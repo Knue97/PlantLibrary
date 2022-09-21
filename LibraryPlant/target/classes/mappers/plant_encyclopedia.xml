@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.plantlibrary.plant_encyclopedia">
+  <select id="listall" resultType="EncyclopediaEntity">  	
+  	SELECT * FROM plantlibrary.plant
+  </select>
+  <select id="listbyid" resultType="EncyclopediaEntity">
+  	SELECT * FROM plantlibrary.plant
+  	WHERE pl_id = #{pl_id}
+  </select>
+  <insert id="create" parameterType="EncyclopediaEntity">
+  	INSERT INTO plantlibrary.plant
+  	(pl_id,ec_id,pl_koreanName,pl_englishName,pl_scientificName,pl_familyName,pl_classification,pl_nativeHome,pl_feature,pl_level,pl_reproduction,pl_water,
+	pl_growthTemperature,pl_light,pl_placement,pl_summary,pl_tip,pl_detailLight,pl_detailTemperature,pl_detailWater,pl_detailReproduction,pl_detailSupport,
+	pl_detailSoil,pl_detailPottingAndRoot,pl_detailFertilizer,pl_detailCaution,pl_image,pl_imageSource,pl_contentSource,pl_hits,pl_bookmarkCnt)
+	VALUES
+	(#{pl_id},#{ec_id},#{pl_koreanName},#{pl_englishName},#{pl_scientificName},#{pl_familyName},#{pl_classification},#{pl_nativeHome},#{pl_feature},#{pl_level},#{pl_reproduction},#{pl_water},
+	#{pl_growthTemperature},#{pl_light},#{pl_placement},#{pl_summary},#{pl_tip},#{pl_detailLight},#{pl_detailTemperature},#{pl_detailWater},#{pl_detailReproduction},#{pl_detailSupport},
+	#{pl_detailSoil},#{pl_detailPottingAndRoot},#{pl_detailFertilizer},#{pl_detailCaution},#{pl_image},#{pl_imageSource},#{pl_contentSource},#{pl_hits},#{pl_bookmarkCnt})
+  </insert>
+  
+  <select id="listbygroup1" resultType="EncyclopediaEntity">
+  	SELECT * FROM plantlibrary.plant
+  	WHERE pl_familyName = '천남성과'
+  	LIMIT 3;
+  </select>
+  
+  <select id="listbygroup2" resultType="EncyclopediaEntity">
+  	SELECT * FROM plantlibrary.plant
+  	WHERE pl_familyName = '야자과'
+  	LIMIT 3;
+  </select>
+  
+  <select id="listbygroup3" resultType="EncyclopediaEntity">
+  	SELECT * FROM plantlibrary.plant
+  	WHERE pl_familyName = '두릅나무과'
+  	LIMIT 3;
+  </select>
+  
+  <select id="listbyfamilyname" resultType="EncyclopediaEntity">
+  	SELECT * FROM plantlibrary.plant
+  	WHERE pl_familyName = #{pl_familyName}
+  </select>
+  
+  <!-- get AutoIncrement -->
+  <select id="getAuto" resultType="int">
+  	select last_insert_id(); 
+  </select>
+</mapper>

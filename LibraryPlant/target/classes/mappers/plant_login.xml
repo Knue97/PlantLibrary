@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.plantlibrary.plant_login">
+  <select id="login" parameterType="java.util.Map" resultType="java.util.Map">  	
+  	SELECT u_id,u_nickname,u_name
+  	FROM plantlibrary.user
+  	WHERE u_id = #{u_id} and u_password = #{u_password}  
+  </select>
+  
+  <insert id="register" parameterType="LoginEntity">
+  	INSERT INTO plantlibrary.user
+	(u_id,u_nickname,u_password,u_name,u_email,u_address,u_findPasswordQ,u_findPasswordA,u_state)
+	VALUES(#{u_id},#{u_nickname},#{u_password},#{u_name},#{u_email},#{u_address},#{u_findPasswordQ},#{u_findPasswordA},#{u_state})
+  </insert>
+</mapper>
