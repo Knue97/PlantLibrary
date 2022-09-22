@@ -15,7 +15,7 @@
     
     <main class="login-body" data-vide-bg="${contextPath}/resources/assets/img/forest.mp4">
     <!-- Login Admin -->
-    <form class="form-default" action="/login/register" method="POST">
+    <form class="form-default" action="${contextPath}/login/register" method="POST">
         
         <div class="login-form">
             <!-- logo-login -->

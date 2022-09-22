@@ -47,7 +47,8 @@
         <!-- Slider Area End -->
 			<!-- Main content -->
 			<section class="content container-fluid">
-			
+				
+				<!-- search.jsp 에 필요함  -->
 				<input type="hidden" id="boardType" value="2">
 
 				<div>

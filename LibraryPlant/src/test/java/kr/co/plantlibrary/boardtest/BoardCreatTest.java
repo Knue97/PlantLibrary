@@ -28,9 +28,9 @@ public class BoardCreatTest {
 		for(int i =1; i<50; i++) {
 			board = new BoardDTO();
 			board.setBc_id(random.nextInt(4)+1);
-			board.setB_title("게시글 " + i + "]");
-			board.setB_content("test 해봄 " + i);
-			board.setU_id("adminboard");
+			board.setB_title("게시글 테스트 [" + i + "]");
+			board.setB_content("test " + i);
+			board.setU_id("boardtest");
 			
 			boardDAO.register(board);
 			

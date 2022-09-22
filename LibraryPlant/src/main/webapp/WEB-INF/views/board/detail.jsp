@@ -187,6 +187,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 			type : 'post',
 			success : function(result) {
 				console.log(result);
+				alert("댓글이 삭제되었습니다.");
 				replyListAll();
 			},
 			error : function(result) {
@@ -198,6 +199,14 @@ function replyUpdateForm(c_no, u_id, c_content){
 	}
 	
 	
+function alarm(){
+	var msg = "해당 글의 삭제를 진행하시겠습니까?";
+	if(confirm(msg)){
+		location.href='delete?b_no=${board.b_no}';
+	return false;
+	}
+	return true;
+	}
 
 	
 </script>
@@ -310,7 +319,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 			
 			<c:if test="${user.u_id == board.u_id}">
 			<input type="button" value="수정" name="loginCheck" onclick="location.href='update?b_no=${board.b_no}'">
-			<input type="button" value="삭제" onclick="location.href='delete?b_no=${board.b_no}'">
+			<input type="button" value="삭제" onclick="return alarm();">
 			</c:if>
 						
 			<c:choose>
@@ -334,25 +343,24 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 				</div>
 			</div>
-					
-					=====================================================
-					<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
-					<c:if test="${board.bc_id == 4 }">
-					
-						<%@include file="shareInfo.jsp" %>
-
-					</c:if>
-					<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
 
 
+			<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
+			<c:if test="${board.bc_id == 4 }">
 
-					
-					============================================
-		
-		<div>
+				<%@include file="shareInfo.jsp"%>
+
+			</c:if>
+			<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
+
+
+
+
+			<hr><p></p>
+			<div>
 			<div class="box-body">
 
-		<c:if test="${board.bc_id != 4 }">
+
 				<table>
 					<tr>
 						<td rowspan="2" width="70%">
@@ -365,10 +373,10 @@ function replyUpdateForm(c_no, u_id, c_content){
 						<td><input type="button" id="replyRegister" value="저장"></td>
 					</tr>
 				</table>
-			</c:if>
+
 			</div>
 		</div>
-      <hr><p></p>
+      <p></p>
 			<div id="replyListAll">
 				
 			</div>

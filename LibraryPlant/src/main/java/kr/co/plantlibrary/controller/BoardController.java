@@ -212,7 +212,7 @@ public class BoardController {
 	public int reply(ReplyDTO replyDTO) throws Exception {
 		logger.info(replyDTO.getC_content());
 		if(replyDTO.getC_content() == "") {
-			logger.info(replyDTO.getC_content() + "s내용없ㅇ늠");
+			logger.info(replyDTO.getC_content() + "댓 내용없음");
 			return 2;
 		}
 		return service.reply(replyDTO);
