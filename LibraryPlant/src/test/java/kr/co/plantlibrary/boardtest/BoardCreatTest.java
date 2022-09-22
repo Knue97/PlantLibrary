@@ -25,7 +25,7 @@ public class BoardCreatTest {
 		BoardDTO board;
 		Random random = new Random();
 		
-		for(int i =1; i<50; i++) {
+		for(int i =1; i<300; i++) {
 			board = new BoardDTO();
 			board.setBc_id(random.nextInt(4)+1);
 			board.setB_title("게시글 테스트 [" + i + "]");

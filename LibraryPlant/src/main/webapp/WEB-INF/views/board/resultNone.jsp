@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-	<c:if test="${pageMaker.totalCount == 0}">
+	<c:if test="${pageMaker.cri.searchKeyword != null}">
 		<div class="box">
 			<h3>
 				"<strong>${pageMaker.cri.searchKeyword}</strong>"에 해당하는 게시글이 없습니다.
@@ -16,15 +16,8 @@
 		</div>
 		<p></p>
 	
-		<div align="center">
+		<div align="center">		
+			<h2><a href="${contextPath}/board/freeListAll">처음으로 돌아가기</a></h2>
+		</div>
+	</c:if>
 	
-		
-			<a href="${contextPath}/board/freeListAll">처음으로 돌아가기</a>
-		
-		</div>
-	</c:if>
-	<c:if test="${pageMaker.totalCount != 0}">
-	<div align="center">
-			<a href="${contextPath}/board/freeListAll">처음으로 돌아가기</a>
-		</div>
-	</c:if>

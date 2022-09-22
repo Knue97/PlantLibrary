@@ -24,7 +24,12 @@
 
 $('#searchbtn').on('click', function(e){
 	e.preventDefault();
-	console.log();
+
+	if($('#searchKeyword').val() == ""){
+		alert("검색어를 입력하세요.");
+		$('#searchKeyword').focus();
+		return false;
+	}
 	var url = "${contextPath}/board/";
 	if($('#boardType').val() ==1){
 	url +="freeListAll";		
@@ -36,16 +41,11 @@ $('#searchbtn').on('click', function(e){
 		url +="shareListAll";		
 	}
 	
-	if($('#searchKeyword').val() == ""){
-		alert("검색어를 입력하세요.");
-		$('#searchKeyword').focus();
-		return false;
-	}
 	
 	url = url+ "?searchType=" + $('#searchType').val();
 	url = url+ "&searchKeyword=" + $('#searchKeyword').val();
-	location.href = url;
-	console.log(url);
+	location.href = encodeURI(url);
+	console.log(encodeURI(url));
 	
 });
 

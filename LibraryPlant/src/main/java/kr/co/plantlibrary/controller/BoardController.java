@@ -52,6 +52,7 @@ public class BoardController {
 		logger.info(""+service.countBoardListTotal1(cri));
 		logger.info(cri.toString());
 		logger.info(""+pageMaker);
+		
 		List<BoardDTO> listAll = service.listAll(cri);	//	원래의 목록 조회 로직에서 Criteria 파라미터를 사용하기 위해 수정
 		mav.addObject("listAll", listAll);
 		mav.addObject("pageMaker", pageMaker);	// 셋팅된 pageMaker에는 페이징을 위한 버튼의 값들이 들어있고 ModelAndView를 이용해 jsp에 넘겨준다.
@@ -70,6 +71,7 @@ public class BoardController {
 		pageMaker.setTotalCount(service.countBoardListTotal2(cri));
 		logger.info("" + service.countBoardListTotal2(cri));
 		logger.info(cri.toString());
+		logger.info(""+pageMaker);
 
 		List<BoardDTO> listAll = service.qnaListAll(cri);
 		mav.addObject("qnaListAll", listAll);
@@ -89,6 +91,7 @@ public class BoardController {
 		pageMaker.setTotalCount(service.countBoardListTotal3(cri));
 		logger.info("" + service.countBoardListTotal3(cri));
 		logger.info(cri.toString());
+		logger.info(""+pageMaker);
 		
 		List<BoardDTO> listAll = service.showListAll(cri);
 		mav.addObject("showListAll", listAll);
@@ -108,6 +111,7 @@ public class BoardController {
 		pageMaker.setTotalCount(service.countBoardListTotal4(cri));
 		logger.info("" + service.countBoardListTotal4(cri));
 		logger.info(cri.toString());
+		logger.info(""+pageMaker);
 		
 		List<BoardDTO> listAll = service.shareListAll(cri);
 		mav.addObject("shareListAll", listAll);
