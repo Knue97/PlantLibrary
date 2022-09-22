@@ -6,5 +6,7 @@
  	<typeAliases>
 		<typeAlias alias="EncyclopediaEntity" type="kr.co.plantlibrary.plant_encyclopedia.EncyclopediaEntity"/>
 		<typeAlias alias="LoginEntity" type="kr.co.plantlibrary.login.LoginEntity"/>
+		<typeAlias alias="BoardDTO" type="kr.co.plantlibrary.board.BoardDTO"/>
+		<typeAlias alias="ReplyDTO" type="kr.co.plantlibrary.board.ReplyDTO"/>
 	</typeAliases>
 </configuration>

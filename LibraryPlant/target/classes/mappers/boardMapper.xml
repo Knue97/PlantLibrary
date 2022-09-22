@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- dtd는 정의어 -->
+
+<mapper namespace="kr.co.plantlibrary.boardMapper"> <!-- 얘는 건드리면 x -->
+	
+	<!-- 페이징 -->
+	<select id="countBoardList1" resultType="java.lang.Integer">
+		select count(*)
+		from board
+		where bc_id = 1
+		<include refid="searchCondition"></include>
+	</select>
+
+	<select id="countBoardList2" resultType="java.lang.Integer">
+		select count(*)
+		from board
+		where bc_id = 2
+		<include refid="searchCondition"></include>
+	</select>
+
+	<select id="countBoardList3" resultType="java.lang.Integer">
+		select count(*)
+		from board
+		where bc_id = 3
+		<include refid="searchCondition"></include>
+	</select>
+
+	<select id="countBoardList4" resultType="java.lang.Integer">
+		select count(*)
+		from board
+		where bc_id = 4
+		<include refid="searchCondition"></include>
+	</select>
+
+
+
+	<!-- 게시판 listAll -->
+	
+	<!-- Free -->
+	<select id="listAll" resultType="BoardDTO" parameterType="BoardDTO">
+		select *
+		from board
+		where bc_id = 1
+		<include refid="searchCondition"></include>
+		order by b_no desc
+		limit #{pageStart} , #{perPageNum}
+	</select>
+
+	<!-- Q/A -->
+	<select id="qnaListAll" resultType="BoardDTO"  parameterType="BoardDTO">
+		select *
+		from board
+		where bc_id = 2
+		<include refid="searchCondition"></include>
+		order by b_no desc
+		limit #{pageStart} , #{perPageNum}
+	</select>
+
+	<!-- show -->
+	<select id="showListAll" resultType="BoardDTO"  parameterType="BoardDTO">
+		select *
+		from board
+		where bc_id = 3
+		<include refid="searchCondition"></include>
+		order by b_no desc
+		limit #{pageStart} , #{perPageNum}
+	</select>
+
+	<!-- share -->
+	<select id="shareListAll" resultType="BoardDTO"  parameterType="BoardDTO">
+		select *
+		from board
+		where bc_id = 4
+		<include refid="searchCondition"></include>
+		order by b_no desc
+		limit #{pageStart} , #{perPageNum}
+	</select>
+
+
+	<!-- 게시글 detail -->
+	<select id="detail" parameterType="java.lang.Integer"
+		resultType="BoardDTO">
+		select *
+		from board
+		where b_no = #{b_no}
+
+	</select>
+
+	<!-- 게시글 쓰기 insert -->
+	<insert id="insert" parameterType="BoardDTO">
+		insert into board (b_no, bc_id, u_id, b_title, b_content, b_regdate, b_image, b_hits, b_recommendedNumber, b_report , b_state, b_commentcnt)
+		values (#{b_no}, #{bc_id}, #{u_id}, #{b_title}, #{b_content}, sysdate(), #{b_image}, #{b_hits}, #{b_recommendedNumber}, #{b_report}, #{b_state}, ${b_commentcnt})
+	</insert>
+
+
+	<!-- 게시글 수정 update -->
+	<update id="update">
+		update board
+		set bc_id = #{bc_id}, b_title = #{b_title}, b_content = #{b_content}, b_image = #{b_image}
+		where b_no = #{b_no}
+	</update>
+
+	<!-- 게시글 삭제 delete -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from board
+		where b_no = #{b_no}
+	</delete>
+
+	<!-- 조회수 카운트 -->
+	<update id="updateHit" parameterType="java.lang.Integer">
+		update board
+		set b_hits = b_hits + 1
+		where b_no = #{b_no}
+	</update>
+
+	<!-- 댓글 카운트 -->
+	<select id="cntReply" parameterType="java.lang.Integer">
+	<!-- b_recommendedNumber 는 추천수  ///  댓글수는 b_commentcnt -->
+		update board
+		set b_commentcnt = (SELECT count(c_no) FROM comment where b_no = #{b_no})
+		where b_no = #{b_no};
+	</select>
+
+	<!-- 검색 기능 -->
+	<sql id="searchCondition">
+		<if test="searchType != null">
+			<if test="searchType == 'writer'">
+			and u_id like CONCAT('%',#{searchKeyword},'%') 
+			</if>
+			<if test="searchType == 'title'">
+			and b_title like CONCAT('%',#{searchKeyword},'%') 
+			</if>
+			<if test="searchType == 'content'">
+			and b_content like CONCAT('%',#{searchKeyword},'%') 
+			</if>
+			<if test="searchType == 'titcon'">
+			and (b_title like CONCAT('%',#{searchKeyword},'%') 
+			or b_content like CONCAT('%',#{searchKeyword},'%')) 
+			</if>
+			<if test="searchType == 'all'">
+			and (u_id like CONCAT('%',#{searchKeyword},'%') 
+			or b_title like CONCAT('%',#{searchKeyword},'%') 
+			or b_content like CONCAT('%',#{searchKeyword},'%')) 
+			</if>
+		</if>
+	</sql>
+	<!-- 추천 기능 -->
+	<!-- 비추천 기능 -->
+
+
+	<!-- 댓글 전체목록 -->
+	<select id="replyListAll" parameterType="java.lang.Integer" resultType="ReplyDTO">
+		select *
+		from comment
+		where b_no = #{b_no}
+		order by c_no desc
+	</select>
+
+	<!-- 댓글 쓰기 -->
+	<insert id="reply" parameterType="ReplyDTO">
+		INSERT INTO comment (c_no, u_id, b_no, c_content, c_regdate, c_likeCnt, c_state, c_choose)
+		VALUES (#{c_no}, #{u_id}, #{b_no}, #{c_content}, sysdate(), #{c_likeCnt}, #{c_state}, #{c_choose})
+	</insert>
+
+
+	<!-- 댓글 수정 -->
+	<update id="replyUpdate" parameterType="ReplyDTO">
+		UPDATE comment
+		SET c_no = #{c_no}, u_id = #{u_id}, c_content = #{c_content}
+		WHERE c_no = #{c_no}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="replyDelete" parameterType="java.lang.Integer">
+		delete from comment
+		where c_no = #{c_no}
+	</delete>
+	
+	<!-- 게시글 삭제시 댓글 삭제 -->
+	<delete id="replyDeleteAll" parameterType="java.lang.Integer">
+		delete from comment
+		where b_no = #{b_no}
+	</delete>
+
+
+</mapper>

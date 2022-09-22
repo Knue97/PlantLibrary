@@ -30,10 +30,10 @@
                                                 </li>
                                                 <li><a href="#">게시판</a>
                                                     <ul class="submenu">
-                                                        <li><a href="blog.html">자유게시판</a></li>
-                                                        <li><a href="blog_details.html">구급게시판</a></li>
-                                                        <li><a href="elements.html">자랑게시판</a></li>
-                                                        <li><a href="elements.html">무슨게시판이니</a></li>
+                                                        <li><a href="${contextPath }/board/freeListAll">자유게시판</a></li>
+                                                        <li><a href="${contextPath }/board/qnaListAll">질문게시판</a></li>
+                                                        <li><a href="${contextPath }/board/showListAll">자랑게시판</a></li>
+                                                        <li><a href="${contextPath }/board/shareListAll">나눔게시판</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="#">식물원</a>
