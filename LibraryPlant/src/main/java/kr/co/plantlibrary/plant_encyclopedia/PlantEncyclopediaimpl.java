@@ -34,11 +34,6 @@ public class PlantEncyclopediaimpl implements PlantEncyclopediaDAO {
 		return sqlSession.selectOne(nameSpace+".getAuto");
 	}
 
-	@Override
-	public List<EncyclopediaEntity> listByFamilyName(String pl_familyName) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(nameSpace+".listbyfamilyname", pl_familyName);
-	}
 
 	@Override
 	public List<EncyclopediaEntity> listByGroup1() {
@@ -56,5 +51,23 @@ public class PlantEncyclopediaimpl implements PlantEncyclopediaDAO {
 	public List<EncyclopediaEntity> listByGroup3() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace+".listbygroup3");
+	}
+
+	@Override
+	public List<EncyclopediaEntity> listByGroup4() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace+".listbygroup4");
+	}
+
+	@Override
+	public List<EncyclopediaEntity> listByFamilyName(String pl_familyName) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace+".listbyfamilyname", pl_familyName);
+	}
+	
+	@Override
+	public List<EncyclopediaEntity> listByClassification(String pl_classfication) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace+".listbyclassification", pl_classfication);
 	}
 }

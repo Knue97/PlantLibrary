@@ -13,12 +13,17 @@ public interface PlantEncyclopediaDAO {
 	
 	public List<EncyclopediaEntity> listByFamilyName(String pl_familyName);
 	
-	//천남성과
+	public List<EncyclopediaEntity> listByClassification(String pl_classfication);
+	
+	//관엽
 	public List<EncyclopediaEntity> listByGroup1();
 	
-	//야자과	
+	//다육	
 	public List<EncyclopediaEntity> listByGroup2();
 	
-	//두릅나무과
+	//화초
 	public List<EncyclopediaEntity> listByGroup3();
+	
+	//허브
+	public List<EncyclopediaEntity> listByGroup4();
 }

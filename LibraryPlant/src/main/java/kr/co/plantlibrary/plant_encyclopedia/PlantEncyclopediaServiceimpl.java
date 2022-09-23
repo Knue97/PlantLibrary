@@ -31,11 +31,6 @@ public class PlantEncyclopediaServiceimpl implements PlantEncyclopediaService {
 		return dao.getAuto();
 	}
 
-	@Override
-	public List<EncyclopediaEntity> listByFamilyName(String pl_familyName) {
-		// TODO Auto-generated method stub
-		return dao.listByFamilyName(pl_familyName);
-	}
 
 	@Override
 	public List<EncyclopediaEntity> listByGroup1() {
@@ -53,6 +48,24 @@ public class PlantEncyclopediaServiceimpl implements PlantEncyclopediaService {
 	public List<EncyclopediaEntity> listByGroup3() {
 		// TODO Auto-generated method stub
 		return dao.listByGroup3();
+	}
+
+	@Override
+	public List<EncyclopediaEntity> listByGroup4() {
+		// TODO Auto-generated method stub
+		return dao.listByGroup4();
+	}
+
+	@Override
+	public List<EncyclopediaEntity> listByFamilyName(String pl_familyName) {
+		// TODO Auto-generated method stub
+		return dao.listByFamilyName(pl_familyName);
+	}
+	
+	@Override
+	public List<EncyclopediaEntity> listByClassification(String pl_classfication) {
+		// TODO Auto-generated method stub
+		return dao.listByClassification(pl_classfication);
 	}
 	
 	

@@ -23,25 +23,37 @@
   
   <select id="listbygroup1" resultType="EncyclopediaEntity">
   	SELECT * FROM plantlibrary.plant
-  	WHERE pl_familyName = '천남성과'
+  	WHERE pl_classification = '관엽'
   	LIMIT 3;
   </select>
   
   <select id="listbygroup2" resultType="EncyclopediaEntity">
   	SELECT * FROM plantlibrary.plant
-  	WHERE pl_familyName = '야자과'
+  	WHERE pl_classification = '다육'
   	LIMIT 3;
   </select>
   
   <select id="listbygroup3" resultType="EncyclopediaEntity">
   	SELECT * FROM plantlibrary.plant
-  	WHERE pl_familyName = '두릅나무과'
+  	WHERE pl_classification = '화초'
+  	LIMIT 3;
+  </select>
+  
+  <select id="listbygroup4" resultType="EncyclopediaEntity">
+  	SELECT * FROM plantlibrary.plant
+  	WHERE pl_classification = '허브'
   	LIMIT 3;
   </select>
   
   <select id="listbyfamilyname" resultType="EncyclopediaEntity">
   	SELECT * FROM plantlibrary.plant
   	WHERE pl_familyName = #{pl_familyName}
+  </select>
+  
+  <select id="listbyclassification" resultType="EncyclopediaEntity">
+  	SELECT * FROM (SELECT * FROM plantlibrary.plant WHERE pl_classification = #{pl_classification}) as Plant
+  	LIMIT 0, 12
+  	
   </select>
   
   <!-- get AutoIncrement -->

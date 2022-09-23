@@ -83,7 +83,14 @@
 		</div>
 		<!-- Domain-search End -->
 		<div class="container mt-150">
-			<h1>천남성과</h1>
+			<div class="d-flex justify-content-between">
+				<div class="div">
+					<h1>관엽</h1>
+				</div>
+				<div class="div">
+					<button type="button" class="btn btn-primary" onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=관엽'">더보기</button>
+				</div>
+			</div>
 			<div class="row row-cols-1 row-cols-md-3">
 				<c:forEach var="entity" items="${group1}">
 					<div class="col mb-4">
@@ -95,7 +102,8 @@
 							<div class="card-body">
 								<h5 class="card-title">${entity.pl_englishName }</h5>
 								<p class="card-text">${entity.pl_summary }</p>
-								<a href="/encyclopedia/plant/detail?pl_id=${entity.pl_id}"
+								<a
+									href="${contextPath}/encyclopedia/plant/detail?pl_id=${entity.pl_id}"
 									class="btn btn-primary">자세히 보러가기</a>
 								<footer class="blockquote-footer">
 									수정일 <cite title="Source Title">Source Title</cite>
@@ -108,7 +116,14 @@
 		</div>
 
 		<div class="container mt-150">
-			<h1>야자과</h1>
+			<div class="d-flex justify-content-between">
+				<div class="div">
+					<h1>다육</h1>
+				</div>
+				<div class="div">
+					<button type="button" class="btn btn-primary" onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=다육'">더보기</button>
+				</div>
+			</div>
 			<div class="row row-cols-1 row-cols-md-3">
 				<c:forEach var="entity" items="${group2}">
 					<div class="col mb-4">
@@ -120,7 +135,8 @@
 							<div class="card-body">
 								<h5 class="card-title">${entity.pl_englishName }</h5>
 								<p class="card-text">${entity.pl_summary }</p>
-								<a href="/encyclopedia/plant/detail?pl_id=${entity.pl_id}"
+								<a
+									href="${contextPath}/encyclopedia/plant/detail?pl_id=${entity.pl_id}"
 									class="btn btn-primary">자세히 보러가기</a>
 								<footer class="blockquote-footer">
 									수정일 <cite title="Source Title">Source Title</cite>
@@ -133,7 +149,14 @@
 		</div>
 
 		<div class="container mt-150">
-			<h1>두릅나무과</h1>
+			<div class="d-flex justify-content-between">
+				<div class="div">
+					<h1>화초</h1>
+				</div>
+				<div class="div">
+					<button type="button" class="btn btn-primary" onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=화초'">더보기</button>
+				</div>
+			</div>
 			<div class="row row-cols-1 row-cols-md-3">
 				<c:forEach var="entity" items="${group3}">
 					<div class="col mb-4">
@@ -145,7 +168,41 @@
 							<div class="card-body">
 								<h5 class="card-title">${entity.pl_englishName }</h5>
 								<p class="card-text">${entity.pl_summary }</p>
-								<a href="/encyclopedia/plant/detail?pl_id=${entity.pl_id}"
+								<a
+									href="${contextPath}/encyclopedia/plant/detail?pl_id=${entity.pl_id}"
+									class="btn btn-primary">자세히 보러가기</a>
+								<footer class="blockquote-footer">
+									수정일 <cite title="Source Title">Source Title</cite>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+
+		<div class="container mt-150">
+			<div class="d-flex justify-content-between">
+				<div class="div">
+					<h1>허브</h1>
+				</div>
+				<div class="div">
+					<button type="button" class="btn btn-primary" onclick="location.href = '${contextPath}/encyclopedia/list?pl_classification=허브'">더보기</button>
+				</div>
+			</div>
+			<div class="row row-cols-1 row-cols-md-3">
+				<c:forEach var="entity" items="${group4}">
+					<div class="col mb-4">
+						<div class="card h-100 text-center">
+							<div class="card-header">${entity.pl_koreanName}</div>
+							<img
+								src="${contextPath}/resources/assets/img/dummy/${entity.pl_image}"
+								class="card-img-top" alt="...">
+							<div class="card-body">
+								<h5 class="card-title">${entity.pl_englishName }</h5>
+								<p class="card-text">${entity.pl_summary }</p>
+								<a
+									href="${contextPath}/encyclopedia/plant/detail?pl_id=${entity.pl_id}"
 									class="btn btn-primary">자세히 보러가기</a>
 								<footer class="blockquote-footer">
 									수정일 <cite title="Source Title">Source Title</cite>

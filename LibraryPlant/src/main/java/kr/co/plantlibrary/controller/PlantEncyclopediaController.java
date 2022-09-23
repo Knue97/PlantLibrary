@@ -38,19 +38,25 @@ public class PlantEncyclopediaController {
 		
 		List<EncyclopediaEntity> group1 = service.listByGroup1();
 		List<EncyclopediaEntity> group2 = service.listByGroup2();
-		List<EncyclopediaEntity> group3 = service.listByGroup3();				
+		List<EncyclopediaEntity> group3 = service.listByGroup3();
+		List<EncyclopediaEntity> group4 = service.listByGroup4();
 		
 		model.addAttribute("group1", group1);
 		model.addAttribute("group2", group2);
 		model.addAttribute("group3", group3);
+		model.addAttribute("group4", group4);
 				
 		return "encyclopedia/plant/listgroup";
 	}
 	
 	@GetMapping("/plant/list")
-	public String plantList(@ModelAttribute("type") String type) {
+	public String plantList(@RequestParam String pl_classification, Model model) {
 		log.info("=================Plant List=================");
 		
+		List<EncyclopediaEntity> group = service.listByClassification(pl_classification);
+		log.info(group);
+		model.addAttribute("group", group);
+		model.addAttribute("classification", pl_classification);
 		return "encyclopedia/plant/list";
 	}
 	

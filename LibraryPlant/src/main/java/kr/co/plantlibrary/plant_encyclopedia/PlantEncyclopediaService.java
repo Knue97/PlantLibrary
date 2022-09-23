@@ -13,13 +13,18 @@ public interface PlantEncyclopediaService {
 	public int getAuto();
 
 	public List<EncyclopediaEntity> listByFamilyName(String pl_familyName);
+	
+	public List<EncyclopediaEntity> listByClassification(String pl_classfication);
 
-	// 천남성과
+	// 관엽
 	public List<EncyclopediaEntity> listByGroup1();
 
-	// 야자과
+	// 다육
 	public List<EncyclopediaEntity> listByGroup2();
 
-	// 두릅나무과
+	// 화초
 	public List<EncyclopediaEntity> listByGroup3();
+	
+	//허브
+	public List<EncyclopediaEntity> listByGroup4();
 }

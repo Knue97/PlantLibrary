@@ -9,7 +9,7 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="/"><img src="${contextPath}/resources/assets/img/logo/logo.png" alt=""></a>
+                                    <a href="${contextPath }/"><img src="${contextPath}/resources/assets/img/logo/logo.png" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-10 col-lg-10">
@@ -22,8 +22,8 @@
                                                 <li><a href="packages.html">About us</a></li>
                                                 <li><a href="#">백과</a>
                                                     <ul class="submenu">
-                                                    	<li><a href="/encyclopedia/home">백과 홈</a></li>
-                                                        <li><a href="/encyclopedia/plant/listgroup">식물</a></li>
+                                                    	<li><a href="${contextPath }/encyclopedia/home">백과 홈</a></li>
+                                                        <li><a href="${contextPath }/encyclopedia/plant/listgroup">식물</a></li>
                                                         <li><a href="blog_details.html">병해충</a></li>
                                                         <li><a href="elements.html">무슨무슨?</a></li>                                                        
                                                     </ul>
