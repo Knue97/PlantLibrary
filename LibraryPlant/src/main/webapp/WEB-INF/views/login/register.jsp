@@ -50,7 +50,7 @@
                 <input type="email" name="u_email" id="email" placeholder="Email Address">
             </div>            
             <div class="form-input pt-30">
-                <input type="submit" name="submit" value="Registration">
+                <input type="submit" name="submit" value="회원가입">
             </div>
             <!-- Forget Password -->
             <a href="#" class="registration">login</a>

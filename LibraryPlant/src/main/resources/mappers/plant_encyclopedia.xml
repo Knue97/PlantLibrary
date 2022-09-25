@@ -50,9 +50,9 @@
   	WHERE pl_familyName = #{pl_familyName}
   </select>
   
-  <select id="listbyclassification" resultType="EncyclopediaEntity">
+  <select id="listbyclassification" parameterType="java.util.Map" resultType="EncyclopediaEntity">
   	SELECT * FROM (SELECT * FROM plantlibrary.plant WHERE pl_classification = #{pl_classification}) as Plant
-  	LIMIT 0, 12
+  	LIMIT #{pageStart}, #{perPageNum}
   	
   </select>
   

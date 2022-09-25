@@ -20,7 +20,7 @@
         <div class="login-form">
             <!-- logo-login -->
             <div class="logo-login">
-                <a href="index.html"><img src="${contextPath}/resources/assets/img/logo/loder.png" alt=""></a>
+                <a href="${contextPath }/"><img src="${contextPath}/resources/assets/img/logo/loder.png" alt=""></a>
             </div>
             <h2>Login Here</h2>
             <div class="form-input">

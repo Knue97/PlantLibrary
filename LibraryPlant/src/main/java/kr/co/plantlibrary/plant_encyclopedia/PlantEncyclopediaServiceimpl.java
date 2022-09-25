@@ -1,6 +1,7 @@
 package kr.co.plantlibrary.plant_encyclopedia;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,9 +64,9 @@ public class PlantEncyclopediaServiceimpl implements PlantEncyclopediaService {
 	}
 	
 	@Override
-	public List<EncyclopediaEntity> listByClassification(String pl_classfication) {
+	public List<EncyclopediaEntity> listByClassification(Map<Object, Object> map) {
 		// TODO Auto-generated method stub
-		return dao.listByClassification(pl_classfication);
+		return dao.listByClassification(map);
 	}
 	
 	

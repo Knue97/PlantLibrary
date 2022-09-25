@@ -1,13 +1,14 @@
 package kr.co.plantlibrary.plant_encyclopedia;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PlantEncyclopediaimpl implements PlantEncyclopediaDAO {
+public class PlantEncyclopediaDAOimpl implements PlantEncyclopediaDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -66,8 +67,8 @@ public class PlantEncyclopediaimpl implements PlantEncyclopediaDAO {
 	}
 	
 	@Override
-	public List<EncyclopediaEntity> listByClassification(String pl_classfication) {
+	public List<EncyclopediaEntity> listByClassification(Map<Object, Object> map) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(nameSpace+".listbyclassification", pl_classfication);
+		return sqlSession.selectList(nameSpace+".listbyclassification", map);
 	}
 }

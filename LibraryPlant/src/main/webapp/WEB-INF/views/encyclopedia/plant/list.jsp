@@ -74,6 +74,34 @@
 				</c:forEach>
 			</div>
 		</div>
+		<div class="container">
+			<div class="d-felx justfy-content-center text-center">
+				<nav aria-label="Page navigation example justfy-content-center">
+					<ul class="pagination">
+						<c:if test="${pageMaker.prev}">
+							<li class="page-item"><a class="page-link"
+								href="${contextPath}/encyclopedia/plant/list?page=${pageMaker.startPage - 1 }&pl_classification=${pl_classification}"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+						</c:if>
+						<c:forEach begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class=page-item active':'class =page-item'}"/>>
+								<a
+								href="${contextPath}/encyclopedia/plant/list?page=${idx}&pl_classification=${pl_classification}"
+								class="page-link">${idx}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+							<li class="page-item"><a class="page-link"
+								href="${contextPath}/encyclopedia/plant/list?page=${pageMaker.endPage + 1}&pl_classification=${pl_classification}"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</c:if>
+					</ul>
+				</nav>
+			</div>
+		</div>
 	</main>
 	<footer>
 		<%@ include file="/WEB-INF/views/include/footer.jsp"%>

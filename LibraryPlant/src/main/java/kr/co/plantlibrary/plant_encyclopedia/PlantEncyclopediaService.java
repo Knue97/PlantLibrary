@@ -1,6 +1,7 @@
 package kr.co.plantlibrary.plant_encyclopedia;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PlantEncyclopediaService {
 
@@ -14,7 +15,7 @@ public interface PlantEncyclopediaService {
 
 	public List<EncyclopediaEntity> listByFamilyName(String pl_familyName);
 	
-	public List<EncyclopediaEntity> listByClassification(String pl_classfication);
+	public List<EncyclopediaEntity> listByClassification(Map<Object, Object> map);
 
 	// 관엽
 	public List<EncyclopediaEntity> listByGroup1();

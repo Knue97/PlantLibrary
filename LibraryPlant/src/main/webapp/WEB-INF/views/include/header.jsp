@@ -67,10 +67,10 @@
 															    ${user.u_id }
 															  </button>
 															  <ul class="dropdown-menu">
-															    <li><a class="dropdown-item" href="${contextPath}/login/logout">로그아웃</a></li>
-															    <li><a class="dropdown-item" href="${contextPath}/#">내 정보</a></li>
+															    <li><a class="dropdown-item" href="${contextPath}/user/mypage">내 정보</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/#">식물관리</a></li>														    
 															    <li><a class="dropdown-item" href="${contextPath}/#">즐겨찾기</a></li>															    
+															    <li><a class="dropdown-item" href="${contextPath}/login/logout">로그아웃</a></li>
 															  </ul>
 															</div>
 														</li>
