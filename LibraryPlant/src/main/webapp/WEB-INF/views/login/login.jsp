@@ -34,7 +34,8 @@
             <div class="form-input pt-30">
                 <input type="submit" name="submit" value="login">
             </div>
-            
+            <a href="${naverUrl}" class="forget">Naver login</a>
+            <a href="#" class="forget">Kakao login</a>
             <!-- Forget Password -->
             <a href="#" class="forget">Forget Password</a>
             <!-- Forget Password -->

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.plantlibrary.login.LoginEntity;
 import kr.co.plantlibrary.login.LoginService;
+import kr.co.plantlibrary.login.NaverLoginBO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -24,11 +25,18 @@ import lombok.extern.log4j.Log4j;
 public class LoginController {
 	@Setter(onMethod_ = @Autowired )
 	private LoginService service;
+	
+	@Setter(onMethod_ = @Autowired )
+	private NaverLoginBO naverLoginBO;
+	
+	private String apiResult = null;
 
 	@GetMapping("/login")
-	public String loginForm() {
+	public String loginForm(Model model, HttpSession httpSession) {
 		log.info("======================Login Form==================");
+		String naverUrl = naverLoginBO.getAuthorization(httpSession);
 		
+		model.addAttribute("naverUrl", naverUrl);
 		return "login/login";
 	}
 	
