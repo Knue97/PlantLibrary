@@ -42,6 +42,12 @@ public class LoginDAOimpl implements LoginDAO {
 		return sqlSession.selectOne(nameSpace + ".mypage_lookup", u_id);
 	}
 
+	@Override
+	public int mypage_updatepw(LoginEntity loginEntity) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(nameSpace + ".mypage_updatepw", loginEntity);
+	}
+
 	
 
 }

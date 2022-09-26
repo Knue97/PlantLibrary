@@ -11,5 +11,7 @@ public interface LoginDAO {
 	
 	public int mypage_update(LoginEntity loginEntity);
 	
+	public int mypage_updatepw(LoginEntity loginEntity);
+	
 	public LoginEntity mypage_lookup(String u_id);
 }

@@ -22,7 +22,8 @@
 			<!-- Single Slider -->
 			<div class="single-slider d-flex align-items-center slider-height2">
 				<div class="container">
-					<form action="" method="">
+					<h2>마이페이지</h2><br>
+					  <form>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">ID</label>
 							<div class="col-sm-10">
@@ -35,12 +36,7 @@
 								<input type="text" class="form-control" value="${user.u_nickname }" readonly="readonly">
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">패스워드</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" value="${user.u_password }" readonly="readonly">
-							</div>
-						</div>
+					
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">이름</label>
 							<div class="col-sm-10">
@@ -50,10 +46,17 @@
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">이메일</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" value="${user.u_email }" readonly="readonly">
+								<input type="email" class="form-control" value="${user.u_email }" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">주소</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" value="${user.u_address }" readonly="readonly">
 							</div>
 						</div>
 						<input type="button" onclick="location.href='${contextPath}/user/mypage_update'" value="회원정보수정">
+						<input type="button" onclick="location.href='${contextPath}/user/mypage_updatepw'" value="비빌번호변경">
 					</form>
 				</div>
 			</div>

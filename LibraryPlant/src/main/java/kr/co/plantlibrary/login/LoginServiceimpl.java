@@ -35,5 +35,11 @@ public class LoginServiceimpl implements LoginService {
 		return dao.mypage_lookup(u_id);
 	}
 
+	@Override
+	public int mypage_updatepw(LoginEntity loginEntity) {
+		// TODO Auto-generated method stub
+		return dao.mypage_updatepw(loginEntity);
+	}
+
 	
 }

@@ -12,19 +12,49 @@
     <!-- ? Preloader Start -->
     <%@ include file="/WEB-INF/views/include/preloader.jsp" %>
     <!-- Preloader Start -->
-            
-<main class="login-body" data-vide-bg="${contextPath}/resources/assets/img/forest.mp4">
-    <!-- Login result -->
-	<div class="container">
-	    <div class="row justify-content-center ">
-	        <div class="col">
-	            <h1>${user}님 회원가입을 축하합니다.</h1><br>
-	            <a href="${contextPath }/login/login">로그인화면으로 돌아가기</a>
-	        </div>
-	    </div>    
-	</div>    
-    <!-- /end login result -->
-</main>
+    <header>
+        <!-- Header Start -->
+        <%@ include file="/WEB-INF/views/include/header.jsp"  %>
+        <!-- Header End -->
+    </header>
+    <main>
+		<!-- Slider Area Start-->
+        <div class="slider-area white-bg ">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider d-flex align-items-center slider-height ">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-xl-5 col-lg-5 col-md-9 ">
+                                <div class="hero__caption">                                   
+                                    <h1 data-animation="fadeInLeft" data-delay=".6s "> 회원가입을<br>축하합니다.</h1>                                  	                                    
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div>
+                                	<button type="button" onclick="location.href='${contextPath}/'" class="btn btn-primary">메인화면으로</button>                             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                           
+            </div>
+            <!-- Slider Shape -->
+            <div class="slider-shape d-none d-lg-block">
+                <img class="slider-shape1" src="${contextPath}/resources/assets/img/hero/top-left-shape.png" alt="">
+            </div>
+        </div>
+        <!-- Slider Area End -->
+        
+                
+	</main>
+<footer>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+  </footer>
+  <!-- Scroll Up -->
+  <div id="back-top" >
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
 
 <!-- JS here -->
 <%@ include file="/WEB-INF/views/include/plugin.jsp" %>

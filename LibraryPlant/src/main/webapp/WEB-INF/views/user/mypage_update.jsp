@@ -22,6 +22,7 @@
 			<!-- Single Slider -->
 			<div class="single-slider d-flex align-items-center slider-height2">
 				<div class="container">
+			      <h2>회원정보 수정</h2><br>
 					<form action="${contextPath }/user/mypage_update" method="post">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">ID</label>
@@ -30,27 +31,28 @@
 							</div>
 						</div>
 						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">이메일</label>
+							<div class="col-sm-10">
+								<input type="email" class="form-control" value="${user.u_email }" readonly="readonly" name="u_email" >
+							</div>
+						</div>
+						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">닉네임</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" value="${user.u_nickname }"name="u_nickname" >
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">패스워드</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" value="${user.u_password }" readonly="readonly" name="u_password" >
-							</div>
-						</div>
+			
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">이름</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" value="${user.u_name }" readonly="readonly" name="u_name" >
+								<input type="text" class="form-control" value="${user.u_name }"  name="u_name" >
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">이메일</label>
+							<div class="form-group row">
+							<label class="col-sm-2 col-form-label">주소</label>
 							<div class="col-sm-10">
-								<input type="email" class="form-control" value="${user.u_email }" name="u_email" >
+								<input type="text" class="form-control" value="${user.u_address }" name="u_address" >
 							</div>
 						</div>
 						<button type="submit">수정하기</button>

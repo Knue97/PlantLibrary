@@ -6,7 +6,13 @@
 	
 	<update id="mypage_update" parameterType="LoginEntity">
 		UPDATE plantlibrary.user 
-		SET u_nickname = #{u_nickname}, u_email = #{u_email} 
+		SET u_nickname = #{u_nickname}, u_name = #{u_name} ,u_address = #{u_address}
+		WHERE (u_id = #{u_id});
+	</update>
+	
+	<update id="mypage_updatepw" parameterType="LoginEntity">
+		UPDATE plantlibrary.user 
+		SET u_password = #{u_password}
 		WHERE (u_id = #{u_id});
 	</update>
 	

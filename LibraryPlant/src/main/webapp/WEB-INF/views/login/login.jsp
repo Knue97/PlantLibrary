@@ -39,7 +39,7 @@
             <!-- Forget Password -->
             <a href="#" class="forget">Forget Password</a>
             <!-- Forget Password -->
-            <a href="register.html" class="registration">Registration</a>
+            <a href="${contextPath }/login/register" class="registration">회원가입</a>
         </div>
     </form>
     <!-- /end login form -->
