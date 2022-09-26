@@ -24,7 +24,7 @@
                                                     <ul class="submenu">
                                                     	<li><a href="${contextPath }/encyclopedia/home">백과 홈</a></li>
                                                         <li><a href="${contextPath }/encyclopedia/plant/listgroup">식물</a></li>
-                                                        <li><a href="blog_details.html">병해충</a></li>
+                                                        <li><a href="${contextPath }/encyclopedia/diseaseandpest">병해충</a></li>
                                                         <li><a href="elements.html">무슨무슨?</a></li>                                                        
                                                     </ul>
                                                 </li>
@@ -64,13 +64,23 @@
 														<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-															    ${user.u_id }
+															  	<c:choose>															  		
+															  		<c:when test="${user.api == 'naver' }">
+															  			${user.u_name }
+															  		</c:when>
+															  		<c:when test="${user.api == 'kakao'}">
+															  			${user.nickname }
+															  		</c:when>
+															  		<c:otherwise>
+															  			${user.u_id }
+															  		</c:otherwise>
+															  	</c:choose>															    															    
 															  </button>
 															  <ul class="dropdown-menu">
-															    <li><a class="dropdown-item" href="${contextPath}/login/logout">로그아웃</a></li>
-															    <li><a class="dropdown-item" href="${contextPath}/#">내 정보</a></li>
+															    <li><a class="dropdown-item" href="${contextPath}/user/mypage">내 정보</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/#">식물관리</a></li>														    
 															    <li><a class="dropdown-item" href="${contextPath}/#">즐겨찾기</a></li>															    
+															    <li><a class="dropdown-item" href="${contextPath}/login/logout">로그아웃</a></li>
 															  </ul>
 															</div>
 														</li>

@@ -1,6 +1,8 @@
 package kr.co.plantlibrary.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.plantlibrary.plant_encyclopedia.Constant;
+import kr.co.plantlibrary.plant_encyclopedia.Criteria;
 import kr.co.plantlibrary.plant_encyclopedia.EncyclopediaEntity;
+import kr.co.plantlibrary.plant_encyclopedia.PageMaker;
 import kr.co.plantlibrary.plant_encyclopedia.PlantEncyclopediaService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -50,13 +54,24 @@ public class PlantEncyclopediaController {
 	}
 	
 	@GetMapping("/plant/list")
-	public String plantList(@RequestParam String pl_classification, Model model) {
+	public String plantList(@RequestParam String pl_classification,Criteria criteria, Model model) {
 		log.info("=================Plant List=================");
+		log.info(criteria);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(criteria);
+		pageMaker.setTotalCount(1000);
+		log.info(pageMaker);
 		
-		List<EncyclopediaEntity> group = service.listByClassification(pl_classification);
-		log.info(group);
+		Map<Object,Object> map = new HashMap<Object, Object>();
+		map.put("pl_classification", pl_classification);
+		map.put("pageStart", criteria.getPageStart() );
+		map.put("perPageNum", criteria.getPerPageNum());
+		
+		List<EncyclopediaEntity> group = service.listByClassification(map);
+		
 		model.addAttribute("group", group);
-		model.addAttribute("classification", pl_classification);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pl_classification",pl_classification);
 		return "encyclopedia/plant/list";
 	}
 	

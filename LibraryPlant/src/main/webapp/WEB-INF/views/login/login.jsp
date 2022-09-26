@@ -20,7 +20,7 @@
         <div class="login-form">
             <!-- logo-login -->
             <div class="logo-login">
-                <a href="index.html"><img src="${contextPath}/resources/assets/img/logo/loder.png" alt=""></a>
+                <a href="${contextPath }/"><img src="${contextPath}/resources/assets/img/logo/loder.png" alt=""></a>
             </div>
             <h2>Login Here</h2>
             <div class="form-input">
@@ -34,7 +34,8 @@
             <div class="form-input pt-30">
                 <input type="submit" name="submit" value="login">
             </div>
-            
+            <a href="${naverUrl}" class="forget">Naver login</a>
+            <a href="${kakaoUrl}" class="forget">Kakao login</a>
             <!-- Forget Password -->
             <a href="#" class="forget">Forget Password</a>
             <!-- Forget Password -->

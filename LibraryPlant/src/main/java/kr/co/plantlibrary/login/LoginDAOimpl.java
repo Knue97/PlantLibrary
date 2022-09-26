@@ -30,6 +30,18 @@ public class LoginDAOimpl implements LoginDAO {
 		return sqlSession.insert(nameSpace + ".register", loginEntity);
 	}
 
+	@Override
+	public int mypage_update(LoginEntity loginEntity) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(nameSpace + ".mypage_update", loginEntity);
+	}
+
+	@Override
+	public LoginEntity mypage_lookup(String u_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".mypage_lookup", u_id);
+	}
+
 	
 
 }

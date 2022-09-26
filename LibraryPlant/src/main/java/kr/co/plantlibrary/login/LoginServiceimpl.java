@@ -23,5 +23,17 @@ public class LoginServiceimpl implements LoginService {
 		return dao.register(loginEntity);
 	}
 
+	@Override
+	public int mypage_update(LoginEntity loginEntity) {
+		// TODO Auto-generated method stub
+		return dao.mypage_update(loginEntity);
+	}
+
+	@Override
+	public LoginEntity mypage_lookup(String u_id) {
+		// TODO Auto-generated method stub
+		return dao.mypage_lookup(u_id);
+	}
+
 	
 }

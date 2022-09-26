@@ -19,7 +19,7 @@
 	    <div class="row justify-content-center ">
 	        <div class="col">
 	            <h1>${user}님 회원가입을 축하합니다.</h1><br>
-	            <a href="/login/login">로그인화면으로 돌아가기</a>
+	            <a href="${contextPath }/login/login">로그인화면으로 돌아가기</a>
 	        </div>
 	    </div>    
 	</div>    
