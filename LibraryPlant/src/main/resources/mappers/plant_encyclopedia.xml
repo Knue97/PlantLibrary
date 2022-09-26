@@ -52,7 +52,7 @@
   
   <select id="listbyclassification" resultType="EncyclopediaEntity">
   	SELECT * FROM (SELECT * FROM plantlibrary.plant WHERE pl_classification = #{pl_classification}) as Plant
-  	LIMIT 0, 12
+  	LIMIT #{page}, 12
   	
   </select>
   
