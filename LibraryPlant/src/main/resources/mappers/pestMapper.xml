@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.plantlibrary.pestMapper">
+	<!-- 해충백과 최신순 목록 조회 -->
+	<select id="listAll" resultType="PestEntity">
+		select
+		pe_id, pe_name, substring_index(pe_image, ',', 1) as pe_image
+		from pest
+		order by pe_id desc	
+	</select>
+	<!-- 조회수가 높은 순서 정렬 조회 3위까지-->
+	<select id="highhits" resultType="PestEntity">
+		select
+		pe_id, pe_name, substring_index(pe_image, ',', 1) as pe_image
+		from pest
+        order by pe_hits desc
+        limit 3;
+	</select>
+	<!-- 해충백과 상세정보 -->
+	<select id="detail" parameterType="java.lang.Integer" resultType="PestEntity">
+		select
+		pe_id, ec_id, pe_name, pe_image, pe_cause, pe_method, pe_biologicalControl, pe_naturalEnemy,
+		pe_carefulPlant, pe_description, pe_hits
+		from pest
+		where pe_id = #{pe_id}
+	</select>
+	<!-- 검색 결과 조회 -->
+	<select id="search" parameterType="java.lang.String" resultType="PestEntity">
+		select
+		pe_id, pe_name, substring_index(pe_image, ',', 1) as pe_image
+		from pest
+		where pe_name like CONCAT('%', #{searchword}, '%')
+	</select>
+	<!-- 해당 해충백과 조회수 증가 -->
+	<update id="updateHits" parameterType="PestEntity">
+		update pest
+		set pe_hits = pe_hits + 1
+		where pe_id = #{pe_id}
+	</update>
+	<!-- 해충 정보 추가 -->
+	<insert id="register" parameterType="PestEntity">
+		insert into pest
+		(pe_id, ec_id, pe_name, pe_image, pe_cause, pe_method, pe_biologicalControl, pe_naturalEnemy,
+		pe_carefulPlant, pe_description, pe_hits)
+		values
+		(#{pe_id}, 30, #{pe_name}, #{pe_image}, #{pe_cause}, #{pe_method}, #{pe_biologicalControl}, #{pe_naturalEnemy},
+		#{pe_carefulPlant}, #{pe_description}, 0)
+	</insert>
+	<!-- 해충 정보 수정 -->
+	<update id="update" parameterType="PestEntity">
+		update pest
+		set
+		ec_id = #{ec_id}, pe_name = #{pe_name}, pe_image = #{pe_image}, pe_cause = #{pe_cause},
+		pe_method = #{pe_method}, pe_biologicalControl = #{pe_biologicalControl}, pe_naturalEnemy = #{pe_naturalEnemy},
+		pe_carefulPlant = #{pe_carefulPlant}, pe_description = #{pe_description}
+		where pe_id = #{pe_id}
+	</update>
+	<!-- 해충 정보 삭제 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete
+		from pest
+		where = pe_id = #{pe_id}
+	</delete>
+</mapper>

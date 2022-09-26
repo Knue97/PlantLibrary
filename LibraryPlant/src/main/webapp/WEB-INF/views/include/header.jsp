@@ -24,7 +24,7 @@
                                                     <ul class="submenu">
                                                     	<li><a href="${contextPath }/encyclopedia/home">백과 홈</a></li>
                                                         <li><a href="${contextPath }/encyclopedia/plant/listgroup">식물</a></li>
-                                                        <li><a href="blog_details.html">병해충</a></li>
+                                                        <li><a href="${contextPath }/encyclopedia/diseaseandpest">병해충</a></li>
                                                         <li><a href="elements.html">무슨무슨?</a></li>                                                        
                                                     </ul>
                                                 </li>

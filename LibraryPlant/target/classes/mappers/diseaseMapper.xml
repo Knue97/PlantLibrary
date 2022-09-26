@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.plantlibrary.diseaseMapper">
+	<!-- 병해백과 최신순 목록 조회 -->
+	<select id="listAll" resultType="DiseaseEntity">
+		select
+		di_id, di_alias, substring_index(di_image, ',', 1) as di_image
+		from disease
+        order by di_id desc
+	</select>
+	<!-- 조회수가 높은 순서 정렬 조회 3위까지-->
+	<select id="highhits" resultType="DiseaseEntity">
+		select
+		di_id, di_alias, substring_index(di_image, ',', 1) as di_image
+		from disease
+        order by di_hits desc
+        limit 3;
+	</select>
+	<!-- 병해백과 상세정보 -->
+	<select id="detail" resultType="DiseaseEntity" parameterType="java.lang.Integer">
+		select
+		di_id, ec_id, di_alias, di_image, di_cause, di_symptomOfDisease,
+		di_biologicalControl, di_carefulPlant, di_descripton, di_hits
+		from disease
+		where di_id = #{di_id}
+	</select>
+	<!-- 검색 결과 조회 -->
+	<select id="search" resultType="DiseaseEntity" parameterType="java.lang.String">
+		select di_id, di_alias, substring_index(di_image, ',', 1) as di_image
+		from disease
+		where di_alias like CONCAT('%', #{searchword}, '%')
+	</select>
+	<!-- 해당 병해백과 조회수 증가 -->
+	<update id="updateHits" parameterType="java.lang.Integer">
+		update disease
+		set di_hits = di_hits + 1
+		where di_id = #{di_id}
+	</update>
+	<!-- 병해 정보 추가 -->
+	<insert id="register" parameterType="DiseaseEntity">
+		insert into disease 
+		(di_id, ec_id, di_alias, di_image, di_cause, di_symptomOfDisease,
+		di_biologicalControl, di_carefulPlant, di_descripton, di_hits)
+		values
+		(#{di_id}, 20, #{di_alias}, #{di_image}, #{di_cause}, #{di_symptomOfDisease},
+		#{di_biologicalControl}, #{di_carefulPlant}, #{di_descripton}, 0)
+	</insert>
+	<!-- 병해 정보 수정 -->
+	<update id="update" parameterType="DiseaseEntity">
+		update disease
+		set ec_id = #{ec_id}, di_alias = #{di_alias}, di_image = #{di_image},
+		di_cause = #{di_cause}, di_symptomOfDisease = #{di_symptomOfDisease},
+		di_biologicalControl = #{di_biologicalControl}, di_carefulPlant = #{di_carefulPlant},
+		di_descripton = #{di_descripton}
+		where di_id = #{di_id}
+	</update>
+	<!-- 병해 정보 삭제 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete
+		from disease
+		where di_id = #{di_id}
+	</delete>
+</mapper>
