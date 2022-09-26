@@ -1,7 +1,12 @@
 package kr.co.plantlibrary.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -9,12 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.plantlibrary.board.BoardDTO;
@@ -38,6 +45,8 @@ public class BoardController {
 	 */
 	@Autowired
 	BoardService service;
+	@Resource(name="uploadPath")
+	private String uploadPath;
 
 //	 free 리스트 불러오기(페이징, 검색 적용중)
 	@GetMapping(value = "board/freeListAll")
@@ -140,12 +149,38 @@ public class BoardController {
 
 //	-2. 입력
 	@PostMapping(value = "board/register")
-	public String register(BoardDTO boardDTO, HttpServletRequest request) throws Exception {
-		request.setCharacterEncoding("UTF-8");
-
-		logger.info("글쓰기 저장" + boardDTO);
-		int r = service.register(boardDTO);
+	public String register(MultipartFile[] files, Model model,BoardDTO boardDTO) throws Exception {
+		logger.info("========== 게시글 작성 ==========");
+//		폴더 생성 yyyy/MM/dd
+		File uploadFolder = new File(uploadPath, getFolder());
+		logger.info("uploadFolder = "+ uploadFolder);
 		
+		if (uploadFolder.exists() == false) {
+			logger.info("폴더 생성 : "+ uploadFolder.mkdirs());
+			uploadFolder.mkdirs();
+		} // 해당 폴더의 유무 확인 후 없으면 만듦
+		
+//		고유값 이미지 저장
+		for(MultipartFile file :files) {
+		
+//		IE has file path
+		String uploadFileName = file.getOriginalFilename();
+		uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
+		logger.info("Only file name = "+ uploadFileName);
+		logger.info("Size = "+ file.getSize());
+		logger.info("ContentType = "+ file.getContentType());
+		
+		if (file.getOriginalFilename() != "") {
+			String b_image = uploadFile(uploadFolder, uploadFileName, file.getBytes());
+			logger.info("이미지 b_image = "+ b_image);
+			boardDTO.setB_image(b_image);
+			model.addAttribute("b_image",b_image);			
+			}
+		}
+		
+		logger.info("글쓰기 저장" + boardDTO);
+		int r= service.register(boardDTO);
+
 		switch (boardDTO.getBc_id()) {
 		case 1:
 			return "redirect:freeListAll";
@@ -238,5 +273,31 @@ public class BoardController {
 		return service.replyDelete(c_no);
 	}
 	
+	
+//	고유값+이름
+	private String uploadFile(File uploadFolder, String uploadFileName, byte[] fileData) throws Exception {
+
+		UUID uid = UUID.randomUUID();
+		String saveName = uid.toString() + "_" + uploadFileName;
+		File target = new File(uploadFolder, saveName);
+		FileCopyUtils.copy(fileData, target);
+		logger.info("uid "+ uid);
+		logger.info("saveName "+saveName);
+		logger.info("target "+target);
+
+		return saveName;
+	}
+
+//	해당 날짜 폴더
+	private String getFolder() {
+		
+		// yyyy-MM-dd 대소문자 정확히 입력해야 날짜대로 나옴
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
+		
+		return str.replace("-", File.separator);
+		
+	}
 	
 }
