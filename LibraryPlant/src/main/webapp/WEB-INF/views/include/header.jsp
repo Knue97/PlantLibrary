@@ -64,7 +64,17 @@
 														<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-															    ${user.u_id }
+															  	<c:choose>															  		
+															  		<c:when test="${user.api == 'naver' }">
+															  			${user.u_name }
+															  		</c:when>
+															  		<c:when test="${user.api == 'kakao'}">
+															  			${user.nickname }
+															  		</c:when>
+															  		<c:otherwise>
+															  			${user.u_id }
+															  		</c:otherwise>
+															  	</c:choose>															    															    
 															  </button>
 															  <ul class="dropdown-menu">
 															    <li><a class="dropdown-item" href="${contextPath}/user/mypage">내 정보</a></li>
