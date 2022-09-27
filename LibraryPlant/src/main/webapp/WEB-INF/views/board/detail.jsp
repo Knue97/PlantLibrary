@@ -51,7 +51,7 @@ function replyListAll() {
 					htmls += '<span style="padding-left: 7px; font-size: 9pt">';
 					if('${user.u_id}'== this.u_id){
 					htmls += '<a href="javascript:void(0)" onclick="replyUpdateForm(' + this.c_no + ', \'' + this.u_id + '\', \'' + this.c_content + '\' )" style="padding-right:5px">수정</a>';
-					htmls += '<a href="javascript:void(0)" onclick="replyDelete(' + this.c_no + ')" >삭제</a>';
+					htmls += '<a href="javascript:void(0)" onclick="replyAlarm(' + this.c_no + ')" >삭제</a>';
 					}
 					htmls += '</span>';
 					htmls += '</span><br>';
@@ -77,7 +77,7 @@ function replyListAll() {
 //	댓글 작성
 
 	$(document).on('click', '#replyRegister', function(){	// 문서에서 이벤트 발생 이벤트는 클릭이고 대상은 #btnReplySave
-		var c_content = $.trim($("#c_content").val());
+		var c_content = $("#c_content").val().trim();
 	console.log(c_content);
 	
 		var u_id = $("#u_id").val();
@@ -146,7 +146,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 //	댓글 수정
 	function replyUpdate(c_no, u_id) {
 		
-		var editmemo = $('#editmemo').val();
+		var editmemo = $('#editmemo').val().trim();
 		var url = "${contextPath}/board/replyUpdate";
 		var paramData = {
 			"c_no" : c_no,
@@ -174,10 +174,20 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 	
 //	댓글 삭제
+//	1) 삭제 확인창
+	function replyAlarm(c_no) {
+		var msg = "해당 댓글을 삭제하시겠습니까?";
+		if (confirm(msg)) {
+			replyDelete(c_no);
+			return false;
+		}
+		return true;
+	}
+//	2) 확인 후 삭제 처리
 	function replyDelete(c_no) {
 		url = "${contextPath}/board/replyDelete";
 		paramData = {
-				"c_no" : c_no
+			"c_no" : c_no
 		};
 
 		$.ajax({
@@ -192,23 +202,21 @@ function replyUpdateForm(c_no, u_id, c_content){
 			},
 			error : function(result) {
 				console.log(result);
-				alert('**수정 실패**');
+				alert('**삭제 실패**');
 			}
-			
+
 		}); // end of $.ajax
 	}
-	
-	
-function alarm(){
-	var msg = "해당 글의 삭제를 진행하시겠습니까?";
-	if(confirm(msg)){
-		location.href='delete?b_no=${board.b_no}';
-	return false;
-	}
-	return true;
-	}
 
-	
+//	게시글 삭제 확인창
+	function alarm() {
+		var msg = "해당 글을 삭제하시겠습니까?";
+		if (confirm(msg)) {
+			location.href = 'delete?b_no=${board.b_no}';
+			return false;
+		}
+		return true;
+	}
 </script>
 
 <body>
@@ -265,6 +273,7 @@ function alarm(){
 
 				<div class="form-group">
 					<h1 align="center">본문은 여기↓</h1>
+					<p></p>
 
 					<div class="container">
 						<div class="row px-xl-5">
@@ -283,16 +292,7 @@ function alarm(){
 												src="${contextPath}/resources/assets/img/sample/12.jpg"
 												alt="">
 										</div>
-										<div class="carousel-item">
-											<img class="w-100 h-100"
-												src="${contextPath}/resources/assets/img/sample/123.jpg"
-												alt="">
-										</div>
-										<div class="carousel-item">
-											<img class="w-100 h-100"
-												src="${contextPath}/resources/assets/img/sample/1234.jpg"
-												alt="">
-										</div>
+										
 									</div>
 									<a class="carousel-control-prev" href="#product-carousel"
 										data-slide="prev"> <i

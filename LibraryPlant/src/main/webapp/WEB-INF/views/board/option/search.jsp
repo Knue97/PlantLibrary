@@ -2,40 +2,57 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<form action="searchList" method="get">
-<div>
-	<div class="search-box">
-			<select class="search-form" name="searchType" id="searchType">
-				<option value="all">전체</option>
-				<option value="writer">작성자</option>
-				<option value="title">제목</option>
-				<option value="content">내용</option>
-				<option value="titcon">제목+내용</option>
-			</select>
+		<c:if test="${pageMaker.cri.searchKeyword == null}">
+			<h2>^^</h2>
+			<p>검색해보든가~</p>
+		</c:if>
+		<c:if test="${pageMaker.cri.searchKeyword != null}">
+			<h5 style="color: #559fa3">
+				"<strong>${pageMaker.cri.searchKeyword}</strong>" 검색결과 : ${pageMaker.totalCount}
+			</h5>
+			<p>검색</p>
+		</c:if>
 
-		<input type="text" name="searchKeyword" id="searchKeyword" value="${pageMaker.cri.searchKeyword}">
-		<button id="searchbtn">검색</button>
+<div class="container">
+	<div class="row">
+		<form action="searchList" method="get" class="search-box">
+			<div>
+				<select class="search-form" name="searchType" id="searchType">
+					<option value="all">전체</option>
+					<option value="writer">작성자</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="titcon">제목+내용</option>
+				</select>
+				
+				<div class="input-form">
+					<div class="world-form">
+						<!-- 아이콘 -->
+						<i class="ti-search"></i>
+					</div>
+
+					<input type="text" name="searchKeyword" id="searchKeyword" value="${pageMaker.cri.searchKeyword}">
+					<button id="searchbtn">검색</button>
+				</div>
+			</div>
+		</form>
 	</div>
-</div>		
-</form>
-
+</div>
 
 <script>
+	$('#searchbtn').on('click', function(e) {
+		e.preventDefault();
 
-$('#searchbtn').on('click', function(e){
-	e.preventDefault();
+		if ($('#searchKeyword').val() == "") {
+			alert("검색어를 입력하세요.");
+			$('#searchKeyword').focus();
+			return false;
+		}
+		var url = "${contextPath}/board/searchList";
+		url = url + "?searchType=" + $('#searchType').val();
+		url = url + "&searchKeyword=" + $('#searchKeyword').val().trim();
+		location.href = encodeURI(url);
+		console.log(encodeURI(url));
 
-	if($('#searchKeyword').val() == ""){
-		alert("검색어를 입력하세요.");
-		$('#searchKeyword').focus();
-		return false;
-	}
-	var url = "${contextPath}/board/searchList";
-	url = url+ "?searchType=" + $('#searchType').val();
-	url = url+ "&searchKeyword=" + $('#searchKeyword').val();
-	location.href = encodeURI(url);
-	console.log(encodeURI(url));
-	
-});
-
+	});
 </script>

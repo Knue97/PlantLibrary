@@ -173,8 +173,10 @@ public class BoardController {
 
 //	-2. 입력
 	@PostMapping(value = "board/register")
-	public String register(MultipartFile[] files, BoardDTO boardDTO) throws Exception {
+	public String register(MultipartFile[] files, BoardDTO boardDTO,Model model) throws Exception {
 		logger.info("========== 게시글 작성 ==========");
+
+		
 //		폴더 생성 yyyy/MM/dd
 		File uploadFolder = new File(uploadPath, getFolder());
 		logger.info("uploadFolder = " + uploadFolder);
@@ -198,14 +200,17 @@ public class BoardController {
 			if (file.getOriginalFilename() != "") {
 				String saveName = uploadFile(uploadFolder, uploadFileName, file.getBytes());
 					b_image += saveName + ",";	// DB 이미지 컬럼에 배열로 받기
-
+					
+					model.addAttribute("saveName", saveName);// 없어도 돌아가긴 하던데 불필요하면 나중에 지워야지 뭐..
+					logger.info("이미지 saveName = " + saveName);
 				
 			}
 		}
-		
+		if (files.length <1) {	//  이미지가 있을 때만 적용되기 - 없으면 오류창에 end = -1이 되버림
 		b_image = b_image.substring(0, b_image.length() - 1);	//	substring : 문자열자르기 = db 입력시 마지막 콤마 자르기
 		boardDTO.setB_image(b_image);
-
+		}
+		
 		logger.info("글쓰기 저장" + boardDTO);
 		int r = service.register(boardDTO);
 

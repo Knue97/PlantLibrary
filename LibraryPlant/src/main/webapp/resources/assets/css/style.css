@@ -6065,3 +6065,19 @@ a.badge:focus {
     }
 }
 
+select {
+	width: 150px;
+	height: 65px;
+	padding: .8em .5em;
+	border: 1px solid #999;
+	font-family: inherit;
+	background: url(../img/icon/selectbutton.jpg) no-repeat 95% 50%;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+select::-ms-expand {
+	display: none;
+}
