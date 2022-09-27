@@ -28,8 +28,8 @@
                         <div class="row align-items-center justify-content-center">
                             <div class="col-xl-5 col-lg-5 col-md-9 ">
                                 <div class="hero__caption text-center">
-                                    <span data-animation="fadeInDown" data-delay=".3s">Search Board</span>
-                                    <h1 data-animation="fadeInDown" data-delay=".1s ">검색 게시판</h1>
+                                    <span data-animation="fadeInDown" data-delay=".3s">Total Search Board</span>
+                                    <h1 data-animation="fadeInDown" data-delay=".1s ">전체 검색 게시판</h1>
 
                                 </div>
                             </div>
@@ -47,12 +47,10 @@
         
         	<section class="content container-fluid">
 				
-				<!-- search.jsp 에 필요함  -->
-				<input type="hidden" id="boardType" value="1">
 				
 				
 				<div>
-					<%@ include file="search.jsp" %>
+					<%@ include file="option/search.jsp" %>
 					
 					
 					<div class="box">
@@ -78,7 +76,7 @@
 								<c:if test="${board.b_image != null}">
 								<img src="${contextPath}/resources/assets/img/icon/plant.png" alt="" height="25" width="25">
 								</c:if>
-								${board.b_title} </a>[<a>${board.b_commentcnt}]</a></td>
+								${board.b_title} </a><a href="detail?b_no=${board.b_no}">[${board.b_commentcnt}]</a></td>
 								<td>${board.u_id}</td>
 								<td>${board.b_regdate}</td>
 								<td><span class="badge">${board.b_hits}</span></td>
@@ -89,32 +87,38 @@
 					
 					<p></p>
 					
-					<!-- 검색에 해당하는 게시글이 없을 때 -->
-					<%@ include file="resultNone.jsp" %>
-					<!-- /검색에 해당하는 게시글이 없을 때 -->
+					<!-- 검색에 해당하는 게시글 결과 -->
+					<%@ include file="option/resultNone.jsp" %>
+					<!-- /검색에 해당하는 게시글 결과 -->
 
 
-					<!-- 페이징  -->
+				<!-- 검색 페이징 주소? 키워드 인코딩 &검색 타입  -->
+				<c:url
+					value="/board/searchList?searchType=${pageMaker.cri.searchType}" var="url">
+					<c:param name="searchKeyword" value="${pageMaker.cri.searchKeyword}"></c:param>
+				</c:url>
+				<!-- /검색 페이징 주소? 키워드 인코딩 &검색 타입  -->
+				<!-- 검색 페이징  -->
 				<div class="row mt-5">
 					<div class="col text-center">
 						<div class="block-27">
 							<ul class="blog-pagination">
 								<c:if test="${pageMaker.prev}">
 									<li>
-										<a href='<c:url value="/board/searchList?page=${pageMaker.startPage - 1}"/>'>
+										<a href='${url }<c:url value="&page=${pageMaker.startPage - 1}"/>'>
 											<i class="fa fa-chevron-left"></i>
 										</a>
 									</li>
 								</c:if>
 								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-									<li><a href='<c:url value="/board/searchList?page=${pageNum}"/>'>
+									<li><a href='${url }<c:url value="&page=${pageNum}"/>'>
 										<i class="fa">${pageNum}</i>
 									</a>
 									</li>
 								</c:forEach>
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 									<li>
-										<a href='<c:url value="/board/searchList?page=${pageMaker.endPage + 1}"/>'>
+										<a href='${url }<c:url value="&page=${pageMaker.endPage + 1}"/>'>
 											<i class="fa fa-chevron-right"></i>
 										</a>
 									</li>
@@ -123,7 +127,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- /페이징  -->
+				<!-- /검색 페이징  -->
+
 
 				<div class="box">
 						<div class="box-header with-border">
@@ -133,6 +138,8 @@
 				</div>
 
 			</section>
+			
+			
 	</main>
 <footer>
     <%@ include file="../include/footer.jsp" %>

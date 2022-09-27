@@ -52,7 +52,7 @@
 				
 				
 				<div>
-					<%@ include file="search.jsp" %>
+					<%@ include file="option/search.jsp" %>
 					
 					
 					<div class="box">
@@ -88,10 +88,6 @@
 					</table>
 					
 					<p></p>
-					
-					<!-- 검색에 해당하는 게시글이 없을 때 -->
-					<%@ include file="resultNone.jsp" %>
-					<!-- /검색에 해당하는 게시글이 없을 때 -->
 
 
 					<!-- 페이징  -->

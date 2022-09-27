@@ -47,25 +47,7 @@ public class BoardController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
-	@GetMapping(value = "board/searchList")
-	public ModelAndView searchList(Criteria cri) throws Exception {
-		logger.info("검색 게시판 리스트");
-		ModelAndView mav = new ModelAndView();
 
-		// PageMaker() 객체를 생성
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri); // page와 perPageNum을 셋팅
-		pageMaker.setTotalCount(service.countSearch(cri));
-		logger.info("" + service.countSearch(cri));
-		logger.info(cri.toString());
-		logger.info("" + pageMaker);
-
-		List<BoardDTO> listAll = service.searchList(cri);
-		mav.addObject("searchList", listAll);
-		mav.addObject("pageMaker", pageMaker);
-		mav.setViewName("board/searchList");
-		return mav;
-	}
 
 //	 free 리스트 불러오기(페이징, 검색 적용중)
 	@GetMapping(value = "board/freeListAll")
@@ -76,8 +58,8 @@ public class BoardController {
 		// PageMaker() 객체를 생성
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri); // page와 perPageNum을 셋팅
-		pageMaker.setTotalCount(service.countBoardListTotal1(cri)); // 총 게시글의 수를 셋팅 (총 게시글 수를 조회하는 로직 구현)
-		logger.info("" + service.countBoardListTotal1(cri));
+		pageMaker.setTotalCount(service.countBoardListTotal1()); // 총 게시글의 수를 셋팅 (총 게시글 수를 조회하는 로직 구현)
+		logger.info("" + service.countBoardListTotal1());
 		logger.info(cri.toString());
 		logger.info("" + pageMaker);
 
@@ -96,8 +78,8 @@ public class BoardController {
 		// PageMaker() 객체를 생성
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri); // page와 perPageNum을 셋팅
-		pageMaker.setTotalCount(service.countBoardListTotal2(cri));
-		logger.info("" + service.countBoardListTotal2(cri));
+		pageMaker.setTotalCount(service.countBoardListTotal2());
+		logger.info("" + service.countBoardListTotal2());
 		logger.info(cri.toString());
 		logger.info("" + pageMaker);
 
@@ -116,8 +98,8 @@ public class BoardController {
 		// PageMaker() 객체를 생성
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri); // page와 perPageNum을 셋팅
-		pageMaker.setTotalCount(service.countBoardListTotal3(cri));
-		logger.info("" + service.countBoardListTotal3(cri));
+		pageMaker.setTotalCount(service.countBoardListTotal3());
+		logger.info("" + service.countBoardListTotal3());
 		logger.info(cri.toString());
 		logger.info("" + pageMaker);
 
@@ -136,8 +118,8 @@ public class BoardController {
 		// PageMaker() 객체를 생성
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri); // page와 perPageNum을 셋팅
-		pageMaker.setTotalCount(service.countBoardListTotal4(cri));
-		logger.info("" + service.countBoardListTotal4(cri));
+		pageMaker.setTotalCount(service.countBoardListTotal4());
+		logger.info("" + service.countBoardListTotal4());
 		logger.info(cri.toString());
 		logger.info("" + pageMaker);
 
@@ -147,6 +129,29 @@ public class BoardController {
 		mav.setViewName("board/shareListAll");
 		return mav;
 	}
+	
+//	검색 전용 리스트
+	@GetMapping(value = "board/searchList")
+	public ModelAndView searchList(Criteria cri) throws Exception {
+		logger.info("검색 게시판 리스트");
+		ModelAndView mav = new ModelAndView();
+
+		// PageMaker() 객체를 생성
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri); // page와 perPageNum을 셋팅
+		pageMaker.setTotalCount(service.countSearch(cri));
+		logger.info("Criteria = " + service.countSearch(cri));
+		logger.info(cri.toString());
+		logger.info("PageMaker = " + pageMaker);
+
+		List<BoardDTO> listAll = service.searchList(cri);
+		mav.addObject("searchList", listAll);
+		mav.addObject("pageMaker", pageMaker);
+		mav.setViewName("board/searchList");
+		return mav;
+	}
+	
+	
 
 //	게시글 보기 detail
 	@RequestMapping(value = "board/detail", method = RequestMethod.GET)
@@ -168,7 +173,7 @@ public class BoardController {
 
 //	-2. 입력
 	@PostMapping(value = "board/register")
-	public String register(MultipartFile[] files, Model model, BoardDTO boardDTO) throws Exception {
+	public String register(MultipartFile[] files, BoardDTO boardDTO) throws Exception {
 		logger.info("========== 게시글 작성 ==========");
 //		폴더 생성 yyyy/MM/dd
 		File uploadFolder = new File(uploadPath, getFolder());
@@ -192,14 +197,13 @@ public class BoardController {
 
 			if (file.getOriginalFilename() != "") {
 				String saveName = uploadFile(uploadFolder, uploadFileName, file.getBytes());
-					b_image += saveName + ",";	// DB 이미지 컬럼에 배열로 받기 위한 녀석
+					b_image += saveName + ",";	// DB 이미지 컬럼에 배열로 받기
 
-				model.addAttribute("saveName", saveName);//불필요하면 나중에 지워야지 뭐..
-				logger.info("이미지 saveName = " + saveName);
+				
 			}
 		}
 		
-		b_image = b_image.substring(0, b_image.length() - 1);	//	substring : 문자열자르기
+		b_image = b_image.substring(0, b_image.length() - 1);	//	substring : 문자열자르기 = db 입력시 마지막 콤마 자르기
 		boardDTO.setB_image(b_image);
 
 		logger.info("글쓰기 저장" + boardDTO);

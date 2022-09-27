@@ -31,8 +31,6 @@ $('#searchbtn').on('click', function(e){
 		return false;
 	}
 	var url = "${contextPath}/board/searchList";
-	
-	
 	url = url+ "?searchType=" + $('#searchType').val();
 	url = url+ "&searchKeyword=" + $('#searchKeyword').val();
 	location.href = encodeURI(url);

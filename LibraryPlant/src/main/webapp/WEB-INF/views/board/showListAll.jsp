@@ -52,7 +52,7 @@
 				<input type="hidden" id="boardType" value="3">
 				
 				<div>
-					<%@ include file="search.jsp" %>
+					<%@ include file="option/search.jsp" %>
 					<div class="box">
 						<div class="box-header with-border">
 							<a href="${contextPath}/board/register"><h3 class="box-title" align="right">게시판 글쓰기</h3></a>
@@ -87,10 +87,7 @@
 					
 					
 					<p></p>
-					
-					<!-- 검색에 해당하는 게시글이 없을 때 -->
-					<%@ include file="resultNone.jsp" %>
-					<!-- /검색에 해당하는 게시글이 없을 때 -->
+	
 
 					<!-- 페이징  -->
 				<div class="row mt-5">

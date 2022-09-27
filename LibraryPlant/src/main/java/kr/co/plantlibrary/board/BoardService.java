@@ -25,10 +25,10 @@ public interface BoardService {
 	public int delete(int b_no) throws Exception;
 
 //	페이징
-	public int countBoardListTotal1(Criteria cri) throws Exception;
-	public int countBoardListTotal2(Criteria cri) throws Exception;
-	public int countBoardListTotal3(Criteria cri) throws Exception;
-	public int countBoardListTotal4(Criteria cri) throws Exception;
+	public int countBoardListTotal1() throws Exception;
+	public int countBoardListTotal2() throws Exception;
+	public int countBoardListTotal3() throws Exception;
+	public int countBoardListTotal4() throws Exception;
 	
 //	검색 기능
 	public List<BoardDTO> searchList(Criteria cri) throws Exception;

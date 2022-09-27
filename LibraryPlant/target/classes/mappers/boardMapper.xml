@@ -11,28 +11,24 @@
 		select count(*)
 		from board
 		where bc_id = 1
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList2" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 2
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList3" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 3
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList4" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 4
-		<include refid="searchCondition"></include>
 	</select>
 
 
@@ -44,7 +40,6 @@
 		select *
 		from board
 		where bc_id = 1
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -54,7 +49,6 @@
 		select *
 		from board
 		where bc_id = 2
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -64,7 +58,6 @@
 		select *
 		from board
 		where bc_id = 3
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -74,10 +67,10 @@
 		select *
 		from board
 		where bc_id = 4
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
+
 
 
 	<!-- 게시글 detail -->

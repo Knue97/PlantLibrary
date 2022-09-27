@@ -89,24 +89,24 @@ public class BoardDAOImpl implements BoardDAO{
 	
 //	 페이징
 	@Override
-	public int countBoardList1(Criteria cri) throws Exception {
+	public int countBoardList1() throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(Namespace + ".countBoardList1", cri);
+		return sqlsession.selectOne(Namespace + ".countBoardList1");
 	}
 	@Override
-	public int countBoardList2(Criteria cri) throws Exception {
+	public int countBoardList2() throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(Namespace + ".countBoardList2", cri);
+		return sqlsession.selectOne(Namespace + ".countBoardList2");
 	}
 	@Override
-	public int countBoardList3(Criteria cri) throws Exception {
+	public int countBoardList3() throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(Namespace + ".countBoardList3", cri);
+		return sqlsession.selectOne(Namespace + ".countBoardList3");
 	}
 	@Override
-	public int countBoardList4(Criteria cri) throws Exception {
+	public int countBoardList4() throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(Namespace + ".countBoardList4", cri);
+		return sqlsession.selectOne(Namespace + ".countBoardList4");
 	}
 	
 //	검색

@@ -67,24 +67,24 @@ public class BoardServiceImpl implements BoardService {
 	
 //	페이징
 	@Override
-	public int countBoardListTotal1(Criteria cri) throws Exception {
+	public int countBoardListTotal1() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countBoardList1(cri);
+		return dao.countBoardList1();
 	}
 	@Override
-	public int countBoardListTotal2(Criteria cri) throws Exception {
+	public int countBoardListTotal2() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countBoardList2(cri);
+		return dao.countBoardList2();
 	}
 	@Override
-	public int countBoardListTotal3(Criteria cri) throws Exception {
+	public int countBoardListTotal3() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countBoardList3(cri);
+		return dao.countBoardList3();
 	}
 	@Override
-	public int countBoardListTotal4(Criteria cri) throws Exception {
+	public int countBoardListTotal4() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countBoardList4(cri);
+		return dao.countBoardList4();
 	}
 	
 //	검색
@@ -93,7 +93,7 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.searchList(cri);
 	}
-
+//	검색 페이징
 	@Override
 	public int countSearch(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub

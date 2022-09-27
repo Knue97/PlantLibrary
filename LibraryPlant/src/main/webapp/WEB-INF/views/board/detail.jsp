@@ -351,7 +351,7 @@ function alarm(){
 			<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
 			<c:if test="${board.bc_id == 4 }">
 
-				<%@include file="shareInfo.jsp"%>
+				<%@include file="option/shareInfo.jsp"%>
 
 			</c:if>
 			<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
