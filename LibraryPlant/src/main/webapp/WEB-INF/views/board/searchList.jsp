@@ -28,8 +28,8 @@
                         <div class="row align-items-center justify-content-center">
                             <div class="col-xl-5 col-lg-5 col-md-9 ">
                                 <div class="hero__caption text-center">
-                                    <span data-animation="fadeInDown" data-delay=".3s">Free Board</span>
-                                    <h1 data-animation="fadeInDown" data-delay=".1s ">자유 게시판</h1>
+                                    <span data-animation="fadeInDown" data-delay=".3s">Search Board</span>
+                                    <h1 data-animation="fadeInDown" data-delay=".1s ">검색 게시판</h1>
 
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
 							<td>조회수</td>
 							<td>추천수</td>
 						</tr>
-						<c:forEach var="board" items="${freeListAll }">
+						<c:forEach var="board" items="${searchList}">
 							<tr>
 								<td>${board.b_no}</td>
 								<td><a href="detail?b_no=${board.b_no}">
@@ -101,20 +101,20 @@
 							<ul class="blog-pagination">
 								<c:if test="${pageMaker.prev}">
 									<li>
-										<a href='<c:url value="/board/freeListAll?page=${pageMaker.startPage - 1}"/>'>
+										<a href='<c:url value="/board/searchList?page=${pageMaker.startPage - 1}"/>'>
 											<i class="fa fa-chevron-left"></i>
 										</a>
 									</li>
 								</c:if>
 								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-									<li><a href='<c:url value="/board/freeListAll?page=${pageNum}"/>'>
+									<li><a href='<c:url value="/board/searchList?page=${pageNum}"/>'>
 										<i class="fa">${pageNum}</i>
 									</a>
 									</li>
 								</c:forEach>
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 									<li>
-										<a href='<c:url value="/board/freeListAll?page=${pageMaker.endPage + 1}"/>'>
+										<a href='<c:url value="/board/searchList?page=${pageMaker.endPage + 1}"/>'>
 											<i class="fa fa-chevron-right"></i>
 										</a>
 									</li>

@@ -30,16 +30,7 @@ $('#searchbtn').on('click', function(e){
 		$('#searchKeyword').focus();
 		return false;
 	}
-	var url = "${contextPath}/board/";
-	if($('#boardType').val() ==1){
-	url +="freeListAll";		
-	}else if($('#boardType').val() ==2){
-		url +="qnaListAll";		
-	}else if($('#boardType').val() ==3){
-		url +="showListAll";		
-	}else if($('#boardType').val() ==4){
-		url +="shareListAll";		
-	}
+	var url = "${contextPath}/board/searchList";
 	
 	
 	url = url+ "?searchType=" + $('#searchType').val();

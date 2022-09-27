@@ -266,7 +266,7 @@ function alarm(){
 				<div class="form-group">
 					<h1 align="center">본문은 여기↓</h1>
 
-					<div class="container-fluid py-5">
+					<div class="container">
 						<div class="row px-xl-5">
 						<c:if test="${board.b_image != null}">
 							<div class="col-lg-5 pb-5">
@@ -305,11 +305,14 @@ function alarm(){
 							</div>
 							</c:if>
 
-									<div class="col-lg-7 pb-5">
-										<p class="mb-4">${board.b_content}</p>
-									</div>
-								
-					
+
+							<div class="col-lg-7 pb-5">
+								<div class="quote-wrapper">
+									<p class="mb-4">${board.b_content}</p>
+								</div>
+							</div>
+
+
 						</div>
 					</div>
 					

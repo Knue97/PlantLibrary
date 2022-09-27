@@ -35,7 +35,6 @@ import kr.co.plantlibrary.board.ReplyDTO;
  */
 @Controller
 
-
 public class BoardController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
@@ -45,26 +44,46 @@ public class BoardController {
 	 */
 	@Autowired
 	BoardService service;
-	@Resource(name="uploadPath")
+	@Resource(name = "uploadPath")
 	private String uploadPath;
+	
+	@GetMapping(value = "board/searchList")
+	public ModelAndView searchList(Criteria cri) throws Exception {
+		logger.info("검색 게시판 리스트");
+		ModelAndView mav = new ModelAndView();
+
+		// PageMaker() 객체를 생성
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri); // page와 perPageNum을 셋팅
+		pageMaker.setTotalCount(service.countSearch(cri));
+		logger.info("" + service.countSearch(cri));
+		logger.info(cri.toString());
+		logger.info("" + pageMaker);
+
+		List<BoardDTO> listAll = service.searchList(cri);
+		mav.addObject("searchList", listAll);
+		mav.addObject("pageMaker", pageMaker);
+		mav.setViewName("board/searchList");
+		return mav;
+	}
 
 //	 free 리스트 불러오기(페이징, 검색 적용중)
 	@GetMapping(value = "board/freeListAll")
 	public ModelAndView freeListAll(Criteria cri) throws Exception {
 		logger.info("자유 게시판 리스트");
 		ModelAndView mav = new ModelAndView();
-		
+
 		// PageMaker() 객체를 생성
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);	//  page와 perPageNum을 셋팅
-		pageMaker.setTotalCount(service.countBoardListTotal1(cri));	// 총 게시글의 수를 셋팅 (총 게시글 수를 조회하는 로직 구현)
-		logger.info(""+service.countBoardListTotal1(cri));
+		pageMaker.setCri(cri); // page와 perPageNum을 셋팅
+		pageMaker.setTotalCount(service.countBoardListTotal1(cri)); // 총 게시글의 수를 셋팅 (총 게시글 수를 조회하는 로직 구현)
+		logger.info("" + service.countBoardListTotal1(cri));
 		logger.info(cri.toString());
-		logger.info(""+pageMaker);
-		
-		List<BoardDTO> listAll = service.listAll(cri);	//	원래의 목록 조회 로직에서 Criteria 파라미터를 사용하기 위해 수정
-		mav.addObject("listAll", listAll);
-		mav.addObject("pageMaker", pageMaker);	// 셋팅된 pageMaker에는 페이징을 위한 버튼의 값들이 들어있고 ModelAndView를 이용해 jsp에 넘겨준다.
+		logger.info("" + pageMaker);
+
+		List<BoardDTO> listAll = service.freeListAll(cri); // 원래의 목록 조회 로직에서 Criteria 파라미터를 사용하기 위해 수정
+		mav.addObject("freeListAll", listAll);
+		mav.addObject("pageMaker", pageMaker); // 셋팅된 pageMaker에는 페이징을 위한 버튼의 값들이 들어있고 ModelAndView를 이용해 jsp에 넘겨준다.
 		mav.setViewName("board/freeListAll");
 		return mav;
 	}
@@ -80,7 +99,7 @@ public class BoardController {
 		pageMaker.setTotalCount(service.countBoardListTotal2(cri));
 		logger.info("" + service.countBoardListTotal2(cri));
 		logger.info(cri.toString());
-		logger.info(""+pageMaker);
+		logger.info("" + pageMaker);
 
 		List<BoardDTO> listAll = service.qnaListAll(cri);
 		mav.addObject("qnaListAll", listAll);
@@ -100,8 +119,8 @@ public class BoardController {
 		pageMaker.setTotalCount(service.countBoardListTotal3(cri));
 		logger.info("" + service.countBoardListTotal3(cri));
 		logger.info(cri.toString());
-		logger.info(""+pageMaker);
-		
+		logger.info("" + pageMaker);
+
 		List<BoardDTO> listAll = service.showListAll(cri);
 		mav.addObject("showListAll", listAll);
 		mav.addObject("pageMaker", pageMaker);
@@ -120,8 +139,8 @@ public class BoardController {
 		pageMaker.setTotalCount(service.countBoardListTotal4(cri));
 		logger.info("" + service.countBoardListTotal4(cri));
 		logger.info(cri.toString());
-		logger.info(""+pageMaker);
-		
+		logger.info("" + pageMaker);
+
 		List<BoardDTO> listAll = service.shareListAll(cri);
 		mav.addObject("shareListAll", listAll);
 		mav.addObject("pageMaker", pageMaker);
@@ -149,37 +168,42 @@ public class BoardController {
 
 //	-2. 입력
 	@PostMapping(value = "board/register")
-	public String register(MultipartFile[] files, Model model,BoardDTO boardDTO) throws Exception {
+	public String register(MultipartFile[] files, Model model, BoardDTO boardDTO) throws Exception {
 		logger.info("========== 게시글 작성 ==========");
 //		폴더 생성 yyyy/MM/dd
 		File uploadFolder = new File(uploadPath, getFolder());
-		logger.info("uploadFolder = "+ uploadFolder);
-		
+		logger.info("uploadFolder = " + uploadFolder);
+
 		if (uploadFolder.exists() == false) {
-			logger.info("폴더 생성 : "+ uploadFolder.mkdirs());
+			logger.info("폴더 생성 : " + uploadFolder.mkdirs());
 			uploadFolder.mkdirs();
 		} // 해당 폴더의 유무 확인 후 없으면 만듦
-		
+
+		String b_image = "";	//	이미지 컬럼이 null
 //		고유값 이미지 저장
-		for(MultipartFile file :files) {
-		
+		for (MultipartFile file : files) {
+
 //		IE has file path
-		String uploadFileName = file.getOriginalFilename();
-		uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
-		logger.info("Only file name = "+ uploadFileName);
-		logger.info("Size = "+ file.getSize());
-		logger.info("ContentType = "+ file.getContentType());
-		
-		if (file.getOriginalFilename() != "") {
-			String b_image = uploadFile(uploadFolder, uploadFileName, file.getBytes());
-			logger.info("이미지 b_image = "+ b_image);
-			boardDTO.setB_image(b_image);
-			model.addAttribute("b_image",b_image);			
+			String uploadFileName = file.getOriginalFilename();
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			logger.info("OriginalFileName = " + uploadFileName);
+			logger.info("Size = " + file.getSize());
+			logger.info("ContentType = " + file.getContentType());
+
+			if (file.getOriginalFilename() != "") {
+				String saveName = uploadFile(uploadFolder, uploadFileName, file.getBytes());
+					b_image += saveName + ",";	// DB 이미지 컬럼에 배열로 받기 위한 녀석
+
+				model.addAttribute("saveName", saveName);//불필요하면 나중에 지워야지 뭐..
+				logger.info("이미지 saveName = " + saveName);
 			}
 		}
 		
+		b_image = b_image.substring(0, b_image.length() - 1);	//	substring : 문자열자르기
+		boardDTO.setB_image(b_image);
+
 		logger.info("글쓰기 저장" + boardDTO);
-		int r= service.register(boardDTO);
+		int r = service.register(boardDTO);
 
 		switch (boardDTO.getBc_id()) {
 		case 1:
@@ -191,7 +215,7 @@ public class BoardController {
 		case 4:
 			return "redirect:shareListAll";
 		}
-		
+
 		return "redirect:freeListAll";
 	}
 
@@ -226,7 +250,7 @@ public class BoardController {
 
 		if (r > 0) {
 			logger.info("삭제 성공, 자유 게시판으로 이동");
-			
+
 			return "redirect:freeListAll";
 		}
 		logger.info("삭제 실패");
@@ -234,46 +258,42 @@ public class BoardController {
 
 	}
 
-	
-	
 //	ajax 댓글 기능
 	@ResponseBody
 	@PostMapping(value = "board/replyListAll")
-	public List<ReplyDTO> replyListAll(@RequestParam("b_no") int b_no) throws Exception{
+	public List<ReplyDTO> replyListAll(@RequestParam("b_no") int b_no) throws Exception {
 		logger.info("ajax 실행");
 		return service.replyListAll(b_no);
 	}
-	
-	
+
 //	댓 작성
 	@ResponseBody
 	@PostMapping(value = "board/reply")
 	public int reply(ReplyDTO replyDTO) throws Exception {
 		logger.info(replyDTO.getC_content());
-		if(replyDTO.getC_content() == "") {
+		if (replyDTO.getC_content() == "") {
 			logger.info(replyDTO.getC_content() + "댓 내용없음");
 			return 2;
 		}
 		return service.reply(replyDTO);
 	}
 
-
 //	댓 수정
 	@ResponseBody
 	@PostMapping(value = "board/replyUpdate")
 	public int replyUpdate(ReplyDTO replyDTO) throws Exception {
-		
+
 		return service.replyUpdate(replyDTO);
 	}
-	
+
 //	댓 삭제
 	@ResponseBody
 	@PostMapping(value = "board/replyDelete")
 	public int replyDelete(@RequestParam("c_no") int c_no) throws Exception {
 		return service.replyDelete(c_no);
 	}
-	
-	
+
+//	나중에 service로 옮겨질 애들 ===================================
 //	고유값+이름
 	private String uploadFile(File uploadFolder, String uploadFileName, byte[] fileData) throws Exception {
 
@@ -281,23 +301,23 @@ public class BoardController {
 		String saveName = uid.toString() + "_" + uploadFileName;
 		File target = new File(uploadFolder, saveName);
 		FileCopyUtils.copy(fileData, target);
-		logger.info("uid "+ uid);
-		logger.info("saveName "+saveName);
-		logger.info("target "+target);
+		logger.info("uid " + uid);
+		logger.info("saveName " + saveName);
+		logger.info("target " + target);
 
 		return saveName;
 	}
 
 //	해당 날짜 폴더
 	private String getFolder() {
-		
+
 		// yyyy-MM-dd 대소문자 정확히 입력해야 날짜대로 나옴
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String str = sdf.format(date);
-		
+
 		return str.replace("-", File.separator);
-		
+
 	}
-	
+
 }

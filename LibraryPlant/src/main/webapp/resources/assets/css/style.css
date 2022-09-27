@@ -6001,3 +6001,67 @@ a.badge:focus {
   text-decoration: none;
   cursor: pointer;
 }
+.container {
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto
+}
+
+@media ( min-width :576px) {
+	.container {
+		max-width: 540px
+	}
+}
+
+@media ( min-width :768px) {
+	.container {
+		max-width: 720px
+	}
+}
+
+@media ( min-width :992px) {
+	.container {
+		max-width: 960px
+	}
+}
+
+@media ( min-width :1200px) {
+	.container {
+		max-width: 1200px
+	}
+}
+
+.container-fluid {
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto
+}
+.single-post-area .quote-wrapper {
+    background: rgba(130, 139, 178, 0.1);
+    padding: 15px;
+    line-height: 1.733;
+    color: #888888;
+    font-style: italic;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+@media (min-width: 768px) {
+    .single-post-area .quote-wrapper {
+        padding: 30px;
+    }
+}
+.single-post-area .quotes {
+    background: #fff;
+    padding: 15px 15px 15px 20px;
+    border-left: 2px solid;
+}
+@media (min-width: 768px) {
+    .single-post-area .quotes {
+        padding: 25px 25px 25px 30px;
+    }
+}
+

@@ -20,7 +20,7 @@
 		<p></p>
 	
 		<div align="center">		
-			<h2><a href="${contextPath}/board/freeListAll">처음으로 돌아가기</a></h2>
+			<h2><a href="${contextPath }/board/freeListAll">처음으로 돌아가기</a></h2>
 		</div>
 	</c:if>
 	

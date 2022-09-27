@@ -12,9 +12,9 @@ public class BoardServiceImpl implements BoardService {
 @Inject BoardDAO dao;
 	
 	@Override
-	public List<BoardDTO> listAll(Criteria cri) throws Exception {
+	public List<BoardDTO> freeListAll(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.listAll(cri);
+		return dao.freeListAll(cri);
 	}
 	
 	@Override
@@ -87,6 +87,18 @@ public class BoardServiceImpl implements BoardService {
 		return dao.countBoardList4(cri);
 	}
 	
+//	검색
+	@Override
+	public List<BoardDTO> searchList(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.searchList(cri);
+	}
+
+	@Override
+	public int countSearch(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countSearch(cri);
+	}
 	
 	
 	

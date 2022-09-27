@@ -101,7 +101,7 @@ function validate() {
 							<p class="textTotal" align="right">글자수 제한 : 1000자</p>
 						</div>
 						<div class="form-group">
-							<label>첨부파일</label> <input type="file" name="files"
+							<label>첨부파일</label> <input type="file" name="files" multiple
 								class="form-control" placeholder="파일 첨부">
 						</div>
 

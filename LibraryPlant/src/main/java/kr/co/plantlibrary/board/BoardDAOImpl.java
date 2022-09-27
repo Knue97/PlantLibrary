@@ -14,11 +14,11 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	private static final String Namespace = "kr.co.plantlibrary.boardMapper";
 	
-	
+//	게시판
 	@Override
-	public List<BoardDTO> listAll(Criteria cri) {
+	public List<BoardDTO> freeListAll(Criteria cri) {
 		// TODO Auto-generated method stub
-		return sqlsession.selectList(Namespace + ".listAll", cri);
+		return sqlsession.selectList(Namespace + ".freeListAll", cri);
 	}
 
 	@Override
@@ -40,12 +40,13 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlsession.selectList(Namespace + ".shareListAll", cri);
 	}
 	
+//	읽기/쓰기/수정/삭제
 	@Override
 	public BoardDTO detail(int b_no) {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(Namespace + ".detail", b_no);
 	}
-
+	
 	@Override
 	public int register(BoardDTO boardDTO) {
 		// TODO Auto-generated method stub
@@ -63,18 +64,22 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		return sqlsession.delete(Namespace + ".delete", b_no);
 	}
+	
+//	글 삭제 시 해당 글의 모든 댓글 삭제
 	@Override
 	public int replyDeleteAll(int b_no) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlsession.delete(Namespace + ".replyDeleteAll", b_no);
 	}
 
+//	조회수
 	@Override
 	public int updateHit(int b_no) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlsession.update(Namespace + ".updateHit", b_no);
 	}
-
+	
+//	댓글수
 	@Override
 	public int cntReply(int b_no) throws Exception {
 		// TODO Auto-generated method stub
@@ -82,7 +87,7 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	
-	// 페이징
+//	 페이징
 	@Override
 	public int countBoardList1(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
@@ -104,11 +109,22 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlsession.selectOne(Namespace + ".countBoardList4", cri);
 	}
 	
+//	검색
+	@Override
+	public List<BoardDTO> searchList(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList(Namespace + ".searchList", cri);
+	}
+
+	@Override
+	public int countSearch(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(Namespace + ".countSearch", cri);
+	}
 	
 	
 	
-	
-	
+//	댓글
 	@Override
 	public List<ReplyDTO> replyListAll(int b_no) throws Exception {
 		// TODO Auto-generated method stub
