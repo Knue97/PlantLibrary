@@ -1,6 +1,7 @@
 package kr.co.plantlibrary.plant_encyclopedia;
 
-public class Criteria {	
+public class Criteria {
+
 	private int page;
 	private int perPageNum;
 	
@@ -8,37 +9,38 @@ public class Criteria {
 		this.page = 1;
 		this.perPageNum = 12;
 	}
-		
 	
 	public void setPage(int page) {
 		if(page <= 0) {
 			this.page = 1;
 			return;
 		}
+		
 		this.page = page;
 	}
 	
 	public void setPerPageNum(int perPageNum) {
-		if(perPageNum <= 0 || perPageNum >= 100) {
+		if(perPageNum <= 0 || perPageNum > 100) {
 			this.perPageNum = 12;
 			return;
 		}
 		
 		this.perPageNum = perPageNum;
 	}
-		
 	
 	public int getPage() {
 		return page;
 	}
 	
-	//method for Mybatis SQL Mapper
+	//method for MyBatis SQL Mapper
 	public int getPageStart() {
-		return (this.page - 1)*perPageNum;
+		
+		return (this.page - 1) * perPageNum;
 	}
 	
-	//method for Mybatis SQL Mapper
+	//method for MyBatis SQL Mapper
 	public int getPerPageNum() {
+		
 		return this.perPageNum;
 	}
 
