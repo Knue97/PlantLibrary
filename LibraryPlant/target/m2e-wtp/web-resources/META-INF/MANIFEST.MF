@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 Manifest-Version: 1.0
-Built-By: 197
+Built-By: knue9
 Build-Jdk: 15.0.2
 Created-By: Maven Integration for Eclipse
 
-=======
-Manifest-Version: 1.0
-Built-By: 123
-Build-Jdk: 15.0.2
-Created-By: Maven Integration for Eclipse
-
->>>>>>> bcc95ea6a9466e13135c279c9b3e0610722310b4

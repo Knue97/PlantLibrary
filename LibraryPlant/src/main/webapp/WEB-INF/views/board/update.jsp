@@ -11,14 +11,28 @@
 </head>
 
 <script>
-	$(document).ready(function(){
-		$('#summernote').summernote({
-			  height: 300,                 // set editor height
-			  minHeight: null,             // set minimum height of editor
-			  maxHeight: null,             // set maximum height of editor
-			  focus: true                  // set focus to editable area after initializing summernote
-			});
-	});
+$(document).ready(function(){
+	$('#summernote').summernote({
+		  height: 500,                 // set editor height
+		  width: 1100,					// set editor width
+		  minHeight: null,             // set minimum height of editor
+		  maxHeight: null,             // set maximum height of editor
+		  focus: true,                  // set focus to editable area after initializing summernote
+		  
+		  toolbar: [
+			  //	https://summernote.org/deep-dive/#custom-toolbar-popover 
+			    // [groupName, [list of button]]
+			    ['style', ['bold', 'italic', 'underline', 'clear']],
+			    ['font', ['strikethrough', 'superscript', 'subscript']],
+			    ['fontsize', ['fontsize']],
+			    ['color', ['color']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['table', ['table']],
+			    ['insert', ['link', 'picture', 'video']],
+			    ['height', ['height']]
+			  ]
+		});
+});
 	
 	function validate() {
 		var titleCheck = document.titleCheck;
@@ -70,41 +84,39 @@
         <!-- Slider Area End -->
     
         <section class="content container-fluid">
-				
+				<div class="container">
+						<div class="row px-xl-5">
 				<form role="form" method="post" name="titleCheck" onsubmit="return validate();">
 					<select name="bc_id">
-					<c:choose>
-				<c:when test="${board.bc_id == 1}">
-						<option value="1" selected>자유게시판</option>
-						<option value="2">Q&A게시판</option>
-						<option value="3">자랑게시판</option>
-						<option value="4">나눔게시판</option>
-				</c:when>
-				<c:when test="${board.bc_id == 2}">
-						<option value="1">자유게시판</option>
-						<option value="2"selected>Q&A게시판</option>
-						<option value="3">자랑게시판</option>
-						<option value="4">나눔게시판</option>
-				</c:when>
-				<c:when test="${board.bc_id == 3}">
-						<option value="1">자유게시판</option>
-						<option value="2">Q&A게시판</option>
-						<option value="3"selected>자랑게시판</option>
-						<option value="4">나눔게시판</option>
-				</c:when>
-				<c:when test="${board.bc_id == 4}">
-						<option value="1">자유게시판</option>
-						<option value="2">Q&A게시판</option>
-						<option value="3">자랑게시판</option>
-						<option value="4"selected>나눔게시판</option>
-				</c:when>
-						
-				</c:choose>
-						
+						<c:choose>
+							<c:when test="${board.bc_id == 1}">
+									<option value="1" selected>자유게시판</option>
+									<option value="2">Q&A게시판</option>
+									<option value="3">자랑게시판</option>
+									<option value="4">나눔게시판</option>
+							</c:when>
+							<c:when test="${board.bc_id == 2}">
+									<option value="1">자유게시판</option>
+									<option value="2"selected>Q&A게시판</option>
+									<option value="3">자랑게시판</option>
+									<option value="4">나눔게시판</option>
+							</c:when>
+							<c:when test="${board.bc_id == 3}">
+									<option value="1">자유게시판</option>
+									<option value="2">Q&A게시판</option>
+									<option value="3"selected>자랑게시판</option>
+									<option value="4">나눔게시판</option>
+							</c:when>
+							<c:when test="${board.bc_id == 4}">
+									<option value="1">자유게시판</option>
+									<option value="2">Q&A게시판</option>
+									<option value="3">자랑게시판</option>
+									<option value="4"selected>나눔게시판</option>
+							</c:when>
+						</c:choose>
 					</select>
 
 					<div class="box-body">
-						<div class="box-body">
 							<div class="form-group">
 								<label>제목</label> <input type="text" name="b_title" rows="20"
 									class="form-control" value="${board.b_title}" placeholder="(필수)제목을 입력하세요 50자 제한" maxlength="50" />
@@ -132,7 +144,7 @@
 						<input type="submit" value="수정" >
 						</div>
 				</form>
-
+</div></div>
 			</section>
        
 	</main>

@@ -46,7 +46,7 @@
         <!-- Slider Area End -->
         
         	<section class="content container-fluid">
-				
+				<div class="container">
 				
 				
 				<div>
@@ -136,7 +136,7 @@
 						</div>
 					</div>
 				</div>
-
+			</div>
 			</section>
 			
 			

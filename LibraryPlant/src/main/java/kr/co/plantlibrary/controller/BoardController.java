@@ -206,7 +206,8 @@ public class BoardController {
 				
 			}
 		}
-		if (files.length <1) {	//  이미지가 있을 때만 적용되기 - 없으면 오류창에 end = -1이 되버림
+		logger.info("b_image = "+b_image);
+		if (b_image != "") {	//  이미지가 있을 때만 적용되기 -> 없으면 오류창에 end = -1이 되버림
 		b_image = b_image.substring(0, b_image.length() - 1);	//	substring : 문자열자르기 = db 입력시 마지막 콤마 자르기
 		boardDTO.setB_image(b_image);
 		}
@@ -271,18 +272,21 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping(value = "board/replyListAll")
 	public List<ReplyDTO> replyListAll(@RequestParam("b_no") int b_no) throws Exception {
-		logger.info("ajax 실행");
+		logger.info("ajax 실행 댓글 리스트");
 		return service.replyListAll(b_no);
 	}
 
 //	댓 작성
 	@ResponseBody
 	@PostMapping(value = "board/reply")
-	public int reply(ReplyDTO replyDTO) throws Exception {
-		logger.info(replyDTO.getC_content());
+	public int reply(ReplyDTO replyDTO, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		logger.info("댓글작성");
+		logger.info("댓글 : " + replyDTO.getC_content());
 		if (replyDTO.getC_content() == "") {
 			logger.info(replyDTO.getC_content() + "댓 내용없음");
-			return 2;
+			
+			return 2;	// detail 댓글 작성에서 result 값으로 보냄
 		}
 		return service.reply(replyDTO);
 	}
@@ -290,8 +294,10 @@ public class BoardController {
 //	댓 수정
 	@ResponseBody
 	@PostMapping(value = "board/replyUpdate")
-	public int replyUpdate(ReplyDTO replyDTO) throws Exception {
-
+	public int replyUpdate(ReplyDTO replyDTO, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		logger.info("댓글수정");
+		logger.info("댓글 : " + replyDTO.getC_content());
 		return service.replyUpdate(replyDTO);
 	}
 
@@ -299,6 +305,7 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping(value = "board/replyDelete")
 	public int replyDelete(@RequestParam("c_no") int c_no) throws Exception {
+		logger.info("댓글삭제");
 		return service.replyDelete(c_no);
 	}
 

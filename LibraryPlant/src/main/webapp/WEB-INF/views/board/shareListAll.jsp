@@ -47,6 +47,8 @@
         <!-- Slider Area End -->
         
 	        <section class="content container-fluid">
+				<div class="container">
+				
 				
 				<!-- search.jsp 에 필요함  -->
 				<input type="hidden" id="boardType" value="4">
@@ -126,7 +128,7 @@
 						</div>
 					</div>
 				</div>
-
+			</div>
 			</section>
 	</main>
 <footer>
