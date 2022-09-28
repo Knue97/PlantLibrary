@@ -6,10 +6,10 @@
 <html class="no-js" lang="zxx">
 <head>
 <%@ include file="../include/head.jsp" %>
-<%@ include file="../include/plugin.jsp" %>
-    
+    <%@ include file="../include/plugin.jsp" %>
 </head>
 <body>
+
     <!-- ? Preloader Start -->
     <%@ include file="../include/preloader.jsp" %>
     <!-- Preloader Start -->
@@ -19,8 +19,7 @@
         <!-- Header End -->
     </header>
     <main>
-    
-         <!-- Slider Area Start-->
+        <!-- Slider Area Start-->
         <div class="slider-area white-bg ">
             <div class="slider-active">
                 <!-- Single Slider -->
@@ -29,8 +28,8 @@
                         <div class="row align-items-center justify-content-center">
                             <div class="col-xl-5 col-lg-5 col-md-9 ">
                                 <div class="hero__caption text-center">
-                                    <span data-animation="fadeInDown" data-delay=".3s">QnA</span>
-                                    <h1 data-animation="fadeInDown" data-delay=".1s ">질문 게시판</h1>
+                                    <span data-animation="fadeInDown" data-delay=".3s">Total Search Board</span>
+                                    <h1 data-animation="fadeInDown" data-delay=".1s ">전체 검색 게시판</h1>
 
                                 </div>
                             </div>
@@ -45,17 +44,18 @@
             </div>
         </div>
         <!-- Slider Area End -->
-			<!-- Main content -->
-			<section class="content container-fluid">
+        
+        	<section class="content container-fluid">
 				
-				<!-- search.jsp 에 필요함  -->
-				<input type="hidden" id="boardType" value="2">
-
+				
+				
 				<div>
 					<%@ include file="option/search.jsp" %>
+					
+					
 					<div class="box">
 						<div class="box-header with-border">
-							<a href="${contextPath}/board/register"><h3 class="box-title" align="right">게시판 글쓰기</h3></a>
+							<a href="${contextPath}/board/register"><h3 align="right">게시판 글쓰기</h3></a>
 						<br>
 						</div>
 					</div>
@@ -69,48 +69,56 @@
 							<td>조회수</td>
 							<td>추천수</td>
 						</tr>
-						<c:forEach var="board" items="${qnaListAll }">
+						<c:forEach var="board" items="${searchList}">
 							<tr>
 								<td>${board.b_no}</td>
 								<td><a href="detail?b_no=${board.b_no}">
 								<c:if test="${board.b_image != null}">
-								<img src="${contextPath}/resources/assets/img/icon/plant.png" alt=" " height="25" width="25">
+								<img src="${contextPath}/resources/assets/img/icon/plant.png" alt="" height="25" width="25">
 								</c:if>
-								${board.b_title} </a>[<a>${board.b_commentcnt}]</a></td>
+								${board.b_title} </a><a href="detail?b_no=${board.b_no}">[${board.b_commentcnt}]</a></td>
 								<td>${board.u_id}</td>
 								<td>${board.b_regdate}</td>
 								<td><span class="badge">${board.b_hits}</span></td>
 								<td><span class="badge">${board.b_recommendedNumber}</td>
 							</tr>
 						</c:forEach>
-
 					</table>
 					
 					<p></p>
 					
+					<!-- 검색에 해당하는 게시글 결과 -->
+					<%@ include file="option/resultNone.jsp" %>
+					<!-- /검색에 해당하는 게시글 결과 -->
 
-					
-					<!-- 페이징  -->
+
+				<!-- 검색 페이징 주소? 키워드 인코딩 &검색 타입  -->
+				<c:url
+					value="/board/searchList?searchType=${pageMaker.cri.searchType}" var="url">
+					<c:param name="searchKeyword" value="${pageMaker.cri.searchKeyword}"></c:param>
+				</c:url>
+				<!-- /검색 페이징 주소? 키워드 인코딩 &검색 타입  -->
+				<!-- 검색 페이징  -->
 				<div class="row mt-5">
 					<div class="col text-center">
 						<div class="block-27">
 							<ul class="blog-pagination">
 								<c:if test="${pageMaker.prev}">
 									<li>
-										<a href='<c:url value="/board/qnaListAll?page=${pageMaker.startPage - 1}"/>'>
+										<a href='${url }<c:url value="&page=${pageMaker.startPage - 1}"/>'>
 											<i class="fa fa-chevron-left"></i>
 										</a>
 									</li>
 								</c:if>
 								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-									<li><a href='<c:url value="/board/qnaListAll?page=${pageNum}"/>'>
+									<li><a href='${url }<c:url value="&page=${pageNum}"/>'>
 										<i class="fa">${pageNum}</i>
 									</a>
 									</li>
 								</c:forEach>
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 									<li>
-										<a href='<c:url value="/board/qnaListAll?page=${pageMaker.endPage + 1}"/>'>
+										<a href='${url }<c:url value="&page=${pageMaker.endPage + 1}"/>'>
 											<i class="fa fa-chevron-right"></i>
 										</a>
 									</li>
@@ -119,8 +127,10 @@
 						</div>
 					</div>
 				</div>
-				<!-- /페이징  -->
-					<div class="box">
+				<!-- /검색 페이징  -->
+
+
+				<div class="box">
 						<div class="box-header with-border">
 							<a href="${contextPath}/board/register"><h3 class="box-title" align="right">게시판 글쓰기</h3></a>
 						</div>
@@ -128,6 +138,8 @@
 				</div>
 
 			</section>
+			
+			
 	</main>
 <footer>
     <%@ include file="../include/footer.jsp" %>
