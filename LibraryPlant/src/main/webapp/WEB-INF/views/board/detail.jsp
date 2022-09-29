@@ -41,20 +41,27 @@ function replyListAll() {
 				$(result).each(function(){ // 요소별로 하나씩 실행하라
 					
 					htmls = htmls + '<div class="" id="c_no' + this.c_no + '">';
-                    //<div id="reno12"> <div id="reno13">
+					htmls += '<hr>';
 					htmls += '<span class="d-block">';
 					htmls += this.c_no + ' - ';
 					htmls += ' <strong class="text-gray-dark">' + this.u_id + '</strong> ';
-					htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+					if(this.c_state == 1){
+					htmls += '(수정)';
+					}
 					if('${user.u_id}'== this.u_id){
+					htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
 					htmls += '<a href="javascript:void(0)" onclick="replyUpdateForm(' + this.c_no + ', \'' + this.u_id + '\', \'' + this.c_content + '\' )" style="padding-right:5px">수정</a>';
 					htmls += '<a href="javascript:void(0)" onclick="replyAlarm(' + this.c_no + ')" >삭제</a>';
+					htmls +=  '</span>';
 					}
+					htmls += '<br>' + this.c_content + ' <br>';
+					if('${user.u_id}'!= this.u_id){
+					htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
+					htmls += '<a href="javascript:void(0)" onclick="신고(' + this.c_no + ')" >신고</a>';
 					htmls += '</span>';
-					htmls += '</span><p>';
-					htmls += this.c_content+' <br>';
+					}
 					htmls += '<span style="color:grey; float:right; font-size:10pt;"> ' + this.c_regdate + '</span> ';
-					htmls += '</p>';
+					htmls += '</span>';
 					htmls += '</div><br>';  
 
 				})
@@ -77,8 +84,11 @@ function replyListAll() {
 		// 개행문자 치환 - 저장
 		var c_content = $("#c_content").val().trim();
 		c_content = c_content.replace(/(?:\r\n|\r|\n)/g, '<br>');	// 엔터
-		c_content = c_content.replace(/ /gi, '&nbsp');	// 스페이스
-		
+		c_content = '<pre>'+c_content+'</pre>'
+//		c_content = c_content.replaceAll("\\\<.*?\\\>","");
+//		c_content = c_content.replace(/ /gi, '&nbsp');	// 스페이스
+
+
 		console.log(c_content);
 	
 		var u_id = $("#u_id").val();
@@ -116,7 +126,7 @@ function replyListAll() {
 function replyUpdateForm(c_no, u_id, c_content){
 	// 개행문자 치환 - 출력
 	var c_content = c_content;
-	c_content = c_content.split('<br>').join("\r\n");
+	c_content = c_content.split('<br>').join("</p>\r\n<p>");
 //	c_content = c_content.split('&nbsp').join("");
 		var htmls = "";
 		
@@ -125,12 +135,12 @@ function replyUpdateForm(c_no, u_id, c_content){
 		htmls += '<span class="d-block">';
 		htmls += c_no + ' - ';
 		htmls += '<strong class="text-gray-dark">' + u_id + '</strong>';
-		htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+		htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
 		htmls += '<a href="javascript:void(0)" onclick="replyUpdate(' + c_no + ', \'' + u_id + '\' )" style="padding-right:5px">저장</a>';
 		htmls += '<a href="javascript:void(0)" onclick="replyListAll()" >취소</a>';
 		htmls += '</span>';
 		htmls += '</span><br>';
-		htmls += '<textarea id="editmemo" name="editmemo" cols="100%" rows="5">';
+		htmls += '<textarea id="editmemo" name="editmemo" maxlength="3000">';
 		htmls += c_content;
 		htmls += '</textarea>';
 		htmls += '</p>';
@@ -147,7 +157,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 		// 개행문자 치환 - 저장
 		var editmemo = $('#editmemo').val().trim();
 		editmemo = editmemo.replace(/(?:\r\n|\r|\n)/g, '<br>');	// 엔터
-		editmemo = editmemo.replace(/ /gi, '&nbsp');	// 스페이스
+//		editmemo = editmemo.replace(/ /gi, '&nbsp');	// 스페이스
 		
 		var url = "${contextPath}/board/replyUpdate";
 		var paramData = {
@@ -333,33 +343,30 @@ function replyUpdateForm(c_no, u_id, c_content){
 				</c:if>
 				<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
 			</div>
-
 			<p></p>
-
+			
 			<hr>
-
-			<div class="container">
-				<div class="row px-xl-5">
-					<div class="box-body">
-						<table>
-							<tr>
-								<td rowspan="2" width="70%"><textarea class="form-control" name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="500"></textarea>
-									<p class="textTotal" align="right" style="width: 600px;">글자수 제한 : 500자</p>
-								</td>
-								<td>
-									<input type="text" name="u_id" id="u_id" value="${user.u_id}" readonly>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input type="button" id="replyRegister" value="등록">
-								</td>
-							</tr>
-						</table>
+				<div class="container">
+					<div class="row px-xl-5">
+						<div class="box-body">
+							<table>
+								<tr>
+									<td>
+										<input type="hidden" name="u_id" id="u_id" value="${user.u_id}" readonly>
+										${user.u_id}
+										<textarea class="form-control" name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="3000"></textarea>
+										<p class="textTotal" align="right" style="width: 800px; height: 100px;">글자수 제한 : 3000자</p>
+									</td>
+									<td>
+										<input type="button" id="replyRegister" value="등록">
+									</td>
+								</tr>
+							</table>
+						</div>
 					</div>
 					<p></p>
-
-					<div id="replyListAll"></div>
+				<div class="row px-xl-5" style="display: flex;">
+					<div style="flex: 100%;" id="replyListAll"></div>
 
 				</div>
 			</div>

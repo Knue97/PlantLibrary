@@ -72,11 +72,25 @@
 						<c:forEach var="board" items="${searchList}">
 							<tr>
 								<td>${board.b_no}</td>
-								<td><a href="detail?b_no=${board.b_no}">
+								<td><a href="detail?b_no=${board.b_no}&searchKeyword=${pageMaker.cri.searchKeyword}&searchType=${pageMaker.cri.searchType}&page=${pageMaker.cri.page}">
+								<c:if test="${board.bc_id ==1}">
+								[자유]
+								</c:if>
+								<c:if test="${board.bc_id ==2}">
+								[질문]
+								</c:if>
+								<c:if test="${board.bc_id ==3}">
+								[자랑]
+								</c:if>
+								<c:if test="${board.bc_id ==4}">
+								[나눔]
+								</c:if>
+								${board.b_title}
+								
 								<c:if test="${board.b_image != null}">
 								<img src="${contextPath}/resources/assets/img/icon/plant.png" alt="" height="25" width="25">
 								</c:if>
-								${board.b_title} </a><a href="detail?b_no=${board.b_no}">[${board.b_commentcnt}]</a></td>
+								</a><a>[${board.b_commentcnt}]</a></td>
 								<td>${board.u_id}</td>
 								<td>${board.b_regdate}</td>
 								<td><span class="badge">${board.b_hits}</span></td>
