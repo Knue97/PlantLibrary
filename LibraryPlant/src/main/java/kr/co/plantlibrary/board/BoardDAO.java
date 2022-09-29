@@ -46,9 +46,10 @@ public interface BoardDAO {
 	
 	
 //	게시글 추천
-	public int recommended(int b_no) throws Exception;
+	public int recommended(BoardDTO boardDTO) throws Exception;
 //	댓글 좋아요
 	public int replyLike(int c_no) throws Exception;
+	public int replyDisLike(int c_no) throws Exception;
 //	댓글 채택
 	public int replyChoose(int c_no) throws Exception;
 	

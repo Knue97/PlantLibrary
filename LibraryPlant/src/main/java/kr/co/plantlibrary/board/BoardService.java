@@ -35,7 +35,7 @@ public interface BoardService {
 	public int countSearch(Criteria cri) throws Exception;
 	
 //	게시글 추천
-	public int recommended(int b_no) throws Exception;
+	public int recommended(BoardDTO boardDTO) throws Exception;
 //	댓글 좋아요
 	public int replyLike(int c_no) throws Exception;
 //	댓글 채택

@@ -101,9 +101,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public int recommended(int b_no) throws Exception {
+	public int recommended(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.recommended(b_no);
+		return dao.recommended(boardDTO);
 	}
 
 	@Override

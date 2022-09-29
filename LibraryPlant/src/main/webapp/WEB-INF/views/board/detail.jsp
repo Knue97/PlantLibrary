@@ -48,6 +48,12 @@ function replyListAll() {
 					if(this.c_state == 1){
 					htmls += '(수정)';
 					}
+					
+					// 유저 정보 + 글번호 + like 값 받아서 체크
+					htmls += '<a href="javascript:void(0)" onclick="return Like(' + this.c_no + ', \'' + this.u_id + '\')">♡안좋음 (구현중)</a>';
+					htmls += '<a href="javascript:void(0)" onclick="return disLike(' + this.c_no + ', \'' + this.u_id + '\')">♥좋음 (구현중)</a>';
+					
+					
 					if('${user.u_id}'== this.u_id){
 					htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
 					htmls += '<a href="javascript:void(0)" onclick="replyUpdateForm(' + this.c_no + ', \'' + this.u_id + '\', \'' + this.c_content + '\' )" style="padding-right:5px">수정</a>';
@@ -57,7 +63,7 @@ function replyListAll() {
 					htmls += '<br>' + this.c_content + ' <br>';
 					if('${user.u_id}'!= this.u_id){
 					htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
-					htmls += '<a href="javascript:void(0)" onclick="신고(' + this.c_no + ')" >신고</a>';
+					htmls += '<a href="javascript:void(0)" onclick="신고(' + this.c_no + ')" >신고 (구현중)</a>';
 					htmls += '</span>';
 					}
 					htmls += '<span style="color:grey; float:right; font-size:10pt;"> ' + this.c_regdate + '</span> ';
@@ -84,9 +90,8 @@ function replyListAll() {
 		// 개행문자 치환 - 저장
 		var c_content = $("#c_content").val().trim();
 		c_content = c_content.replace(/(?:\r\n|\r|\n)/g, '<br>');	// 엔터
-		c_content = '<pre>'+c_content+'</pre>'
 //		c_content = c_content.replaceAll("\\\<.*?\\\>","");
-//		c_content = c_content.replace(/ /gi, '&nbsp');	// 스페이스
+		c_content = c_content.replace(/ /gi, '&nbsp');	// 스페이스
 
 
 		console.log(c_content);
@@ -126,8 +131,8 @@ function replyListAll() {
 function replyUpdateForm(c_no, u_id, c_content){
 	// 개행문자 치환 - 출력
 	var c_content = c_content;
-	c_content = c_content.split('<br>').join("</p>\r\n<p>");
-//	c_content = c_content.split('&nbsp').join("");
+	c_content = c_content.split('<br>').join("\r\n");
+	c_content = c_content.split('&nbsp').join(" ");
 		var htmls = "";
 		
 		htmls = htmls + '<div class="" id="c_no' +c_no + '">';
@@ -140,7 +145,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 		htmls += '<a href="javascript:void(0)" onclick="replyListAll()" >취소</a>';
 		htmls += '</span>';
 		htmls += '</span><br>';
-		htmls += '<textarea id="editmemo" name="editmemo" maxlength="3000">';
+		htmls += '<textarea id="editmemo" name="editmemo" style="width: 800px; height:100px;" maxlength="3000">';
 		htmls += c_content;
 		htmls += '</textarea>';
 		htmls += '</p>';
@@ -157,7 +162,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 		// 개행문자 치환 - 저장
 		var editmemo = $('#editmemo').val().trim();
 		editmemo = editmemo.replace(/(?:\r\n|\r|\n)/g, '<br>');	// 엔터
-//		editmemo = editmemo.replace(/ /gi, '&nbsp');	// 스페이스
+		editmemo = editmemo.replace(/ /gi, '&nbsp');	// 스페이스
 		
 		var url = "${contextPath}/board/replyUpdate";
 		var paramData = {
@@ -227,6 +232,9 @@ function replyUpdateForm(c_no, u_id, c_content){
 		}
 		return true;
 	}
+	
+	
+	
 </script>
 
 
@@ -286,7 +294,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 				<div class="box-body">
 
-					<div class="form-group">
+					<div class="form-group" style="background-color: silver;">
 						<h1 align="center">본문은 여기↓</h1>
 						<p></p>
 
@@ -297,9 +305,12 @@ function replyUpdateForm(c_no, u_id, c_content){
 								<h5 style="color: lightgrey;">내용이 없습니다.</h5>
 							</c:if>
 						</div>
-
-
-
+						<div class="search-box" align="center">
+							
+							<input type="button" value="추천 (구현중)" name="recommended" onclick="return recommended();">
+							
+							
+							
 						<div class="box-footer" align="right">
 							<input type="button" value="메인"
 								onclick="location.href='${contextPath}'">
@@ -342,6 +353,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 				</c:if>
 				<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
+			</div>
 			</div>
 			<p></p>
 			

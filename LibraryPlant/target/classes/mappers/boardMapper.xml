@@ -166,17 +166,23 @@
 	
 
 	<!-- 게시글 추천 기능 -->
-	<update id="recommended" parameterType="java.lang.Integer">
+	<update id="recommended" parameterType="BoardDTO">
 		UPDATE board
 		SET b_recommendedNumber = #{b_recommendedNumber} + 1
-		WHERE b_no = #{b_no}
+		WHERE b_no = #{b_no} and u_id = #{u_id}<!-- 좀 더 고민 -->
 	</update>
+	
 	
 	<!-- 댓글 좋아요 -->
 	<update id="replyLike" parameterType="java.lang.Integer">
 		UPDATE comment
 		SET c_likeCnt = #{c_likeCnt} + 1
-		WHERE c_no = #{c_no}
+		WHERE c_no = #{c_no} and u_id = #{u_id}
+	</update>
+	<update id="replyDisLike" parameterType="java.lang.Integer">
+		UPDATE comment
+		SET c_likeCnt = #{c_likeCnt} - 1
+		WHERE c_no = #{c_no} and u_id = #{u_id}
 	</update>
 	
 	
@@ -222,7 +228,7 @@
 
 	<!-- 댓글 쓰기 -->
 	<insert id="reply" parameterType="ReplyDTO">
-		INSERT INTO comment (c_no, u_id, b_no, c_content, c_regdate, c_likeCnt, c_state, c_choose, report)
+		INSERT INTO comment (c_no, u_id, b_no, c_content, c_regdate, c_likeCnt, c_state, c_choose, c_report)
 		VALUES (#{c_no}, #{u_id}, #{b_no}, #{c_content}, sysdate(), #{c_likeCnt}, 0, #{c_choose}, 0)
 	</insert>
 
