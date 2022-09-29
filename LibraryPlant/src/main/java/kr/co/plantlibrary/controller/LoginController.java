@@ -159,7 +159,7 @@ public class LoginController {
 		}
 	
 	@GetMapping("/register")
-	public String regisgerForm() {
+	public String regisgerForm() throws Exception {
 		log.info("===============Login RegisterForm================");
 		
 		

@@ -13,10 +13,24 @@
 <script>
 $(document).ready(function(){
 	$('#summernote').summernote({
-		  height: 300,                 // set editor height
+		  height: 500,                 // set editor height
+		  width: 1100,					// set editor width
 		  minHeight: null,             // set minimum height of editor
 		  maxHeight: null,             // set maximum height of editor
-		  focus: true                  // set focus to editable area after initializing summernote
+		  focus: true,                  // set focus to editable area after initializing summernote
+		  
+		  toolbar: [
+			  //	https://summernote.org/deep-dive/#custom-toolbar-popover 
+			    // [groupName, [list of button]]
+			    ['style', ['bold', 'italic', 'underline', 'clear']],
+			    ['font', ['strikethrough', 'superscript', 'subscript']],
+			    ['fontsize', ['fontsize']],
+			    ['color', ['color']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['table', ['table']],
+			    ['insert', ['link', 'video']],
+			    ['height', ['height']]
+			  ]
 		});
 });
 
@@ -78,6 +92,7 @@ function validate() {
     
         <section class="content container-fluid">
 
+				<div class="container">
 				
 				<form role="form" method="post" enctype="multipart/form-data" name="loginCheck" onsubmit="return validate();">
 				
@@ -101,7 +116,7 @@ function validate() {
 							<p class="textTotal" align="right">글자수 제한 : 1000자</p>
 						</div>
 						<div class="form-group">
-							<label>첨부파일</label> <input type="file" name="files"
+							<label>첨부파일</label> <input type="file" name="files" multiple
 								class="form-control" placeholder="파일 첨부">
 						</div>
 
@@ -114,8 +129,8 @@ function validate() {
 						<input type="submit" value="작성완료">
 					</div>
 				</form>
-
-			
+</div>
+			</div>
 		</section>
        
 	</main>

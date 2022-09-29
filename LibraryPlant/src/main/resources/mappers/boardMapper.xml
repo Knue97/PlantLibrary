@@ -11,28 +11,24 @@
 		select count(*)
 		from board
 		where bc_id = 1
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList2" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 2
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList3" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 3
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList4" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 4
-		<include refid="searchCondition"></include>
 	</select>
 
 
@@ -40,11 +36,10 @@
 	<!-- 게시판 listAll -->
 	
 	<!-- Free -->
-	<select id="listAll" resultType="BoardDTO" parameterType="BoardDTO">
+	<select id="freeListAll" resultType="BoardDTO" parameterType="BoardDTO">
 		select *
 		from board
 		where bc_id = 1
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -54,7 +49,6 @@
 		select *
 		from board
 		where bc_id = 2
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -64,7 +58,6 @@
 		select *
 		from board
 		where bc_id = 3
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -74,10 +67,10 @@
 		select *
 		from board
 		where bc_id = 4
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
+
 
 
 	<!-- 게시글 detail -->
@@ -109,6 +102,9 @@
 		where b_no = #{b_no}
 	</delete>
 
+
+
+
 	<!-- 조회수 카운트 -->
 	<update id="updateHit" parameterType="java.lang.Integer">
 		update board
@@ -124,11 +120,29 @@
 		where b_no = #{b_no};
 	</select>
 
+	<!-- 검색 페이징 -->
+	<select id="countSearch" resultType="java.lang.Integer">
+		select count(*)
+		from board
+		where bc_id 
+		<include refid="searchCondition"></include>
+	</select>
+
+	<!-- 검색 -->
+	<select id="searchList" resultType="BoardDTO" parameterType="BoardDTO">
+		select *
+		from board
+		where bc_id 
+		<include refid="searchCondition"></include>
+		order by b_no desc
+		limit #{pageStart} , #{perPageNum}
+	</select>
+	
 	<!-- 검색 기능 -->
 	<sql id="searchCondition">
 		<if test="searchType != null">
 			<if test="searchType == 'writer'">
-			and u_id like CONCAT('%',#{searchKeyword},'%') 
+			 and u_id like CONCAT('%',#{searchKeyword},'%') 
 			</if>
 			<if test="searchType == 'title'">
 			and b_title like CONCAT('%',#{searchKeyword},'%') 
@@ -147,6 +161,7 @@
 			</if>
 		</if>
 	</sql>
+	
 	<!-- 추천 기능 -->
 	<!-- 비추천 기능 -->
 

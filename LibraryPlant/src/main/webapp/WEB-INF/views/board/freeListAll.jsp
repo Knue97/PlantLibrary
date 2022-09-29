@@ -46,13 +46,14 @@
         <!-- Slider Area End -->
         
         	<section class="content container-fluid">
-				
+				<div class="container">
+					
 				<!-- search.jsp 에 필요함  -->
 				<input type="hidden" id="boardType" value="1">
 				
 				
 				<div>
-					<%@ include file="search.jsp" %>
+					<%@ include file="option/search.jsp" %>
 					
 					
 					<div class="box">
@@ -71,7 +72,7 @@
 							<td>조회수</td>
 							<td>추천수</td>
 						</tr>
-						<c:forEach var="board" items="${listAll }">
+						<c:forEach var="board" items="${freeListAll }">
 							<tr>
 								<td>${board.b_no}</td>
 								<td><a href="detail?b_no=${board.b_no}">
@@ -88,10 +89,6 @@
 					</table>
 					
 					<p></p>
-					
-					<!-- 검색에 해당하는 게시글이 없을 때 -->
-					<%@ include file="resultNone.jsp" %>
-					<!-- /검색에 해당하는 게시글이 없을 때 -->
 
 
 					<!-- 페이징  -->
@@ -131,6 +128,8 @@
 						</div>
 					</div>
 				</div>
+				</div>
+				
 
 			</section>
 	</main>

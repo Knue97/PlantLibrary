@@ -24,7 +24,7 @@
                                                     <ul class="submenu">
                                                     	<li><a href="${contextPath }/encyclopedia/home">백과 홈</a></li>
                                                         <li><a href="${contextPath }/encyclopedia/plant/listgroup">식물</a></li>
-                                                        <li><a href="blog_details.html">병해충</a></li>
+                                                        <li><a href="${contextPath }/encyclopedia/diseaseandpest">병해충</a></li>
                                                         <li><a href="elements.html">무슨무슨?</a></li>                                                        
                                                     </ul>
                                                 </li>
@@ -38,7 +38,7 @@
                                                 </li>
                                                 <li><a href="#">식물원</a>
                                                     <ul class="submenu">
-                                                        <li><a href="blog.html">지도로 보기</a></li>
+                                                        <li><a href="${contextPath }/botanicalgarden/navermap">지도로 보기</a></li>
                                                         <li><a href="blog_details.html">표로 보기</a></li>
                                                         <li><a href="elements.html">랭킹</a></li>                                                        
                                                     </ul>
