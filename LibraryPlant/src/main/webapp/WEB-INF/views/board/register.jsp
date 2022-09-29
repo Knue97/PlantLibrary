@@ -79,7 +79,7 @@ function validate() {
         <section class="content container-fluid">
 
 				
-				<form role="form" method="post" name="loginCheck" onsubmit="return validate();">
+				<form role="form" method="post" enctype="multipart/form-data" name="loginCheck" onsubmit="return validate();">
 				
 					<select name="bc_id">
 					<option value="1">자유게시판</option>
@@ -101,7 +101,7 @@ function validate() {
 							<p class="textTotal" align="right">글자수 제한 : 1000자</p>
 						</div>
 						<div class="form-group">
-							<label>첨부파일</label> <input type="file" name="b_image"
+							<label>첨부파일</label> <input type="file" name="files"
 								class="form-control" placeholder="파일 첨부">
 						</div>
 
