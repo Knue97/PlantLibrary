@@ -54,5 +54,12 @@ public class PestServiceImpl implements PestService{
 		return pestDAO.delete(pe_id);
 	}
 
+	@Override
+	public int checkPest(String pe_name) throws Exception {
+		// TODO Auto-generated method stub
+		return pestDAO.checkPest(pe_name);
+	}
+	
+
 
 }

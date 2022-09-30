@@ -62,5 +62,11 @@ public class PestDAOImpl implements PestDAO{
 		return sqlSession.delete(NAMESPACE + ".delete", pe_id);
 	}
 
+	@Override
+	public int checkPest(String pe_name) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + ".checkpest", pe_name);
+	}
+
 
 }

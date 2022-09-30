@@ -5,9 +5,32 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-<%@ include file="/WEB-INF/views/include/head.jsp" %>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <style>
+
 .disease-pest-list { display:none; }
+
+.customizing-check{
+
+	margin-right : 10px;
+	padding: 0;
+	border: none;
+	background: none;
+	font-size: 23px;
+	font-weight: bold;
+	text-decoration: underline;
+	
+}
+
+.customizing{
+
+	margin-right : 10px;
+	padding: 0;
+	border: none;
+	background: none;
+	font-size: 23px;
+
+}
 
 .card {
   position: relative;
@@ -134,7 +157,6 @@
   padding-left: 1rem !important;
 }
 
-
 </style>
 </head>
 <body>
@@ -164,7 +186,6 @@
 									아프다면?</span>
 								<h1 data-animation="fadeInLeft" data-delay=".6s ">Disease and Pest
 									Repository</h1>
-								<a href="${contextPath}/encyclopedia/disease/register" style="color:black;">정보등록하기</a>
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-6 text-center">
@@ -197,7 +218,7 @@
 						<!--Hero form -->
 						<form action="${contextPath }/encyclopedia/diseaseandpest/search" class="search-box" method="get">
 							<div class="input-form">
-								<input type="text" placeholder="Search for a disease and pest"
+								<input type="text" id="searchInput" placeholder="Search for a disease and pest"
 									name="searchword">
 								<!-- icon search -->
 								<div class="search-form">
@@ -218,8 +239,8 @@
 		<!-- Domain-search End -->
 		<br><hr>
 		
-                    	<button style="color:black;" id="popular-disease-button">자주 찾는 병해</button>
-                    	<button style="color:black;" id="popular-pest-button">자주 찾는 해충</button>
+                    	<button class="customizing-check" style="color:black;" id="popular-disease-button">자주 찾는 병해 <img src="${contextPath}/resources/assets/img/icon/leaf.png" style="height:22px;"></button>
+                    	<button class="customizing" style="color:black;" id="popular-pest-button">자주 찾는 해충 <img src="${contextPath}/resources/assets/img/icon/worm.png" style="height:22px;"></button>
                     	<hr>
                     	<div class="row justify-content-center" id="popular-top3">
                     	<c:forEach var="popular" items="${popularDisease }">
@@ -244,8 +265,8 @@
                     	
                     	                    	
                     	
-                    	<button style="color:black;" id="show-disease-list">병해백과 목록</button>
-                    	<button style="color:black;" id="show-pest-list">해충백과 목록</button>
+                    	<button class="customizing-check" style="color:black;" id="show-disease-list">병해백과 목록 <img src="${contextPath}/resources/assets/img/icon/leaf.png" style="height:22px;"></button>
+                    	<button class="customizing" style="color:black;" id="show-pest-list">해충백과 목록 <img src="${contextPath}/resources/assets/img/icon/worm.png" style="height:22px;"></button>
                     	<hr>
                     	
 				        <div class="row" id="insert-list">
@@ -278,15 +299,14 @@
 </div>
 
 <!-- JS here -->
-<%@ include file="/WEB-INF/views/include/plugin.jsp" %>
-
+<%@ include file="/WEB-INF/views/include/plugin.jsp" %>​
 <script>
 
 	$(function(){
 		
-		
 		diseaseList();
 		
+		//인기순위
 		$("#popular-disease-button").on('click',function(){
 			
 			var htmls = '';
@@ -303,6 +323,9 @@
 			
 			
 			$("#popular-top3").replaceWith(htmls);
+			
+			$("#popular-disease-button").attr("class", "customizing-check");
+			$("#popular-pest-button").attr("class", "customizing");
 		})
 		
 		
@@ -322,6 +345,10 @@
 			
 			
 			$("#popular-top3").replaceWith(htmls);
+			$("#popular-disease-button").attr("class", "customizing");
+			$("#popular-pest-button").attr("class", "customizing-check");
+			
+			
 		})
 		
 		
@@ -341,13 +368,22 @@
 			$('#load').replaceWith('<button type="button" id="load" class="genric-btn info-border radius more">MORE</button>');
 			$("#show-disease-list").focus();
 		})
+		
+		
+		
+		
+		
+		
 	
 		
 		});
 	
 	
-	
+	//해충백과 리스트 ajax 불러오기
 	$("#show-pest-list").click(function() {
+		
+		$("#show-pest-list").attr("class", "customizing-check");
+		$("#show-disease-list").attr("class", "customizing");
 		
 		$.ajax({
 			
@@ -392,6 +428,9 @@
 
 	$('#show-disease-list').click(function(){
 		
+		$("#show-pest-list").attr("class", "customizing");
+		$("#show-disease-list").attr("class", "customizing-check");
+		
 		diseaseList();
 		
 	});
@@ -400,6 +439,8 @@
 	
 	
 	function diseaseList() {
+		
+
 		
 		$.ajax({
 			
