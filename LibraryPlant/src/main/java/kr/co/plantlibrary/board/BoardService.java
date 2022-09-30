@@ -6,7 +6,7 @@ import java.util.Map;
 public interface BoardService {
 
 //	목록 리스트
-	public List<BoardDTO> listAll(Criteria cri) throws Exception;
+	public List<BoardDTO> freeListAll(Criteria cri) throws Exception;
 	public List<BoardDTO> qnaListAll(Criteria cri) throws Exception;
 	public List<BoardDTO> showListAll(Criteria cri) throws Exception;
 	public List<BoardDTO> shareListAll(Criteria cri) throws Exception;
@@ -25,10 +25,29 @@ public interface BoardService {
 	public int delete(int b_no) throws Exception;
 
 //	페이징
-	public int countBoardListTotal1(Criteria cri) throws Exception;
-	public int countBoardListTotal2(Criteria cri) throws Exception;
-	public int countBoardListTotal3(Criteria cri) throws Exception;
-	public int countBoardListTotal4(Criteria cri) throws Exception;
+	public int countBoardListTotal1() throws Exception;
+	public int countBoardListTotal2() throws Exception;
+	public int countBoardListTotal3() throws Exception;
+	public int countBoardListTotal4() throws Exception;
+	
+//	검색 기능
+	public List<BoardDTO> searchList(Criteria cri) throws Exception;
+	public int countSearch(Criteria cri) throws Exception;
+	
+//	게시글 추천
+	public int recommended(BoardDTO boardDTO) throws Exception;
+//	댓글 좋아요
+	public int replyLike(int c_no) throws Exception;
+//	댓글 채택
+	public int replyChoose(int c_no) throws Exception;
+	
+	
+//	게시글 신고 
+	public int boardReport(int b_no) throws Exception;
+//	댓글 신고
+	public int replyReport(int c_no) throws Exception;
+//	유저 신고
+	public int userReport(String u_id) throws Exception;
 	
 	
 	

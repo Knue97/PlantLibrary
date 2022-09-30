@@ -11,28 +11,24 @@
 		select count(*)
 		from board
 		where bc_id = 1
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList2" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 2
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList3" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 3
-		<include refid="searchCondition"></include>
 	</select>
 
 	<select id="countBoardList4" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id = 4
-		<include refid="searchCondition"></include>
 	</select>
 
 
@@ -40,11 +36,10 @@
 	<!-- 게시판 listAll -->
 	
 	<!-- Free -->
-	<select id="listAll" resultType="BoardDTO" parameterType="BoardDTO">
+	<select id="freeListAll" resultType="BoardDTO" parameterType="BoardDTO">
 		select *
 		from board
 		where bc_id = 1
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -54,7 +49,6 @@
 		select *
 		from board
 		where bc_id = 2
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -64,7 +58,6 @@
 		select *
 		from board
 		where bc_id = 3
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
@@ -74,10 +67,10 @@
 		select *
 		from board
 		where bc_id = 4
-		<include refid="searchCondition"></include>
 		order by b_no desc
 		limit #{pageStart} , #{perPageNum}
 	</select>
+
 
 
 	<!-- 게시글 detail -->
@@ -92,14 +85,14 @@
 	<!-- 게시글 쓰기 insert -->
 	<insert id="insert" parameterType="BoardDTO">
 		insert into board (b_no, bc_id, u_id, b_title, b_content, b_regdate, b_image, b_hits, b_recommendedNumber, b_report , b_state, b_commentcnt)
-		values (#{b_no}, #{bc_id}, #{u_id}, #{b_title}, #{b_content}, sysdate(), #{b_image}, #{b_hits}, #{b_recommendedNumber}, #{b_report}, #{b_state}, ${b_commentcnt})
+		values (#{b_no}, #{bc_id}, #{u_id}, #{b_title}, #{b_content}, sysdate(), #{b_image}, #{b_hits}, #{b_recommendedNumber}, 0, 0, ${b_commentcnt})
 	</insert>
 
 
 	<!-- 게시글 수정 update -->
 	<update id="update">
 		update board
-		set bc_id = #{bc_id}, b_title = #{b_title}, b_content = #{b_content}, b_image = #{b_image}
+		set bc_id = #{bc_id}, b_title = #{b_title}, b_content = #{b_content}, b_image = #{b_image}, b_state = 1
 		where b_no = #{b_no}
 	</update>
 
@@ -108,6 +101,11 @@
 		delete from board
 		where b_no = #{b_no}
 	</delete>
+
+
+
+
+<!-- 부가 기능 -->
 
 	<!-- 조회수 카운트 -->
 	<update id="updateHit" parameterType="java.lang.Integer">
@@ -124,11 +122,29 @@
 		where b_no = #{b_no};
 	</select>
 
+	<!-- 검색 페이징 -->
+	<select id="countSearch" resultType="java.lang.Integer">
+		select count(*)
+		from board
+		where bc_id 
+		<include refid="searchCondition"></include>
+	</select>
+
+	<!-- 검색 -->
+	<select id="searchList" resultType="BoardDTO" parameterType="BoardDTO">
+		select *
+		from board
+		where bc_id 
+		<include refid="searchCondition"></include>
+		order by b_no desc
+		limit #{pageStart} , #{perPageNum}
+	</select>
+	
 	<!-- 검색 기능 -->
 	<sql id="searchCondition">
 		<if test="searchType != null">
 			<if test="searchType == 'writer'">
-			and u_id like CONCAT('%',#{searchKeyword},'%') 
+			 and u_id like CONCAT('%',#{searchKeyword},'%') 
 			</if>
 			<if test="searchType == 'title'">
 			and b_title like CONCAT('%',#{searchKeyword},'%') 
@@ -147,9 +163,60 @@
 			</if>
 		</if>
 	</sql>
-	<!-- 추천 기능 -->
-	<!-- 비추천 기능 -->
+	
 
+	<!-- 게시글 추천 기능 -->
+	<update id="recommended" parameterType="BoardDTO">
+		UPDATE board
+		SET b_recommendedNumber = #{b_recommendedNumber} + 1
+		WHERE b_no = #{b_no} and u_id = #{u_id}<!-- 좀 더 고민 -->
+	</update>
+	
+	
+	<!-- 댓글 좋아요 -->
+	<update id="replyLike" parameterType="java.lang.Integer">
+		UPDATE comment
+		SET c_likeCnt = #{c_likeCnt} + 1
+		WHERE c_no = #{c_no} and u_id = #{u_id}
+	</update>
+	<update id="replyDisLike" parameterType="java.lang.Integer">
+		UPDATE comment
+		SET c_likeCnt = #{c_likeCnt} - 1
+		WHERE c_no = #{c_no} and u_id = #{u_id}
+	</update>
+	
+	
+	<!-- 댓글 채택 -->
+	<update id="replyChoose" parameterType="java.lang.Integer">
+		UPDATE comment
+		SET c_choose = #{c_choose} + 1
+		WHERE c_no = #{c_no}
+	</update>
+	
+	
+	<!-- 게시글 신고 기능 -->
+	<update id="boardReport" parameterType="java.lang.Integer">
+		UPDATE board
+		SET b_report = #{b_report} + 1
+		WHERE b_no = #{b_no}
+	</update>
+	<!-- 댓글 신고 기능 -->
+	<update id="replyReport" parameterType="java.lang.Integer">
+		UPDATE comment
+		SET c_report = #{c_report} + 1
+		WHERE c_no = #{c_no}
+	</update>
+	<!-- 유저 신고 기능 -->
+	<update id="userReport" parameterType="java.lang.Integer">
+		UPDATE user
+		SET u_report = #{u_report} + 1
+		WHERE u_id = #{u_id}
+	</update>
+
+<!-- /부가 기능 -->
+	
+	
+	
 
 	<!-- 댓글 전체목록 -->
 	<select id="replyListAll" parameterType="java.lang.Integer" resultType="ReplyDTO">
@@ -161,15 +228,15 @@
 
 	<!-- 댓글 쓰기 -->
 	<insert id="reply" parameterType="ReplyDTO">
-		INSERT INTO comment (c_no, u_id, b_no, c_content, c_regdate, c_likeCnt, c_state, c_choose)
-		VALUES (#{c_no}, #{u_id}, #{b_no}, #{c_content}, sysdate(), #{c_likeCnt}, #{c_state}, #{c_choose})
+		INSERT INTO comment (c_no, u_id, b_no, c_content, c_regdate, c_likeCnt, c_state, c_choose, c_report)
+		VALUES (#{c_no}, #{u_id}, #{b_no}, #{c_content}, sysdate(), #{c_likeCnt}, 0, #{c_choose}, 0)
 	</insert>
 
 
 	<!-- 댓글 수정 -->
 	<update id="replyUpdate" parameterType="ReplyDTO">
 		UPDATE comment
-		SET c_no = #{c_no}, u_id = #{u_id}, c_content = #{c_content}
+		SET c_no = #{c_no}, u_id = #{u_id}, c_content = #{c_content}, c_state = 1
 		WHERE c_no = #{c_no}
 	</update>
 

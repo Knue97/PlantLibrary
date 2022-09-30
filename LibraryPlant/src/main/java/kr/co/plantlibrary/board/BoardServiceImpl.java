@@ -12,9 +12,9 @@ public class BoardServiceImpl implements BoardService {
 @Inject BoardDAO dao;
 	
 	@Override
-	public List<BoardDTO> listAll(Criteria cri) throws Exception {
+	public List<BoardDTO> freeListAll(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.listAll(cri);
+		return dao.freeListAll(cri);
 	}
 	
 	@Override
@@ -67,27 +67,74 @@ public class BoardServiceImpl implements BoardService {
 	
 //	페이징
 	@Override
-	public int countBoardListTotal1(Criteria cri) throws Exception {
+	public int countBoardListTotal1() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countBoardList1(cri);
+		return dao.countBoardList1();
 	}
 	@Override
-	public int countBoardListTotal2(Criteria cri) throws Exception {
+	public int countBoardListTotal2() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countBoardList2(cri);
+		return dao.countBoardList2();
 	}
 	@Override
-	public int countBoardListTotal3(Criteria cri) throws Exception {
+	public int countBoardListTotal3() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countBoardList3(cri);
+		return dao.countBoardList3();
 	}
 	@Override
-	public int countBoardListTotal4(Criteria cri) throws Exception {
+	public int countBoardListTotal4() throws Exception {
 		// TODO Auto-generated method stub
-		return dao.countBoardList4(cri);
+		return dao.countBoardList4();
 	}
 	
+//	검색
+	@Override
+	public List<BoardDTO> searchList(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.searchList(cri);
+	}
+//	검색 페이징
+	@Override
+	public int countSearch(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countSearch(cri);
+	}
 	
+	@Override
+	public int recommended(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.recommended(boardDTO);
+	}
+
+	@Override
+	public int replyLike(int c_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.replyLike(c_no);
+	}
+
+	@Override
+	public int replyChoose(int c_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.replyChoose(c_no);
+	}
+
+	@Override
+	public int boardReport(int b_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.boardReport(b_no);
+	}
+
+	@Override
+	public int replyReport(int c_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.replyReport(c_no);
+	}
+
+	@Override
+	public int userReport(String u_id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.userReport(u_id);
+	}
 	
 	
 	

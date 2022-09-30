@@ -25,4 +25,5 @@ public class ReplyDTO {
 	private int c_likeCnt;
 	private int c_state;
 	private int c_choose;
+	private int c_report;
 }
