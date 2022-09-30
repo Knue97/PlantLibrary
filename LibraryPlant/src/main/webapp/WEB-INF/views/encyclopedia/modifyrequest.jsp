@@ -6,7 +6,15 @@
 <html class="no-js" lang="zxx">
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style>
+
+*{
+	font-family: 'IBM Plex Sans KR', sans-serif !important;
+}
+
 .contact-us {
 
   padding: 50px 100px; }
@@ -14,9 +22,7 @@
 label, input, textarea {
   display: block;
   width: 100%;
-  font-size: 12pt;
-  line-height: 24pt;
-  font-family: "Spartan"; }
+  line-height: 24pt;}
 
 input {
   margin-bottom: 24pt; }
@@ -25,11 +31,10 @@ h3 {
   font-weight: normal;
   font-size: 10pt;
   line-height: 24pt;
-  font-style: italic;
   margin: 0 0 .5em 0; }
 
 span {
-  font-size: 8pt; }
+  font-size: 10pt; }
 
 em {
   color: #2e8b57;
@@ -106,8 +111,7 @@ textarea:-webkit-autofill:focus {
 				<br>
 						<div class="contact-us">
 						<h2>수정 문의</h2>
-							<form action="${contextPath }/library/modifyrequest"
-								method="post">
+							<form action="${contextPath }/encyclopedia/modifyrequest" method="post" enctype="multipart/form-data">
 								<h3>
 									본문 내용이 올바르지 않은 부분 또는 오탈자 수정이 필요한 것을 알려 주세요.<br> 검토결과에 대한
 									내용은 마이페이지에서 확인 가능합니다.
@@ -115,15 +119,22 @@ textarea:-webkit-autofill:focus {
 								<%    
 								    request.setCharacterEncoding("UTF-8");
 								    String mr_name = request.getParameter("mr_name");
+								    String ec_id = request.getParameter("ec_id");
+								    String name= request.getParameter("name");
+								  
 								%>
-								<label for="u_id"> 아이디(닉네임)<span>&nbsp;&nbsp;보내주신
-										내용이 서비스에 반영되면, 해당 정보에 수정된 정보와 함께 닉네임이 올라갑니다.</span>
-								</label><input id="u_id" name="u_id" value="${user.u_id }(${user.u_nickname })"
-									type="text" readonly /> <label for="mr_name"> 백과 항목 </label><input
-									id="mr_name" name="mr_name" value="<%= mr_name %>"
-									type="text" readonly /> <label for="mr_file">파일첨부</label> <input
-									id="mr_file" name="mr_file" type="file" /> <label
-									for="mr_source">출처/참고자료</label> <input id="mr_source"
+								<input type="hidden" name="ec_id" value=<%=ec_id %>>
+								<label for="u_id"> 아이디(닉네임)
+								</label><input value="${user.u_id }(${user.u_nickname })"
+									type="text" readonly />
+								<input type="hidden" id="u_id" name="u_id" value="${user.u_id }">
+								<label for="name"> 백과 항목 </label><input
+									value="<%=name %>"
+									type="text" readonly />
+								<input type="hidden" name ="mr_name" value="<%=mr_name%>">
+									<label for="mr_file">파일첨부</label> <input
+									id="mr_file" name="file" type="file" />
+									<label for="mr_source">출처/참고자료</label> <input id="mr_source"
 									name="mr_source" type="text" placeholder="인터넷 주소 또는 사이트명 입력" />
 								<label for="mr_content"> 수정문의 내용입력 <em>&#x2a;</em>
 								</label>

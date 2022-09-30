@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- ? Preloader Start -->
-	z
+	
 	<%@ include file="/WEB-INF/views/include/preloader.jsp"%>
 	<!-- Preloader Start -->
 	<header>

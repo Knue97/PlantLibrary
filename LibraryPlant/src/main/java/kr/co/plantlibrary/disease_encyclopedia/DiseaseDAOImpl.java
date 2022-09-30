@@ -61,6 +61,18 @@ public class DiseaseDAOImpl implements DiseaseDAO{
 		return sqlSession.delete(NAMESPACE + ".delete", di_id);
 	}
 
+	@Override
+	public List<String> aliasList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE + ".aliasList");
+	}
+
+	@Override
+	public int checkDisease(String di_alias) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + ".checkdisease", di_alias);
+	}
+
 
 
 

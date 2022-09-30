@@ -30,4 +30,8 @@ public interface PestService {
 
 	// 해충 정보 삭제
 	int delete(int pe_id) throws Exception;
+	
+	// 정보등록/수정시 해충명 중복 확인하기
+	int checkPest(String pe_name) throws Exception;
+
 }

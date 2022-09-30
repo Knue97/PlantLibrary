@@ -14,6 +14,7 @@ public class LoginDAOimpl implements LoginDAO {
 	@Setter(onMethod_ = @Autowired )
 	private SqlSession  sqlSession;
 	
+	
 	private static final String nameSpace = "kr.co.plantlibrary.plant_login";
 	
 //	로그인
@@ -40,6 +41,24 @@ public class LoginDAOimpl implements LoginDAO {
 	public LoginEntity mypage_lookup(String u_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace + ".mypage_lookup", u_id);
+	}
+
+	@Override
+	public int mypage_updatepw(LoginEntity loginEntity) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(nameSpace + ".mypage_updatepw", loginEntity);
+	}
+
+	@Override
+	public int userIdcheck(String u_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".userIdcheck", u_id);
+	}
+
+	@Override
+	public int userNicknamecheck(String u_nickname) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".userNicknamecheck", u_nickname);
 	}
 
 	
