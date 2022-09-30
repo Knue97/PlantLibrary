@@ -14,4 +14,8 @@ public interface LoginService {
 	public int mypage_updatepw(LoginEntity loginEntity);
 	
 	public LoginEntity mypage_lookup(String u_id);
+
+	public int userIdcheck(String u_id);
+	
+	public int userNicknamecheck(String u_nickname);
 }

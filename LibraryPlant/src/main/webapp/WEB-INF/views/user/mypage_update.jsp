@@ -6,7 +6,7 @@
 <html class="no-js" lang="zxx">
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
-
+<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 </head>
 <body>
 	<!-- ? Preloader Start -->
@@ -22,39 +22,23 @@
 			<!-- Single Slider -->
 			<div class="single-slider d-flex align-items-center slider-height2">
 				<div class="container">
-			      <h2>회원정보 수정</h2><br>
+			      <h2>닉네임 변경</h2><br>
 					<form action="${contextPath }/user/mypage_update" method="post">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">ID</label>
-							<div class="col-sm-10">
+							<div class="col-sm-3">
 								<input type="text" class="form-control" value="${user.u_id }" name="u_id" readonly="readonly">
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">이메일</label>
-							<div class="col-sm-10">
-								<input type="email" class="form-control" value="${user.u_email }" readonly="readonly" name="u_email" >
-							</div>
-						</div>
+						
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">닉네임</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" value="${user.u_nickname }"name="u_nickname" >
+							<div class="col-sm-3">
+								<input type="text" class="form-control"  name="u_nickname" id="u_nickname" placeholder="변경하실 닉네임(2~6자)">
+								<div class="check_font" id="nickname_check"></div>
 							</div>
 						</div>
-			
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">이름</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" value="${user.u_name }"  name="u_name" >
-							</div>
-						</div>
-							<div class="form-group row">
-							<label class="col-sm-2 col-form-label">주소</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" value="${user.u_address }" name="u_address" >
-							</div>
-						</div>
+					
 						<button type="submit">수정하기</button>
 						<input type="button" onclick="location.href='${contextPath}/user/mypage'" value="취소">
 					</form>
@@ -77,6 +61,61 @@
 	</div>
 
 	<!-- JS here -->
-	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
+	<script type="text/javascript">
+	var idJ2 = /^[a-z0-9가-힣]{2,6}$/;
+	$("#u_nickname").blur(function() {		
+		var u_nickname = $('#u_nickname').val();
+		$.ajax({
+					url : '${pageContext.request.contextPath}/user/nicknameCheck?u_nickname='
+							+ u_nickname,
+					type : 'get',
+					success : function(data) {
+						console.log("1 = 중복o / 0 = 중복x : "
+								+ data);
+
+						if (data != 0) {
+							
+							$("#nickname_check").text(
+									"이미 사용중인 닉네임입니다.");
+							$("#nickname_check").css("color",
+									"red");
+							$("#reg_submit").attr(
+									"disabled", true);
+						} else {
+
+							if (idJ2.test(u_nickname)) {
+								// 0 : 닉네임 길이 / 문자열 검사
+								$("#nickname_check").text("");
+								$("#reg_submit").attr(
+										"disabled", false);
+
+							} else if (u_nickname == "") {
+
+								$('#nickname_check').text(
+										'닉네임을 입력해주세요.');
+								$('#nickname_check').css('color',
+										'red');
+								$("#reg_submit").attr(
+										"disabled", true);
+
+							} else {
+
+								$('#nickname_check').text(
+												"2~6자만 가능");
+								$('#nickname_check').css('color',
+										'red');
+								$("#reg_submit").attr(
+										"disabled", true);
+							}
+
+						}
+					},
+					error : function() {
+						console.log("실패");
+					}
+				});
+	});
+	</script>
+	
 </body>
 </html>

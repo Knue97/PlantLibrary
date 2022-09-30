@@ -6,7 +6,7 @@
 	
 	<update id="mypage_update" parameterType="LoginEntity">
 		UPDATE plantlibrary.user 
-		SET u_nickname = #{u_nickname}, u_name = #{u_name} ,u_address = #{u_address}
+		SET u_nickname = #{u_nickname}
 		WHERE (u_id = #{u_id});
 	</update>
 	
@@ -20,5 +20,15 @@
 		select * from plantlibrary.user 
 		WHERE (u_id = #{u_id});
 	</select>
+	
+	<select id="userIdcheck" parameterType="LoginEntity" resultType="java.lang.Integer">
+		select count(*) from plantlibrary.user where u_id = #{u_id}
+	</select>
+	
+	<select id="userNicknamecheck" parameterType="LoginEntity" resultType="java.lang.Integer">
+		select count(*) from plantlibrary.user where u_nickname = #{u_nickname}
+	</select>
+	
+
 	
 </mapper>

@@ -55,7 +55,7 @@
 								<input type="text" class="form-control" value="${user.u_address }" readonly="readonly">
 							</div>
 						</div>
-						<input type="button" onclick="location.href='${contextPath}/user/mypage_update'" value="회원정보수정">
+						<input type="button" onclick="location.href='${contextPath}/user/mypage_update'" value="닉네임변경">
 						<input type="button" onclick="location.href='${contextPath}/user/mypage_updatepw'" value="비빌번호변경">
 					</form>
 				</div>

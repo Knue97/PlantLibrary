@@ -64,9 +64,7 @@
 														<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-<<<<<<< HEAD
-															    ${user.u_nickname }님
-=======
+															    ${user.u_nickname }
 															  	<c:choose>															  		
 															  		<c:when test="${user.api == 'naver' }">
 															  			${user.u_name }
@@ -75,10 +73,10 @@
 															  			${user.nickname }
 															  		</c:when>
 															  		<c:otherwise>
-															  			${user.u_id }
+															  			(${user.u_id })님
 															  		</c:otherwise>
 															  	</c:choose>															    															    
->>>>>>> bee31da3796f765bea350e2f92ff135e523da0a1
+
 															  </button>
 															  <ul class="dropdown-menu">
 															    <li><a class="dropdown-item" href="${contextPath}/user/mypage">내 정보</a></li>

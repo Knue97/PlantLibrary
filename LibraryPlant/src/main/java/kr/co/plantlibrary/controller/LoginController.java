@@ -1,11 +1,8 @@
 package kr.co.plantlibrary.controller;
 
-<<<<<<< HEAD
 
 import java.io.PrintWriter;
-=======
 import java.util.HashMap;
->>>>>>> bee31da3796f765bea350e2f92ff135e523da0a1
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,17 +40,14 @@ public class LoginController {
 	
 	@Setter(onMethod_ = @Autowired )
 	private NaverLoginBO naverLoginBO;
-<<<<<<< HEAD
  
 	@Autowired
 	private MailSendService mailService;
-=======
 	
 	@Setter(onMethod_ = @Autowired )
 	private KakaoLoginBO kakaoLoginBO;
 	
 	
->>>>>>> bee31da3796f765bea350e2f92ff135e523da0a1
 	private String apiResult = null;
 
 	@GetMapping("/login")
@@ -148,7 +142,7 @@ public class LoginController {
 		
 	}
 	//이메일 인증
-		@GetMapping("/mailCheck")
+		@GetMapping("/register/mailCheck")
 		@ResponseBody
 		public String mailCheck(String email) {
 			System.out.println("이메일 인증 요청이 들어옴!");
@@ -159,7 +153,7 @@ public class LoginController {
 		}
 	
 	@GetMapping("/register")
-	public String regisgerForm() throws Exception {
+	public String regisgerForm() {
 		log.info("===============Login RegisterForm================");
 		
 		

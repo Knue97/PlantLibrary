@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Component
+@Service
 public class MailSendService {
 	@Autowired
 	private JavaMailSenderImpl mailSender;
@@ -28,7 +30,7 @@ public class MailSendService {
 				//이메일 보낼 양식! 
 		public String joinEmail(String email) {
 			makeRandomNumber();
-			String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
+			String setFrom = "rudtjqdnekd@naver.com"; // email-config에 설정한 자신의 이메일 주소를 입력 
 			String toMail = email;
 			String title = "회원 가입 인증 이메일 입니다."; // 이메일 제목 
 			String content = 

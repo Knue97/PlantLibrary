@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.plantlibrary.login.LoginEntity;
 import kr.co.plantlibrary.login.LoginService;
@@ -23,6 +25,19 @@ public class UserController {
 	@Autowired
 	private LoginService service;
 
+	@GetMapping(value = "/idCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam("u_id") String u_id) {
+		
+		return service.userIdcheck(u_id);
+	}
+	@GetMapping(value = "/nicknameCheck")
+	@ResponseBody
+	public int nicknameCheck(@RequestParam("u_nickname") String u_nickname) {
+		
+		return service.userNicknamecheck(u_nickname);
+	}
+	
 	@GetMapping(value = "/mypage")
 	public String mypage() {
 		
@@ -36,7 +51,7 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/mypage_update")
-	public String mypage_update(LoginEntity loginEntity,HttpServletRequest request) {
+	public String mypage_update(LoginEntity loginEntity,HttpServletRequest request) throws Exception{
 		log.info("=====update=====");
 		
 		service.mypage_update(loginEntity);

@@ -28,11 +28,12 @@
                             <div class="col-xl-5 col-lg-5 col-md-9 ">
                                 <div class="hero__caption">                                   
                                     <h1 data-animation="fadeInLeft" data-delay=".6s "> 회원가입을<br>축하합니다.</h1>                                  	                                    
+                                	<button type="button" onclick="location.href='${contextPath}/'" class="btn btn-primary">메인화면</button>
+                                	<button type="button" onclick="location.href='${contextPath}/login/login'" class="btn btn-primary">로그인</button>                             
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6">
                                 <div>
-                                	<button type="button" onclick="location.href='${contextPath}/'" class="btn btn-primary">메인화면으로</button>                             
                                 </div>
                             </div>
                         </div>
