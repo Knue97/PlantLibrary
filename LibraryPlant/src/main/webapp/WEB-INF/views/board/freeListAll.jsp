@@ -76,10 +76,11 @@
 							<tr>
 								<td>${board.b_no}</td>
 								<td><a href="detail?b_no=${board.b_no}">
+								${board.b_title} </a>
 								<c:if test="${board.b_image != null}">
 								<img src="${contextPath}/resources/assets/img/icon/plant.png" alt="" height="25" width="25">
 								</c:if>
-								${board.b_title} </a>[<a>${board.b_commentcnt}]</a></td>
+								<a>[${board.b_commentcnt}]</a></td>
 								<td>${board.u_id}</td>
 								<td>${board.b_regdate}</td>
 								<td><span class="badge">${board.b_hits}</span></td>

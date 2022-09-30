@@ -59,8 +59,9 @@
 			return false;
 		}
 		var url = "${contextPath}/board/searchList";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&searchKeyword=" + $('#searchKeyword').val().trim();
+		url = url + "?searchKeyword=" + $('#searchKeyword').val().trim();
+		url = url + "&searchType=" + $('#searchType').val();
+		url = url + "&page=1"
 		location.href = encodeURI(url);
 		console.log(encodeURI(url));
 

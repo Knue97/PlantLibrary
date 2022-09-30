@@ -309,6 +309,18 @@ public class BoardController {
 		return service.replyDelete(c_no);
 	}
 
+	
+	
+//	추천/좋아요/신고
+	// 세션 값 받아서 처리..? user.u_id + boardDTO.b_no + 체크값1 입력
+	// 취소 -> 동일 체크값 -1
+	@ResponseBody
+	@PostMapping(value = "board/recommended")
+	public int recommended(BoardDTO boardDTO) throws Exception {
+		logger.info("총 추천 수 : "+ boardDTO.getB_recommendedNumber());
+		return service.recommended(boardDTO);
+	}
+	
 //	나중에 service로 옮겨질 애들 ===================================
 //	고유값+이름
 	private String uploadFile(File uploadFolder, String uploadFileName, byte[] fileData) throws Exception {

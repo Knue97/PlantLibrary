@@ -100,6 +100,41 @@ public class BoardServiceImpl implements BoardService {
 		return dao.countSearch(cri);
 	}
 	
+	@Override
+	public int recommended(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.recommended(boardDTO);
+	}
+
+	@Override
+	public int replyLike(int c_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.replyLike(c_no);
+	}
+
+	@Override
+	public int replyChoose(int c_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.replyChoose(c_no);
+	}
+
+	@Override
+	public int boardReport(int b_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.boardReport(b_no);
+	}
+
+	@Override
+	public int replyReport(int c_no) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.replyReport(c_no);
+	}
+
+	@Override
+	public int userReport(String u_id) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.userReport(u_id);
+	}
 	
 	
 	

@@ -112,8 +112,8 @@ function validate() {
 						<div class="form-group">
 							<label>내용</label>
 							<textarea id="summernote" name="b_content"
-								placeholder="내용을 입력하세요" maxlength="1000"></textarea>
-							<p class="textTotal" align="right">글자수 제한 : 1000자</p>
+								placeholder="내용을 입력하세요" maxlength="10000"></textarea>
+							<p class="textTotal" align="right">글자수 제한 : 10000자</p>
 						</div>
 						<div class="form-group">
 							<label>첨부파일</label> <input type="file" name="files" multiple
