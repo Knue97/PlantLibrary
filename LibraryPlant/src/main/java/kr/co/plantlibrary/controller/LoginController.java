@@ -1,9 +1,12 @@
 package kr.co.plantlibrary.controller;
 
+
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -36,6 +40,9 @@ public class LoginController {
 	
 	@Setter(onMethod_ = @Autowired )
 	private NaverLoginBO naverLoginBO;
+ 
+	@Autowired
+	private MailSendService mailService;
 	
 	@Setter(onMethod_ = @Autowired )
 	private KakaoLoginBO kakaoLoginBO;
@@ -134,24 +141,47 @@ public class LoginController {
 		return "redirect:/";
 		
 	}
+	//이메일 인증
+		@GetMapping("/register/mailCheck")
+		@ResponseBody
+		public String mailCheck(String email) {
+			System.out.println("이메일 인증 요청이 들어옴!");
+			System.out.println("이메일 인증 이메일 : " + email);
+			return mailService.joinEmail(email);
+			
+				
+		}
 	
 	@GetMapping("/register")
-	public String regisgerForm() throws Exception {
+	public String regisgerForm() {
 		log.info("===============Login RegisterForm================");
+		
 		
 		return "login/register";
 	}
 	
 	@PostMapping("/register")
-	public String register(LoginEntity loginEntity,Model model) {
+	public String register(LoginEntity loginEntity,String pwC,Model model,HttpServletResponse response) throws Exception {
 		log.info("==============Login Register==============");
 		
 		log.info(loginEntity);
 		
-		int result = service.register(loginEntity);
+		if(loginEntity.getU_password().equals(pwC)&&loginEntity.getU_password() != "") {
+			int result = service.register(loginEntity);
+			
+			log.info("result : " + result);
+			
+			return "login/regresult";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('비밀번호를 다시확인해주세요.');history.go(-1);</script>");
+			out.flush();
+			out.close();
+			return "login/register";
+		}
 		
-		log.info("result : " + result);
 		
-		return "login/regresult";
 	}
 }

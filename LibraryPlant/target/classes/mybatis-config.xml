@@ -11,5 +11,7 @@
 		<typeAlias alias="DiseaseEntity" type="kr.co.plantlibrary.disease_encyclopedia.DiseaseEntity"/>
 		<typeAlias alias="PestEntity" type="kr.co.plantlibrary.pest_encyclopedia.PestEntity"/>
 		<typeAlias alias="BookmarkEntity" type="kr.co.plantlibrary.bookmark.BookmarkEntity"/>
+		<typeAlias alias="ModifyRequestEntity" type="kr.co.plantlibrary.modifyrequest.ModifyRequestEntity"/>
+		<typeAlias alias="BotanicalGardenVO" type="kr.co.plantlibrary.botanical_garden.BotanicalGardenVO"/>
 	</typeAliases>
 </configuration>

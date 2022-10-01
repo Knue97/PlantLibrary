@@ -11,14 +11,65 @@
 </head>
 
 <script>
-	$(document).ready(function(){
-		$('#summernote').summernote({
-			  height: 300,                 // set editor height
-			  minHeight: null,             // set minimum height of editor
-			  maxHeight: null,             // set maximum height of editor
-			  focus: true                  // set focus to editable area after initializing summernote
-			});
-	});
+$(document).ready(function(){
+	$('#summernote').summernote({
+		  height: 500,                 // set editor height
+		  width: 1100,					// set editor width
+		  minHeight: null,             // set minimum height of editor
+		  maxHeight: null,             // set maximum height of editor
+		  focus: true,                  // set focus to editable area after initializing summernote
+		  placeholder: '내용을 입력하세요.',
+		  
+		  toolbar: [
+			  //	https://summernote.org/deep-dive/#custom-toolbar-popover 
+			    // [groupName, [list of button]]
+			  	['fontname', ['fontname']],
+			    ['fontsize', ['fontsize']],
+			    ['style', ['bold', 'italic', 'underline', 'clear', 'strikethrough', 'superscript', 'subscript']],
+			    ['color', ['forecolor','backcolor']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['table', ['table']],
+			    ['insert', ['link', 'picture', 'video']],
+			    ['height', ['height']]
+			  ],
+			  
+			  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+		      fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+		      callbacks: {
+		    	  onImageUpload : function(files, editor, welEditable){
+		        	
+		        	 console.log("files 받음 :" + files);
+		           // 파일 업로드(다중업로드를 위해 반복문 사용)
+		            for (var i = files.length - 1; i >= 0; i--) {
+		            	uploadSummernoteImageFile(files[i], this);
+            		}
+		          }
+		      } 
+		});
+	$(".note-group-image-url").remove();}); // 이미지 url 제거
+
+
+	function uploadSummernoteImageFile(file, el) {
+		
+		data = new FormData();
+		data.append("file", file);
+		console.log("데이터 = " +data + "파일 =" + file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "uploadSummernoteImageFile",
+			contentType : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			success : function(data) {
+				console.log("사진 업로드 : "+file);
+				$(el).summernote('editor.insertImage', data.url);
+			},
+			error : function(data){
+				alert('사진 업로드를 실패하였습니다.');
+			}
+		});
+	}
 	
 	function validate() {
 		var titleCheck = document.titleCheck;
@@ -70,41 +121,39 @@
         <!-- Slider Area End -->
     
         <section class="content container-fluid">
-				
+				<div class="container">
+						<div class="row px-xl-5">
 				<form role="form" method="post" name="titleCheck" onsubmit="return validate();">
 					<select name="bc_id">
-					<c:choose>
-				<c:when test="${board.bc_id == 1}">
-						<option value="1" selected>자유게시판</option>
-						<option value="2">Q&A게시판</option>
-						<option value="3">자랑게시판</option>
-						<option value="4">나눔게시판</option>
-				</c:when>
-				<c:when test="${board.bc_id == 2}">
-						<option value="1">자유게시판</option>
-						<option value="2"selected>Q&A게시판</option>
-						<option value="3">자랑게시판</option>
-						<option value="4">나눔게시판</option>
-				</c:when>
-				<c:when test="${board.bc_id == 3}">
-						<option value="1">자유게시판</option>
-						<option value="2">Q&A게시판</option>
-						<option value="3"selected>자랑게시판</option>
-						<option value="4">나눔게시판</option>
-				</c:when>
-				<c:when test="${board.bc_id == 4}">
-						<option value="1">자유게시판</option>
-						<option value="2">Q&A게시판</option>
-						<option value="3">자랑게시판</option>
-						<option value="4"selected>나눔게시판</option>
-				</c:when>
-						
-				</c:choose>
-						
+						<c:choose>
+							<c:when test="${board.bc_id == 1}">
+									<option value="1" selected>자유게시판</option>
+									<option value="2">Q&A게시판</option>
+									<option value="3">자랑게시판</option>
+									<option value="4">나눔게시판</option>
+							</c:when>
+							<c:when test="${board.bc_id == 2}">
+									<option value="1">자유게시판</option>
+									<option value="2"selected>Q&A게시판</option>
+									<option value="3">자랑게시판</option>
+									<option value="4">나눔게시판</option>
+							</c:when>
+							<c:when test="${board.bc_id == 3}">
+									<option value="1">자유게시판</option>
+									<option value="2">Q&A게시판</option>
+									<option value="3"selected>자랑게시판</option>
+									<option value="4">나눔게시판</option>
+							</c:when>
+							<c:when test="${board.bc_id == 4}">
+									<option value="1">자유게시판</option>
+									<option value="2">Q&A게시판</option>
+									<option value="3">자랑게시판</option>
+									<option value="4"selected>나눔게시판</option>
+							</c:when>
+						</c:choose>
 					</select>
 
 					<div class="box-body">
-						<div class="box-body">
 							<div class="form-group">
 								<label>제목</label> <input type="text" name="b_title" rows="20"
 									class="form-control" value="${board.b_title}" placeholder="(필수)제목을 입력하세요 50자 제한" maxlength="50" />
@@ -116,10 +165,7 @@
 									class="form-control" placeholder="내용을 입력하세요" maxlength="1000">${board.b_content}</textarea>
 									<p class="textTotal" align="right">글자수 제한 : 1000자</p>
 							</div>
-							<div class="form-group">
-							<label>첨부파일</label> <input type="file" name="b_image"
-								class="form-control" placeholder="파일 첨부" value="${board.b_image}">
-							</div>
+							
 							<!-- 작성자 -->
 							<input type="hidden" name="u_id" value="${user.u_id}">
 							<!-- 수정에 사용할 글번호 -->
@@ -132,7 +178,7 @@
 						<input type="submit" value="수정" >
 						</div>
 				</form>
-
+</div></div>
 			</section>
        
 	</main>
