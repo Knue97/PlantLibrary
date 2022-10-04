@@ -56,6 +56,18 @@ public class DiseaseServiceImpl implements DiseaseService{
 		return diseaseDAO.delete(di_id);
 	}
 
+	@Override
+	public List<String> aliasList() throws Exception {
+		// TODO Auto-generated method stub
+		return diseaseDAO.aliasList();
+	}
+
+	@Override
+	public int checkDisease(String di_alias) throws Exception {
+		// TODO Auto-generated method stub
+		return diseaseDAO.checkDisease(di_alias);
+	}
+
 
 
 

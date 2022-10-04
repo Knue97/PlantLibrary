@@ -44,6 +44,25 @@ public interface BoardDAO {
 	public int countSearch(Criteria cri) throws Exception;
 	
 	
+	
+//	게시글 추천
+	public int recommended(BoardDTO boardDTO) throws Exception;
+//	댓글 좋아요
+	public int replyLike(int c_no) throws Exception;
+	public int replyDisLike(int c_no) throws Exception;
+//	댓글 채택
+	public int replyChoose(int c_no) throws Exception;
+	
+	
+//	게시글 신고 
+	public int boardReport(int b_no) throws Exception;
+//	댓글 신고
+	public int replyReport(int c_no) throws Exception;
+//	유저 신고
+	public int userReport(String u_id) throws Exception;
+	
+	
+	
 //	댓글 기능들
 //	댓글 리스트
 	public List<ReplyDTO> replyListAll(int b_no) throws Exception;

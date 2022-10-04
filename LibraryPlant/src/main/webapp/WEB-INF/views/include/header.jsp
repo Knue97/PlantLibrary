@@ -49,13 +49,13 @@
 	                                                	<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-															    ${user.u_id }
+															    ${user.u_nickname }님
 															  </button>
 															  <ul class="dropdown-menu">
-															    <li><a class="dropdown-item" href="${contextPath}/login/logout">로그아웃</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/#">유저관리</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/#">유저 식물 관리</a></li>														    
 															    <li><a class="dropdown-item" href="${contextPath}/encyclopedia/plant/register">식물백과 추가</a></li>															    
+															    <li><a class="dropdown-item" href="${contextPath}/login/logout">로그아웃</a></li>
 															  </ul>
 															</div>
 														</li>
@@ -64,6 +64,7 @@
 														<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+															    ${user.u_nickname }
 															  	<c:choose>															  		
 															  		<c:when test="${user.api == 'naver' }">
 															  			${user.u_name }
@@ -72,9 +73,10 @@
 															  			${user.nickname }
 															  		</c:when>
 															  		<c:otherwise>
-															  			${user.u_id }
+															  			(${user.u_id })님
 															  		</c:otherwise>
 															  	</c:choose>															    															    
+
 															  </button>
 															  <ul class="dropdown-menu">
 															    <li><a class="dropdown-item" href="${contextPath}/user/mypage">내 정보</a></li>
@@ -88,8 +90,8 @@
                                                 </c:if>
                                                 <c:if test="${empty user }">
 	                                                <!-- Button -->
-	                                                <li class="button-header margin-left "><a href="${contextPath}/login/register" class="btn">Sign Up</a></li>
-	                                                <li class="button-header"><a href="${contextPath}/login/login" class="btn">Sign In</a></li>
+	                                                <li class="button-header margin-left "><a href="${contextPath}/login/register" class="btn">회원가입</a></li>
+	                                                <li class="button-header"><a href="${contextPath}/login/login" class="btn">로그인</a></li>
                                                 </c:if>                                                
                                             </ul>
                                         </nav>

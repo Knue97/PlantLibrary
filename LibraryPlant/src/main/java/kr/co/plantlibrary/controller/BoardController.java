@@ -1,6 +1,8 @@
 package kr.co.plantlibrary.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +10,9 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.JsonObject;
 
 import kr.co.plantlibrary.board.BoardDTO;
 import kr.co.plantlibrary.board.BoardService;
@@ -44,9 +50,9 @@ public class BoardController {
 	 */
 	@Autowired
 	BoardService service;
-	@Resource(name = "uploadPath")
+	@Resource(name = "uploadPath") //외부 저장 경로 c:\\upload\\
 	private String uploadPath;
-	
+	static String b_image;
 
 
 //	 free 리스트 불러오기(페이징, 검색 적용중)
@@ -173,9 +179,9 @@ public class BoardController {
 
 //	-2. 입력
 	@PostMapping(value = "board/register")
-	public String register(MultipartFile[] files, BoardDTO boardDTO,Model model) throws Exception {
+	public String register(BoardDTO boardDTO, HttpServletRequest request) throws Exception {
 		logger.info("========== 게시글 작성 ==========");
-
+		request.setCharacterEncoding("UTF-8");
 		
 //		폴더 생성 yyyy/MM/dd
 		File uploadFolder = new File(uploadPath, getFolder());
@@ -186,29 +192,31 @@ public class BoardController {
 			uploadFolder.mkdirs();
 		} // 해당 폴더의 유무 확인 후 없으면 만듦
 
-		String b_image = "";	//	이미지 컬럼이 null
-//		고유값 이미지 저장
-		for (MultipartFile file : files) {
-
-//		IE has file path
-			String uploadFileName = file.getOriginalFilename();
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-			logger.info("OriginalFileName = " + uploadFileName);
-			logger.info("Size = " + file.getSize());
-			logger.info("ContentType = " + file.getContentType());
-
-			if (file.getOriginalFilename() != "") {
-				String saveName = uploadFile(uploadFolder, uploadFileName, file.getBytes());
-					b_image += saveName + ",";	// DB 이미지 컬럼에 배열로 받기
-					
-					model.addAttribute("saveName", saveName);// 없어도 돌아가긴 하던데 불필요하면 나중에 지워야지 뭐..
-					logger.info("이미지 saveName = " + saveName);
-				
-			}
-		}
-		if (files.length <1) {	//  이미지가 있을 때만 적용되기 - 없으면 오류창에 end = -1이 되버림
-		b_image = b_image.substring(0, b_image.length() - 1);	//	substring : 문자열자르기 = db 입력시 마지막 콤마 자르기
+//		String b_image = "";	//	이미지 컬럼이 null
+//		고유값 첨부 파일 저장
+//		for (MultipartFile file : files) {
+//
+////		IE has file path
+//			String uploadFileName = file.getOriginalFilename();
+//			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+//			logger.info("OriginalFileName = " + uploadFileName);
+//			logger.info("Size = " + file.getSize());
+//			logger.info("ContentType = " + file.getContentType());
+//
+//			if (file.getOriginalFilename() != "") {
+//				String saveName = uploadFile(uploadFolder, uploadFileName, file.getBytes());
+//					b_image += saveName + ",";	// DB 이미지 컬럼에 배열로 받기
+//					
+//					model.addAttribute("saveName", saveName);// 없어도 돌아가긴 하던데 불필요하면 나중에 지워야지 뭐..
+//					logger.info("첨부파일 saveName = " + saveName);
+//				
+//			}
+//		}
+		logger.info("b_image = "+b_image);
+		if (b_image != "") {	//  이미지가 있을 때만 적용되기 -> 없으면 오류창에 end = -1이 되버림
+//		b_image = b_image.substring(0, b_image.length() - 1);	//	substring : 문자열자르기 = db 입력시 마지막 콤마 자르기
 		boardDTO.setB_image(b_image);
+		
 		}
 		
 		logger.info("글쓰기 저장" + boardDTO);
@@ -242,6 +250,12 @@ public class BoardController {
 	public String update(BoardDTO boardDTO, HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		logger.info("업데이트 실행");
+		
+		if (boardDTO.getB_image()!="") {
+			b_image = boardDTO.getB_image()+b_image;
+			boardDTO.setB_image(b_image);
+			int r = service.update(boardDTO);
+		}
 		int r = service.update(boardDTO);
 
 		if (r > 0) {
@@ -271,18 +285,21 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping(value = "board/replyListAll")
 	public List<ReplyDTO> replyListAll(@RequestParam("b_no") int b_no) throws Exception {
-		logger.info("ajax 실행");
+		logger.info("ajax 실행 댓글 리스트");
 		return service.replyListAll(b_no);
 	}
 
 //	댓 작성
 	@ResponseBody
 	@PostMapping(value = "board/reply")
-	public int reply(ReplyDTO replyDTO) throws Exception {
-		logger.info(replyDTO.getC_content());
+	public int reply(ReplyDTO replyDTO, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		logger.info("댓글작성");
+		logger.info("댓글 : " + replyDTO.getC_content());
 		if (replyDTO.getC_content() == "") {
 			logger.info(replyDTO.getC_content() + "댓 내용없음");
-			return 2;
+			
+			return 2;	// detail 댓글 작성에서 result 값으로 보냄
 		}
 		return service.reply(replyDTO);
 	}
@@ -290,8 +307,10 @@ public class BoardController {
 //	댓 수정
 	@ResponseBody
 	@PostMapping(value = "board/replyUpdate")
-	public int replyUpdate(ReplyDTO replyDTO) throws Exception {
-
+	public int replyUpdate(ReplyDTO replyDTO, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		logger.info("댓글수정");
+		logger.info("댓글 : " + replyDTO.getC_content());
 		return service.replyUpdate(replyDTO);
 	}
 
@@ -299,23 +318,72 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping(value = "board/replyDelete")
 	public int replyDelete(@RequestParam("c_no") int c_no) throws Exception {
+		logger.info("댓글삭제");
 		return service.replyDelete(c_no);
 	}
 
+	
+	
+//	추천/좋아요/신고
+	// 세션 값 받아서 처리..? user.u_id + boardDTO.b_no + 체크값1 입력
+	// 취소 -> 동일 체크값 -1
+	@ResponseBody
+	@PostMapping(value = "board/recommended")
+	public int recommended(BoardDTO boardDTO) throws Exception {
+		logger.info("총 추천 수 : "+ boardDTO.getB_recommendedNumber());
+		return service.recommended(boardDTO);
+	}
+	
+	
+	@RequestMapping(value="board/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		JsonObject jsonObject = new JsonObject();
+		
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		System.out.println(contextRoot);
+		String fileRoot = contextRoot+"resources/fileupload/";
+		
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		
+		File targetFile = new File(fileRoot + savedFileName);	
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", "/plantlibrary/resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+			
+			b_image = request.getContextPath() + "/resources/fileupload/" + savedFileName;
+			logger.info("사진 = " + b_image);
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	}
+	
+	
+	
+	
 //	나중에 service로 옮겨질 애들 ===================================
 //	고유값+이름
-	private String uploadFile(File uploadFolder, String uploadFileName, byte[] fileData) throws Exception {
-
-		UUID uid = UUID.randomUUID();
-		String saveName = uid.toString() + "_" + uploadFileName;
-		File target = new File(uploadFolder, saveName);
-		FileCopyUtils.copy(fileData, target);
-		logger.info("uid " + uid);
-		logger.info("saveName " + saveName);
-		logger.info("target " + target);
-
-		return saveName;
-	}
+//	private String uploadFile(File uploadFolder, String uploadFileName, byte[] fileData) throws Exception {
+//
+//		UUID uid = UUID.randomUUID();
+//		String saveName = uid.toString() + "_" + uploadFileName;
+//		File target = new File(uploadFolder, saveName);
+//		FileCopyUtils.copy(fileData, target);
+//		logger.info("uid " + uid);
+//		logger.info("saveName " + saveName);
+//		logger.info("target " + target);
+//
+//		return saveName;
+//	}
 
 //	해당 날짜 폴더
 	private String getFolder() {

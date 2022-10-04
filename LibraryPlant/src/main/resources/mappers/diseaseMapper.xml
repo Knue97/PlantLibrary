@@ -32,6 +32,12 @@
 		from disease
 		where di_alias like CONCAT('%', #{searchword}, '%')
 	</select>
+	<!-- 병해명 리스트 가져오기 -->
+	<select id="aliasList" resultType="java.util.ArrayList">
+		select di_alias
+		from disease
+		order by binary(di_alias);
+	</select>
 	<!-- 해당 병해백과 조회수 증가 -->
 	<update id="updateHits" parameterType="java.lang.Integer">
 		update disease
@@ -50,7 +56,8 @@
 	<!-- 병해 정보 수정 -->
 	<update id="update" parameterType="DiseaseEntity">
 		update disease
-		set ec_id = #{ec_id}, di_alias = #{di_alias}, di_image = #{di_image},
+		set
+		di_alias = #{di_alias}, di_image = #{di_image},
 		di_cause = #{di_cause}, di_symptomOfDisease = #{di_symptomOfDisease},
 		di_biologicalControl = #{di_biologicalControl}, di_carefulPlant = #{di_carefulPlant},
 		di_descripton = #{di_descripton}
@@ -62,4 +69,11 @@
 		from disease
 		where di_id = #{di_id}
 	</delete>
+	<!-- 정보 등록/수정시 병해명 중복 체크 -->
+	<select id="checkdisease" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select
+		count(di_id)
+		from disease
+		where di_alias = #{di_alias}
+	</select>
 </mapper>
