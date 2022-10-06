@@ -4,8 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.plantlibrary.botanical_garden">
 	<select id="listbysummary" resultType="BotanicalGardenVO">
-		SELECT g_id,g_name,g_detailedAddress,g_url,g_summary,g_latitude,g_longitude,g_longitude
+		SELECT g_id,g_name,g_detailedAddress,g_url,g_summary,g_latitude,g_longitude,g_longitude,g_region
 		FROM plantlibrary.botanical_garden
 		WHERE g_region = #{g_region}
 	</select>
+	
+	<insert id="create">
+		INSERT INTO plantlibrary.botanical_garden
+		(g_name,g_detailedAddress,g_url,g_summary,g_latitude,g_longitude,g_region)
+		VALUES
+		(#{g_name},#{g_detailedAddress},#{g_url},#{g_summary},#{g_latitude},#{g_longitude},#{g_region})
+	</insert>
 </mapper>

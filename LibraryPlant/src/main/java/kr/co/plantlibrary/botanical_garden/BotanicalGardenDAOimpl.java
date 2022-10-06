@@ -22,4 +22,10 @@ public class BotanicalGardenDAOimpl implements BotanicalGardenDAO {
 		return sqlSession.selectList(nameSpace + ".listbysummary", g_resion);
 	}
 
+	@Override
+	public int create(BotanicalGardenVO botanicalGardenVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(nameSpace + ".create", botanicalGardenVO);
+	}
+
 }

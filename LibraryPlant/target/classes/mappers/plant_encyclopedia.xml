@@ -52,12 +52,40 @@
   
   <select id="listbyclassification" parameterType="java.util.Map" resultType="EncyclopediaEntity">
   	SELECT * FROM (SELECT * FROM plantlibrary.plant WHERE pl_classification = #{pl_classification}) as Plant
-  	LIMIT #{pageStart}, #{perPageNum}
-  	
+  	LIMIT #{pageStart}, #{perPageNum}	
   </select>
   
-  <!-- get AutoIncrement -->
-  <select id="getAuto" resultType="int">
-  	select last_insert_id(); 
+  <!-- hits -->
+  <update id="hitsup" parameterType="java.lang.Integer">
+	UPDATE plantlibrary.plant
+	SET
+	pl_hits = IFNULL(pl_hits,0)+1
+	WHERE pl_id = #{pl_id}	  	
+  </update>
+  
+  <!-- search -->
+  <select id="search" parameterType="SearchVO" resultType="EncyclopediaEntity">
+  	SELECT * FROM plantlibrary.plant
+  	<where>
+  		<if test="category == null and value != null">
+  			pl_koreanName Like CONCAT('%', #{value}, '%') OR pl_englishName Like CONCAT('%', #{value}, '%') or pl_scientificName Like CONCAT('%', #{value}, '%') or pl_familyName Like CONCAT('%', #{value}, '%') or pl_classification Like CONCAT('%', #{value}, '%')
+  		</if>
+  		<if test="category == 'pl_koreanName'">
+  			pl_koreanName Like CONCAT('%', #{value}, '%')
+  		</if>
+  		<if test="category == 'pl_englishName'">
+  			pl_englishName Like CONCAT('%', #{value}, '%')
+  		</if>
+  		<if test="category == 'pl_scientificName'">
+  			pl_scientificName Like CONCAT('%', #{value}, '%')
+  		</if>
+  		<if test="category == 'pl_familyName'">
+  			pl_familyName Like CONCAT('%', #{value}, '%')
+  		</if>
+  		<if test="category == 'pl_classification'">
+  			pl_classification Like CONCAT('%', #{value}, '%')
+  		</if>
+  	</where>
   </select>
+  
 </mapper>
