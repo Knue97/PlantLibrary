@@ -68,6 +68,18 @@ public class PlantEncyclopediaServiceimpl implements PlantEncyclopediaService {
 		// TODO Auto-generated method stub
 		return dao.listByClassification(map);
 	}
+
+	@Override
+	public List<EncyclopediaEntity> search(SearchVO searchVO) {
+		// TODO Auto-generated method stub
+		return dao.search(searchVO);
+	}
+
+	@Override
+	public int hitsUp(int pl_id) {
+		// TODO Auto-generated method stub
+		return dao.hitsUp(pl_id);
+	}
 	
 	
 }

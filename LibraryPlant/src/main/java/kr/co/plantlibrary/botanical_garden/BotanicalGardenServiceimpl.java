@@ -19,4 +19,10 @@ public class BotanicalGardenServiceimpl implements BotanicalGardenService {
 		return dao.listBySummary(g_resion);
 	}
 
+	@Override
+	public int create(BotanicalGardenVO botanicalGardenVO) {
+		// TODO Auto-generated method stub
+		return dao.create(botanicalGardenVO);
+	}
+
 }
