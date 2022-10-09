@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.plantlibrary.plant_encyclopedia.Constant;
 import kr.co.plantlibrary.plant_encyclopedia.Criteria;
@@ -90,16 +92,27 @@ public class PlantEncyclopediaController {
 	}
 	
 	@GetMapping("/plant/detail")
-	public String plant(@RequestParam("pl_id") int pl_id, Model model) {
+	public String plant(@ModelAttribute("pl_id") int pl_id, Model model) {
 		log.info("================Encyclopedia Plant=====================");
 		service.hitsUp(pl_id);
 		EncyclopediaEntity entity = service.listById(pl_id);
 		Constant constant = new Constant();
 		log.info(entity);
 		log.info(constant);
+		
 		model.addAttribute("entity", entity);
 		model.addAttribute("constant", constant);
 		return "encyclopedia/plant/detail";
+	}
+	
+	@PostMapping(value = "/plant/detail/hitsup")
+	@ResponseBody
+	public int plantLike(@RequestParam Map<String, Object> map){
+	    log.info("====================Ajax BookMark================");
+	    int r = service.bookMark((int)map.get("pl_id"));
+	    int bookmark = service.getBookMark(map);
+	   
+	    return bookmark;	    
 	}
 	
 	@GetMapping("/plant/register")

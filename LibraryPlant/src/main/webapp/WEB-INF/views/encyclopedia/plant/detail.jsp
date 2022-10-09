@@ -25,8 +25,9 @@
                 <div class="single-slider d-flex align-items-center slider-height ">
 					<div class="container">
 					    <h1 class="mb-5">요약 설명</h1>
+					    <h1 class="mb-5 d-none">${pl_id }</h1>
 					    <h5 class="text-right">조회수: ${entity.pl_hits}</h5>
-					    <h5 class="text-right">북마크: ${entity.pl_bookmarkCnt}</h5>
+					    <h5 class="text-right"><button id ="bookmark">추가</button><span id="like">북마크: ${entity.pl_bookmarkCnt}</span></h5>
 					    <div class="row">
 					        <div class="col">
 					        	<h2>${entity.pl_koreanName}</h2>
@@ -219,5 +220,27 @@
 
 <!-- JS here -->
 <%@ include file="/WEB-INF/views/include/plugin.jsp" %>
+<script>        
+
+        $(document).ready(function(){
+            $("#bookmark").click(function () {
+                var form = {
+                    pl_id : ${ pl_id }
+                }
+                $.ajax({
+                    url: "${contextPaht}/encyclopedia/plant/detail/hitsup",
+                    type: "POST",
+                    data: form,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function(){
+                        alert("error");
+                    }
+                });
+            });
+            
+        });
+</script>
 </body>
 </html>

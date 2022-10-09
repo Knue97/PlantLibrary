@@ -33,4 +33,10 @@ public interface PlantEncyclopediaDAO {
 	
 	//HitsUp
 	public int hitsUp(int pl_id);
+	
+	//BookMark
+	public int bookMark(int pl_id);
+	
+	//Get BookMark
+	public int getBookMark(Map<String, Object> map);
 }
