@@ -13,5 +13,6 @@
 		<typeAlias alias="BookmarkEntity" type="kr.co.plantlibrary.bookmark.BookmarkEntity"/>
 		<typeAlias alias="ModifyRequestEntity" type="kr.co.plantlibrary.modifyrequest.ModifyRequestEntity"/>
 		<typeAlias alias="BotanicalGardenVO" type="kr.co.plantlibrary.botanical_garden.BotanicalGardenVO"/>
+		<typeAlias alias="SearchVO" type="kr.co.plantlibrary.plant_encyclopedia.SearchVO"/>
 	</typeAliases>
 </configuration>

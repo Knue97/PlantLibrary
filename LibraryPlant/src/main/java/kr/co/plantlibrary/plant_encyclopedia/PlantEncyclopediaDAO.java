@@ -27,4 +27,10 @@ public interface PlantEncyclopediaDAO {
 	
 	//허브
 	public List<EncyclopediaEntity> listByGroup4();
+	
+	//Search
+	public List<EncyclopediaEntity> search(SearchVO searchVO);
+	
+	//HitsUp
+	public int hitsUp(int pl_id);
 }

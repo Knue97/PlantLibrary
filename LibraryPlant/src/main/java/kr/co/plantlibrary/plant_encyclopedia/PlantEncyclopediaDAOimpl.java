@@ -71,4 +71,16 @@ public class PlantEncyclopediaDAOimpl implements PlantEncyclopediaDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace+".listbyclassification", map);
 	}
+
+	@Override
+	public List<EncyclopediaEntity> search(SearchVO searchVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace+".search", searchVO);
+	}
+
+	@Override
+	public int hitsUp(int pl_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(nameSpace+".hitsup", pl_id);
+	}
 }

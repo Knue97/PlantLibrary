@@ -18,6 +18,7 @@ import kr.co.plantlibrary.plant_encyclopedia.Criteria;
 import kr.co.plantlibrary.plant_encyclopedia.EncyclopediaEntity;
 import kr.co.plantlibrary.plant_encyclopedia.PageMaker;
 import kr.co.plantlibrary.plant_encyclopedia.PlantEncyclopediaService;
+import kr.co.plantlibrary.plant_encyclopedia.SearchVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -34,6 +35,19 @@ public class PlantEncyclopediaController {
 		log.info("=================Encyclopedia Home====================");
 		
 		return "encyclopedia/integrate_search";
+	}
+	
+	@GetMapping("/plant/search")
+	public String search(SearchVO searchVO, Model model) {
+		log.info("=================Encyclopedia Search===================");
+		
+		log.info(searchVO);
+		
+		List<EncyclopediaEntity> list = service.search(searchVO);
+		
+		model.addAttribute("list", list);
+		
+		return "encyclopedia/plant/search";
 	}
 	
 	@GetMapping("/plant/listgroup")
@@ -78,6 +92,7 @@ public class PlantEncyclopediaController {
 	@GetMapping("/plant/detail")
 	public String plant(@RequestParam("pl_id") int pl_id, Model model) {
 		log.info("================Encyclopedia Plant=====================");
+		service.hitsUp(pl_id);
 		EncyclopediaEntity entity = service.listById(pl_id);
 		Constant constant = new Constant();
 		log.info(entity);
