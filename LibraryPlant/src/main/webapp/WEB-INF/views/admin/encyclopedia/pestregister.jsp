@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<form id="form" action="${pageContext.request.contextPath}/encyclopedia/pest/register" method="post" enctype="multipart/form-data">
+<form id="form" action="${pageContext.request.contextPath}/admin/encyclopedia/pest/register" method="post" enctype="multipart/form-data">
 	<div class="form-row">
 		<div class="form-group col-12">
 			<h2>해충등록</h2>

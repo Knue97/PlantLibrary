@@ -196,7 +196,7 @@
 						<!--Hero form -->
 						<form action="${contextPath }/encyclopedia/diseaseandpest/search" class="search-box" method="get">
 							<div class="input-form">
-								<input type="text" placeholder="Search for a disease and pest"
+								<input type="text" placeholder="${searchWord }"
 									name="searchword">
 								<!-- icon search -->
 								<div class="search-form">

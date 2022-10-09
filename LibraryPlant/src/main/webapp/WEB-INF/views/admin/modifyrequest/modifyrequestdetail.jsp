@@ -6,7 +6,15 @@
 <html class="no-js" lang="zxx">
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style>
+
+*{
+	font-family: 'IBM Plex Sans KR', sans-serif !important;
+}
+
 .contact-us {
 
   padding: 50px 100px; }
@@ -14,9 +22,7 @@
 label, input, textarea {
   display: block;
   width: 100%;
-  font-size: 12pt;
-  line-height: 24pt;
-  font-family: "Spartan"; }
+  line-height: 24pt;}
 
 input {
   margin-bottom: 24pt; }
@@ -25,11 +31,10 @@ h3 {
   font-weight: normal;
   font-size: 10pt;
   line-height: 24pt;
-  font-style: italic;
   margin: 0 0 .5em 0; }
 
 span {
-  font-size: 8pt; }
+  font-size: 10pt; }
 
 em {
   color: #2e8b57;
@@ -104,40 +109,32 @@ textarea:-webkit-autofill:focus {
 				<br>
 				<br>
 				<br>
-							병해백과 정보 추가
-    <form method="post" enctype="multipart/form-data">
-    
-    	<p>병해명</p><input type="text" name="di_alias" value="${disease.di_alias }">
-    	<p>원인</p><input type="text" name="di_cause" value="${disease.di_cause }">
-    	<p>병징 및 표징</p><input type="text" name="di_symptomOfDisease" value="${disease.di_symptomOfDisease }">
-    	<p>방제법</p><input type="text" name="di_biologicalControl" value="${disease.di_biologicalControl }">
-    	<p>조심해야할 식물</p><input type="text" name="di_carefulPlant" value="${disease.di_carefulPlant }">
-    	<p>상세설명</p><input type="text" name="di_descripton" value="${disease.di_descripton }">
-    	
-		<button class="fileAdd_btn" type="button">파일추가</button>
-		<input type="file" multiple>
-		<button type="submit">정보 등록하기</button>
-		<input type="submit">
-    </form>
-
-<script>
-	function fn_addFile(){
-			var fileIndex = 1;
-			$(".fileAdd_btn").on("click", function(){
-				$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
-			});
-			$(document).on("click","#fileDelBtn", function(){
-				$(this).parent().remove();
-				
-			});
-		}
-
-</script>
-						
-						
-						
-						
-						
+					<div class="contact-us">
+					<h2 style="color: #235c3c;">수정 문의</h2>
+							<%    
+							    request.setCharacterEncoding("UTF-8");
+							    String mr_name = request.getParameter("mr_name");
+							    String name= request.getParameter("name");
+							  
+							%>
+							<input type="hidden" name="ec_id" value="${list.ec_id }">
+							<label for="u_id">등록유저
+							</label><input value="${list.u_id }"
+								type="text" readonly />
+							<input type="hidden" id="u_id" name="u_id" value="${user.u_id }">
+							<label for="name"> 요청 항목 </label><input
+								value="${name }"
+								type="text" readonly />
+							<input type="hidden" name ="mr_name" value="<%=mr_name%>">
+								<label for="mr_file">파일첨부</label> <input
+								id="mr_file" name="file" type="file" />
+								<label for="mr_source">출처/참고자료</label> <input id="mr_source"
+								name="mr_source" type="text" readonly value="${list.mr_source }"/>
+							<label for="mr_content"> 수정문의 내용 <em>&#x2a;</em>
+							</label>
+							<textarea id="mr_content" name="mr_content" required rows="4" readonly>${list.mr_content }</textarea>
+							<br>
+					</div>
 
 
 					</div>

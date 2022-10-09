@@ -38,7 +38,6 @@
 			<!-- Slider Shape -->
 			<div class="slider-shape d-none d-lg-block">
 				<img class="slider-shape1"
-					src="${contextPath}/resources/assets/img/hero/top-left-shape.png"
 					alt="">
 			</div>
 		</div>

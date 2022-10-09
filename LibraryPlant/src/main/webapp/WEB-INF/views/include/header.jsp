@@ -44,13 +44,14 @@
                                                 </li>
                                                 <li><a href="contact.html">블로그</a></li>
                                                 <c:if test="${not empty user}">
-                                                	<c:if test="${user.u_id == 'admin' }">                                                
+                                                	<c:if test="${user.u_state == 99 }">                                                
 	                                                	<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
 															    ${user.u_nickname }님
 															  </button>
 															  <ul class="dropdown-menu">
+															    <li><a class="dropdown-item" href="${contextPath}/admin">관리자페이지</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/#">유저관리</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/#">유저 식물 관리</a></li>														    
 															    <li><a class="dropdown-item" href="${contextPath}/encyclopedia/plant/register">식물백과 추가</a></li>
@@ -60,7 +61,7 @@
 															</div>
 														</li>
 													</c:if>
-													<c:if test="${user.u_id != 'admin' }">
+													<c:if test="${user.u_state != 99 }">
 														<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">

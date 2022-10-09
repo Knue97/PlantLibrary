@@ -40,43 +40,6 @@ public class DiseaseAndPestController {
 	FileUtil fileUtil;
 	
 	private static final Logger logger = LoggerFactory.getLogger(DiseaseAndPestController.class);
-
-	
-	//스프링 컨트롤러 부분
-	@GetMapping(value = "encyclopedia/disesasename", produces="text/plain;charset=UTF-8")
-	@ResponseBody
-	public String json(Locale locale, Model model) throws Exception {    
-	    
-	    List<String> array = diseaseService.aliasList();
-	    Gson gson = new Gson();
-
-	    return gson.toJson(array);
-	}
-	
-	// 백과 정보 등록
-	@GetMapping(value="encyclopedia/register")
-	public String register1() {
-		return "encyclopedia/register";
-	}
-	@GetMapping(value="encyclopedia/update")
-	public String update1() {
-		return "encyclopedia/update";
-	}
-	
-	
-	// select option으로 항목 선택시 업로드(register) 폼 불러오기
-	@GetMapping(value="encyclopedia/plantregister")
-	public String plantregister() {
-		return "encyclopedia/plant/plantregister";
-	}
-	@GetMapping(value="encyclopedia/diseaseregister")
-	public String diseaseregister() {
-		return "encyclopedia/disease/diseaseregister";
-	}
-	@GetMapping(value="encyclopedia/pestregister")
-	public String pestregister() {
-		return "encyclopedia/pest/pestregister";
-	}
 	
 	// 병해&해충백과 목록 조회 페이지 가기
 	@GetMapping(value="encyclopedia/diseaseandpest")
@@ -118,6 +81,7 @@ public class DiseaseAndPestController {
 		
 		mav.addObject("diseaseList", diseaseList);
 		mav.addObject("pestList", pestList);
+		mav.addObject("searchWord", searchWord);
 		
 		mav.setViewName("encyclopedia/diseaseandpest/search");
 		
@@ -129,7 +93,7 @@ public class DiseaseAndPestController {
 	}
 	
 	// 병해 정보 추가하기
-	@PostMapping(value="encyclopedia/disease/register")
+	@PostMapping(value="admin/encyclopedia/disease/register")
 	public String diseaseRegister(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] upload) throws Exception {
 		DiseaseEntity diseaseEntity = new DiseaseEntity();
 		diseaseEntity.setDi_alias(request.getParameter("di_alias"));
@@ -144,12 +108,12 @@ public class DiseaseAndPestController {
 		diseaseEntity.setDi_image(imgstr);
 		int r = diseaseService.register(diseaseEntity);
 		
-		return "redirect:/encyclopedia/diseaseandpest";
+		return "redirect:/admin";
 	}
 	
 	
 	// 병해 정보 수정으로가기
-	@GetMapping(value="encyclopedia/disease/update")
+	@GetMapping(value="admin/encyclopedia/disease/update")
 	public String diseaseUpdate(@RequestParam("di_id")int di_id, Model model) throws Exception {
 		DiseaseEntity diseaseEntity = new DiseaseEntity();
 		diseaseEntity = diseaseService.detail(di_id);
@@ -159,7 +123,7 @@ public class DiseaseAndPestController {
 	}
 	
 	// 병해 정보 업데이트하기
-	@PostMapping(value="encyclopedia/disease/update")
+	@PostMapping(value="admin/encyclopedia/disease/update")
 	public String diseaseUpdate(@RequestParam("originalimg")String originalimg, @RequestParam("file") MultipartFile[] upload, MultipartHttpServletRequest request) throws Exception {
 		
 		DiseaseEntity diseaseEntity = new DiseaseEntity();
@@ -194,7 +158,7 @@ public class DiseaseAndPestController {
 	}
 	
 	// 병해 정보 지우기
-	@GetMapping(value="encyclopedia/disease/delete")
+	@GetMapping(value="admin/encyclopedia/disease/delete")
 	public String diseaseDelete(@RequestParam("di_id") int di_id, HttpServletRequest request) throws Exception {
 		
 		DiseaseEntity diseaseEntity = new DiseaseEntity();
@@ -237,7 +201,7 @@ public class DiseaseAndPestController {
 	}
 	
 	// 해충 정보 추가하기
-	@PostMapping(value="encyclopedia/pest/register")
+	@PostMapping(value="admin/encyclopedia/pest/register")
 	public String pestRegister(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] upload) throws Exception {
 		PestEntity pestEntity = new PestEntity();
 		
@@ -255,11 +219,11 @@ public class DiseaseAndPestController {
 		pestEntity.setPe_image(imgstr);
 		int r = pestService.register(pestEntity);
 		
-		return "redirect:/encyclopedia/diseaseandpest";
+		return "redirect:/admin";
 	}
 	
 	// 해충 업데이트폼으로 가기
-	@GetMapping(value="encyclopedia/pest/update")
+	@GetMapping(value="admin/encyclopedia/pest/update")
 	public ModelAndView pestUpdate(@RequestParam("pe_id")int pe_id) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
@@ -274,7 +238,7 @@ public class DiseaseAndPestController {
 	
 	
 	// 해충 정보 업데이트하기
-	@PostMapping(value="encyclopedia/pest/update")
+	@PostMapping(value="admin/encyclopedia/pest/update")
 	public String pestUpdate(@RequestParam("originalimg")String originalimg, @RequestParam("file") MultipartFile[] upload, MultipartHttpServletRequest request) throws Exception {
 		
 		PestEntity pestEntity = new PestEntity();
@@ -309,7 +273,7 @@ public class DiseaseAndPestController {
 	}
 	
 	// 해충 정보 지우기
-	@GetMapping(value="encyclopedia/pest/delete")
+	@GetMapping(value="admin/encyclopedia/pest/delete")
 	public String pestDelete(@RequestParam("pe_id") int pe_id, HttpServletRequest request) throws Exception {
 		
 		PestEntity pestEntity = new PestEntity();

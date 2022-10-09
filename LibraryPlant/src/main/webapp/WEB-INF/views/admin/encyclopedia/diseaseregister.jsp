@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<form id="form" action="${pageContext.request.contextPath}/encyclopedia/disease/register" method="post" enctype="multipart/form-data">
+<form id="form" action="${pageContext.request.contextPath}/admin/encyclopedia/disease/register" method="post" enctype="multipart/form-data">
 	<div class="form-row">
 		<div class="form-group col-12">
 			<h2>병해등록</h2>

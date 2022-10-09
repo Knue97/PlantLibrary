@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="kr.co.plantlibrary.adminMapper">
+ 	<!-- 식물백과 개수 출력 -->
+	<select id="countDisease" resultType="int">
+		select count(di_id) from disease
+	</select>
+
+	<!-- 식물백과 목록 + 페이징 -->
+	<select id="diseaseListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
+	 select
+	 di_id, di_alias
+	 from disease
+	 order by di_id desc
+	 limit #{displayPost}, #{postNum}
+	</select>
+ </mapper>
