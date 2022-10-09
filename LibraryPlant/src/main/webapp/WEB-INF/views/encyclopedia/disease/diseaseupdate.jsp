@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div class="container">
-			<form action="${pageContext.request.contextPath}/encyclopedia/disease/update" method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/admin/encyclopedia/disease/update" method="post" enctype="multipart/form-data">
 			<div class="form-row">
 				<div class="form-group col-12">
 					<h2>병해 정보 수정</h2>

@@ -138,9 +138,10 @@
 										<h5 style="font-weight: bold;">상세설명</h5><p>${pest.pe_description }</p>
 									</div>
 									
-									 
-									 <a style="color:black;"href="${contextPath }/encyclopedia/pest/update?pe_id=${pest.pe_id}">수정하기</a>
-									 <a style="color:black;"href="${contextPath }/encyclopedia/pest/delete?pe_id=${pest.pe_id}">삭제하기</a>
+									<c:if test="${user.u_state == 99}"> 
+									 <a style="color:black;"href="${contextPath }/admin/encyclopedia/pest/update?pe_id=${pest.pe_id}">수정하기</a>
+									 <a style="color:black;"href="${contextPath }/admin/encyclopedia/pest/delete?pe_id=${pest.pe_id}">삭제하기</a>
+									</c:if>
 								</div>
 							</div>
 						</div>

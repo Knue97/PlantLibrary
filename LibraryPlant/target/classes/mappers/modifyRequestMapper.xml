@@ -10,4 +10,48 @@
 		values
 		(#{mr_no}, #{ec_id}, #{u_id}, #{mr_name}, #{mr_content}, #{mr_file}, #{mr_source})
 	</insert>
+	<!-- 수정요청 개수 카운트 -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(mr_no) from modify_request
+	</select>
+	<!-- 수정요청 목록 가져오기 + 페이징 -->
+	<select id="listPage" parameterType="java.util.HashMap" resultType="java.util.Map">
+		 select
+		 mr_no, ec_id, u_id, mr_name
+		 from modify_request
+		 order by mr_no desc
+		 limit #{displayPost}, #{postNum}
+	</select>
+	<!-- 수정요청 상세보기 -->
+	<select id="detail" parameterType="java.lang.Integer" resultType="ModifyRequestEntity">
+		select mr_no, ec_id, u_id, mr_name, mr_content, mr_file, mr_source
+		from modify_request
+		where mr_no = #{mr_no}
+	</select>
+	<!-- ec_id와 mr_name으로 식물명/병해명/해충명 가져오기 -->
+	<select id="getName" parameterType="java.util.Map" resultType="java.lang.String">
+		<choose>
+			<when test="ec_id == 10">
+				select pl_koreanName
+				from plant
+				where pl_id = #{mr_name}
+			</when>
+			<when test="ec_id == 20">
+				select di_alias
+				from disease
+				where di_id = #{mr_name}
+			</when>
+			<otherwise>
+				select pe_name
+				from pest
+				where pe_id = #{mr_name}
+			</otherwise>
+		</choose>
+	</select>
+	<!-- 수정요청 삭제 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete
+		from modify_request
+		where mr_no = #{mr_no}
+	</delete>	
 </mapper>

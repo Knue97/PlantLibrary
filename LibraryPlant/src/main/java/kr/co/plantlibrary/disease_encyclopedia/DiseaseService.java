@@ -1,6 +1,7 @@
 package kr.co.plantlibrary.disease_encyclopedia;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DiseaseService {
 	
@@ -29,7 +30,7 @@ public interface DiseaseService {
 	int delete(int di_id) throws Exception;
 	
 	// 병해명리스트 가져오기
-	List<String> aliasList() throws Exception;
+	List<Map<String,Object>> aliasList() throws Exception;
 	
 	// 정보등록/수정시 병해명 중복 확인하기
 	int checkDisease(String di_alias) throws Exception;

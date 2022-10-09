@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div class="container">
-			<form action="${pageContext.request.contextPath}/encyclopedia/pest/update" method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/admin/encyclopedia/pest/update" method="post" enctype="multipart/form-data">
 			<div class="form-row">
 				<div class="form-group col-12">
 					<h2>해충 정보 수정</h2>

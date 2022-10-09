@@ -135,10 +135,10 @@
 										<h5 style="font-weight: bold;">상세설명</h5><p>${disease.di_descripton }</p>
 									</div>
 									
-									
-									<a href="${contextPath }/encyclopedia/disease/update?di_id=${disease.di_id }" style="color:black;"> 수정하기 </a>
-									<a href="${contextPath }/encyclopedia/disease/delete?di_id=${disease.di_id }" style="color:black;"> 삭제하기 </a>
-									
+									<c:if test="${user.u_state == 99}"> 
+									<a href="${contextPath }/admin/encyclopedia/disease/update?di_id=${disease.di_id }" style="color:black;"> 수정하기 </a>
+									<a href="${contextPath }/admin/encyclopedia/disease/delete?di_id=${disease.di_id }" style="color:black;"> 삭제하기 </a>
+									</c:if>
 									
 								</div>
 							</div>

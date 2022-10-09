@@ -110,9 +110,9 @@ textarea:-webkit-autofill:focus {
 				<br>
 				<br>
 						<div class="contact-us">
-						<h2>수정 문의</h2>
+						<h2 style="color: #235c3c;">수정 문의</h2>
 							<form action="${contextPath }/encyclopedia/modifyrequest" method="post" enctype="multipart/form-data">
-								<h3>
+								<h3 style="color: #235c3c;">
 									본문 내용이 올바르지 않은 부분 또는 오탈자 수정이 필요한 것을 알려 주세요.<br> 검토결과에 대한
 									내용은 마이페이지에서 확인 가능합니다.
 								</h3>

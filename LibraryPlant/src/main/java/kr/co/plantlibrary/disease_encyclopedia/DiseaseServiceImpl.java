@@ -57,7 +57,7 @@ public class DiseaseServiceImpl implements DiseaseService{
 	}
 
 	@Override
-	public List<String> aliasList() throws Exception {
+	public List<Map<String,Object>> aliasList() throws Exception {
 		// TODO Auto-generated method stub
 		return diseaseDAO.aliasList();
 	}

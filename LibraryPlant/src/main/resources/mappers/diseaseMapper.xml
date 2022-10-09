@@ -32,11 +32,11 @@
 		from disease
 		where di_alias like CONCAT('%', #{searchword}, '%')
 	</select>
-	<!-- 병해명 리스트 가져오기 -->
-	<select id="aliasList" resultType="java.util.ArrayList">
-		select di_alias
+	<!-- 병해명 , id 가져오기 -->
+	<select id="aliasList" resultType="java.util.Map">
+		select di_id, di_alias
 		from disease
-		order by binary(di_alias);
+		order by di_id desc
 	</select>
 	<!-- 해당 병해백과 조회수 증가 -->
 	<update id="updateHits" parameterType="java.lang.Integer">
