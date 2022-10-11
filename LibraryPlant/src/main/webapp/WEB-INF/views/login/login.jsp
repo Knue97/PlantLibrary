@@ -35,10 +35,8 @@
                 <input type="submit" name="submit" value="login">
             </div>
             <a href="${naverUrl}" class="forget">Naver login</a>
-            <a href="${kakaoUrl}" class="forget">Kakao login</a>
-            <!-- Forget Password -->
-            <a href="#" class="forget">Forget Password</a>
-            <!-- Forget Password -->
+            <a href="${kakaoUrl}" class="forget">Kakao login</a> 
+            <a href="${contextPath }/login/findpage" class="forget">비밀번호 찾기</a>           
             <a href="${contextPath }/login/register" class="registration">회원가입</a>
         </div>
     </form>
