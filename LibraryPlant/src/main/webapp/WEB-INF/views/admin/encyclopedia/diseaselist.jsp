@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -22,21 +23,62 @@
 			<div class="slider-active">
 				<!-- Single Slider -->
 				
-				<div class="single-slider d-flex align-items-center slider-height2">
+				<div class="single-slider d-flex align-items-center slider-height">
 					<div class="container">
+					<div style="height:100px;"></div>
 				<div class="row align-items-center justify-content-center">
 				<div class="col-lg-9">
-				<div class="hero__caption hero__caption3 text-center">
-					<h1 data-animation="fadeInLeft" data-delay=".3s">백과 수정/삭제</h1>						
-				</div>
 				<div class="form-group col-md-6">
 					<h4 style="color: #212542;">백과사전 카테고리를 선택하세요.</h4>
 					<select onchange="if(this.value) location.href=(this.value);">
 						<option selected value="">--- 항목선택 ---</option>
 						<option value="${contextPath }/admin/encyclopedia/plant?num=1">식물</option>
-						<option value="${contextPath }/admin/encyclopedia/disease?num=1">병해</option>
+						<option selected value="${contextPath }/admin/encyclopedia/disease?num=1">병해</option>
 						<option value="${contextPath }/admin/encyclopedia/pest?num=1">해충</option>
 					</select>
+				</div>
+				<h2 style="height:50px; color: #212542;">병해백과 목록</h2>
+				<table class="table table-hover table-striped">
+				<tr style="color:white; background-color: #1F2B7B;">
+			      <th style="width: 20%;">등록번호</th>
+			      <th class="text-center" >병해명</th>
+			      <th style="width: 12%;"></th>
+			      <th style="width: 12%;"></th>
+			    </tr>
+			    <c:if test="${fn:length(list) == 0}">
+				  <tr>
+				  <td colspan="6" class="text-center" style="font-weight: bold;">병해백과 목록이 없습니다.</td>
+				  </tr>
+				</c:if> 
+				<c:forEach items="${list}" var="list">
+				 <tr>
+				  <td><a href="${contextPath }/encyclopedia/disease/detail?di_id=${list.di_id}">${list.di_id}</a></td>
+				  <td><a href="${contextPath }/encyclopedia/disease/detail?di_id=${list.di_id}">${list.di_alias}</a></td>
+				  <td class="text-center"><a href="${contextPath }/admin/encyclopedia/disease/update?di_id=${list.di_id}">수정</a></td>
+				  <td class="text-center"><a onclick="delConfirm(${list.di_id});">삭제</a></td>
+				 </tr>
+				</c:forEach>
+				</table>
+				
+				<div class="row align-items-center justify-content-center">
+				<c:if test="${prev}">
+				 <span>[ <a href="${contextPath }/admin/encyclopedia/disease?num=${startPageNum - 1}">이전</a> ]</span>
+				</c:if>
+				
+				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+				  <span style="padding:5px;">
+					  <c:if test="${select != num}">
+					   <a href="${contextPath }/admin/encyclopedia/disease?num=${num}">${num}</a>
+					  </c:if>
+					  <c:if test="${select == num}">
+					   <b>${num}</b>
+					  </c:if> 
+				 </span>
+				</c:forEach>
+				
+					<c:if test="${next}">
+					 <span>[ <a href="${contextPath }/admin/encyclopedia/disease?num=${endPageNum + 1}">다음</a> ]</span>
+					</c:if>
 				</div>
 				</div>
 

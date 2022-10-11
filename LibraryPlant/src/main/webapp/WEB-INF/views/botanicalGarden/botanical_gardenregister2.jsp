@@ -65,14 +65,8 @@
 				</div>
 				<div class="form-group">
 					<label>주소</label> <input type="text" class="form-control"
-						placeholder="식물원 또는 수목원 주소" name="address"
-						id="address_kakao" readonly>
+						placeholder="식물원 또는 수목원 주소" name="g_detailedAddress">
 				</div>
-				<div class="form-group">
-					<label>상세주소</label> <input type="text" class="form-control"
-						placeholder="식물원 또는 수목원 상세주소" id="detail-address">
-				</div>
-				<input type="hidden" name="g_detailedAddress" id="g_detailedAddress">
 				<div class="form-group">
 					<label>홈페이지</label> <input type="url" class="form-control"
 						placeholder="식물원 또는 수목원 홈페이지" name="g_url">
@@ -89,9 +83,8 @@
 					<label>경도</label> <input type="number" class="form-control"
 						placeholder="식물원 또는 수목원 경도" name="g_longitude" step="any">
 				</div>
-				<button type="submit" onclick="add();">등록하기</button>
+				<button type="submit">등록하기</button>
 				<button type="reset">초기화</button>
-				<div id="message"></div>
 			</form>
 		</div>
 	</main>
@@ -105,47 +98,5 @@
 
 	<!-- JS here -->
 	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-window.onload = function(){
-    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                document.querySelector("input[name=address]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    });
-}
-
-function add(){
-	var location = $("#address_kakao").val();
-	location += ' ' +  $("#detail-address").val();
-	
-	$('#g_detailedAddress').val(location);
-	
-
-}
-
-</script>
-<script>
-
-async function geocoding(url) {
-    const req = await fetch(url);
-    return req.json();
-}
-async function doGeocoding(address) {
-    const result = await geocoding("http://api.vworld.kr/req/address?service=address"
-        + "&request=getcoord"
-        + "&address=" + encodeURI(address) + "&type=road"
-        + "&key=887D11A8-A861-33AE-9BFA-E52DADCF7AE5");
-    console.log(result.point);
-}
-
-doGeocoding('서울시 성동구 아차산로7나길 18');
-
-</script>
-
 </body>
 </html>

@@ -2,6 +2,7 @@ package kr.co.plantlibrary.controller;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -158,15 +159,15 @@ public class DiseaseAndPestController {
 	}
 	
 	// 병해 정보 지우기
+	@ResponseBody
 	@GetMapping(value="admin/encyclopedia/disease/delete")
-	public String diseaseDelete(@RequestParam("di_id") int di_id, HttpServletRequest request) throws Exception {
+	public int diseaseDelete(@RequestParam("di_id") int di_id, HttpServletRequest request) throws Exception {
 		
 		DiseaseEntity diseaseEntity = new DiseaseEntity();
 		diseaseEntity = diseaseService.detail(di_id);
 		fileUtil.deleteFile(request, "/disease", diseaseEntity.getDi_image());
-		int r = diseaseService.delete(di_id);
 		
-		return "redirect:/encyclopedia/diseaseandpest";
+		return diseaseService.delete(di_id);
 		
 		
 	}
@@ -273,27 +274,79 @@ public class DiseaseAndPestController {
 	}
 	
 	// 해충 정보 지우기
+	@ResponseBody
 	@GetMapping(value="admin/encyclopedia/pest/delete")
-	public String pestDelete(@RequestParam("pe_id") int pe_id, HttpServletRequest request) throws Exception {
+	public int pestDelete(@RequestParam("pe_id") int pe_id, HttpServletRequest request) throws Exception {
 		
 		PestEntity pestEntity = new PestEntity();
 		pestEntity = pestService.detail(pe_id);
 		fileUtil.deleteFile(request, "/pest", pestEntity.getPe_image());
-		int r = pestService.delete(pe_id);
 		
-		if(r>0)
-			System.out.println("해충정보삭제 성공");
-		else
-			System.out.println("해충정보삭제 실패");
+		return pestService.delete(pe_id);
 		
-		return "redirect:/encyclopedia/diseaseandpest";
 	}
+	
 	
 	// 해충정보 등록/수정시 해충명 중복 확인
 	@ResponseBody
 	@PostMapping(value="encyclopedia/checkPest")
 	int checkPest(@RequestParam("pe_name")String pe_name) throws Exception {
 		return pestService.checkPest(pe_name);
+	}
+	
+	// 해충백과 목록 + 페이징 추가
+	@GetMapping(value = "admin/encyclopedia/pest")
+	public String getListPage(Model model, @RequestParam("num") int num) throws Exception {
+
+		// 게시물 총 개수
+		int count = pestService.countPest();
+
+		// 한 페이지에 출력할 게시물 개수
+		int postNum = 10;
+
+		// 하단 페이징 번호 ([ 게시물 총 개수 ÷ 한 페이지에 출력할 개수 ]의 올림)
+		int pageNum = (int) Math.ceil((double) count / postNum);
+
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum;
+
+		// 한번에 표시할 페이징 번호의 개수
+		int pageNum_cnt = 10;
+
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int) (Math.ceil((double) num / (double) pageNum_cnt) * pageNum_cnt);
+
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+
+		if (endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
+		}
+		
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		
+		
+		List<Map<String, Object>> list = null;
+		list = pestService.listPage(displayPost, postNum);
+		model.addAttribute("list", list);
+		model.addAttribute("pageNum", pageNum);
+		
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+		
+		// 현재 페이지
+		model.addAttribute("select", num);
+
+		return "admin/encyclopedia/pestlist";
 	}
 	
 	

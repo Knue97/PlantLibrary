@@ -68,10 +68,10 @@
 															    ${user.u_nickname }
 															  	<c:choose>															  		
 															  		<c:when test="${user.api == 'naver' }">
-															  			${user.u_name }
+															  			님(NAVER)
 															  		</c:when>
 															  		<c:when test="${user.api == 'kakao'}">
-															  			${user.nickname }
+															  			님(KAKAO)
 															  		</c:when>
 															  		<c:otherwise>
 															  			(${user.u_id })님

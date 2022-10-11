@@ -110,36 +110,25 @@ textarea:-webkit-autofill:focus {
 				<br>
 				<br>
 					<div class="contact-us">
-					<h2 style="color: #235c3c;">수정 문의</h2>
-							<%    
-							    request.setCharacterEncoding("UTF-8");
-							    String mr_name = request.getParameter("mr_name");
-							    String name= request.getParameter("name");
-							  
-							%>
-							<input type="hidden" name="ec_id" value="${list.ec_id }">
-							<label for="u_id">등록유저
+					<h2 style="color: #235c3c;">신고 문의</h2>
+							<label for="report_user">등록유저
+							</label><input value="${list.report_user }"
+								type="text" readonly />
+							<label for="u_id">신고대상자
 							</label><input value="${list.u_id }"
-								type="text" readonly />
-							<input type="hidden" id="u_id" name="u_id" value="${user.u_id }">
-							<label for="name"> 요청 항목 </label><input
-								value="${name }"
-								type="text" readonly />
-							<input type="hidden" name ="mr_name" value="<%=mr_name%>">
-								<label for="mr_file">첨부파일</label>
+								type="text" readonly />	
+							<label for="r_file">파일첨부</label>
 							<div>
-							<c:if test="${list.mr_file == null}">
+							<c:if test="${list.r_file == null}">
 								<input type="text" value="첨부파일 없음" readonly>
 							</c:if>
-							<c:forTokens var="img" items="${list.mr_file }" delims="," varStatus="status">
+							<c:forTokens var="img" items="${list.r_file }" delims="," varStatus="status">
 								<img src="${contextPath }/resources/assets/img/modifyrequest/${img }" style="height:150px;" onclick = "location.href='${contextPath}/resources/assets/img/modifyrequest/${img }';">
 							</c:forTokens>
 							</div>
-								<label for="mr_source">출처/참고자료</label> <input id="mr_source"
-								name="mr_source" type="text" readonly value="${list.mr_source }"/>
-							<label for="mr_content"> 수정문의 내용 <em>&#x2a;</em>
+							<label for="mr_content"> 신고 내용 <em>&#x2a;</em>
 							</label>
-							<textarea id="mr_content" name="mr_content" required rows="4" readonly>${list.mr_content }</textarea>
+							<textarea id="r_content" name="r_content" required rows="4" readonly>${list.r_content }</textarea>
 							<br>
 					</div>
 

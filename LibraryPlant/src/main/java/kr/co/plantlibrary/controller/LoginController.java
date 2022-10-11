@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.co.plantlibrary.login.KakaoLoginBO;
+import kr.co.plantlibrary.login.LoginDAO;
 import kr.co.plantlibrary.login.LoginEntity;
 import kr.co.plantlibrary.login.LoginService;
 import kr.co.plantlibrary.login.NaverLoginBO;
@@ -110,8 +112,8 @@ public class LoginController {
 		JSONObject response_obj2 = (JSONObject) response_obj.get("profile");
 		//프로필 조회
 		Map<String, String> sessionMap = new HashMap<String, String>();
-		sessionMap.put("email",(String) response_obj.get("email"));
-		sessionMap.put("nickname", (String) response_obj2.get("nickname"));
+		sessionMap.put("u_email",(String) response_obj.get("email"));
+		sessionMap.put("u_nickname", (String) response_obj2.get("nickname"));
 		sessionMap.put("api", "kakao");
 		
 		session.setAttribute("user", sessionMap);
@@ -135,6 +137,7 @@ public class LoginController {
 		log.info("map: " + map);
 		HttpSession session = request.getSession();
 		Map<String, String> sessionMap	= service.login(map);
+		sessionMap.put("api", "none");
 		log.info(sessionMap);
 		session.setAttribute("user", sessionMap);		
 		
@@ -182,6 +185,21 @@ public class LoginController {
 			return "login/register";
 		}
 		
+	}
+	@GetMapping(value = "/findpage")
+	public String findpage() {
 		
+		
+		return "login/findpage";
+	}
+
+	@PostMapping(value = "/findpage_ok")
+	public String findpage_ok(LoginEntity loginEntity ,Model model) throws Exception {
+		log.info("u_password" + loginEntity.getU_id());
+		
+		service.findPassword(loginEntity.getU_email(), loginEntity.getU_id(),loginEntity.getU_password());
+		model.addAttribute("loginEntity", loginEntity.getU_email());
+		
+		return "login/findpage_ok";
 	}
 }

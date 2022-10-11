@@ -1,5 +1,6 @@
 package kr.co.plantlibrary.login;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -60,6 +61,30 @@ public class LoginDAOimpl implements LoginDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace + ".userNicknamecheck", u_nickname);
 	}
+
+	@Override
+	public int findPasswordCheck(LoginEntity loginEntity) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".findPasswordCheck", loginEntity);
+	}
+
+	@Override
+	public int findPassword(String u_password, String u_email, String u_id) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("u_id", u_id);
+		map.put("u_email", u_email);
+		map.put("u_password", u_password);
+		
+		return sqlSession.update(nameSpace + ".findPassword", map);
+	}
+
+	@Override
+	public int userEmailcheck(String u_email) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".userEmailcheck", u_email);
+	}
+
+
 
 	
 
