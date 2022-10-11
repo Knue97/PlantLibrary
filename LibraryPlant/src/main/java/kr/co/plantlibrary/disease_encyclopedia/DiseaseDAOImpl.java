@@ -1,6 +1,8 @@
 package kr.co.plantlibrary.disease_encyclopedia;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,18 @@ public class DiseaseDAOImpl implements DiseaseDAO{
 	public int delete(int di_id) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(NAMESPACE + ".delete", di_id);
+	}
+
+	@Override
+	public List<Map<String, Object>> aliasList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE + ".aliasList");
+	}
+
+	@Override
+	public int checkDisease(String di_alias) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + ".checkdisease", di_alias);
 	}
 
 

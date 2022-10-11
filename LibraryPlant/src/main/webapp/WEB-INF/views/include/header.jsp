@@ -18,7 +18,7 @@
                                     <div class="main-menu d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation" >                                                                                          
-                                                <li><a href="index.html">Home</a></li>
+                                                <li><a href="${contextPath }/">Home</a></li>
                                                 <li><a href="packages.html">About us</a></li>
                                                 <li><a href="#">백과</a>
                                                     <ul class="submenu">
@@ -39,28 +39,29 @@
                                                 <li><a href="#">식물원</a>
                                                     <ul class="submenu">
                                                         <li><a href="${contextPath }/botanicalgarden/navermap">지도로 보기</a></li>
-                                                        <li><a href="blog_details.html">표로 보기</a></li>
-                                                        <li><a href="elements.html">랭킹</a></li>                                                        
+                                                        <li><a class="dropdown-item" href="${contextPath}/botanicalgarden/register">식물원 추가</a></li>                                                                                                                
                                                     </ul>
                                                 </li>
                                                 <li><a href="contact.html">블로그</a></li>
                                                 <c:if test="${not empty user}">
-                                                	<c:if test="${user.u_id == 'admin' }">                                                
+                                                	<c:if test="${user.u_state == 99 }">                                                
 	                                                	<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
 															    ${user.u_nickname }님
 															  </button>
 															  <ul class="dropdown-menu">
+															    <li><a class="dropdown-item" href="${contextPath}/admin">관리자페이지</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/#">유저관리</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/#">유저 식물 관리</a></li>														    
-															    <li><a class="dropdown-item" href="${contextPath}/encyclopedia/plant/register">식물백과 추가</a></li>															    
+															    <li><a class="dropdown-item" href="${contextPath}/encyclopedia/plant/register">식물백과 추가</a></li>
+															    <li><a class="dropdown-item" href="${contextPath}/botanicalgarden/register">식물원 추가</a></li>															    
 															    <li><a class="dropdown-item" href="${contextPath}/login/logout">로그아웃</a></li>
 															  </ul>
 															</div>
 														</li>
 													</c:if>
-													<c:if test="${user.u_id != 'admin' }">
+													<c:if test="${user.u_state != 99 }">
 														<li>
 															<div class="dropdown">
 															  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">

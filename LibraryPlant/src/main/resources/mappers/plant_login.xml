@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.plantlibrary.plant_login">
   <select id="login" parameterType="java.util.Map" resultType="java.util.Map">  	
-  	SELECT u_id,u_nickname,u_name,u_password,u_email,u_address
+  	SELECT u_id,u_nickname,u_name,u_password,u_email,u_address,u_state
   	FROM plantlibrary.user
   	WHERE u_id = #{u_id} and u_password = #{u_password}  
   </select>

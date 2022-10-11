@@ -1,6 +1,11 @@
 package kr.co.plantlibrary.controller;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import kr.co.plantlibrary.disease_encyclopedia.DiseaseEntity;
 import kr.co.plantlibrary.disease_encyclopedia.DiseaseService;
@@ -30,8 +37,10 @@ public class DiseaseAndPestController {
 	@Autowired
 	PestService pestService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(DiseaseAndPestController.class);
+	@Autowired
+	FileUtil fileUtil;
 	
+	private static final Logger logger = LoggerFactory.getLogger(DiseaseAndPestController.class);
 	
 	// 병해&해충백과 목록 조회 페이지 가기
 	@GetMapping(value="encyclopedia/diseaseandpest")
@@ -63,12 +72,6 @@ public class DiseaseAndPestController {
 		return "encyclopedia/disease/detail";
 	}
 	
-	@GetMapping(value="encyclopedia/modifyrequest")
-	public String requestModify(@RequestParam("mr_name") String mr_name) {
-		return "encyclopedia/modifyrequest";
-	}
-	
-	
 	// 검색 결과 조회
 	@GetMapping(value="encyclopedia/diseaseandpest/search")
 	public ModelAndView search(@RequestParam("searchword")String searchWord) throws Exception {
@@ -79,6 +82,7 @@ public class DiseaseAndPestController {
 		
 		mav.addObject("diseaseList", diseaseList);
 		mav.addObject("pestList", pestList);
+		mav.addObject("searchWord", searchWord);
 		
 		mav.setViewName("encyclopedia/diseaseandpest/search");
 		
@@ -89,15 +93,9 @@ public class DiseaseAndPestController {
 		return mav;
 	}
 	
-	// 정보추가로 가기
-	@GetMapping(value="encyclopedia/disease/register")
-	public String register() {
-		return "encyclopedia/disease/register";
-	}
-	
 	// 병해 정보 추가하기
-	@PostMapping(value="encyclopedia/disease/register")
-	public String register(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] upload) throws Exception {
+	@PostMapping(value="admin/encyclopedia/disease/register")
+	public String diseaseRegister(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] upload) throws Exception {
 		DiseaseEntity diseaseEntity = new DiseaseEntity();
 		diseaseEntity.setDi_alias(request.getParameter("di_alias"));
 		diseaseEntity.setDi_biologicalControl(request.getParameter("di_biologicalControl"));
@@ -106,46 +104,82 @@ public class DiseaseAndPestController {
 		diseaseEntity.setDi_descripton(request.getParameter("di_descripton"));
 		diseaseEntity.setDi_symptomOfDisease(request.getParameter("di_symptomOfDisease"));
 		
-		
-		FileUtil fileUtil = new FileUtil();
-		String imgstr = fileUtil.uploadFile(upload, request, 20);
+		String imgstr = fileUtil.uploadFile(upload, request, "/disease");
 		
 		diseaseEntity.setDi_image(imgstr);
 		int r = diseaseService.register(diseaseEntity);
 		
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 	
 	
 	// 병해 정보 수정으로가기
-	@GetMapping(value="encyclopedia/disease/update")
-	public String update(@RequestParam("di_id")int di_id, Model model) throws Exception {
+	@GetMapping(value="admin/encyclopedia/disease/update")
+	public String diseaseUpdate(@RequestParam("di_id")int di_id, Model model) throws Exception {
 		DiseaseEntity diseaseEntity = new DiseaseEntity();
 		diseaseEntity = diseaseService.detail(di_id);
 		model.addAttribute("disease", diseaseEntity);
 		
-		return "encyclopedia/disease/update";
+		return "encyclopedia/disease/diseaseupdate";
 	}
 	
 	// 병해 정보 업데이트하기
-	@PostMapping(value="encyclopedia/disease/update")
-	public String update(DiseaseEntity diseaseEntity) throws Exception {
+	@PostMapping(value="admin/encyclopedia/disease/update")
+	public String diseaseUpdate(@RequestParam("originalimg")String originalimg, @RequestParam("file") MultipartFile[] upload, MultipartHttpServletRequest request) throws Exception {
+		
+		DiseaseEntity diseaseEntity = new DiseaseEntity();
+		String imgstr = null;
+		
+		diseaseEntity.setDi_id(Integer.parseInt(request.getParameter("di_id")));
+		diseaseEntity.setDi_alias(request.getParameter("di_alias"));
+		diseaseEntity.setDi_biologicalControl(request.getParameter("di_biologicalControl"));
+		diseaseEntity.setDi_carefulPlant(request.getParameter("di_carefulPlant"));
+		diseaseEntity.setDi_cause(request.getParameter("di_cause"));
+		diseaseEntity.setDi_descripton(request.getParameter("di_descripton"));
+		diseaseEntity.setDi_symptomOfDisease(request.getParameter("di_symptomOfDisease"));
+		
+		if(!upload[0].isEmpty()) {
+			imgstr = fileUtil.uploadFile(upload, request, "/disease");
+			fileUtil.deleteFile(request, "/disease", originalimg);
+		}else {
+			imgstr = originalimg;
+		}
+		
+		diseaseEntity.setDi_image(imgstr);
 		
 		int r = diseaseService.update(diseaseEntity);
 		
-		return "redirect:/";
+		if(r>0)
+			System.out.println("업데이트 성공");
+		else
+			System.out.println("업데이트 실패");
+		
+		
+		return "redirect:/encyclopedia/diseaseandpest";
 	}
 	
 	// 병해 정보 지우기
-	@GetMapping(value="encyclopedia/disease/delete")
-	public String delete(@RequestParam("di_id") int di_id) throws Exception {
+	@ResponseBody
+	@GetMapping(value="admin/encyclopedia/disease/delete")
+	public int diseaseDelete(@RequestParam("di_id") int di_id, HttpServletRequest request) throws Exception {
 		
-		int r = diseaseService.delete(di_id);
+		DiseaseEntity diseaseEntity = new DiseaseEntity();
+		diseaseEntity = diseaseService.detail(di_id);
+		fileUtil.deleteFile(request, "/disease", diseaseEntity.getDi_image());
 		
-		return "redirect:/";
+		return diseaseService.delete(di_id);
 		
 		
-	} // 병해관련 매핑 끝
+	}
+	
+	// 병해정보 등록/수정시 병해명 중복 확인
+	@ResponseBody
+	@PostMapping(value="encyclopedia/checkDisease")
+	int checkDisease(@RequestParam("di_alias")String di_alias) throws Exception {
+		return diseaseService.checkDisease(di_alias);
+	}
+	
+	// 병해관련 매핑 끝
 	
 	
 	// 해충백과 매핑 시작
@@ -157,7 +191,7 @@ public class DiseaseAndPestController {
 		return pestService.listAll();
 	} 
 	
-	// 병해백과 상세 목록
+	// 해충백과 상세 목록
 	@GetMapping(value="encyclopedia/pest/detail")
 	public String pestDetail(@RequestParam("pe_id") int pe_id, Model model) throws Exception {
 		
@@ -166,5 +200,158 @@ public class DiseaseAndPestController {
 		
 		return "encyclopedia/pest/detail";
 	}
+	
+	// 해충 정보 추가하기
+	@PostMapping(value="admin/encyclopedia/pest/register")
+	public String pestRegister(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] upload) throws Exception {
+		PestEntity pestEntity = new PestEntity();
+		
+		pestEntity.setPe_biologicalControl(request.getParameter("pe_biologicalControl"));
+		pestEntity.setPe_carefulPlant(request.getParameter("pe_carefulPlant"));
+		pestEntity.setPe_cause(request.getParameter("pe_cause"));
+		pestEntity.setPe_description(request.getParameter("pe_description"));
+		pestEntity.setPe_method(request.getParameter("pe_method"));
+		pestEntity.setPe_name(request.getParameter("pe_name"));
+		pestEntity.setPe_naturalEnemy(request.getParameter("pe_naturalEnemy"));
+		
+		String imgstr = fileUtil.uploadFile(upload, request, "/pest");
+		
+		
+		pestEntity.setPe_image(imgstr);
+		int r = pestService.register(pestEntity);
+		
+		return "redirect:/admin";
+	}
+	
+	// 해충 업데이트폼으로 가기
+	@GetMapping(value="admin/encyclopedia/pest/update")
+	public ModelAndView pestUpdate(@RequestParam("pe_id")int pe_id) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		PestEntity pestEntity = new PestEntity();
+		pestEntity = pestService.detail(pe_id);
+		
+		mav.addObject("pest", pestEntity);
+		mav.setViewName("encyclopedia/pest/pestupdate");
+		
+		return mav;
+	}
+	
+	
+	// 해충 정보 업데이트하기
+	@PostMapping(value="admin/encyclopedia/pest/update")
+	public String pestUpdate(@RequestParam("originalimg")String originalimg, @RequestParam("file") MultipartFile[] upload, MultipartHttpServletRequest request) throws Exception {
+		
+		PestEntity pestEntity = new PestEntity();
+		String imgstr = null;
+		
+		pestEntity.setPe_id(Integer.parseInt(request.getParameter("pe_id")));
+		pestEntity.setPe_biologicalControl(request.getParameter("pe_biologicalControl"));
+		pestEntity.setPe_carefulPlant(request.getParameter("pe_carefulPlant"));
+		pestEntity.setPe_cause(request.getParameter("pe_cause"));
+		pestEntity.setPe_description(request.getParameter("pe_description"));
+		pestEntity.setPe_method(request.getParameter("pe_method"));
+		pestEntity.setPe_name(request.getParameter("pe_name"));
+		pestEntity.setPe_naturalEnemy(request.getParameter("pe_naturalEnemy"));
+		
+		if(!upload[0].isEmpty()) {
+			imgstr = fileUtil.uploadFile(upload, request, "/pest");
+			fileUtil.deleteFile(request, "/pest", originalimg);
+		}else {
+			imgstr = originalimg;
+		}
+		
+		pestEntity.setPe_image(imgstr);
+		
+		int r = pestService.update(pestEntity);
+		
+		if(r>0)
+			System.out.println("업데이트 성공");
+		else
+			System.out.println("업데이트 실패");
+		
+		return "redirect:/encyclopedia/diseaseandpest";
+	}
+	
+	// 해충 정보 지우기
+	@ResponseBody
+	@GetMapping(value="admin/encyclopedia/pest/delete")
+	public int pestDelete(@RequestParam("pe_id") int pe_id, HttpServletRequest request) throws Exception {
+		
+		PestEntity pestEntity = new PestEntity();
+		pestEntity = pestService.detail(pe_id);
+		fileUtil.deleteFile(request, "/pest", pestEntity.getPe_image());
+		
+		return pestService.delete(pe_id);
+		
+	}
+	
+	
+	// 해충정보 등록/수정시 해충명 중복 확인
+	@ResponseBody
+	@PostMapping(value="encyclopedia/checkPest")
+	int checkPest(@RequestParam("pe_name")String pe_name) throws Exception {
+		return pestService.checkPest(pe_name);
+	}
+	
+	// 해충백과 목록 + 페이징 추가
+	@GetMapping(value = "admin/encyclopedia/pest")
+	public String getListPage(Model model, @RequestParam("num") int num) throws Exception {
 
+		// 게시물 총 개수
+		int count = pestService.countPest();
+
+		// 한 페이지에 출력할 게시물 개수
+		int postNum = 10;
+
+		// 하단 페이징 번호 ([ 게시물 총 개수 ÷ 한 페이지에 출력할 개수 ]의 올림)
+		int pageNum = (int) Math.ceil((double) count / postNum);
+
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum;
+
+		// 한번에 표시할 페이징 번호의 개수
+		int pageNum_cnt = 10;
+
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int) (Math.ceil((double) num / (double) pageNum_cnt) * pageNum_cnt);
+
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+
+		if (endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
+		}
+		
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		
+		
+		List<Map<String, Object>> list = null;
+		list = pestService.listPage(displayPost, postNum);
+		model.addAttribute("list", list);
+		model.addAttribute("pageNum", pageNum);
+		
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+		
+		// 현재 페이지
+		model.addAttribute("select", num);
+
+		return "admin/encyclopedia/pestlist";
+	}
+	
+	
+	
+	
+	
+	
 }

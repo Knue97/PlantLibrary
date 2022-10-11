@@ -6,8 +6,20 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
+
 <style>
+
+	*{
+		font-family: 'IBM Plex Sans KR', sans-serif !important;
+	}
+	
+	h5{
+		font-weight: bold !important;
+	}
 
     .thumb {
       margin: 0;
@@ -24,6 +36,22 @@
 	    background-position: center; 
 	    background-repeat: no-repeat;
     }
+    
+    .scroll::-webkit-scrollbar{
+    width: 6px;
+	}
+
+	.scroll::-webkit-scrollbar-thumb{
+	
+    height: 17%;
+    background-color: rgba(33,133,133,1);
+    border-radius: 10px;     
+	}
+	
+	.scroll::-webkit-scrollbar-track{
+    background-color: rgba(33,133,133,0.33);
+	}
+
 
 </style>
 </head>
@@ -46,20 +74,20 @@
 						<div style="height:150px;"></div>
 						<div class="row">
 						<div class="col-12 col-md-7" style="height:550px;">
-                        <div class="single_product_thumb">
-                            <div style="overflow: hidden; height: 550px;" id="product_details_slider" class="carousel slide" data-ride="carousel">
+
+                            <div style="overflow: hidden; height: 550px;" id="details_slider" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                 	<c:if test="${fn:contains(disease.di_image,',')}">
 										<c:forTokens var="img" items="${disease.di_image }" delims="," varStatus="status">
 											<c:if test="${status.index == 0 }">
-												<li class="active thumb" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${contextPath}/resources/assets/img/disease/${img });">
+												<li class="active thumb" data-target="#details_slider" data-slide-to="0" style="background-image: url(${contextPath}/resources/assets/img/disease/${img });">
 		                                    	</li>
 											</c:if>
 											<c:if test="${status.index != 0 }">
-												<li class="thumb" data-target="#product_details_slider" data-slide-to="${status.index }" style="background-image: url(${contextPath}/resources/assets/img/disease/${img });">
+												<li class="thumb" data-target="#details_slider" data-slide-to="${status.index }" style="background-image: url(${contextPath}/resources/assets/img/disease/${img });">
 		                                    	</li>											
 											</c:if>
-										</c:forTokens>                                	
+										</c:forTokens>            	
                                 	</c:if>
                                 </ol>
                                 <div class="carousel-inner">
@@ -77,51 +105,41 @@
                                 	</c:forTokens>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
-                    <div class="col-12 col-md-1"></div>
                     
-							<div class="col-12 col-md-4">
-								<div class="single_product_desc">
-									<!-- Product Meta Data -->
-									<div class="product-meta-data">
-										<div class="line"></div>
-
-											<h2>${disease.di_alias } <a id="bookmark"
-										class="fa fa-star" aria-hidden="true" style="color: #73e35c" href="#!bookmark"></a></h2>
-
-										<!-- Ratings & Review -->
-										<div
-											class="ratings-review mb-15 d-flex align-items-center justify-content-between">
-										</div>
-									</div>
-
-									<div class="short_overview my-5">
-										<p>원인 : ${disease.di_cause }</p>
-									</div>
-									<div class="short_overview my-5">
-										<p>병징 및 표징 : ${disease.di_symptomOfDisease }</p>
-									</div>
-									<div class="short_overview my-5">
-										<p>방제법 : ${disease.di_biologicalControl }</p>
-									</div>
-									<div class="short_overview my-5">
-										<p>조심해야할 식물 : ${disease.di_carefulPlant }</p>
-									</div>
-									<div class="short_overview my-5">
-										<p>상세설명 : ${disease.di_descripton }</p>
-									</div>
-
+							<div class="col-12 col-md-5">
+								<div class="scroll"style="overflow-y: scroll; height: 550px; padding-right: 35px;">
+										<h2 style="font-weight: bold;">${disease.di_alias }<img src="${contextPath}/resources/assets/img/icon/empty.png" id="bookmark"
+										style="float:right; height:35px;cursor:pointer;" class="bookmarkno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
+										</h2>
+										
 									<c:if test="${user != null}">
-										<a href="${contextPath }/encyclopedia/modifyrequest?mr_name=${disease.di_alias}"
-										style="color: black;">수정문의</a>
+										<a href="${contextPath }/encyclopedia/modifyrequest?mr_name=${disease.di_id}&ec_id=${disease.ec_id}&name=${disease.di_alias}"
+										style="color: black; float: right;">수정문의</a>
+									</c:if>
+
+									<div class="short_overview my-5">
+										<h5 style="font-weight: bold;">원인</h5><p>${disease.di_cause }</p>
+									</div>
+									<div class="short_overview my-5">
+										<h5 style="font-weight: bold;">병징 및 표징</h5><p>${disease.di_symptomOfDisease }</p>
+									</div>
+									<div class="short_overview my-5">
+										<h5 style="font-weight: bold;">방제법</h5><p>${disease.di_biologicalControl }</p>
+									</div>
+									<div class="short_overview my-5">
+										<h5 style="font-weight: bold;">조심해야할 식물</h5><p>${disease.di_carefulPlant }</p>
+									</div>
+									<div class="short_overview my-5">
+										<h5 style="font-weight: bold;">상세설명</h5><p>${disease.di_descripton }</p>
+									</div>
+									
+									<c:if test="${user.u_state == 99}"> 
+									<a href="${contextPath }/admin/encyclopedia/disease/update?di_id=${disease.di_id }" style="color:black;"> 수정하기 </a>
+									<a href="${contextPath }/admin/encyclopedia/disease/delete?di_id=${disease.di_id }" style="color:black;"> 삭제하기 </a>
 									</c:if>
 									
-									<a href="${contextPath }/encyclopedia/disease/update?di_id=${disease.di_id}" style="color:black;">정보수정하기</a>
-									<a href="${contextPath }/encyclopedia/disease/delete?di_id=${disease.di_id}" style="color:black;">정보삭제하기</a>
-									
-									
-
 								</div>
 							</div>
 						</div>
@@ -151,14 +169,31 @@
 	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 
 <script>
+	
+	function onMouseEnter() {
+		if($("#bookmark").attr('class') == 'bookmarkno')
+			
+	     	$("#bookmark").attr("src", $("#bookmark").attr("src").replace("empty","full"));
+		else
+			$("#bookmark").attr("src", $("#bookmark").attr("src").replace("full","empty"));
+		
+	}
+	
+	function onMouseLeave() {
+		if($("#bookmark").attr('class') == 'bookmarkno')
+	     	$("#bookmark").attr("src", $("#bookmark").attr("src").replace("full","empty"));
+		else
+			$("#bookmark").attr("src", $("#bookmark").attr("src").replace("empty","full"));	
+	
+	}
 
 	// 즐겨찾기버튼에 마우스 올렸을시 hover 효과로 추가효과, 제거효과 만들기
 	// cnt => db에서 즐겨찾기 조건 동일한 것의 개수
 
 	let cnt = 0;
-
-	$(document).ready(function() {
 		
+	$(document).ready(function() {
+
 		isbookmarked();
 
 		$(document).on('click', '#bookmark', function() {
@@ -178,10 +213,9 @@
 				"bm_name" : '${disease.di_id}'
 			};
 
-			console.log(cnt + "여기");
 
 			if (cnt == 0) {
-				console.log("addbookmark 시작");
+
 				$.ajax({
 					url : addUrl,
 					data : paramData,
@@ -189,20 +223,20 @@
 					type : 'POST',
 					success : function(result) {
 
-						alert('즐찾추가완료');
 						isbookmarked();
+						alert('즐겨찾기가 추가되었습니다. 마이페이지에서 목록을 확인할 수 있습니다.');
 
 					},
 
 					error : function(result) {
-						alert('어즐찾실패')
+						alert('즐겨찾기실패')
 
 					}
 
 				});
 
 			} else {
-				console.log("removebookmark 시작");
+
 				$.ajax({
 					url : removeUrl,
 					data : paramData,
@@ -210,13 +244,13 @@
 					type : 'POST',
 					success : function(result) {
 
-						alert('즐찾추가해제완료');
 						isbookmarked();
+						alert('즐겨찾기가 해제되었습니다.');
 
 					},
 					error : function(result) {
 
-						alert('즐찾해제실패');
+						alert('즐겨찾기해제실패');
 
 					}
 				});
@@ -248,17 +282,21 @@
 				
 				var htmls = ""; // 문서꾸미기
 
-				if (result == 0) {
-					htmls += '즐겨찾기추가';
-				} else {
-					htmls += '즐겨찾기해제~';
+				if (result != 0) {
+					htmls += '<img src="${contextPath}/resources/assets/img/icon/full.png" id="bookmark"';
+					htmls += 'style="float:right; height:35px; cursor:pointer;" class="bookmarkyes" ';
+					htmls += 'onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>';
+				}else{
+					htmls += '<img src="${contextPath}/resources/assets/img/icon/empty.png" id="bookmark"';
+					htmls += 'style="float:right; height:35px; cursor:pointer;" class="bookmarkno" ';
+					htmls += 'onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>';
 				}
-
-				$("#bookmark").html(htmls); // 댓글위치에 html로 보여주기
+				
+				$("#bookmark").replaceWith(htmls);
 
 				cnt = result;
-
-				console.log(cnt + "isbookmarked");
+				
+				
 			},
 			error : function(result) {
 				alert('실패');
@@ -266,6 +304,8 @@
 		});
 
 	}
+		
+	
 		
 		
 </script>

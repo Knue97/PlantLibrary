@@ -1,6 +1,8 @@
 package kr.co.plantlibrary.pest_encyclopedia;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,29 @@ public class PestDAOImpl implements PestDAO{
 	public int delete(int pe_id) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(NAMESPACE + ".delete", pe_id);
+	}
+
+	@Override
+	public int checkPest(String pe_name) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + ".checkpest", pe_name);
+	}
+
+	@Override
+	public int countPest() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE+".countPest");
+	}
+
+	@Override
+	public List<Map<String, Object>> listPage(int displayPost, int postNum) throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		  
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		 
+		return sqlSession.selectList(NAMESPACE + ".pestListPage", data);
 	}
 
 

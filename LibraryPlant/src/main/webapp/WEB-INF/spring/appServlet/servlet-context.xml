@@ -31,7 +31,7 @@
 	</beans:bean>
 	<!-- 파일 저장 경로 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\upload">
+		<beans:constructor-arg value="C:\\upload\\">
 		</beans:constructor-arg>
 	</beans:bean>
 	
@@ -40,8 +40,32 @@
 	
 	<!-- KakaoLoginBO class에 대한 Bean 설정 추가 -->
 	<beans:bean id="kakaoLoginBO" class="kr.co.plantlibrary.login.KakaoLoginBO" />
+	
+	<!-- 인터셉트 설정 -->
+	<beans:bean class="kr.co.plantlibrary.common.AuthenticationInterceptor" id="auth"/>
+		<!-- 인터셉터를 위한 매핑경로 설정해 auth의 메소드를 수행하게 된다. -->
+		<interceptors>
+			<interceptor>
+				<mapping path="/board/register"/>
+				<mapping path="/board/update"/>
+				<mapping path="/board/delete"/>
+				<beans:ref bean="auth"/> <!-- auth를 참조하겠다는 의미 -->
+			</interceptor>
+		</interceptors>
+	
 	<!-- AOP 실행을 위해 컴포넌트 등록 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	
+	<!-- 관리자 페이지 인터셉터 -->
+	<beans:bean id="AdminInterceptor" class="kr.co.plantlibrary.admin.AdminInterceptor"></beans:bean>
+	<interceptors>
+	 <interceptor>
+	  <mapping path="/admin/**" />
+	  <beans:ref bean="AdminInterceptor" />
+	 </interceptor>
+	</interceptors>
+	
 	
 	
 	<context:component-scan base-package="kr.co.plantlibrary" />

@@ -60,22 +60,57 @@
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item" role="presentation">
 				<button class="nav-link active" id="home-tab" data-toggle="tab"
-					data-target="#home" type="button" role="tab" aria-controls="home"
+					data-target="#region1" type="button" role="tab" aria-controls="home"
 					aria-selected="true">서울</button>
 			</li>
 			<li class="nav-item" role="presentation">
 				<button class="nav-link" id="profile-tab" data-toggle="tab"
-					data-target="#profile" type="button" role="tab"
-					aria-controls="profile" aria-selected="false">경기도</button>
+					data-target="#region2" type="button" role="tab"
+					aria-controls="profile" aria-selected="false">경기</button>
 			</li>
 			<li class="nav-item" role="presentation">
 				<button class="nav-link" id="contact-tab" data-toggle="tab"
-					data-target="#contact" type="button" role="tab"
-					aria-controls="contact" aria-selected="false">Contact</button>
+					data-target="#region3" type="button" role="tab"
+					aria-controls="region3" aria-selected="false">부산</button>
 			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-toggle="tab"
+					data-target="#region4" type="button" role="tab"
+					aria-controls="contact" aria-selected="false">인천</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-toggle="tab"
+					data-target="#region5" type="button" role="tab"
+					aria-controls="contact" aria-selected="false">광주</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-toggle="tab"
+					data-target="#region6" type="button" role="tab"
+					aria-controls="contact" aria-selected="false">대구</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-toggle="tab"
+					data-target="#region7" type="button" role="tab"
+					aria-controls="contact" aria-selected="false">대전</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-toggle="tab"
+					data-target="#region8" type="button" role="tab"
+					aria-controls="contact" aria-selected="false">울산</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-toggle="tab"
+					data-target="#region9" type="button" role="tab"
+					aria-controls="contact" aria-selected="false">강원</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-toggle="tab"
+					data-target="#region10" type="button" role="tab"
+					aria-controls="contact" aria-selected="false">제주</button>
+			</li>			
 		</ul>
 		<div class="tab-content" id="myTabContent">
-			<div class="tab-pane fade show active" id="home" role="tabpanel"
+			<div class="tab-pane fade show active" id="region1" role="tabpanel"
 				aria-labelledby="home-tab">
 				<div class="container-fluid">
 					<table class="table tabel-bordered" id="table">
@@ -106,7 +141,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="profile" role="tabpanel"
+			<div class="tab-pane fade" id="region2" role="tabpanel"
 				aria-labelledby="profile-tab">
 				<div class="container-fluid">
 					<table class="table tabel-bordered" id="table">
@@ -137,6 +172,255 @@
 					</table>
 				</div>
 			</div>
+			<div class="tab-pane fade" id="region3" role="tabpanel"
+				aria-labelledby="region3">
+				<div class="container-fluid">
+					<table class="table tabel-bordered" id="table">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">HomePage</th>
+								<th scope="col">요약</th>
+								<th scope="col" class="d-none">좌표(위도)</th>
+								<th scope="col" class="d-none">좌표(경도)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list3}" var="entity">
+								<tr>
+									<th scope="row">${entity.g_id }</th>
+									<td>${entity.g_name }</td>
+									<td>${entity.g_detailedAddress }</td>
+									<td><a href="${entity.g_url }" target="_black">홈페이지</a></td>
+									<td>${entity.g_summary }</td>
+									<td class="d-none">${entity.g_latitude }</td>
+									<td class="d-none">${entity.g_longitude }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="region4" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div class="container-fluid">
+					<table class="table tabel-bordered" id="table">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">HomePage</th>
+								<th scope="col">요약</th>
+								<th scope="col" class="d-none">좌표(위도)</th>
+								<th scope="col" class="d-none">좌표(경도)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list4}" var="entity">
+								<tr>
+									<th scope="row">${entity.g_id }</th>
+									<td>${entity.g_name }</td>
+									<td>${entity.g_detailedAddress }</td>
+									<td><a href="${entity.g_url }" target="_black">홈페이지</a></td>
+									<td>${entity.g_summary }</td>
+									<td class="d-none">${entity.g_latitude }</td>
+									<td class="d-none">${entity.g_longitude }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="region5" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div class="container-fluid">
+					<table class="table tabel-bordered" id="table">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">HomePage</th>
+								<th scope="col">요약</th>
+								<th scope="col" class="d-none">좌표(위도)</th>
+								<th scope="col" class="d-none">좌표(경도)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list5}" var="entity">
+								<tr>
+									<th scope="row">${entity.g_id }</th>
+									<td>${entity.g_name }</td>
+									<td>${entity.g_detailedAddress }</td>
+									<td><a href="${entity.g_url }" target="_black">홈페이지</a></td>
+									<td>${entity.g_summary }</td>
+									<td class="d-none">${entity.g_latitude }</td>
+									<td class="d-none">${entity.g_longitude }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="region6" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div class="container-fluid">
+					<table class="table tabel-bordered" id="table">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">HomePage</th>
+								<th scope="col">요약</th>
+								<th scope="col" class="d-none">좌표(위도)</th>
+								<th scope="col" class="d-none">좌표(경도)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list6}" var="entity">
+								<tr>
+									<th scope="row">${entity.g_id }</th>
+									<td>${entity.g_name }</td>
+									<td>${entity.g_detailedAddress }</td>
+									<td><a href="${entity.g_url }" target="_black">홈페이지</a></td>
+									<td>${entity.g_summary }</td>
+									<td class="d-none">${entity.g_latitude }</td>
+									<td class="d-none">${entity.g_longitude }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="region7" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div class="container-fluid">
+					<table class="table tabel-bordered" id="table">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">HomePage</th>
+								<th scope="col">요약</th>
+								<th scope="col" class="d-none">좌표(위도)</th>
+								<th scope="col" class="d-none">좌표(경도)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list7}" var="entity">
+								<tr>
+									<th scope="row">${entity.g_id }</th>
+									<td>${entity.g_name }</td>
+									<td>${entity.g_detailedAddress }</td>
+									<td><a href="${entity.g_url }" target="_black">홈페이지</a></td>
+									<td>${entity.g_summary }</td>
+									<td class="d-none">${entity.g_latitude }</td>
+									<td class="d-none">${entity.g_longitude }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="region8" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div class="container-fluid">
+					<table class="table tabel-bordered" id="table">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">HomePage</th>
+								<th scope="col">요약</th>
+								<th scope="col" class="d-none">좌표(위도)</th>
+								<th scope="col" class="d-none">좌표(경도)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list8}" var="entity">
+								<tr>
+									<th scope="row">${entity.g_id }</th>
+									<td>${entity.g_name }</td>
+									<td>${entity.g_detailedAddress }</td>
+									<td><a href="${entity.g_url }" target="_black">홈페이지</a></td>
+									<td>${entity.g_summary }</td>
+									<td class="d-none">${entity.g_latitude }</td>
+									<td class="d-none">${entity.g_longitude }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="region9" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div class="container-fluid">
+					<table class="table tabel-bordered" id="table">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">HomePage</th>
+								<th scope="col">요약</th>
+								<th scope="col" class="d-none">좌표(위도)</th>
+								<th scope="col" class="d-none">좌표(경도)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list9}" var="entity">
+								<tr>
+									<th scope="row">${entity.g_id }</th>
+									<td>${entity.g_name }</td>
+									<td>${entity.g_detailedAddress }</td>
+									<td><a href="${entity.g_url }" target="_black">홈페이지</a></td>
+									<td>${entity.g_summary }</td>
+									<td class="d-none">${entity.g_latitude }</td>
+									<td class="d-none">${entity.g_longitude }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="region10" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div class="container-fluid">
+					<table class="table tabel-bordered" id="table">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">HomePage</th>
+								<th scope="col">요약</th>
+								<th scope="col" class="d-none">좌표(위도)</th>
+								<th scope="col" class="d-none">좌표(경도)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list10}" var="entity">
+								<tr>
+									<th scope="row">${entity.g_id }</th>
+									<td>${entity.g_name }</td>
+									<td>${entity.g_detailedAddress }</td>
+									<td><a href="${entity.g_url }" target="_black">홈페이지</a></td>
+									<td>${entity.g_summary }</td>
+									<td class="d-none">${entity.g_latitude }</td>
+									<td class="d-none">${entity.g_longitude }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
 			<div class="tab-pane fade" id="contact" role="tabpanel"
 				aria-labelledby="contact-tab">${list1.size() }</div>
 		</div>
@@ -166,8 +450,8 @@
 			
 			<c:forEach items="${list1}" var="entity">
 			content = [ '<div class="d-flex flex-column text-center" >',
-					'<div>', '<h4>${entity.g_name}</h4>', '</div>', '<div>',
-					'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
 			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
 			var marker = new naver.maps.Marker(
 						{
@@ -192,7 +476,7 @@
 			</c:forEach>
 			<c:forEach items="${list2}" var="entity">
 			content = [ '<div class="d-flex flex-column text-center" >',
-					'<div>', '<h4>${entity.g_name}</h4>', '</div>', '<div>',
+					'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
 					'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
 			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
 			var marker = new naver.maps.Marker(
@@ -216,6 +500,213 @@
 			contents.push(content);
 			</c:forEach>
 			
+			<c:forEach items="${list3}" var="entity">
+			content = [ '<div class="d-flex flex-column text-center" >',
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
+			var marker = new naver.maps.Marker(
+						{
+							map : map,
+							position : position,
+							icon : {
+								url : '${contextPath}/resources/assets/img/icon/garden.png',
+								size : new naver.maps.Size(24, 37),
+								anchor : new naver.maps.Point(12, 37),
+								origin : new naver.maps.Point(0, 0)
+							},
+							zIndex : 100
+						});
+			
+				var infoWindow = new naver.maps.InfoWindow({
+					content : content.join('')
+				});
+			markers.push(marker);
+			infoWindows.push(infoWindow);
+			contents.push(content);
+			</c:forEach>
+			
+			<c:forEach items="${list4}" var="entity">
+			content = [ '<div class="d-flex flex-column text-center" >',
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
+			var marker = new naver.maps.Marker(
+						{
+							map : map,
+							position : position,
+							icon : {
+								url : '${contextPath}/resources/assets/img/icon/garden.png',
+								size : new naver.maps.Size(24, 37),
+								anchor : new naver.maps.Point(12, 37),
+								origin : new naver.maps.Point(0, 0)
+							},
+							zIndex : 100
+						});
+			
+				var infoWindow = new naver.maps.InfoWindow({
+					content : content.join('')
+				});
+			markers.push(marker);
+			infoWindows.push(infoWindow);
+			contents.push(content);
+			</c:forEach>
+			
+			<c:forEach items="${list5}" var="entity">
+			content = [ '<div class="d-flex flex-column text-center" >',
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
+			var marker = new naver.maps.Marker(
+						{
+							map : map,
+							position : position,
+							icon : {
+								url : '${contextPath}/resources/assets/img/icon/garden.png',
+								size : new naver.maps.Size(24, 37),
+								anchor : new naver.maps.Point(12, 37),
+								origin : new naver.maps.Point(0, 0)
+							},
+							zIndex : 100
+						});
+			
+				var infoWindow = new naver.maps.InfoWindow({
+					content : content.join('')
+				});
+			markers.push(marker);
+			infoWindows.push(infoWindow);
+			contents.push(content);
+			</c:forEach>
+			
+			<c:forEach items="${list6}" var="entity">
+			content = [ '<div class="d-flex flex-column text-center" >',
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
+			var marker = new naver.maps.Marker(
+						{
+							map : map,
+							position : position,
+							icon : {
+								url : '${contextPath}/resources/assets/img/icon/garden.png',
+								size : new naver.maps.Size(24, 37),
+								anchor : new naver.maps.Point(12, 37),
+								origin : new naver.maps.Point(0, 0)
+							},
+							zIndex : 100
+						});
+			
+				var infoWindow = new naver.maps.InfoWindow({
+					content : content.join('')
+				});
+			markers.push(marker);
+			infoWindows.push(infoWindow);
+			contents.push(content);
+			</c:forEach>
+			
+			<c:forEach items="${list7}" var="entity">
+			content = [ '<div class="d-flex flex-column text-center" >',
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
+			var marker = new naver.maps.Marker(
+						{
+							map : map,
+							position : position,
+							icon : {
+								url : '${contextPath}/resources/assets/img/icon/garden.png',
+								size : new naver.maps.Size(24, 37),
+								anchor : new naver.maps.Point(12, 37),
+								origin : new naver.maps.Point(0, 0)
+							},
+							zIndex : 100
+						});
+			
+				var infoWindow = new naver.maps.InfoWindow({
+					content : content.join('')
+				});
+			markers.push(marker);
+			infoWindows.push(infoWindow);
+			contents.push(content);
+			</c:forEach>
+			
+			<c:forEach items="${list8}" var="entity">
+			content = [ '<div class="d-flex flex-column text-center" >',
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
+			var marker = new naver.maps.Marker(
+						{
+							map : map,
+							position : position,
+							icon : {
+								url : '${contextPath}/resources/assets/img/icon/garden.png',
+								size : new naver.maps.Size(24, 37),
+								anchor : new naver.maps.Point(12, 37),
+								origin : new naver.maps.Point(0, 0)
+							},
+							zIndex : 100
+						});
+			
+				var infoWindow = new naver.maps.InfoWindow({
+					content : content.join('')
+				});
+			markers.push(marker);
+			infoWindows.push(infoWindow);
+			contents.push(content);
+			</c:forEach>
+			
+			<c:forEach items="${list9}" var="entity">
+			content = [ '<div class="d-flex flex-column text-center" >',
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
+			var marker = new naver.maps.Marker(
+						{
+							map : map,
+							position : position,
+							icon : {
+								url : '${contextPath}/resources/assets/img/icon/garden.png',
+								size : new naver.maps.Size(24, 37),
+								anchor : new naver.maps.Point(12, 37),
+								origin : new naver.maps.Point(0, 0)
+							},
+							zIndex : 100
+						});
+			
+				var infoWindow = new naver.maps.InfoWindow({
+					content : content.join('')
+				});
+			markers.push(marker);
+			infoWindows.push(infoWindow);
+			contents.push(content);
+			</c:forEach>
+			
+			<c:forEach items="${list10}" var="entity">
+			content = [ '<div class="d-flex flex-column text-center" >',
+				'<div>', '<h4>${entity.g_name}</h4>', '</div>','<a href="${entity.g_url}" target="_black" class="h6">${entity.g_url}</a>', '<div>',
+				'<p>${entity.g_detailedAddress}</p>', '</div>', '</div>' ]
+			var position = new naver.maps.LatLng(${entity.g_latitude},${entity.g_longitude});
+			var marker = new naver.maps.Marker(
+						{
+							map : map,
+							position : position,
+							icon : {
+								url : '${contextPath}/resources/assets/img/icon/garden.png',
+								size : new naver.maps.Size(24, 37),
+								anchor : new naver.maps.Point(12, 37),
+								origin : new naver.maps.Point(0, 0)
+							},
+							zIndex : 100
+						});
+			
+				var infoWindow = new naver.maps.InfoWindow({
+					content : content.join('')
+				});
+			markers.push(marker);
+			infoWindows.push(infoWindow);
+			contents.push(content);
+			</c:forEach>
 			/*
 			for (var index = 1; index < table.rows.length; index++) {
 

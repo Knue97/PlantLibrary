@@ -50,8 +50,8 @@ function replyListAll() {
 					}
 					
 					// 유저 정보 + 글번호 + like 값 받아서 체크
-					htmls += '<a href="javascript:void(0)" onclick="return Like(' + this.c_no + ', \'' + this.u_id + '\')">♡안좋음 (구현중)</a>';
-					htmls += '<a href="javascript:void(0)" onclick="return disLike(' + this.c_no + ', \'' + this.u_id + '\')">♥좋음 (구현중)</a>';
+					//htmls += '<a href="javascript:void(0)" onclick="return Like(' + this.c_no + ', \'' + this.u_id + '\')">♡안좋음 (구현예정)</a>';
+					//htmls += '<a href="javascript:void(0)" onclick="return disLike(' + this.c_no + ', \'' + this.u_id + '\')">♥좋음 (구현예정)</a>';
 					
 					
 					if('${user.u_id}'== this.u_id){
@@ -60,10 +60,10 @@ function replyListAll() {
 					htmls += '<a href="javascript:void(0)" onclick="replyAlarm(' + this.c_no + ')" >삭제</a>';
 					htmls +=  '</span>';
 					}
-					htmls += '<br>' + this.c_content + ' <br>';
+					htmls += '<br><br>' + this.c_content + ' <br>';
 					if('${user.u_id}'!= this.u_id){
 					htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
-					htmls += '<a href="javascript:void(0)" onclick="신고(' + this.c_no + ')" >신고 (구현중)</a>';
+					//htmls += '<a href="javascript:void(0)" onclick="신고(' + this.c_no + ')" >신고 (구현예정)</a>';
 					htmls += '</span>';
 					}
 					htmls += '<span style="color:grey; float:right; font-size:10pt;"> ' + this.c_regdate + '</span> ';
@@ -90,7 +90,7 @@ function replyListAll() {
 		// 개행문자 치환 - 저장
 		var c_content = $("#c_content").val().trim();
 		c_content = c_content.replace(/(?:\r\n|\r|\n)/g, '<br>');	// 엔터
-//		c_content = c_content.replaceAll("\\\<.*?\\\>","");
+//		c_content = c_content.replaceAll("\\\<.*?\\\>", "");
 		c_content = c_content.replace(/ /gi, '&nbsp');	// 스페이스
 
 
@@ -121,7 +121,7 @@ function replyListAll() {
 				}
 			},
 			error : function(result){
-				alert('에러 발생');
+				alert('로그인이 필요합니다.');
 			}
 		}); // ajax end
 	}); // end of $(#replyRegister').on
@@ -294,10 +294,10 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 				<div class="box-body">
 
-					<div class="form-group" style="background-color: silver;">
-						<h1 align="center">본문은 여기↓</h1>
+					<div class="form-group">
+						
 						<p></p>
-
+						<br><br><br><br>
 
 						<div class="quote-wrapper">
 							<p class="mb-4">${board.b_content}</p>
@@ -305,9 +305,10 @@ function replyUpdateForm(c_no, u_id, c_content){
 								<h5 style="color: lightgrey;">내용이 없습니다.</h5>
 							</c:if>
 						</div>
+						<br><br><br><br>
 						<div class="search-box" align="center">
 							
-							<input type="button" value="추천 (구현중)" name="recommended" onclick="return recommended();">
+							<input type="button" value="추천 (구현 예정)" name="recommended" onclick="return recommended();">
 							
 							
 							
@@ -365,9 +366,9 @@ function replyUpdateForm(c_no, u_id, c_content){
 								<tr>
 									<td>
 										<input type="hidden" name="u_id" id="u_id" value="${user.u_id}" readonly>
-										${user.u_id}
+										 작성자 : ${user.u_id}
 										<textarea class="form-control" name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="3000"></textarea>
-										<p class="textTotal" align="right" style="width: 800px; height: 100px;">글자수 제한 : 3000자</p>
+										<p class="textTotal" align="right" style="width: 800px; height: 200px;">글자수 제한 : 3000자</p>
 									</td>
 									<td>
 										<input type="button" id="replyRegister" value="등록">

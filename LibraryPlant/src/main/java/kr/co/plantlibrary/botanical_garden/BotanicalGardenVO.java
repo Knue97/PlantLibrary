@@ -12,4 +12,5 @@ public class BotanicalGardenVO {
 	private String g_summary;
 	private double g_latitude;
 	private double g_longitude;
+	private String g_region;
 }

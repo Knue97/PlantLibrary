@@ -52,7 +52,7 @@
 	<update id="update" parameterType="PestEntity">
 		update pest
 		set
-		ec_id = #{ec_id}, pe_name = #{pe_name}, pe_image = #{pe_image}, pe_cause = #{pe_cause},
+		pe_name = #{pe_name}, pe_image = #{pe_image}, pe_cause = #{pe_cause},
 		pe_method = #{pe_method}, pe_biologicalControl = #{pe_biologicalControl}, pe_naturalEnemy = #{pe_naturalEnemy},
 		pe_carefulPlant = #{pe_carefulPlant}, pe_description = #{pe_description}
 		where pe_id = #{pe_id}
@@ -61,6 +61,26 @@
 	<delete id="delete" parameterType="java.lang.Integer">
 		delete
 		from pest
-		where = pe_id = #{pe_id}
+		where pe_id = #{pe_id}
 	</delete>
+	<!-- 정보 등록/수정시 해충명 중복 체크 -->
+	<select id="checkpest" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select
+		count(pe_id)
+		from pest
+		where pe_name = #{pe_name}
+	</select>
+	<!-- 해충백과 개수 출력 -->
+	<select id="countPest" resultType="java.lang.Integer">
+		select count(pe_id) from pest
+	</select>
+	<!-- 해충백과 목록 + 페이징 -->
+	<select id="pestListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
+		 select
+		 pe_id, pe_name
+		 from pest
+		 order by pe_id desc
+		 limit #{displayPost}, #{postNum}
+	</select>
+	
 </mapper>

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- ? Preloader Start -->
-	z
+
 	<%@ include file="/WEB-INF/views/include/preloader.jsp"%>
 	<!-- Preloader Start -->
 	<header>
@@ -58,10 +58,21 @@
 						<p class="text-center">이름 또는 다양한 카테고리로 검색이 가능합니다</p>
 					</div>
 				</div>
-				<div class="row justify-content-center">
+				<div class="row justify-content-center align-content-center">
+					<div class="col-2">
+						<select name="category" id="" class="text-center" onchange="selectBoxChange(this.value);">
+								<option value="" selected>타입</option>
+								<option value="pl_koreanName">한글명</option>
+								<option value="pl_englishName">영명</option>
+								<option value="pl_scientificName">학명</option>
+								<option value="pl_familyName">과명</option>
+								<option value="pl_classification">분류</option>
+							</select>
+							
+					</div>
 					<div class="col-xl-8 col-lg-7">
 						<!--Hero form -->
-						<form action="/encyclopedia/plant" class="search-box" method="get">
+						<form action="${contextPath}/encyclopedia/plant/search" class="search-box" method="get">
 							<div class="input-form">
 								<input type="text" placeholder="Search for a domain"
 									name="value">
@@ -88,7 +99,8 @@
 					<h1>관엽</h1>
 				</div>
 				<div class="div">
-					<button type="button" class="btn btn-primary" onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=관엽'">더보기</button>
+					<button type="button" class="btn btn-primary"
+						onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=관엽'">더보기</button>
 				</div>
 			</div>
 			<div class="row row-cols-1 row-cols-md-3">
@@ -121,7 +133,8 @@
 					<h1>다육</h1>
 				</div>
 				<div class="div">
-					<button type="button" class="btn btn-primary" onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=다육'">더보기</button>
+					<button type="button" class="btn btn-primary"
+						onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=다육'">더보기</button>
 				</div>
 			</div>
 			<div class="row row-cols-1 row-cols-md-3">
@@ -154,7 +167,8 @@
 					<h1>화초</h1>
 				</div>
 				<div class="div">
-					<button type="button" class="btn btn-primary" onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=화초'">더보기</button>
+					<button type="button" class="btn btn-primary"
+						onclick="location.href = '${contextPath}/encyclopedia/plant/list?pl_classification=화초'">더보기</button>
 				</div>
 			</div>
 			<div class="row row-cols-1 row-cols-md-3">
@@ -187,7 +201,8 @@
 					<h1>허브</h1>
 				</div>
 				<div class="div">
-					<button type="button" class="btn btn-primary" onclick="location.href = '${contextPath}/encyclopedia/list?pl_classification=허브'">더보기</button>
+					<button type="button" class="btn btn-primary"
+						onclick="location.href = '${contextPath}/encyclopedia/list?pl_classification=허브'">더보기</button>
 				</div>
 			</div>
 			<div class="row row-cols-1 row-cols-md-3">
@@ -226,6 +241,6 @@
 	</div>
 
 	<!-- JS here -->
-	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
+	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>	
 </body>
 </html>

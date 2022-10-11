@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="kr.co.plantlibrary.adminMapper">
+ 	<!-- 병해백과 개수 출력 -->
+	<select id="countDisease" resultType="java.lang.Integer">
+		select count(di_id) from disease
+	</select>
+	<!-- 병해백과 목록 + 페이징 -->
+	<select id="diseaseListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
+		 select
+		 di_id, di_alias
+		 from disease
+		 order by di_id desc
+		 limit #{displayPost}, #{postNum}
+	</select>
+	<!-- 식물백과 개수 출력 -->
+	<select id="countPlant" resultType="java.lang.Integer">
+		select count(pl_id) from plant
+	</select>
+	<!-- 식물백과 목록 + 페이징 -->
+	<select id="plantListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
+		 select
+		 pl_id, pl_koreanName
+		 from plant
+		 order by pl_id desc
+		 limit #{displayPost}, #{postNum}
+	</select>
+	<!-- 신고개수 카운트 -->
+	<select id="countReport" resultType="java.lang.Integer">
+		select count(r_no) from report
+		where r_state = 0 or r_state = 1
+	</select>
+	<!-- 신고 목록 + 페이징 -->
+	<select id="reportListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
+		 select
+		 r_no, b_no, c_no, u_id, rc_content, r_state
+		 from report
+		 where r_state = 0 or r_state = 1
+		 order by r_no desc
+		 limit #{displayPost}, #{postNum}
+	</select>
+	<!-- 신고내용 상세보기 -->
+	<select id="reportDetail" parameterType="java.lang.Integer" resultType="ReportEntity">
+		select
+		r_no, b_no, c_no, u_id, report_user, rc_content, r_content, r_file, r_state
+		from report
+		where r_no = #{r_no}
+	</select>
+	<!-- 신고 처리 상태 업데이트하기 -->
+	<update id="updateReportState" parameterType="java.util.HashMap">
+		update report
+		set
+		r_state = #{r_state}
+		where r_no = #{r_no}
+	</update>
+ </mapper>
