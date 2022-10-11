@@ -7,7 +7,7 @@
 <head>
 <%@ include file="../include/head.jsp" %>
 <%@ include file="../include/plugin.jsp" %>
-<%@ include file="../board/option/css.jsp" %>
+<%@ include file="../board/option/regiser_css.jsp" %>
 
 </head>
 <body>

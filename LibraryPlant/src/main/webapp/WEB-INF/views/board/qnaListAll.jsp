@@ -7,7 +7,7 @@
 <head>
 <%@ include file="../include/head.jsp" %>
 <%@ include file="../include/plugin.jsp" %>
-<%@ include file="../board/option/css.jsp" %>
+<%@ include file="../board/option/regiser_css.jsp" %>
  
 </head>
 <body>
@@ -54,6 +54,7 @@
 
 				<div>
 					<%@ include file="option/search.jsp" %>
+					
 					
 					<!-- 게시글 작성 커서이벤트 -->
 					<div class="box">

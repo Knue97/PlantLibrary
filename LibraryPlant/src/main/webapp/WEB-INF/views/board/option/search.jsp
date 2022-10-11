@@ -3,15 +3,19 @@
 <!DOCTYPE html>
 
 	<c:if test="${pageMaker.cri.searchKeyword == null}">
-		<h2>^^</h2>
-		<p>검색해보든가~</p>
+		<h4>원하는 결과를 찾아보세요!
+		<img src="${contextPath}/resources/assets/img/icon/search-icon.png" style="height: 35px;">
+		</h4>
+		<p></p>
 	</c:if>
 	<c:if test="${pageMaker.cri.searchKeyword != null}">
 		<h5 style="color: #559fa3">
-			"<strong>${pageMaker.cri.searchKeyword}</strong>" 검색결과 :
-			${pageMaker.totalCount}
+			"<strong>${pageMaker.cri.searchKeyword}</strong>" 검색결과
+			<img src="${contextPath}/resources/assets/img/icon/search-color.png" style="height: 35px;">
+			 : ${pageMaker.totalCount}
+			
 		</h5>
-		<p>검색</p>
+		<p>원하는 결과를 얻었나요?</p>
 	</c:if>
 	
 

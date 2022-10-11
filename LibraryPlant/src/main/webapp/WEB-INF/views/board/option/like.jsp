@@ -27,7 +27,7 @@ button {
 	
 	
 		<h2 style="font-weight: bold;">
-			<img src="${contextPath}/resources/assets/img/icon/empty.png"
+			<img src="${contextPath}/resources/assets/img/icon/loveicon_empty.png"
 				id="like" style="float: right; height: 35px; cursor: pointer;"
 				class="likeno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
 		</h2>
@@ -55,20 +55,20 @@ $('#report').on('click', function(e) {
 	function onMouseEnter() {
 		if ($("#like").attr('class') == 'likeno')
 
-			$("#like").attr("src", $("#like").attr("src").replace("empty", "full"));
+			$("#like").attr("src", $("#like").attr("src").replace("loveicon_empty", "loveicon_full"));
 		else
 			$("#like").attr("src",
-					$("#like").attr("src").replace("full", "empty"));
+					$("#like").attr("src").replace("loveicon_full", "loveicon_empty"));
 
 	}
 
 	function onMouseLeave() {
 		if ($("#like").attr('class') == 'likeno')
 			$("#like").attr("src",
-					$("#like").attr("src").replace("full", "empty"));
+					$("#like").attr("src").replace("loveicon_full", "loveicon_empty"));
 		else
 			$("#like").attr("src",
-					$("#like").attr("src").replace("empty", "full"));
+					$("#like").attr("src").replace("loveicon_empty", "loveicon_full"));
 
 	}
 
@@ -168,11 +168,11 @@ $('#report').on('click', function(e) {
 					var htmls = ""; // 문서꾸미기
 
 					if (result != 0) {
-						htmls += '<img src="${contextPath}/resources/assets/img/icon/full.png" id="like"';
+						htmls += '<img src="${contextPath}/resources/assets/img/icon/loveicon_full.png" id="like"';
 						htmls += 'style="float:right; height:35px; cursor:pointer;" class="likeyes" ';
 						htmls += 'onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>';
 					} else {
-						htmls += '<img src="${contextPath}/resources/assets/img/icon/empty.png" id="like"';
+						htmls += '<img src="${contextPath}/resources/assets/img/icon/loveicon_empty.png" id="like"';
 						htmls += 'style="float:right; height:35px; cursor:pointer;" class="likeno" ';
 						htmls += 'onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>';
 					}
