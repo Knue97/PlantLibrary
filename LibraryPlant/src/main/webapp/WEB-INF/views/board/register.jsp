@@ -129,7 +129,7 @@ function validate() {
     
         <section class="content container-fluid">
 
-				<div class="container">
+			<div class="container">
 				
 				<form role="form" method="post" enctype="multipart/form-data" name="loginCheck" onsubmit="return validate();">
 				
@@ -163,7 +163,7 @@ function validate() {
 						<input type="submit" value="작성완료">
 					</div>
 				</form>
-</div>
+
 			</div>
 		</section>
        

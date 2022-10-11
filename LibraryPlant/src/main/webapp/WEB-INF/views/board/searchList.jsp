@@ -6,7 +6,9 @@
 <html class="no-js" lang="zxx">
 <head>
 <%@ include file="../include/head.jsp" %>
-    <%@ include file="../include/plugin.jsp" %>
+<%@ include file="../include/plugin.jsp" %>
+<%@ include file="../board/option/css.jsp" %>
+
 </head>
 <body>
 
@@ -29,7 +31,7 @@
                             <div class="col-xl-5 col-lg-5 col-md-9 ">
                                 <div class="hero__caption text-center">
                                     <span data-animation="fadeInDown" data-delay=".3s">Total Search Board</span>
-                                    <h1 data-animation="fadeInDown" data-delay=".1s ">전체 검색 게시판</h1>
+                                    <h1 data-animation="fadeInDown" data-delay=".1s ">전체 검색</h1>
 
                                 </div>
                             </div>
@@ -53,9 +55,14 @@
 					<%@ include file="option/search.jsp" %>
 					
 					
+					<!-- 게시글 작성 커서이벤트 -->
 					<div class="box">
 						<div class="box-header with-border">
-							<a href="${contextPath}/board/register"><h3 align="right">게시판 글쓰기</h3></a>
+							<button type="button" onclick="location.href='${contextPath}/board/register';">
+								<img src="${contextPath}/resources/assets/img/icon/write_empty.png"
+									id="write" style="float: right; height: 35px; cursor: pointer;"
+									class="writeno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
+							</button>
 						<br>
 						</div>
 					</div>
@@ -104,6 +111,17 @@
 					<!-- 검색에 해당하는 게시글 결과 -->
 					<%@ include file="option/resultNone.jsp" %>
 					<!-- /검색에 해당하는 게시글 결과 -->
+					
+					<!-- 게시글 작성 커서이벤트 -->
+					<div class="box">
+						<div class="box-header with-border">
+							<button type="button" onclick="location.href='${contextPath}/board/register';">
+								<img src="${contextPath}/resources/assets/img/icon/write_empty.png"
+									id="write" style="float: right; height: 35px; cursor: pointer;"
+									class="writeno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
+							</button>
+						</div>
+					</div>
 
 
 				<!-- 검색 페이징 주소? 키워드 인코딩 &검색 타입  -->
@@ -112,6 +130,7 @@
 					<c:param name="searchKeyword" value="${pageMaker.cri.searchKeyword}"></c:param>
 				</c:url>
 				<!-- /검색 페이징 주소? 키워드 인코딩 &검색 타입  -->
+				
 				<!-- 검색 페이징  -->
 				<div class="row mt-5">
 					<div class="col text-center">
@@ -144,11 +163,7 @@
 				<!-- /검색 페이징  -->
 
 
-				<div class="box">
-						<div class="box-header with-border">
-							<a href="${contextPath}/board/register"><h3 class="box-title" align="right">게시판 글쓰기</h3></a>
-						</div>
-					</div>
+				
 				</div>
 			</div>
 			</section>

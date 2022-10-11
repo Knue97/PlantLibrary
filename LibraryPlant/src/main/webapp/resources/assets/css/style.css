@@ -6089,7 +6089,7 @@ form.search-box .input-box {
 form.search-box .input-box input {
     height: 65px;
     width: 150%;
-    padding: .8em .5em;
+    padding: .8em 4em .8em .5em;
 	border: 1px solid #999;
 	font-family: inherit;
 	border-radius: 0px;
@@ -6118,7 +6118,7 @@ form.search-box .input-box input::placeholder {
 
 form.search-box .input-box .search-btn {
     position: absolute;
-    right: -100px;
+    right: -122px;
     top: 8px;
 }
 form.search-box .input-box .search-btn button {
