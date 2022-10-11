@@ -126,8 +126,15 @@ textarea:-webkit-autofill:focus {
 								value="${name }"
 								type="text" readonly />
 							<input type="hidden" name ="mr_name" value="<%=mr_name%>">
-								<label for="mr_file">파일첨부</label> <input
-								id="mr_file" name="file" type="file" />
+								<label for="mr_file">첨부파일</label>
+							<div>
+							<c:if test="${list.mr_file == null}">
+								<input type="text" value="첨부파일 없음" readonly>
+							</c:if>
+							<c:forTokens var="img" items="${list.mr_file }" delims="," varStatus="status">
+								<img src="${contextPath }/resources/assets/img/modifyrequest/${img }" style="height:150px;" onclick = "location.href='${contextPath}/resources/assets/img/modifyrequest/${img }';">
+							</c:forTokens>
+							</div>
 								<label for="mr_source">출처/참고자료</label> <input id="mr_source"
 								name="mr_source" type="text" readonly value="${list.mr_source }"/>
 							<label for="mr_content"> 수정문의 내용 <em>&#x2a;</em>

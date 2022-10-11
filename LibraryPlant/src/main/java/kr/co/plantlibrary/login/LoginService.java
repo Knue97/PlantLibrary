@@ -18,4 +18,10 @@ public interface LoginService {
 	public int userIdcheck(String u_id);
 	
 	public int userNicknamecheck(String u_nickname);
+	
+	public int userEmailcheck(String u_email);
+	
+	public void findPassword(String u_email,String u_id,String u_password) throws Exception;
+	
+	public int findPasswordCheck(LoginEntity loginEntity);
 }

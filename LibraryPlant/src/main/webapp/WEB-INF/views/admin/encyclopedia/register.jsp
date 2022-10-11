@@ -43,7 +43,7 @@
 		</div>
 		<div class="container">
 					<div class="form-group col-md-6">
-						<h2><label for="ec_id">백과사전 카테고리</label></h2> <select id="ec_id"
+						<h2 style="color: #212542;"><label for="ec_id">백과사전 카테고리</label></h2> <select id="ec_id"
 							class="form-control" name="ec_id" onchange="onChange();">
 							<option selected value="">--- 항목선택 ---</option>
 							<option value="10">식물</option>

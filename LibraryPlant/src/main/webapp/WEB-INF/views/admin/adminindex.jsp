@@ -71,19 +71,19 @@
 						<h3>플라백과사전</h3>
 					</div>
 					<button class="genric-btn primary e-large" onclick="location.href='${contextPath }/admin/encyclopedia/register'">백과등록</button>
-					<button class="genric-btn primary e-large" onclick="location.href='${contextPath }/admin/encyclopedia?num=1'">백과수정/삭제</button>
+					<button class="genric-btn primary e-large" onclick="location.href='${contextPath }/admin/encyclopedia'">백과수정/삭제</button>
 					<button style="position: relative;" class="genric-btn primary e-large" onclick="location.href='${contextPath }/admin/modifyrequest?num=1'">수정요청목록<span id="countmr"></span></button>
 					<hr>
 					<div class="row align-items-left justify-content-left">
 						<h3>회원</h3>
 					</div>
 					<button class="genric-btn primary e-large">회원관리</button>
-					<button style="position: relative;" class="genric-btn primary e-large" onclick="location.href='${contextPath}/admin/report'">신고목록<span class="note-num" id="countModify">3</span></button>
+					<button style="position: relative;" class="genric-btn primary e-large" onclick="location.href='${contextPath}/admin/report?num=1'">신고목록<span id="countrp"></span></button>
 					<hr>
 					<div class="row align-items-left justify-content-left">
 						<h3>식물원</h3>
 					</div>
-					<button class="genric-btn primary e-large">식물원 정보 등록</button>
+					<button class="genric-btn primary e-large" onclick="location.href='${contextPath}/admin/botanicalgarden/register'">식물원 정보 등록</button>
 					<button class="genric-btn primary e-large">식물원 정보 변경/삭제</button>
 					<hr>
 					<div class="row align-items-left justify-content-left">
@@ -136,6 +136,23 @@
 				
 				if(result != 0)
 				$("#countmr").replaceWith('<span class="note-num" id="countmr">'+ result +'</span>');
+				
+			},
+			error: function(result){
+				alert('오류');
+			}
+			
+		})
+		
+		
+		$.ajax({
+			
+			url: "${contextPath}/admin/report/count",
+			type: 'GET',
+			success: function(result){
+				
+				if(result != 0)
+				$("#countrp").replaceWith('<span class="note-num" id="countrp">'+ result +'</span>');
 				
 			},
 			error: function(result){

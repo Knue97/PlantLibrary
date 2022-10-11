@@ -22,66 +22,23 @@
 			<div class="slider-active">
 				<!-- Single Slider -->
 				
-				<div class="single-slider d-flex align-items-center slider-height">
+				<div class="single-slider d-flex align-items-center slider-height2">
 					<div class="container">
-					<div style="height:100px;"></div>
-				<h2 style="height:50px; color: #212542;">병해백과 목록</h2>
-				<div class="row">
-				<div class="col-lg-8">
-				<table class="table table-hover table-striped">
-				<tr style="color:white; background-color: #1F2B7B;">
-			      <th style="width: 20%;">등록번호</th>
-			      <th class="text-center" >병해명</th>
-			      <th style="width: 12%;"></th>
-			      <th style="width: 12%;"></th>
-			    </tr>
-				<c:forEach items="${list}" var="list">
-				 <tr>
-				  <td><a href="${contextPath }/encyclopedia/disease/detail?di_id=${list.di_id}">${list.di_id}</a></td>
-				  <td><a href="${contextPath }/encyclopedia/disease/detail?di_id=${list.di_id}">${list.di_alias}</a></td>
-				  <td class="text-center"><a href="${contextPath }/admin/encyclopedia/disease/update?di_id=${list.di_id}">수정</a></td>
-				  <td class="text-center"><a onclick="delConfirm();">삭제</a></td>
-				 </tr>
-				</c:forEach>
-				</table>
-				
 				<div class="row align-items-center justify-content-center">
-				<c:if test="${prev}">
-				 <span>[ <a href="${contextPath }/admin/encyclopedia?num=${startPageNum - 1}">이전</a> ]</span>
-				</c:if>
-				
-				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
-				  <span style="padding:5px;">
-					  <c:if test="${select != num}">
-					   <a href="${contextPath }/admin/encyclopedia?num=${num}">${num}</a>
-					  </c:if>
-					  <c:if test="${select == num}">
-					   <b>${num}</b>
-					  </c:if> 
-				 </span>
-				</c:forEach>
-				
-					<c:if test="${next}">
-					 <span>[ <a href="${contextPath }/admin/encyclopedia?num=${endPageNum + 1}">다음</a> ]</span>
-					</c:if>
+				<div class="col-lg-9">
+				<div class="hero__caption hero__caption3 text-center">
+					<h1 data-animation="fadeInLeft" data-delay=".3s">백과 수정/삭제</h1>						
+				</div>
+				<div class="form-group col-md-6">
+					<h4 style="color: #212542;">백과사전 카테고리를 선택하세요.</h4>
+					<select onchange="if(this.value) location.href=(this.value);">
+						<option selected value="">--- 항목선택 ---</option>
+						<option value="${contextPath }/admin/encyclopedia/plant?num=1">식물</option>
+						<option value="${contextPath }/admin/encyclopedia/disease?num=1">병해</option>
+						<option value="${contextPath }/admin/encyclopedia/pest?num=1">해충</option>
+					</select>
 				</div>
 				</div>
-
-			<div class="col-lg-4">
-
-				    <form action="#">
-				     <div class="form-group">
-				      <div class="input-group mb-3">
-				       <input type="text" class="form-control" placeholder="Search Keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-				       <div class="input-group-append">
-				        <button class="btns" type="button"><i class="ti-search"></i></button>
-				      </div>
-				    </div>
-				  </div>
-				  <button class="genric-btn w-100 primary e-large" type="submit">Search</button>
-				</form>
-
-			</div>
 
 			</div>
 		</div>
@@ -104,28 +61,28 @@
 
 	<!-- JS here -->
 	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
-
 <script>
-	function delConfirm(){
+	function delConfirm(di_id){
 		var delConfirm = confirm('정말 삭제하시겠습니까?');
 		if (delConfirm) {
-			$.ajax{(
-				url: "admin/encyclopedia/disease/delete",
+			$.ajax({
+				url: "${contextPath}/admin/encyclopedia/disease/delete",
 				data: {
-					"di_id" : "${di_id}"
+					"di_id" : di_id
 				},
 				dataType: 'json',
-				type: 'POST',
+				type: 'GET',
 				success: function(result){
-					
+					alert('삭제되었습니다.');
+					location.reload();
 				},
 				error: function(result){
-					
+					alert('오류');
 				}
 				
 			
-			)}
-		   alert('삭제되었습니다.');
+			})
+		   
 		}
 		else {
 		   alert('삭제가 취소되었습니다.');

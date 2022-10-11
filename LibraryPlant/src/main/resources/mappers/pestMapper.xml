@@ -70,4 +70,17 @@
 		from pest
 		where pe_name = #{pe_name}
 	</select>
+	<!-- 해충백과 개수 출력 -->
+	<select id="countPest" resultType="java.lang.Integer">
+		select count(pe_id) from pest
+	</select>
+	<!-- 해충백과 목록 + 페이징 -->
+	<select id="pestListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
+		 select
+		 pe_id, pe_name
+		 from pest
+		 order by pe_id desc
+		 limit #{displayPost}, #{postNum}
+	</select>
+	
 </mapper>

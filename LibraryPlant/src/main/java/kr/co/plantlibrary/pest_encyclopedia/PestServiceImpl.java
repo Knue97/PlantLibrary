@@ -1,6 +1,7 @@
 package kr.co.plantlibrary.pest_encyclopedia;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,18 @@ public class PestServiceImpl implements PestService{
 	public int checkPest(String pe_name) throws Exception {
 		// TODO Auto-generated method stub
 		return pestDAO.checkPest(pe_name);
+	}
+
+	@Override
+	public int countPest() {
+		// TODO Auto-generated method stub
+		return pestDAO.countPest();
+	}
+
+	@Override
+	public List<Map<String, Object>> listPage(int displayPost, int postNum) throws Exception {
+		// TODO Auto-generated method stub
+		return pestDAO.listPage(displayPost, postNum);
 	}
 	
 

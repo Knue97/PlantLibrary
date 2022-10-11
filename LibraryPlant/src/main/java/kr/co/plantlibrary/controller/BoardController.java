@@ -50,8 +50,6 @@ public class BoardController {
 	 */
 	@Autowired
 	BoardService service;
-	@Resource(name = "uploadPath") //외부 저장 경로 c:\\upload\\
-	private String uploadPath;
 	static String b_image;
 
 
@@ -183,14 +181,14 @@ public class BoardController {
 		logger.info("========== 게시글 작성 ==========");
 		request.setCharacterEncoding("UTF-8");
 		
-//		폴더 생성 yyyy/MM/dd
-		File uploadFolder = new File(uploadPath, getFolder());
-		logger.info("uploadFolder = " + uploadFolder);
-
-		if (uploadFolder.exists() == false) {
-			logger.info("폴더 생성 : " + uploadFolder.mkdirs());
-			uploadFolder.mkdirs();
-		} // 해당 폴더의 유무 확인 후 없으면 만듦
+////		폴더 생성 yyyy/MM/dd
+//		File uploadFolder = new File(uploadPath, getFolder());
+//		logger.info("uploadFolder = " + uploadFolder);
+//
+//		if (uploadFolder.exists() == false) {
+//			logger.info("폴더 생성 : " + uploadFolder.mkdirs());
+//			uploadFolder.mkdirs();
+//		} // 해당 폴더의 유무 확인 후 없으면 만듦
 
 //		String b_image = "";	//	이미지 컬럼이 null
 //		고유값 첨부 파일 저장
@@ -251,11 +249,7 @@ public class BoardController {
 		request.setCharacterEncoding("UTF-8");
 		logger.info("업데이트 실행");
 		
-		if (boardDTO.getB_image()!="") {
-			b_image = boardDTO.getB_image()+b_image;
-			boardDTO.setB_image(b_image);
-			int r = service.update(boardDTO);
-		}
+		
 		int r = service.update(boardDTO);
 
 		if (r > 0) {
@@ -334,7 +328,7 @@ public class BoardController {
 		return service.recommended(boardDTO);
 	}
 	
-	
+//	이미지 업로드 및 구현
 	@RequestMapping(value="board/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
@@ -345,7 +339,7 @@ public class BoardController {
 		System.out.println(contextRoot);
 		String fileRoot = contextRoot+"resources/fileupload/";
 		
-		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지널 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
 		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
 		
@@ -356,8 +350,13 @@ public class BoardController {
 			jsonObject.addProperty("url", "/plantlibrary/resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 			
+			if(b_image != null || savedFileName.length()>1) {
+				b_image += "," + savedFileName;	// DB 이미지 컬럼에 배열로 받기
+				logger.info("사진+ = " + b_image);
+			}else {
 			b_image = request.getContextPath() + "/resources/fileupload/" + savedFileName;
 			logger.info("사진 = " + b_image);
+			}
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
@@ -385,16 +384,16 @@ public class BoardController {
 //		return saveName;
 //	}
 
-//	해당 날짜 폴더
-	private String getFolder() {
-
-		// yyyy-MM-dd 대소문자 정확히 입력해야 날짜대로 나옴
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		String str = sdf.format(date);
-
-		return str.replace("-", File.separator);
-
-	}
+////	해당 날짜 폴더
+//	private String getFolder() {
+//
+//		// yyyy-MM-dd 대소문자 정확히 입력해야 날짜대로 나옴
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date date = new Date();
+//		String str = sdf.format(date);
+//
+//		return str.replace("-", File.separator);
+//
+//	}
 
 }

@@ -37,6 +37,13 @@ public class UserController {
 		
 		return service.userNicknamecheck(u_nickname);
 	}
+	@GetMapping(value = "/emailCheck")
+	@ResponseBody
+	public int emailCheck(@RequestParam("u_email") String u_email) {
+		
+		return service.userEmailcheck(u_email);
+	}
+	
 	
 	@GetMapping(value = "/mypage")
 	public String mypage() {

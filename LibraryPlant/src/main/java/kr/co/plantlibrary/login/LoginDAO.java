@@ -18,4 +18,10 @@ public interface LoginDAO {
 	public int userIdcheck(String u_id);
 	
 	public int userNicknamecheck(String u_nickname);
+	
+	public int userEmailcheck(String u_email);
+	
+	public int findPasswordCheck(LoginEntity loginEntity);
+	
+	public int findPassword(String u_password,String u_email,String u_id);
 }
