@@ -27,7 +27,6 @@ button:hover {
 }
 </style>
 
-
 <div class="box-footer">
 		
 	<button id="list">목록</button>

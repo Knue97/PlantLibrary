@@ -28,11 +28,13 @@
 		from board_like
 		where b_no = #{b_no}
 	</delete>
+	
 	<!-- 좋아요 총 개수 -->
-	<select id="likeCountAll" parameterType="java.lang.Integer">
-		insert into board (b_recommendedNumber)
-		SELECT count(b_no)
-		FROM board_like
+	<select id="likeCountAll" parameterType="BoardLikeEntity" resultType="java.lang.Integer">
+		update board
+		set b_recommendedNumber = 
+		(SELECT count(b_no) FROM board_like where b_no = #{b_no})
 		where b_no = #{b_no};
 	</select>
+	
 </mapper>

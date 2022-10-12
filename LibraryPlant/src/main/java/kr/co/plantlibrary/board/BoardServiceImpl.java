@@ -38,9 +38,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardDTO detail(int b_no) throws Exception {
-		// TODO Auto-generated method stub
+		// 조회수
 			dao.updateHit(b_no);
-			
+		
 		return dao.detail(b_no);
 	}
 

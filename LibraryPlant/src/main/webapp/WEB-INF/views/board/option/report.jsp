@@ -49,11 +49,7 @@ button:hover {
 		}
 
 		var url = "${contextPath }/board/reportPage";
-		url = url + "?b_no=" + $
-		{
-			board.b_no
-		}
-		;
+		url = url + "?b_no=" + ${board.b_no};
 		url = url + "&u_id=${board.u_id}";
 		url = url + "&b_title=${board.b_title}";
 		location.href = encodeURI(url);

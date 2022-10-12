@@ -9,15 +9,18 @@
 <%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 
 <style>
-	table textarea {
-	width: 60%;
-	height: 100px;
+	textarea {
+	width: 800px;
+	height:100px;
 	margin: auto;
-	text-align: center;
+	padding-left: auto;
+	padding-right: auto;
+	
 	}
 	.form-group{
 	min-height: 30em;
 	}
+	
 </style>
 </head>
 
@@ -47,7 +50,8 @@ function replyListAll() {
 			//alert("result");
 			var htmls = "";
 			if(result.length < 1) {
-				htmls += '<h3>댓글이 없습니다.</h3>';
+				htmls += '<br><br>';
+				htmls += '<h3 style="color: lightgrey; text-align: center;">댓글이 없습니다.</h3>';
 			} else{
 				$(result).each(function(){ // 요소별로 하나씩 실행하라
 					
@@ -179,6 +183,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 		
 		htmls = htmls + '<div class="" id="c_no' +c_no + '">';
         //<div id="reno12"> <div id="reno13">
+        htmls += '<hr>';
 		htmls += '<span class="d-block">';
 		htmls += c_no + ' - ';
 		htmls += '<strong class="text-gray-dark">' + u_id + '</strong>';
@@ -187,7 +192,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 		htmls += '<a href="javascript:void(0)" onclick="replyListAll()" >취소</a>';
 		htmls += '</span>';
 		htmls += '</span><br>';
-		htmls += '<textarea id="editmemo" name="editmemo" style="width: 800px; height:100px;" maxlength="3000">';
+		htmls += '<textarea id="editmemo" name="editmemo" maxlength="3000">';
 		htmls += c_content;
 		htmls += '</textarea>';
 		htmls += '</p>';
@@ -337,31 +342,25 @@ function replyUpdateForm(c_no, u_id, c_content){
 								<h5 style="color: lightgrey; text-align: center;">내용이 없습니다.</h5>
 							</c:if>
 						</div>
-						
-				</div>
+					</div>
 				
+					<!-- 좋아요 기능 -->
+					<%@ include file="../option/like.jsp" %>
 						
-						<div >
-						<!-- 추천 기능 -->
-						<%@ include file="../option/like.jsp" %>
-						</div>
-						
-						<br><br>
-						<div class="search-box">
+					<br><br>
+					<div class="search-box">
 						<!-- 버튼 기능 -->
 						<%@ include file="../option/detail_button.jsp" %>
-						<br>
-						</div>		
-							
-
-
-				<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
-				<c:if test="${board.bc_id == 4 }">
-					<%@include file="../option/shareInfo.jsp"%>
-				</c:if>
-				<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
+					<br>
+					</div>		
+					
+					<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
+					<c:if test="${board.bc_id == 4 }">
+						<%@include file="../option/shareInfo.jsp"%>
+					</c:if>
+					<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
 				
-			</div>
+				</div>
 			</div>
 			<p></p><br>
 
@@ -373,8 +372,10 @@ function replyUpdateForm(c_no, u_id, c_content){
 									<td>
 										<input type="hidden" name="u_id" id="u_id" value="${user.u_id}" readonly>
 										 작성자 : ${user.u_id}
-										<textarea class="form-control" name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="3000" rows="3"></textarea>
-										<p class="textTotal" align="right" style="width: 800px;">글자수 제한 : 3000자</p>
+										 <div id="textarea-middle">
+										<textarea name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="3000" rows="3"></textarea>
+										 </div>
+										<p class="textTotal" align="right">글자수 제한 : 3000자</p>
 									</td>
 									<td>
 										<input type="button" id="replyRegister" value="등록">
