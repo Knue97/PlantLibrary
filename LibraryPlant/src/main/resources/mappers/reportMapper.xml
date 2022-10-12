@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.plantlibrary.reportMapper">
+	<!-- 신고하기 -->
+	<insert id="register" parameterType="ReportEntity">
+		insert into report
+		(r_no, b_no, c_no, u_id, report_user, rc_content, r_content, r_file, r_state)
+		values
+		(#{r_no}, #{b_no}, #{c_no}, #{u_id}, #{report_user}, #{rc_content}, #{r_content}, #{r_file}, 0)
+	</insert>
+</mapper>

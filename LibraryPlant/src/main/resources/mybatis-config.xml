@@ -14,6 +14,7 @@
 		<typeAlias alias="ModifyRequestEntity" type="kr.co.plantlibrary.modifyrequest.ModifyRequestEntity"/>
 		<typeAlias alias="BotanicalGardenVO" type="kr.co.plantlibrary.botanical_garden.BotanicalGardenVO"/>
 		<typeAlias alias="SearchVO" type="kr.co.plantlibrary.plant_encyclopedia.SearchVO"/>
+		<typeAlias alias="BoardLikeEntity" type="kr.co.plantlibrary.like.BoardLikeEntity"/>
 		<typeAlias alias="ReportEntity" type="kr.co.plantlibrary.report.ReportEntity"/>
 	</typeAliases>
 </configuration>

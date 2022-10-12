@@ -6,7 +6,9 @@
 <html class="no-js" lang="zxx">
 <head>
 <%@ include file="../include/head.jsp" %>
-    <%@ include file="../include/plugin.jsp" %>
+<%@ include file="../include/plugin.jsp" %>
+<%@ include file="../board/option/regiser_css.jsp" %>
+    
 </head>
 <body>
 
@@ -44,21 +46,24 @@
             </div>
         </div>
         <!-- Slider Area End -->
-        
+        	<!-- Main content -->
         	<section class="content container-fluid">
 				<div class="container">
-					
 				<!-- search.jsp 에 필요함  -->
 				<input type="hidden" id="boardType" value="1">
-				
 				
 				<div>
 					<%@ include file="option/search.jsp" %>
 					
 					
+					<!-- 게시글 작성 커서이벤트 -->
 					<div class="box">
 						<div class="box-header with-border">
-							<a href="${contextPath}/board/register"><h3 align="right">게시판 글쓰기</h3></a>
+							<button type="button" onclick="location.href='${contextPath}/board/register';">
+								<img src="${contextPath}/resources/assets/img/icon/write_empty.png"
+									id="write" style="float: right; height: 35px; cursor: pointer;"
+									class="writeno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
+							</button>
 						<br>
 						</div>
 					</div>
@@ -89,7 +94,19 @@
 						</c:forEach>
 					</table>
 					
+					
 					<p></p>
+					
+					<!-- 게시글 작성 커서이벤트 -->
+					<div class="box">
+						<div class="box-header with-border">
+							<button type="button" onclick="location.href='${contextPath}/board/register';">
+								<img src="${contextPath}/resources/assets/img/icon/write_empty.png"
+									id="write" style="float: right; height: 35px; cursor: pointer;"
+									class="writeno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
+							</button>
+						</div>
+					</div>
 
 
 					<!-- 페이징  -->
@@ -123,15 +140,9 @@
 				</div>
 				<!-- /페이징  -->
 
-				<div class="box">
-						<div class="box-header with-border">
-							<a href="${contextPath}/board/register"><h3 class="box-title" align="right">게시판 글쓰기</h3></a>
-						</div>
-					</div>
-				</div>
-				</div>
 				
-
+				</div>
+			</div>
 			</section>
 	</main>
 <footer>

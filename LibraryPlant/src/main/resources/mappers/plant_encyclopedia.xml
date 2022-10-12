@@ -55,11 +55,25 @@
   	LIMIT #{pageStart}, #{perPageNum}	
   </select>
   
-  <!-- hits -->
+  <!-- hits up -->
   <update id="hitsup" parameterType="java.lang.Integer">
 	UPDATE plantlibrary.plant
 	SET
 	pl_hits = IFNULL(pl_hits,0)+1
+	WHERE pl_id = #{pl_id}	  	
+  </update>
+  
+  <!-- get bookmark -->
+  <select id="getbookmark" parameterType="java.util.Map" resultType="_int">
+  	SELECT pl_bookmarkCnt FROM plantlibrary.plant
+  	WHERE pl_id = #{pl_id}
+  </select>
+  
+  <!-- bookmark -->
+  <update id="bookmark" parameterType="java.lang.Integer">
+	UPDATE plantlibrary.plant
+	SET
+	pl_hits = IFNULL(pl_bookmarkCnt,0)+1
 	WHERE pl_id = #{pl_id}	  	
   </update>
   
@@ -70,6 +84,7 @@
   		<if test="category == null and value != null">
   			pl_koreanName Like CONCAT('%', #{value}, '%') OR pl_englishName Like CONCAT('%', #{value}, '%') or pl_scientificName Like CONCAT('%', #{value}, '%') or pl_familyName Like CONCAT('%', #{value}, '%') or pl_classification Like CONCAT('%', #{value}, '%')
   		</if>
+  		<if test="category == null and value == null"></if>
   		<if test="category == 'pl_koreanName'">
   			pl_koreanName Like CONCAT('%', #{value}, '%')
   		</if>

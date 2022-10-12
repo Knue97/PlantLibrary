@@ -5,9 +5,9 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-<%@ include file="../include/head.jsp" %>
-<%@ include file="../include/plugin.jsp" %>
-<%@ include file="../include/summernote.jsp" %>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
+<%@ include file="/WEB-INF/views/include/plugin.jsp" %>
+<%@ include file="/WEB-INF/views/include/summernote.jsp" %>
 </head>
 
 <script>
@@ -86,11 +86,11 @@ $(document).ready(function(){
 
 <body>
     <!-- ? Preloader Start -->
-    <%@ include file="../include/preloader.jsp" %>
+    <%@ include file="/WEB-INF/views/include/preloader.jsp" %>
     <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
-        <%@ include file="../include/header.jsp"  %>
+        <%@ include file="/WEB-INF/views/include/header.jsp"  %>
         <!-- Header End -->
     </header>
     <main>
@@ -183,7 +183,7 @@ $(document).ready(function(){
        
 	</main>
 <footer>
-    <%@ include file="../include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
   </footer>
   <!-- Scroll Up -->
   <div id="back-top" >
