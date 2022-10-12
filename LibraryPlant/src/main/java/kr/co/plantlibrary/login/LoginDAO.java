@@ -24,4 +24,6 @@ public interface LoginDAO {
 	public int findPasswordCheck(LoginEntity loginEntity);
 	
 	public int findPassword(String u_password,String u_email,String u_id);
+	
+	public int leave(String u_id);
 }

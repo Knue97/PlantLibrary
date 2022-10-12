@@ -24,7 +24,7 @@
 				<div class="container">
 					<div class="row align-items-center justify-content-center">
 						<div class="col-xl-8 col-lg-9 col-md-12 ">
-							<div class="hero__caption hero__caption3 text-center">								
+							<div class="hero__caption hero__caption3 text-center">
 								<h1 data-animation="fadeInLeft" data-delay=".6s ">식물원 등록</h1>
 							</div>
 						</div>
@@ -43,48 +43,47 @@
 					alt="">
 			</div>
 		</div>
-		<div class="container">			
+		<div class="container">
 			<form action="${contextPath}/botanicalgarden/register" method="post">
 				<div class="form-group">
-					<label>지역</label> <select class="form-control" name="g_region">
-						<option value="서울">서울</option>
-						<option value="경기">경기</option>
-						<option value="부산">부산</option>
-						<option value="인천">인천</option>
-						<option value="광주">광주</option>
-						<option value="대구">대구</option>
-						<option value="대전">대전</option>
-						<option value="울산">울산</option>
-						<option value="강원">강원</option>
-						<option value="제주">제주</option>
-					</select>
+					<label>지역</label><input type="text" class="form-control"
+						placeholder="지역" name="g_id" value="${VO.g_id }"
+						readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label>이름</label> <input type="text" class="form-control"
-						placeholder="식물원 또는 수목원 이름" name="g_name">
+						placeholder="식물원 또는 수목원 이름" name="g_name" value="${VO.g_name }"
+						readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label>주소</label> <input type="text" class="form-control"
-						placeholder="식물원 또는 수목원 주소" name="g_detailedAddress">
+						placeholder="식물원 또는 수목원 주소" name="address" id="address_kakao"
+						value="${VO.g_detailedAddress }" readonly="readonly">
 				</div>
+
 				<div class="form-group">
 					<label>홈페이지</label> <input type="url" class="form-control"
-						placeholder="식물원 또는 수목원 홈페이지" name="g_url">
+						placeholder="식물원 또는 수목원 홈페이지" name="g_url" value="${VO.g_url }"
+						readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label>요약 정보</label>
-					<textarea class="form-control" rows="5" name="g_summary"></textarea>
+					<textarea class="form-control" rows="5" name="g_summary"
+						readonly="readonly">${VO.g_summary }</textarea>
 				</div>
 				<div class="form-group">
 					<label>위도</label> <input type="number" class="form-control"
-						placeholder="식물원 또는 수목원 위도" name="g_latitude" step="any">
+						placeholder="식물원 또는 수목원 위도" name="g_latitude" id="g_latitude"
+						step="any" readonly="readonly" value="${VO.g_latitude }">
 				</div>
 				<div class="form-group">
 					<label>경도</label> <input type="number" class="form-control"
-						placeholder="식물원 또는 수목원 경도" name="g_longitude" step="any">
+						placeholder="식물원 또는 수목원 경도" name="g_longitude" id="g_longitude"
+						step="any" readonly="readonly" value="${VO.g_longitude }">
 				</div>
-				<button type="submit">등록하기</button>
-				<button type="reset">초기화</button>
+				<button type="button" onclick="" id="updateBtn">수정</button>
+				<button type="button" onclick="" id="removeBtn">삭제</button>
+				<div id="message"></div>
 			</form>
 		</div>
 	</main>
@@ -98,5 +97,14 @@
 
 	<!-- JS here -->
 	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
+	<script>
+	 let updateBtn = document.getElementById('updateBtn');
+     let removeBtn = document.getElementById('removeBtn');
+
+     updateBtn.addEventListener('click',function(){
+         location.href = '${contextPath}/botanicalgarden/listbyid?g_id=${VO.g_id}';
+     });		
+	</script>
+
 </body>
 </html>

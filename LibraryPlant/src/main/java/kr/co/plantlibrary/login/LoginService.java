@@ -24,4 +24,6 @@ public interface LoginService {
 	public void findPassword(String u_email,String u_id,String u_password) throws Exception;
 	
 	public int findPasswordCheck(LoginEntity loginEntity);
+	
+	public int leave(String u_id);
 }

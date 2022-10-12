@@ -123,6 +123,7 @@
 						</div>
 						<input type="button" onclick="location.href='${contextPath}/user/mypage_update'" value="닉네임변경">
 						<input type="button" onclick="location.href='${contextPath}/user/mypage_updatepw'" value="비빌번호변경">
+						<input type="button" onclick="location.href='${contextPath}/user/mypage_delete'" value="회원탈퇴">
 					</form>
 				</c:if>
 					

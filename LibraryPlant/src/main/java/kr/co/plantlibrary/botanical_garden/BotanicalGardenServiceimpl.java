@@ -25,4 +25,10 @@ public class BotanicalGardenServiceimpl implements BotanicalGardenService {
 		return dao.create(botanicalGardenVO);
 	}
 
+    @Override
+    public BotanicalGardenVO listById(int g_id) {
+        // TODO Auto-generated method stub
+        return dao.listById(g_id);
+    }
+
 }

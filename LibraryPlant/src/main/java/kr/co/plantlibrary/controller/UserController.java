@@ -107,4 +107,22 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/mypage_delete")
+	public String deleteForm() {
+	    
+	    
+	    
+	    return "user/mypage_delete";
+	}
+	@GetMapping("/mypage_leave")
+	public String leave(@RequestParam("u_id") String u_id,HttpServletRequest request) {
+	    
+	    int r = service.leave(u_id);
+        log.info("int r: "+ r);
+        
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/";
+	}
+	
 }

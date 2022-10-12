@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.plantlibrary.botanical_garden.BotanicalGardenService;
 import kr.co.plantlibrary.botanical_garden.BotanicalGardenVO;
@@ -18,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequestMapping("/botanicalgarden")
-public class BotanicalGarden {
+public class BotanicalGardenController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BotanicalGardenService service;
@@ -67,5 +68,25 @@ public class BotanicalGarden {
 		int r = service.create(botanicalGardenVO);
 		
 		return "redirect:/";
+	}		
+	
+	@GetMapping("/listbyid")
+	public String botanicalGardenListById(@RequestParam("g_id") int g_id, Model model) {
+	    log.info("=====================Botanical Garden Listbyid======================");
+	    BotanicalGardenVO vo = service.listById(g_id);
+	    
+	    model.addAttribute("VO", vo);
+	    
+	    return "botanicalGarden/botanical_garden";
+	}
+	
+	@GetMapping("/update")
+	public String BotanicalGardenUpdate(@RequestParam("g_id") int g_id, Model model) {
+	    log.info("=========================Botanical Garden Update=====================");
+	    BotanicalGardenVO vo = service.listById(g_id);
+        
+        
+        model.addAttribute("VO", vo);
+        return "botanicalGarden/botanical_gardenupdate";
 	}
 }
