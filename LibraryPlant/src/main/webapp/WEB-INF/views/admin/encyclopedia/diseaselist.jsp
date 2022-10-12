@@ -37,8 +37,20 @@
 						<option value="${contextPath }/admin/encyclopedia/pest?num=1">해충</option>
 					</select>
 				</div>
+				
+				<div class="form-group col-md-6" style="float: right;">
+				     <div class="form-group">
+				      <div class="input-group mb-3">
+				       <input id="searchword" style="height: 45px;" type="text" class="form-control" placeholder="병해 이름을 검색하세요">
+				       <div class="input-group-append">
+				  		<button class="genric-btn w-100 primary" type="button" style="height: 45px;" onclick="search();">검색</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
 				<h2 style="height:50px; color: #212542;">병해백과 목록</h2>
-				<table class="table table-hover table-striped">
+				<table class="table table-hover table-striped" id="searchresult">
 				<tr style="color:white; background-color: #1F2B7B;">
 			      <th style="width: 20%;">등록번호</th>
 			      <th class="text-center" >병해명</th>
@@ -60,7 +72,7 @@
 				</c:forEach>
 				</table>
 				
-				<div class="row align-items-center justify-content-center">
+				<div id="paging" class="row align-items-center justify-content-center">
 				<c:if test="${prev}">
 				 <span>[ <a href="${contextPath }/admin/encyclopedia/disease?num=${startPageNum - 1}">이전</a> ]</span>
 				</c:if>
@@ -104,6 +116,17 @@
 	<!-- JS here -->
 	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 <script>
+
+	$(document).ready(function(){
+		
+		$('#searchword').keyup(function(event){
+			
+			if(event.keyCode == 13)
+				search();		
+		})
+		
+	})
+
 	function delConfirm(di_id){
 		var delConfirm = confirm('정말 삭제하시겠습니까?');
 		if (delConfirm) {
@@ -130,6 +153,60 @@
 		   alert('삭제가 취소되었습니다.');
 		}
 	}
+	
+	function search(){
+		
+		var htmls = '';
+		
+			$.ajax({
+				url: "${contextPath}/admin/search/disease",
+				data: {
+					'searchword' : $("#searchword").val()
+				},
+				dataType: 'json',
+				type: 'GET',
+				success: function(result){
+					
+					if(result.length==0){
+						alert('검색 결과가 존재하지 않습니다.');
+						return false;
+					}
+					
+					htmls += '<table class="table table-hover table-striped" id="searchresult">';
+					htmls += '<tr style="color:white; background-color: #1F2B7B;">';
+					htmls += '<th style="width: 20%;">등록번호</th><th class="text-center" >해충명</th><th style="width: 12%;"></th>';
+					htmls += '<th style="width: 12%;"></th></tr>';
+					console.log(result[0]);
+					for(var i=0; i<result.length; i++){						
+						
+						htmls += '<tr><td><a href="${contextPath }/encyclopedia/disease/detail?di_id='+ result[i].di_id +'">'+ result[i].di_id +'</a></td>';
+						htmls += '<td><a href="${contextPath }/encyclopedia/disease/detail?di_id='+ result[i].di_id +'">'+ result[i].di_alias +'</a></td>';
+						htmls += '<td class="text-center"><a href="${contextPath }/admin/encyclopedia/disease/update?di_id='+ result[i].di_id +'">수정</a></td>';
+						htmls += '<td class="text-center"><a onclick="delConfirm('+ result[i].di_id +');">삭제</a></td></tr>';
+
+					}			
+					
+					htmls += '</table>';
+					htmls += '<button style="float: right;" class="genric-btn w-40 primary" id="all" onclick="reload();">전체보기</button>'
+					
+					$("#all").remove();
+					$("#searchresult").replaceWith(htmls);
+					$("#paging").remove();
+				    					
+				},
+				error: function(result){
+					alert('오류');
+				}
+				
+			
+			})
+		   
+	}
+	
+	function reload(){
+		location.href = "${contextPath}/admin/encyclopedia/disease?num=1";
+	}
+	
 </script>
 </body>
 </html>

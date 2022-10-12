@@ -66,7 +66,7 @@
 				<div class="form-group">
 					<label>주소</label> <input type="text" class="form-control"
 						placeholder="식물원 또는 수목원 주소" name="address"
-						id="address_kakao">
+						id="address_kakao" readonly>
 					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색">
 					<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 				</div>
@@ -158,6 +158,16 @@
             }
         }).open();
     }
+    
+    function add(){
+    	var location = $("#address_kakao").val();
+    	location += ' ' +  $("#detail-address").val();
+    	
+    	$('#g_detailedAddress').val(location);
+
+    }
+    
+    
 </script>	
 
 </body>

@@ -15,4 +15,10 @@
 		VALUES
 		(#{g_name},#{g_detailedAddress},#{g_url},#{g_summary},#{g_latitude},#{g_longitude},#{g_region})
 	</insert>
+	
+	<select id="listbyid" resultType="BotanicalGardenVO">
+		SELECT g_id,g_name,g_detailedAddress,g_url,g_summary,g_latitude,g_longitude,g_region
+		FROM plantlibrary.botanical_garden
+		WHERE g_id = #{g_id}
+	</select>
 </mapper>

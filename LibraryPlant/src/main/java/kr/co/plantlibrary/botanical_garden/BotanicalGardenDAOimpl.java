@@ -28,4 +28,10 @@ public class BotanicalGardenDAOimpl implements BotanicalGardenDAO {
 		return sqlSession.insert(nameSpace + ".create", botanicalGardenVO);
 	}
 
+    @Override
+    public BotanicalGardenVO listById(int g_id) {
+        // TODO Auto-generated method stub
+        return sqlSession.selectOne(nameSpace + ".listbyid", g_id);
+    }
+
 }

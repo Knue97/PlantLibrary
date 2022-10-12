@@ -251,7 +251,6 @@ window.onload = function() {
 		document.pfrm.submit();
 	}
 }
-
 function pwtest() {
 	var p1 = document.getElementById('password').value;
 	var p2 = document.getElementById('password2').value;
@@ -262,7 +261,6 @@ function pwtest() {
 		alert("비밀번호가 일치합니다");
 		return true;
 	}
-
 }
 $('#mail-Check-Btn').click(function() {
 					const email = $('#email1').val()
@@ -270,7 +268,6 @@ $('#mail-Check-Btn').click(function() {
 					console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
 					const checkInput = $('.mail-check-input') // 인증번호 입력하는곳
 					$("#real-email").val(email);
-
 					$.ajax({
 								type : 'get',
 								url : '<c:url value ="/login/register/mailCheck?email="/>'
@@ -288,7 +285,6 @@ $('#mail-Check-Btn').click(function() {
 $('.mail-check-input').blur(function() {
 			const inputCode = $(this).val();
 			const $resultMsg = $('#mail-check-warn');
-
 			if (inputCode === code) {
 				$resultMsg.html('인증번호가 일치합니다.');
 				$resultMsg.css('color', 'green');
@@ -316,7 +312,6 @@ $("#u_id").blur(function() {
 								success : function(data) {
 									console.log("1 = 중복o / 0 = 중복x : "
 											+ data);
-
 									if (data == 1) {
 										// 1 : 아이디가 중복되는 문구
 										$("#id_check").text(
@@ -326,24 +321,19 @@ $("#u_id").blur(function() {
 										$("#reg_submit").attr(
 												"disabled", true);
 									} else {
-
 										if (idJ.test(u_id)) {
 											// 0 : 아이디 길이 / 문자열 검사
 											$("#id_check").text("");
 											$("#reg_submit").attr(
 													"disabled", false);
-
 										} else if (u_id == "") {
-
 											$('#id_check').text(
 													'아이디를 입력해주세요.');
 											$('#id_check').css('color',
 													'red');
 											$("#reg_submit").attr(
 													"disabled", true);
-
 										} else {
-
 											$('#id_check').text(
 															"아이디는 소문자와 숫자 4~12자리만 가능합니다.");
 											$('#id_check').css('color',
@@ -351,7 +341,6 @@ $("#u_id").blur(function() {
 											$("#reg_submit").attr(
 													"disabled", true);
 										}
-
 									}
 								},
 								error : function() {
@@ -369,7 +358,6 @@ $("#u_nickname").blur(function() {
 				success : function(data) {
 					console.log("1 = 중복o / 0 = 중복x : "
 							+ data);
-
 					if (data != 0) {
 						
 						$("#nickname_check").text(
@@ -379,24 +367,19 @@ $("#u_nickname").blur(function() {
 						$("#reg_submit").attr(
 								"disabled", true);
 					} else {
-
 						if (idJ2.test(u_nickname)) {
 							// 0 : 닉네임 길이 / 문자열 검사
 							$("#nickname_check").text("");
 							$("#reg_submit").attr(
 									"disabled", false);
-
 						} else if (u_nickname == "") {
-
 							$('#nickname_check').text(
 									'닉네임을 입력해주세요.');
 							$('#nickname_check').css('color',
 									'red');
 							$("#reg_submit").attr(
 									"disabled", true);
-
 						} else {
-
 							$('#nickname_check').text(
 											"2~6자만 가능");
 							$('#nickname_check').css('color',
@@ -404,7 +387,6 @@ $("#u_nickname").blur(function() {
 							$("#reg_submit").attr(
 									"disabled", true);
 						}
-
 					}
 				},
 				error : function() {
@@ -412,17 +394,14 @@ $("#u_nickname").blur(function() {
 				}
 			});
 });
-
 function sample4_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
             // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
             var roadAddr = data.roadAddress; // 도로명 주소 변수
             var extraRoadAddr = ''; // 참고 항목 변수
-
             // 법정동명이 있을 경우 추가한다. (법정리는 제외)
             // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
             if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -436,7 +415,6 @@ function sample4_execDaumPostcode() {
             if(extraRoadAddr !== ''){
                 extraRoadAddr = ' (' + extraRoadAddr + ')';
             }
-
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample4_postcode').value = data.zonecode;
             document.getElementById("sample4_roadAddress").value = roadAddr;
@@ -448,14 +426,12 @@ function sample4_execDaumPostcode() {
             } else {
                 document.getElementById("sample4_extraAddress").value = '';
             }
-
             var guideTextBox = document.getElementById("guide");
             // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
             if(data.autoRoadAddress) {
                 var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                 guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
                 guideTextBox.style.display = 'block';
-
             } else if(data.autoJibunAddress) {
                 var expJibunAddr = data.autoJibunAddress;
                 guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';

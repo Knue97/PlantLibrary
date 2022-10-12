@@ -140,7 +140,7 @@
 									
 									<c:if test="${user.u_state == 99}"> 
 									 <a style="color:black;"href="${contextPath }/admin/encyclopedia/pest/update?pe_id=${pest.pe_id}">수정하기</a>
-									 <a style="color:black;"href="${contextPath }/admin/encyclopedia/pest/delete?pe_id=${pest.pe_id}">삭제하기</a>
+									 <a onclick="delConfirm(${pest.pe_id});" style="color:black;">삭제하기</a>
 									</c:if>
 								</div>
 							</div>
@@ -307,9 +307,32 @@
 
 	}
 		
-	
-		
-		
+	function delConfirm(pe_id){
+		var delConfirm = confirm('정말 삭제하시겠습니까?');
+		if (delConfirm) {
+			$.ajax({
+				url: "${contextPath}/admin/encyclopedia/pest/delete",
+				data: {
+					"pe_id" : pe_id
+				},
+				dataType: 'json',
+				type: 'GET',
+				success: function(result){
+					alert('삭제되었습니다.');
+					location.href='${contextPath}/encyclopedia/diseaseandpest';
+				},
+				error: function(result){
+					alert('오류');
+				}
+				
+			
+			})
+		   
+		}
+		else {
+		   alert('삭제가 취소되었습니다.');
+		}
+	}
 </script>
 
 </body>

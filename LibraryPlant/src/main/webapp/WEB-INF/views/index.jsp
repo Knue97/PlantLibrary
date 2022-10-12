@@ -6,7 +6,24 @@
 <html class="no-js" lang="zxx">
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
+<style>
+    .slide-image{
+	    height: 550px;
+	    background-size: cover; 
+	    background-position: center; 
+	    background-repeat: no-repeat;
+    }
     
+    .thumb {
+      margin: 0;
+      padding: 30px 50px 30px 50px;
+      list-style: none;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 150px;
+    }
+    
+</style>
 </head>
 <body>
     <!-- ? Preloader Start -->
@@ -54,6 +71,40 @@
         <div class="domain-search-area section-bg1">
            <div class="container">
                <div class="row">
+               
+               
+               
+               
+             <div class="col-xl-12">   
+               <div style="overflow: hidden; height: 550px;" id="details_slider" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+						<li class="active thumb" data-target="#details_slider" data-slide-to="0" style="background-image: url(${contextPath}/resources/assets/img/slide/slide1.jpg);"></li>
+						<li class="thumb" data-target="#details_slider" data-slide-to="1" style="background-image: url(${contextPath}/resources/assets/img/slide/slide2.jpg);"></li>											
+						<li class="thumb" data-target="#details_slider" data-slide-to="2" style="background-image: url(${contextPath}/resources/assets/img/slide/slide3.jpg);"></li>											
+						<li class="thumb" data-target="#details_slider" data-slide-to="3" style="background-image: url(${contextPath}/resources/assets/img/slide/slide4.jpg);"></li>											
+					</ol>
+                    <div class="carousel-inner">
+                    	<div class="carousel-item slide-image active" onclick = "location.href='${contextPath}/encyclopedia/plant/listgroup';" style="cursor: pointer; background-image: url(${contextPath}/resources/assets/img/slide/slide1.jpg);" >
+                             <a class="gallery_img" href="${contextPath}/resources/assets/img/slide/slide1.jpg"></a>
+                        </div>
+                   		<div class="carousel-item slide-image" onclick = "location.href='${contextPath}/board/freeListAll';" style="cursor: pointer; background-image: url(${contextPath}/resources/assets/img/slide/slide2.jpg);" >
+                             <a class="gallery_img" href="${contextPath}/resources/assets/img/slide/slide2.jpg"></a>
+                        </div>
+                   		<div class="carousel-item slide-image" onclick = "location.href='${contextPath}/encyclopedia/diseaseandpest';" style="cursor: pointer; background-image: url(${contextPath}/resources/assets/img/slide/slide3.jpg);" >
+                             <a class="gallery_img" href="${contextPath}/resources/assets/img/slide/slide3.jpg"></a>
+                        </div>
+                   		<div class="carousel-item slide-image" onclick = "location.href='${contextPath}/botanicalgarden/navermap';" style="cursor: pointer; background-image: url(${contextPath}/resources/assets/img/slide/slide4.jpg);" >
+                             <a class="gallery_img" href="${contextPath}/resources/assets/img/slide/slide4.jpg"></a>
+                        </div>
+                    </div>
+				</div>
+              </div>   
+               
+               
+               
+              <div class="row" style="heigt:50px;"></div> 
+               
+               
                    <div class="col-xl-4 col-lg-5">
                        <h2>백과 검색</h2>
                        <p>관리자와 사용자가 함께 만든 백과를 검색해보세요</p>
@@ -83,13 +134,21 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-12">
-                    <div class="section-tittle text-center mb-105">
+                    
+                    
+                
+
+                  
+                  
+                  
+                  
+                  <div class="section-tittle text-center mb-105">
                         <h2>플라는 이것이 다르다!</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6"">
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-cat">
                         <div class="cat-icon">
                             <img src="${contextPath}/resources/assets/img/icon/services1.svg" alt="">

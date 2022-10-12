@@ -100,6 +100,12 @@ public class LoginServiceimpl implements LoginService {
 		return dao.userEmailcheck(u_email);
 	}
 
+    @Override
+    public int leave(String u_id) {
+        // TODO Auto-generated method stub
+        return dao.leave(u_id);
+    }
+
 
 
 	

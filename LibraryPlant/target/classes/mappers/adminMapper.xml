@@ -55,4 +55,37 @@
 		r_state = #{r_state}
 		where r_no = #{r_no}
 	</update>
+		<!-- 회원수 카운트 -->
+	<select id="countUser" resultType="java.lang.Integer">
+		select count(u_id) from user
+	</select>
+	<!-- 회원 목록 + 페이징 -->
+	<select id="userListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
+		 select
+		 u_id, u_nickname, u_name, u_email, u_state
+		 from user
+		 order by u_id
+		 limit #{displayPost}, #{postNum}
+	</select>
+	<!-- 회원상태변경 -->
+	<update id="updateUserState" parameterType="java.util.HashMap">
+		update user
+		set
+		u_state = #{u_state}
+		where u_id = #{u_id}
+	</update>
+	<!-- 회원 삭제 -->
+	<delete id="deleteUser" parameterType="java.lang.String">
+		delete
+		from user
+		where u_id = #{u_id}
+	</delete>
+	<!-- 식물 삭제 -->
+	<delete id="dfs">
+		
+	</delete>
+	<!-- 식물 수정 -->
+	<update id="d">
+		
+	</update>
  </mapper>
