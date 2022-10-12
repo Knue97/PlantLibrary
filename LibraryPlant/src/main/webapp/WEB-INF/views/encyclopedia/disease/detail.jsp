@@ -137,7 +137,7 @@
 									
 									<c:if test="${user.u_state == 99}"> 
 									<a href="${contextPath }/admin/encyclopedia/disease/update?di_id=${disease.di_id }" style="color:black;"> 수정하기 </a>
-									<a href="${contextPath }/admin/encyclopedia/disease/delete?di_id=${disease.di_id }" style="color:black;"> 삭제하기 </a>
+									<a onclick="delConfirm(${disease.di_id});" style="color:black;">삭제하기</a>
 									</c:if>
 									
 								</div>
@@ -306,7 +306,32 @@
 	}
 		
 	
-		
+	function delConfirm(di_id){
+		var delConfirm = confirm('정말 삭제하시겠습니까?');
+		if (delConfirm) {
+			$.ajax({
+				url: "${contextPath}/admin/encyclopedia/disease/delete",
+				data: {
+					"di_id" : di_id
+				},
+				dataType: 'json',
+				type: 'GET',
+				success: function(result){
+					alert('삭제되었습니다.');
+					location.href='${contextPath}/encyclopedia/diseaseandpest';
+				},
+				error: function(result){
+					alert('오류');
+				}
+				
+			
+			})
+		   
+		}
+		else {
+		   alert('삭제가 취소되었습니다.');
+		}
+	}		
 		
 </script>
 

@@ -77,7 +77,7 @@
 					<div class="row align-items-left justify-content-left">
 						<h3>회원</h3>
 					</div>
-					<button class="genric-btn primary e-large">회원관리</button>
+					<button class="genric-btn primary e-large" onclick="location.href='${contextPath}/admin/user?num=1'">회원관리</button>
 					<button style="position: relative;" class="genric-btn primary e-large" onclick="location.href='${contextPath}/admin/report?num=1'">신고목록<span id="countrp"></span></button>
 					<hr>
 					<div class="row align-items-left justify-content-left">

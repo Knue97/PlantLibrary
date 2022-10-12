@@ -92,4 +92,42 @@ public class AdminDAOImpl implements AdminDAO{
 		return sqlSession.update(NAMESPACE + ".updateReportState", data);
 	}
 
+
+    @Override
+    public int countUser() {
+        // TODO Auto-generated method stub
+        return sqlSession.selectOne(NAMESPACE+".countUser");
+    }
+
+
+    @Override
+    public List<Map<String, Object>> userListPage(int displayPost, int postNum) throws Exception {
+        // TODO Auto-generated method stub
+        HashMap<String, Integer> data = new HashMap<String, Integer>();
+        
+        data.put("displayPost", displayPost);
+        data.put("postNum", postNum);
+         
+        return sqlSession.selectList(NAMESPACE + ".userListPage", data);
+    }
+
+
+    @Override
+    public int updateUserState(String u_id, int u_state) throws Exception {
+        // TODO Auto-generated method stub
+        HashMap<String, Object> data = new HashMap<String, Object>();
+        
+        data.put("u_id", u_id);
+        data.put("u_state", u_state);
+        
+        return sqlSession.update(NAMESPACE + ".updateUserState", data);
+    }
+
+
+    @Override
+    public int deleteUser(String u_id) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.delete(NAMESPACE + ".deleteUser", u_id);
+    }
+
 }

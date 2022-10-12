@@ -61,6 +61,30 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return adminDAO.updateReportState(r_no, r_state);
 	}
+
+    @Override
+    public int countUser() {
+        // TODO Auto-generated method stub
+        return adminDAO.countUser();
+    }
+
+    @Override
+    public List<Map<String, Object>> userListPage(int displayPost, int postNum) throws Exception {
+        // TODO Auto-generated method stub
+        return adminDAO.userListPage(displayPost, postNum);
+    }
+
+    @Override
+    public int updateUserState(String u_id, int u_state) throws Exception {
+        // TODO Auto-generated method stub
+        return adminDAO.updateUserState(u_id, u_state);
+    }
+
+    @Override
+    public int deleteUser(String u_id) throws Exception {
+        // TODO Auto-generated method stub
+        return adminDAO.deleteUser(u_id);
+    }
 	
 	
 }
