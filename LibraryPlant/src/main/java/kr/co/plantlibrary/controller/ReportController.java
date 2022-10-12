@@ -25,19 +25,19 @@ public class ReportController {
 	FileUtil fileUtil;
 	
 	
-	@GetMapping(value="board/report")
+	@GetMapping(value="board/reportPage")
 	public String report(ReportEntity reportEntity) {
-		return "board/option/report";
+		return "board/optionPage/reportPage";
 	}
 	
 	
 	// 수정요청폼 내역 DB전송
-	@PostMapping(value="board/report")
+	@PostMapping(value="board/reportPage")
 	public ModelAndView register(ReportEntity reportEntity, MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] upload) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 
-		String imgstr = fileUtil.uploadFile(upload, request, "/report");
+		String imgstr = fileUtil.uploadFile(upload, request, "/reportPage");
 		
 		reportEntity.setR_file(imgstr);
 		int r = reportService.register(reportEntity);
@@ -53,7 +53,7 @@ public class ReportController {
 	}
 	
 	// 관리자 신고 목록 관리  0. 접수대기 1. 접수중 2. 접수 완료
-	@GetMapping(value="board/option/report/changeStatus")
+	@GetMapping(value="board/reportPage/changeStatus")
 	public String ChangeStatus(@RequestParam("r_state")int r_state) {
 		
 		

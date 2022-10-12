@@ -5,19 +5,19 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-<%@ include file="../include/head.jsp" %>
-<%@ include file="../include/plugin.jsp" %>
-<%@ include file="../board/option/regiser_css.jsp" %>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
+<%@ include file="/WEB-INF/views/include/plugin.jsp" %>
+<%@ include file="/WEB-INF/views/board/option/regiser_css.jsp" %>
 
 </head>
 <body>
 
     <!-- ? Preloader Start -->
-    <%@ include file="../include/preloader.jsp" %>
+    <%@ include file="/WEB-INF/views/include/preloader.jsp" %>
     <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
-        <%@ include file="../include/header.jsp"  %>
+        <%@ include file="/WEB-INF/views/include/header.jsp"  %>
         <!-- Header End -->
     </header>
     <main>
@@ -52,7 +52,7 @@
 				
 				
 				<div>
-					<%@ include file="option/search.jsp" %>
+					<%@ include file="../option/search.jsp" %>
 					
 					
 					<!-- 게시글 작성 커서이벤트 -->
@@ -109,7 +109,7 @@
 					<p></p>
 					
 					<!-- 검색에 해당하는 게시글 결과 -->
-					<%@ include file="option/resultNone.jsp" %>
+					<%@ include file="../option/resultNone.jsp" %>
 					<!-- /검색에 해당하는 게시글 결과 -->
 					
 					<!-- 게시글 작성 커서이벤트 -->
@@ -171,7 +171,7 @@
 			
 	</main>
 <footer>
-    <%@ include file="../include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
   </footer>
   <!-- Scroll Up -->
   <div id="back-top" >

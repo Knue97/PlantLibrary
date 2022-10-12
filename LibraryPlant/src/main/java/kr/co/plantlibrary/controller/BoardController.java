@@ -151,7 +151,7 @@ public class BoardController {
 		List<BoardDTO> listAll = service.searchList(cri);
 		mav.addObject("searchList", listAll);
 		mav.addObject("pageMaker", pageMaker);
-		mav.setViewName("board/searchList");
+		mav.setViewName("board/optionPage/searchList");
 		return mav;
 	}
 	
@@ -164,7 +164,7 @@ public class BoardController {
 		BoardDTO board = service.detail(b_no);
 		model.addAttribute("board", board);
 
-		return "board/detail";
+		return "board/optionPage/detail";
 	}
 
 //	게시글 입력 insert
@@ -172,7 +172,7 @@ public class BoardController {
 	@GetMapping(value = "board/register")
 	public String register() {
 		logger.info("글쓰기 폼으로 이동");
-		return "board/register";
+		return "board/optionPage/register";
 	}
 
 //	-2. 입력
@@ -240,7 +240,7 @@ public class BoardController {
 		BoardDTO board = service.detail(b_no);
 		model.addAttribute("board", board);
 		logger.info("업뎃 폼 " + board);
-		return "board/update";
+		return "board/optionPage/update";
 	}
 
 //	-2 수정

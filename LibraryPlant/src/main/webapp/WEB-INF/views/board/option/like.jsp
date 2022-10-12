@@ -5,25 +5,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <!doctype html>
 
-<style>
-button {
-  display: block;
-  float: right;
-  line-height: 24pt;
-  padding: 0 20px;
-  border: none;
-  background: #fff;
-  color: #000;
-  letter-spacing: 2px;
-  transition: .2s all ease-in-out;
-  border-bottom: 2px solid transparent;
-  outline: none; }
-  button:hover {
-    background: inherit;
-    color: #2e8b57;
-    border-bottom: 2px solid #2e8b57; }
-</style>
-	
+
 	
 	
 		<h2 style="font-weight: bold;">
@@ -32,26 +14,15 @@ button {
 				class="likeno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
 		</h2>
 
-		<c:if test="${user != null}">
-		<button id="report"> 신고 </button>
-		</c:if>
 
 
 
 
 <script>
-$('#report').on('click', function(e) {
-	e.preventDefault();
 
-	
-	var url = "${contextPath }/board/report";
-	url = url + "?b_no=" + ${board.b_no};
-	url = url + "&u_id=${board.u_id}";
-	url = url + "&b_title=${board.b_title}";
-	location.href = encodeURI(url);
-	console.log(encodeURI(url));
 
-});
+
+//	마우스 이벤트
 	function onMouseEnter() {
 		if ($("#like").attr('class') == 'likeno')
 
@@ -85,7 +56,7 @@ $('#report').on('click', function(e) {
 
 			if ('${user.u_id}' == "") {
 				alert('즐겨찾기는 로그인 후 이용해주세요.');
-				location.href = "${contextPath}/login/login";
+				
 				return;
 
 			}

@@ -5,8 +5,8 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-<%@ include file="../include/head.jsp"%>
-<%@ include file="../include/plugin.jsp"%>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
+<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 
 </head>
 
@@ -274,11 +274,11 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 <body>
 	<!-- ? Preloader Start -->
-	<%@ include file="../include/preloader.jsp"%>
+	<%@ include file="/WEB-INF/views/include/preloader.jsp"%>
 	<!-- Preloader Start -->
 	<header>
 		<!-- Header Start -->
-		<%@ include file="../include/header.jsp"%>
+		<%@ include file="/WEB-INF/views/include/header.jsp"%>
 		<!-- Header End -->
 	</header>
 	<main>
@@ -343,8 +343,11 @@ function replyUpdateForm(c_no, u_id, c_content){
 						<div class="search-box" align="center">
 							
 						<!-- 추천 기능 -->
-						<%@ include file="option/like.jsp" %>
-						<!-- /추천 기능 -->
+						<%@ include file="../option/like.jsp" %>
+						<!-- 신고 기능 -->
+						<%@ include file="../option/report.jsp" %>
+						
+						
 							
 							
 							
@@ -386,7 +389,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 				<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
 				<c:if test="${board.bc_id == 4 }">
 
-					<%@include file="option/shareInfo.jsp"%>
+					<%@include file="../option/shareInfo.jsp"%>
 
 				</c:if>
 				<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
@@ -424,7 +427,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 	</main>
 	<footer>
-		<%@ include file="../include/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	</footer>
 	<!-- Scroll Up -->
 	<div id="back-top">
