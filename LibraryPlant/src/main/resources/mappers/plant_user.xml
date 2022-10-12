@@ -21,6 +21,11 @@
 		WHERE (u_id = #{u_id});
 	</select>
 	
+	<select id="mypage_leave">
+		DELETE FROM plantlibrary.user
+		WHERE u_id = #{u_id}
+	</select>
+	
 	<select id="userIdcheck" parameterType="LoginEntity" resultType="java.lang.Integer">
 		select count(*) from plantlibrary.user where u_id = #{u_id}
 	</select>

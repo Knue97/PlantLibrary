@@ -84,6 +84,12 @@ public class LoginDAOimpl implements LoginDAO {
 		return sqlSession.selectOne(nameSpace + ".userEmailcheck", u_email);
 	}
 
+    @Override
+    public int leave(String u_id) {
+        // TODO Auto-generated method stub
+        return sqlSession.delete(nameSpace + ".mypage_leave", u_id);
+    }
+
 
 
 	
