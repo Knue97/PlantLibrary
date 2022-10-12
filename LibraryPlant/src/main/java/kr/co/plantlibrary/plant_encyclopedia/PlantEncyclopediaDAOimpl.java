@@ -83,4 +83,16 @@ public class PlantEncyclopediaDAOimpl implements PlantEncyclopediaDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.update(nameSpace+".hitsup", pl_id);
 	}
+
+    @Override
+    public int bookMark(int pl_id) {
+        // TODO Auto-generated method stub
+        return sqlSession.update(nameSpace+".bookmark", pl_id);
+    }
+
+    @Override
+    public int getBookMark(Map<String, Object> map) {
+        // TODO Auto-generated method stub
+        return sqlSession.selectOne(nameSpace+".getbookmark", map);
+    }
 }

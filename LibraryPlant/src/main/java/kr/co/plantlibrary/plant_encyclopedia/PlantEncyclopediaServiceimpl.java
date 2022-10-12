@@ -80,6 +80,18 @@ public class PlantEncyclopediaServiceimpl implements PlantEncyclopediaService {
 		// TODO Auto-generated method stub
 		return dao.hitsUp(pl_id);
 	}
+
+    @Override
+    public int bookMark(int pl_id) {
+        // TODO Auto-generated method stub
+        return dao.bookMark(pl_id);
+    }
+
+    @Override
+    public int getBookMark(Map<String, Object> map) {
+        // TODO Auto-generated method stub
+        return dao.getBookMark(map);
+    }
 	
 	
 }

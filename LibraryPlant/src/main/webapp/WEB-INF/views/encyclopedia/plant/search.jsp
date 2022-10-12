@@ -59,8 +59,12 @@
 					</div>
 				</div>
 				<div class="row justify-content-center align-content-center">
-					<div class="col-2">
-						<select name="category" id="" class="text-center">
+					<div class="col-xl-8 col-lg-7">
+						<!--Hero form -->
+						<form action="${contextPath}/encyclopedia/plant/search"
+							class="search-box" method="get">
+							<select name="category" id="" class="text-center"
+								onchange="changeSelect()">
 								<option value="" selected>타입</option>
 								<option value="pl_koreanName">한글명</option>
 								<option value="pl_englishName">영명</option>
@@ -68,11 +72,6 @@
 								<option value="pl_familyName">과명</option>
 								<option value="pl_classification">분류</option>
 							</select>
-							
-					</div>
-					<div class="col-xl-8 col-lg-7">
-						<!--Hero form -->
-						<form action="${contextPath}/encyclopedia/plant/search" class="search-box" method="get">
 							<div class="input-form">
 								<input type="text" placeholder="Search for a domain"
 									name="value">
@@ -97,7 +96,7 @@
 			<div class="d-flex justify-content-center">
 				<div class="div">
 					<h1>검색결과</h1>
-				</div>				
+				</div>
 			</div>
 			<div class="row row-cols-1 row-cols-md-3">
 				<c:forEach var="entity" items="${list}">
@@ -123,7 +122,7 @@
 			</div>
 		</div>
 
-		
+
 
 
 
@@ -137,6 +136,46 @@
 	</div>
 
 	<!-- JS here -->
+	<script>
+		function changeSelect() {
+			let selectList = document.getElementById('category');
+
+			removeSelect(selectList);
+			setSelect(selectList);
+			console.log(selectList.options[selectList.selectedIndex].value);
+
+		}
+
+		function setSelect(selectList) {
+			let selectValue = selectList.options[selectList.selectedIndex].value;
+
+			if (selectValue == 'pl_koreanName') {
+				selectList[1].setAttribute('selected', true);
+			}
+
+			if (selectValue == 'pl_englishName') {
+				selectList[2].setAttribute('selected', true);
+			}
+
+			if (selectValue == 'pl_scientificName') {
+				selectList[3].setAttribute('selected', true);
+			}
+
+			if (selectValue == 'pl_familyName') {
+				selectList[4].setAttribute('selected', true);
+			}
+
+			if (selectValue == 'pl_classification') {
+				selectList[5].setAttribute('selected', true);
+			}
+		}
+
+		function removeSelect(selectList) {
+			for (let index = 0; index < selectList.length; index++) {
+				selectList[index].removeAttribute('selected');
+			}
+		}
+	</script>
 	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 </body>
 </html>
