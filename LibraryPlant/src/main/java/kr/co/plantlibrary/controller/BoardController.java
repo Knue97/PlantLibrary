@@ -108,6 +108,19 @@ public class BoardController {
 		logger.info("" + pageMaker);
 
 		List<BoardDTO> listAll = service.showListAll(cri);
+		
+		// 썸네일 
+		for(int i =0; i<listAll.size();i++) {
+		    if (listAll.get(i).getB_image() != null) {
+                
+	         String thumbnail = null;
+	         String [] st =listAll.get(i).getB_image().split(",");
+	         thumbnail = st[0];
+	         listAll.get(i).setB_image(thumbnail);
+		    }
+	      }
+		
+		
 		mav.addObject("showListAll", listAll);
 		mav.addObject("pageMaker", pageMaker);
 		mav.setViewName("board/showListAll");
@@ -350,15 +363,15 @@ public class BoardController {
 			jsonObject.addProperty("url", "/plantlibrary/resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 			
-			if(b_image != null || savedFileName.length()>1) {
-				b_image += "," + savedFileName;	// DB 이미지 컬럼에 배열로 받기
-				logger.info("사진+ = " + b_image);
-			}else {
+			
 			b_image = request.getContextPath() + "/resources/fileupload/" + savedFileName;
 			logger.info("사진 = " + b_image);
-			}
+			if(b_image != null) {
+                b_image += "," + savedFileName; // DB 이미지 컬럼에 배열로 받기
+                logger.info("사진+ = " + b_image);
+            }
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			FileUtils.deleteQuietly(targetFile);	 //저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}

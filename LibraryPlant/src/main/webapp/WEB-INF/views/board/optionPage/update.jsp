@@ -169,13 +169,14 @@ $(document).ready(function(){
 							<!-- 작성자 -->
 							<input type="hidden" name="u_id" value="${user.u_id}">
 							<!-- 수정에 사용할 글번호 -->
-							<input type="hidden" name="b_no" value="${board.b_no }" />
+							<input type="hidden" name="b_no" value="${board.b_no }">
+							<input type="hidden" name="b_image" value="${board.b_image }">
 						</div>
 
 						<div class="box-footer" align="right">
 						<input type="button" value="취소" onclick="history.back()">
 						<input type="reset" value="초기화">
-						<input type="submit" value="수정" >
+						<input type="submit" value="수정완료" >
 						</div>
 				</form>
 </div></div>

@@ -8,6 +8,17 @@
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 <%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 
+<style>
+	table textarea {
+	width: 60%;
+	height: 100px;
+	margin: auto;
+	text-align: center;
+	}
+	.form-group{
+	min-height: 30em;
+	}
+</style>
 </head>
 
 <script>
@@ -80,7 +91,7 @@ function replyListAll() {
 //댓글 신고 기능
 function report(b_no, c_no, u_id, c_content){
 
-	var url = "${contextPath }/board/report";
+	var url = "${contextPath }/board/reportPage";
 	url = url + "?b_no=" + b_no;
 	url = url + "&c_no=" + c_no;
 	url = url + "&u_id=" + u_id;
@@ -255,19 +266,6 @@ function replyUpdateForm(c_no, u_id, c_content){
 	}
 	
 	
-
-
-//	게시글 삭제 확인창
-	function alarm() {
-		var msg = "해당 글을 삭제하시겠습니까?";
-		if (confirm(msg)) {
-			location.href = 'delete?b_no=${board.b_no}';
-			return false;
-		}
-		return true;
-	}
-	
-	
 	
 </script>
 
@@ -328,76 +326,45 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 				<div class="box-body">
 
-					<div class="form-group">
+					<div class="form-group" >
 						
 						<p></p>
-						<br><br><br><br>
+						<br>
 
 						<div class="quote-wrapper">
 							<p class="mb-4">${board.b_content}</p>
 							<c:if test="${board.b_content == '' }">
-								<h5 style="color: lightgrey;">내용이 없습니다.</h5>
+								<h5 style="color: lightgrey; text-align: center;">내용이 없습니다.</h5>
 							</c:if>
 						</div>
-						<br><br><br><br>
-						<div class="search-box" align="center">
-							
+						
+				</div>
+				
+						
+						<div >
 						<!-- 추천 기능 -->
 						<%@ include file="../option/like.jsp" %>
-						<!-- 신고 기능 -->
-						<%@ include file="../option/report.jsp" %>
-						
-						
-							
-							
-							
-						<div class="box-footer" align="right">
-							<input type="button" value="메인"
-								onclick="location.href='${contextPath}'">
-
-							<c:if test="${user.u_id == board.u_id || user.u_state == 99 }">
-								<input type="button" value="수정" name="loginCheck" onclick="location.href='update?b_no=${board.b_no}'">
-								<input type="button" value="삭제" onclick="return alarm();">
-							</c:if>
-
-							<c:choose>
-							
-								<c:when test="${board.bc_id == 1}">
-									<input type="button" value="목록" onclick="location.href='freeListAll'">
-								</c:when>
-								<c:when test="${board.bc_id == 2}">
-									<input type="button" value="목록" onclick="location.href='qnaListAll'">
-								</c:when>
-								<c:when test="${board.bc_id == 3}">
-									<input type="button" value="목록" onclick="location.href='showListAll'">
-								</c:when>
-								<c:when test="${board.bc_id == 4}">
-									<input type="button" value="목록" onclick="location.href='shareListAll'">
-								</c:when>
-								
-								<c:otherwise>
-									<input type="button" value="메인" onclick="location.href='${contextPath}'">
-								</c:otherwise>
-								
-							</c:choose>
 						</div>
-
-					</div>
-				</div>
+						
+						<br><br>
+						<div class="search-box">
+						<!-- 버튼 기능 -->
+						<%@ include file="../option/detail_button.jsp" %>
+						<br>
+						</div>		
+							
 
 
 				<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
 				<c:if test="${board.bc_id == 4 }">
-
 					<%@include file="../option/shareInfo.jsp"%>
-
 				</c:if>
 				<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
+				
 			</div>
 			</div>
-			<p></p>
-			
-			<hr>
+			<p></p><br>
+
 				<div class="container">
 					<div class="row px-xl-5">
 						<div class="box-body">
@@ -406,8 +373,8 @@ function replyUpdateForm(c_no, u_id, c_content){
 									<td>
 										<input type="hidden" name="u_id" id="u_id" value="${user.u_id}" readonly>
 										 작성자 : ${user.u_id}
-										<textarea class="form-control" name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="3000"></textarea>
-										<p class="textTotal" align="right" style="width: 800px; height: 200px;">글자수 제한 : 3000자</p>
+										<textarea class="form-control" name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="3000" rows="3"></textarea>
+										<p class="textTotal" align="right" style="width: 800px;">글자수 제한 : 3000자</p>
 									</td>
 									<td>
 										<input type="button" id="replyRegister" value="등록">

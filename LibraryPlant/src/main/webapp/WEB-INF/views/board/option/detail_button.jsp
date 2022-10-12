@@ -28,36 +28,66 @@ button:hover {
 </style>
 
 
+<div class="box-footer">
+		
+	<button id="list">목록</button>
+	<c:if test="${user.u_id != board.u_id }">
+		<c:if test="${user.u_state != 99 }">
+			<button id="report">신고</button>
+		</c:if>
+	</c:if>
+	<c:if test="${user.u_id == board.u_id}">
+		<button id="delete" onclick="return alarm();">삭제</button>
+		<button id="update">수정</button>
+	</c:if>
 
-<c:if test="${board.u_id != user.u_id || user.u_state != 99 }">
-	<button id="report">신고</button>
-</c:if>
 
+</div>
 
 
 
 <script>
+
+	
+	$('#update').on('click', function() {
+		var url = "update?b_no=${board.b_no}";
+		location.href = url;
+	});
+	
+	$('#list').on('click', function() {
+		if(${board.bc_id} == 1)
+			var url = "freeListAll";
+		
+		else if(${board.bc_id} == 2)
+			var url = "qnaListAll";
+		
+		else if(${board.bc_id} == 3)
+			var url = "showListAll";
+		
+		else if(${board.bc_id} == 4)
+			var url = "shareListAll";
+		
+		else var url = "${contextPath }";
+		
+		location.href = url;
+	});
+
+	
 	// 신고페이지 이동
-	$('#report').on('click', function(e) {
-		e.preventDefault();
+	$('#report').on('click', function() {
 
 		if ('${user}' == "") {
 			alert('로그인 후 이용해주세요.');
 
 			return alarmLogin();
-
 		}
 
 		var url = "${contextPath }/board/reportPage";
-		url = url + "?b_no=" + $
-		{
-			board.b_no
-		}
-		;
+		url = url + "?b_no=" + ${board.b_no};
 		url = url + "&u_id=${board.u_id}";
 		url = url + "&b_title=${board.b_title}";
 		location.href = encodeURI(url);
-		console.log(encodeURI(url));
+		console.log(location.href);
 
 	});
 
@@ -70,5 +100,20 @@ button:hover {
 		}
 		return true;
 	}
-</script>
+	
 
+//	게시글 삭제 확인창
+	function alarm() {
+		var msg = "해당 글을 삭제하시겠습니까?";
+		if (confirm(msg)) {
+			location.href = 'delete?b_no=${board.b_no}';
+			return false;
+		}
+		return true;
+	}
+	
+
+	
+
+	
+</script>

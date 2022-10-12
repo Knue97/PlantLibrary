@@ -31,6 +31,18 @@ public class BoardLikeDAOImpl implements BoardLikeDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.delete(NAMESPACE + ".removeLike", boardLikeEntity);
 	}
+
+    @Override
+    public int removeLikeAll(int b_no) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.delete(NAMESPACE + ".removeLikeAll", b_no);
+    }
+
+    @Override
+    public int likeCountAll(int b_no) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.selectOne(NAMESPACE + ".likeCountAll", b_no);
+    }
 	
 
 }

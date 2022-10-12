@@ -21,4 +21,18 @@
 		from board_like
 		where b_no = #{b_no} and u_id= #{u_id} and bl_content = #{bl_content}
 	</delete>
+	
+	<!-- 해당 게시글 좋아요 전체 취소(게시글 삭제시)  -->
+	<delete id="removeLikeAll" parameterType="java.lang.Integer">
+		delete
+		from board_like
+		where b_no = #{b_no}
+	</delete>
+	<!-- 좋아요 총 개수 -->
+	<select id="likeCountAll" parameterType="java.lang.Integer">
+		insert into board (b_recommendedNumber)
+		SELECT count(b_no)
+		FROM board_like
+		where b_no = #{b_no};
+	</select>
 </mapper>

@@ -8,18 +8,17 @@
 
 	
 	
-		<h2 style="font-weight: bold;">
-			<img src="${contextPath}/resources/assets/img/icon/loveicon_empty.png"
-				id="like" style="float: right; height: 35px; cursor: pointer;"
-				class="likeno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
-		</h2>
+	<h2 style="font-weight: bold;">
+		<img src="${contextPath}/resources/assets/img/icon/loveicon_empty.png"
+			id="like" style="float: right; height: 35px; cursor: pointer;"
+			class="likeno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
+	</h2>
 
 
 
 
 
 <script>
-
 
 
 //	마우스 이벤트
@@ -30,7 +29,6 @@
 		else
 			$("#like").attr("src",
 					$("#like").attr("src").replace("loveicon_full", "loveicon_empty"));
-
 	}
 
 	function onMouseLeave() {
@@ -40,7 +38,6 @@
 		else
 			$("#like").attr("src",
 					$("#like").attr("src").replace("loveicon_empty", "loveicon_full"));
-
 	}
 
 	// 즐겨찾기버튼에 마우스 올렸을시 hover 효과로 추가효과, 제거효과 만들기
@@ -79,14 +76,12 @@
 					success : function(result) {
 						
 						isliked();
-						console.log('좋아요 + 1');
 
 					},
 
 					error : function(result) {
 						
 						alert('좋아요를 실패하였습니다.')
-
 					}
 
 				});
@@ -101,8 +96,7 @@
 					success : function(result) {
 						
 						isliked();
-						alert('좋아요를 취소하였습니다.');
-
+						
 					},
 					error : function(result) {
 						
@@ -110,14 +104,13 @@
 
 					}
 				});
-
-			}
-			;
+			};
 
 		}); // end of $(document).on('
 
 	})
 
+	//  마우스 이벤트 실행
 	function isliked() {
 
 		if ('${user.u_id}' == "")

@@ -172,46 +172,6 @@
 		WHERE b_no = #{b_no} and u_id = #{u_id}<!-- 좀 더 고민 -->
 	</update>
 	
-	
-	<!-- 댓글 좋아요 -->
-	<update id="replyLike" parameterType="java.lang.Integer">
-		UPDATE comment
-		SET c_likeCnt = #{c_likeCnt} + 1
-		WHERE c_no = #{c_no} and u_id = #{u_id}
-	</update>
-	<update id="replyDisLike" parameterType="java.lang.Integer">
-		UPDATE comment
-		SET c_likeCnt = #{c_likeCnt} - 1
-		WHERE c_no = #{c_no} and u_id = #{u_id}
-	</update>
-	
-	
-	<!-- 댓글 채택 -->
-	<update id="replyChoose" parameterType="java.lang.Integer">
-		UPDATE comment
-		SET c_choose = #{c_choose} + 1
-		WHERE c_no = #{c_no}
-	</update>
-	
-	
-	<!-- 게시글 신고 기능 -->
-	<update id="boardReport" parameterType="java.lang.Integer">
-		UPDATE board
-		SET b_report = #{b_report} + 1
-		WHERE b_no = #{b_no}
-	</update>
-	<!-- 댓글 신고 기능 -->
-	<update id="replyReport" parameterType="java.lang.Integer">
-		UPDATE comment
-		SET c_report = #{c_report} + 1
-		WHERE c_no = #{c_no}
-	</update>
-	<!-- 유저 신고 기능 -->
-	<update id="userReport" parameterType="java.lang.Integer">
-		UPDATE user
-		SET u_report = #{u_report} + 1
-		WHERE u_id = #{u_id}
-	</update>
 
 <!-- /부가 기능 -->
 	
