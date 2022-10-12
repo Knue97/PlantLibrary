@@ -5,8 +5,8 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-<%@ include file="../include/head.jsp"%>
-<%@ include file="../include/plugin.jsp"%>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
+<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 
 </head>
 
@@ -49,12 +49,7 @@ function replyListAll() {
 					htmls += '(수정)';
 					}
 					
-					// 유저 정보 + 글번호 + like 값 받아서 체크
-					//htmls += '<a href="javascript:void(0)" onclick="return Like(' + this.c_no + ', \'' + this.u_id + '\')">♡안좋음 (구현예정)</a>';
-					//htmls += '<a href="javascript:void(0)" onclick="return disLike(' + this.c_no + ', \'' + this.u_id + '\')">♥좋음 (구현예정)</a>';
-					
-					
-					if('${user.u_id}'== this.u_id){
+					if('${user.u_id}'== this.u_id || '${user.u_state}' == 99){
 					htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
 					htmls += '<a href="javascript:void(0)" onclick="replyUpdateForm(' + this.c_no + ', \'' + this.u_id + '\', \'' + this.c_content + '\' )" style="padding-right:5px">수정</a>';
 					htmls += '<a href="javascript:void(0)" onclick="replyAlarm(' + this.c_no + ')" >삭제</a>';
@@ -63,7 +58,7 @@ function replyListAll() {
 					htmls += '<br><br>' + this.c_content + ' <br>';
 					if('${user.u_id}'!= this.u_id){
 					htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
-					//htmls += '<a href="javascript:void(0)" onclick="신고(' + this.c_no + ')" >신고 (구현예정)</a>';
+					htmls += '<a href="javascript:void(0)" onclick="report(' + this.b_no + ', \'' + this.c_no + '\', \'' + this.u_id + '\', \'' + this.c_content + '\')" >신고</a>';
 					htmls += '</span>';
 					}
 					htmls += '<span style="color:grey; float:right; font-size:10pt;"> ' + this.c_regdate + '</span> ';
@@ -75,14 +70,50 @@ function replyListAll() {
 		$("#replyListAll").html(htmls); // 댓글 위치에 html로 보여주기 ,  #replylist는 선택자 ->아래 div id="replylist"에 해당
 		},
 		error : function(result){
-			alert("실패");
+			alert("댓글을 불러오는 것에 실패하였습니다.");
 		}
 	}); // end of ajax
 	
 } // end of replyListAll
 
 
+//댓글 신고 기능
+function report(b_no, c_no, u_id, c_content){
 
+	var url = "${contextPath }/board/report";
+	url = url + "?b_no=" + b_no;
+	url = url + "&c_no=" + c_no;
+	url = url + "&u_id=" + u_id;
+	url = url + "&c_content=" + encodeURI(c_content);
+
+
+	var paramData = {
+			"b_no" : '${comment.b_no}',
+			"c_no" : '${comment.c_no}',
+			"u_id" : '${comment.u_id}',
+			"c_content" : '${comment.c_content}'
+	}; // 추가 데이터 작성
+	
+	$.ajax({
+		url : url,
+		data : paramData, // 받아올 데이터가 없어서 dataType은 뺐다.
+		type : 'POST',
+		success : function(result){
+			
+			window.location.replace(url);
+		}, error : function(result){
+			
+			console.log("b_no = " + b_no + "c_no = " + c_no);
+			
+			if(${user.u_id == null}) {
+				alert('로그인이 필요합니다.');
+			}else{
+				alert('문제가 발생하여 신고페이지로 넘어갈 수 없습니다.');
+			}
+		}
+	}); // end of ajax
+
+}; // end of report
 
 //	댓글 작성
 
@@ -183,7 +214,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 			},
 			error : function(result) {
 				console.log(result);
-				alert('**수정 실패**');
+				alert('댓글 수정을 실패하였습니다.');
 			}
 		}); // end of $.ajax
 	}// end of replyUpdate()
@@ -218,10 +249,13 @@ function replyUpdateForm(c_no, u_id, c_content){
 			},
 			error : function(result) {
 				console.log(result);
-				alert('**삭제 실패**');
+				alert('댓글 삭제를 실패하였습니다.');
 			}
 		}); // end of $.ajax
 	}
+	
+	
+
 
 //	게시글 삭제 확인창
 	function alarm() {
@@ -240,11 +274,11 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 <body>
 	<!-- ? Preloader Start -->
-	<%@ include file="../include/preloader.jsp"%>
+	<%@ include file="/WEB-INF/views/include/preloader.jsp"%>
 	<!-- Preloader Start -->
 	<header>
 		<!-- Header Start -->
-		<%@ include file="../include/header.jsp"%>
+		<%@ include file="/WEB-INF/views/include/header.jsp"%>
 		<!-- Header End -->
 	</header>
 	<main>
@@ -308,7 +342,12 @@ function replyUpdateForm(c_no, u_id, c_content){
 						<br><br><br><br>
 						<div class="search-box" align="center">
 							
-							<input type="button" value="추천 (구현 예정)" name="recommended" onclick="return recommended();">
+						<!-- 추천 기능 -->
+						<%@ include file="../option/like.jsp" %>
+						<!-- 신고 기능 -->
+						<%@ include file="../option/report.jsp" %>
+						
+						
 							
 							
 							
@@ -316,7 +355,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 							<input type="button" value="메인"
 								onclick="location.href='${contextPath}'">
 
-							<c:if test="${user.u_id == board.u_id}">
+							<c:if test="${user.u_id == board.u_id || user.u_state == 99 }">
 								<input type="button" value="수정" name="loginCheck" onclick="location.href='update?b_no=${board.b_no}'">
 								<input type="button" value="삭제" onclick="return alarm();">
 							</c:if>
@@ -350,7 +389,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 				<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
 				<c:if test="${board.bc_id == 4 }">
 
-					<%@include file="option/shareInfo.jsp"%>
+					<%@include file="../option/shareInfo.jsp"%>
 
 				</c:if>
 				<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
@@ -388,7 +427,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 
 	</main>
 	<footer>
-		<%@ include file="../include/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	</footer>
 	<!-- Scroll Up -->
 	<div id="back-top">

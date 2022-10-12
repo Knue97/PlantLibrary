@@ -13,7 +13,7 @@
 	<update id="mypage_updatepw" parameterType="LoginEntity">
 		UPDATE plantlibrary.user 
 		SET u_password = #{u_password}
-		WHERE (u_id = #{u_id});
+		WHERE u_id = #{u_id};
 	</update>
 	
 	<select id="mypage_lookup" resultType="LoginEntity">
@@ -29,6 +29,17 @@
 		select count(*) from plantlibrary.user where u_nickname = #{u_nickname}
 	</select>
 	
-
+	<select id="userEmailcheck" parameterType="LoginEntity" resultType="java.lang.Integer" >
+		select count(*) from plantlibrary.user where u_email = #{u_email}
+	</select>
 	
+	<update id="findPassword" parameterType="LoginEntity">
+	 	update plantlibrary.user set u_password = #{u_password} where u_email = #{u_email} and u_id = #{u_id}
+	</update>
+	
+	<select id="findPasswordCheck" parameterType="LoginEntity" resultType="java.lang.Integer">
+	 	select count(*) from plantlibrary.user where u_email = #{u_email} and u_id = #{u_id}
+	</select>
+	
+
 </mapper>

@@ -5,9 +5,9 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-<%@ include file="../include/head.jsp" %>
-<%@ include file="../include/plugin.jsp" %>
-<%@ include file="../include/summernote.jsp" %>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
+<%@ include file="/WEB-INF/views/include/plugin.jsp" %>
+<%@ include file="/WEB-INF/views/include/summernote.jsp" %>
 </head>
 
 <script>
@@ -92,11 +92,11 @@ function validate() {
 </script>
 <body>
     <!-- ? Preloader Start -->
-    <%@ include file="../include/preloader.jsp" %>
+    <%@ include file="/WEB-INF/views/include/preloader.jsp" %>
     <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
-        <%@ include file="../include/header.jsp"  %>
+        <%@ include file="/WEB-INF/views/include/header.jsp"  %>
         <!-- Header End -->
     </header>
     <main>
@@ -129,7 +129,7 @@ function validate() {
     
         <section class="content container-fluid">
 
-				<div class="container">
+			<div class="container">
 				
 				<form role="form" method="post" enctype="multipart/form-data" name="loginCheck" onsubmit="return validate();">
 				
@@ -163,13 +163,13 @@ function validate() {
 						<input type="submit" value="작성완료">
 					</div>
 				</form>
-</div>
+
 			</div>
 		</section>
        
 	</main>
 <footer>
-    <%@ include file="../include/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
   </footer>
   <!-- Scroll Up -->
   <div id="back-top" >
