@@ -8,6 +8,25 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 <%@ include file="/WEB-INF/views/include/plugin.jsp"%>
+<style>
+.login-form{
+    height: 700px;
+    overflow: auto;
+}
+
+.login-form::-webkit-scrollbar {
+    width: 10px;
+  }
+  .login-form::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+  }
+  .login-form::-webkit-scrollbar-track {
+    background-color: grey;
+}
+
+</style>
+
+
 </head>
 <body>
 	<!-- ? Preloader Start -->
@@ -19,16 +38,12 @@
 		<!-- Login Admin -->
 		<form class="form-default" action="${contextPath}/login/register"
 			method="POST">
-
 			<div class="login-form">
 				<!-- logo-login -->
 				<div class="logo-login">
 					<a href="${contextPath }/"><img
 						src="${contextPath}/resources/assets/img/logo/loder.png" alt=""></a>
 				</div>
-				<h1>회원가입</h1><br>
-				<h1>회원가입</h1><br>
-				<h1>회원가입</h1><br>
 				<h2>회원가입</h2>
 				<div class="form-input">
 					<label for="ID">아이디</label> <input type="text" class="form-control"
