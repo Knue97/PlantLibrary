@@ -2,49 +2,57 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="kr.co.plantlibrary.adminMapper">
- 	<!-- 병해백과 개수 출력 -->
+<mapper namespace="kr.co.plantlibrary.adminMapper">
+	<!-- 병해백과 개수 출력 -->
 	<select id="countDisease" resultType="java.lang.Integer">
-		select count(di_id) from disease
+		select count(di_id) from
+		disease
 	</select>
 	<!-- 병해백과 목록 + 페이징 -->
-	<select id="diseaseListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
-		 select
-		 di_id, di_alias
-		 from disease
-		 order by di_id desc
-		 limit #{displayPost}, #{postNum}
+	<select id="diseaseListPage" parameterType="java.util.HashMap"
+		resultType="java.util.Map">
+		select
+		di_id, di_alias
+		from disease
+		order by di_id desc
+		limit #{displayPost}, #{postNum}
 	</select>
 	<!-- 식물백과 개수 출력 -->
 	<select id="countPlant" resultType="java.lang.Integer">
-		select count(pl_id) from plant
+		select count(pl_id) from
+		plant
 	</select>
 	<!-- 식물백과 목록 + 페이징 -->
-	<select id="plantListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
-		 select
-		 pl_id, pl_koreanName
-		 from plant
-		 order by pl_id desc
-		 limit #{displayPost}, #{postNum}
+	<select id="plantListPage" parameterType="java.util.HashMap"
+		resultType="java.util.Map">
+		select
+		pl_id, pl_koreanName
+		from plant
+		order by pl_id desc
+		limit #{displayPost}, #{postNum}
 	</select>
 	<!-- 신고개수 카운트 -->
 	<select id="countReport" resultType="java.lang.Integer">
-		select count(r_no) from report
+		select count(r_no) from
+		report
 		where r_state = 0 or r_state = 1
 	</select>
 	<!-- 신고 목록 + 페이징 -->
-	<select id="reportListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
-		 select
-		 r_no, b_no, c_no, u_id, rc_content, r_state
-		 from report
-		 where r_state = 0 or r_state = 1
-		 order by r_no desc
-		 limit #{displayPost}, #{postNum}
+	<select id="reportListPage" parameterType="java.util.HashMap"
+		resultType="java.util.Map">
+		select
+		r_no, b_no, c_no, u_id, rc_content, r_state
+		from report
+		where r_state = 0 or r_state = 1
+		order by r_no desc
+		limit #{displayPost}, #{postNum}
 	</select>
 	<!-- 신고내용 상세보기 -->
-	<select id="reportDetail" parameterType="java.lang.Integer" resultType="ReportEntity">
+	<select id="reportDetail" parameterType="java.lang.Integer"
+		resultType="ReportEntity">
 		select
-		r_no, b_no, c_no, u_id, report_user, rc_content, r_content, r_file, r_state
+		r_no, b_no, c_no, u_id, report_user, rc_content,
+		r_content, r_file, r_state
 		from report
 		where r_no = #{r_no}
 	</select>
@@ -55,17 +63,18 @@
 		r_state = #{r_state}
 		where r_no = #{r_no}
 	</update>
-		<!-- 회원수 카운트 -->
+	<!-- 회원수 카운트 -->
 	<select id="countUser" resultType="java.lang.Integer">
 		select count(u_id) from user
 	</select>
 	<!-- 회원 목록 + 페이징 -->
-	<select id="userListPage" parameterType="java.util.HashMap" resultType="java.util.Map">
-		 select
-		 u_id, u_nickname, u_name, u_email, u_state
-		 from user
-		 order by u_id
-		 limit #{displayPost}, #{postNum}
+	<select id="userListPage" parameterType="java.util.HashMap"
+		resultType="java.util.Map">
+		select
+		u_id, u_nickname, u_name, u_email, u_state
+		from user
+		order by u_id
+		limit #{displayPost}, #{postNum}
 	</select>
 	<!-- 회원상태변경 -->
 	<update id="updateUserState" parameterType="java.util.HashMap">
@@ -78,35 +87,62 @@
 	<delete id="deleteUser" parameterType="java.lang.String">
 		delete
 		from user
-		where u_id = #{u_id}
+		where u_id
+		= #{u_id}
 	</delete>
+	<!-- 식물 등록 -->
+	<insert id="create" parameterType="EncyclopediaEntity">
+		INSERT INTO plantlibrary.plant
+		(pl_id,ec_id,pl_koreanName,pl_englishName,pl_scientificName,pl_familyName,pl_classification,pl_nativeHome,pl_feature,pl_level,pl_reproduction,pl_water,
+		pl_growthTemperature,pl_light,pl_placement,pl_summary,pl_tip,pl_detailLight,pl_detailTemperature,pl_detailWater,pl_detailReproduction,pl_detailSupport,
+		pl_detailSoil,pl_detailPottingAndRoot,pl_detailFertilizer,pl_detailCaution,pl_image,pl_imageSource,pl_contentSource,pl_hits,pl_bookmarkCnt)
+		VALUES
+		(#{pl_id},#{ec_id},#{pl_koreanName},#{pl_englishName},#{pl_scientificName},#{pl_familyName},#{pl_classification},#{pl_nativeHome},#{pl_feature},#{pl_level},#{pl_reproduction},#{pl_water},
+		#{pl_growthTemperature},#{pl_light},#{pl_placement},#{pl_summary},#{pl_tip},#{pl_detailLight},#{pl_detailTemperature},#{pl_detailWater},#{pl_detailReproduction},#{pl_detailSupport},
+		#{pl_detailSoil},#{pl_detailPottingAndRoot},#{pl_detailFertilizer},#{pl_detailCaution},#{pl_image},#{pl_imageSource},#{pl_contentSource},#{pl_hits},#{pl_bookmarkCnt})
+	</insert>
 	<!-- 식물 삭제 -->
 	<delete id="deletePlant" parameterType="java.lang.Integer">
 		delete
 		from plant
-		where pl_id = #{pl_id}
+		where
+		pl_id = #{pl_id}
 	</delete>
 	<!-- 식물 수정 -->
 	<update id="updatePlant" parameterType="EncyclopediaEntity">
 		update plant
 		set
-		pl_id = #{pl_id}, ec_id = #{ec_id}, pl_koreanName = #{pl_koreanName},
-		pl_englishName = #{pl_englishName}, pl_scientificName = #{pl_scientificName},
-		pl_familyName = #{pl_familyName}, pl_classification = #{pl_classification},
-		pl_nativeHome = #{pl_nativeHome}, pl_feature = #{pl_feature}, pl_level = #{pl_level},
+		pl_id =
+		#{pl_id}, ec_id = #{ec_id}, pl_koreanName = #{pl_koreanName},
+		pl_englishName = #{pl_englishName}, pl_scientificName =
+		#{pl_scientificName},
+		pl_familyName = #{pl_familyName},
+		pl_classification = #{pl_classification},
+		pl_nativeHome =
+		#{pl_nativeHome}, pl_feature = #{pl_feature}, pl_level = #{pl_level},
 		pl_reproduction = #{pl_reproduction}, pl_water = #{pl_water},
-		pl_growthTemperature = #{pl_growthTemperature}, pl_light = #{pl_light}, pl_placement = #{pl_placement},
-		pl_summary = #{pl_summary}, pl_tip = #{pl_tip}, pl_detailLight = #{pl_detailLight},
-		pl_detailTemperature = #{pl_detailTemperature}, pl_detailWater = #{pl_detailWater},
-		pl_detailReproduction = #{pl_detailReproduction}, pl_detailSupport = #{pl_detailSupport},
-		pl_detailSoil = #{pl_detailSoil}, pl_detailPottingAndRoot = #{pl_detailPottingAndRoot},
-		pl_detailFertilizer = #{pl_detailFertilizer}, pl_detailCaution = #{pl_detailCaution},
-		pl_image = #{pl_image}, pl_imageSource = #{pl_imageSource}, pl_contentSource = #{pl_contentSource},
-		pl_hits = #{pl_hits}, pl_bookmarkCnt = #{pl_bookmarkCnt}
+		pl_growthTemperature = #{pl_growthTemperature}, pl_light =
+		#{pl_light}, pl_placement = #{pl_placement},
+		pl_summary =
+		#{pl_summary}, pl_tip = #{pl_tip}, pl_detailLight = #{pl_detailLight},
+		pl_detailTemperature = #{pl_detailTemperature}, pl_detailWater =
+		#{pl_detailWater},
+		pl_detailReproduction = #{pl_detailReproduction},
+		pl_detailSupport = #{pl_detailSupport},
+		pl_detailSoil =
+		#{pl_detailSoil}, pl_detailPottingAndRoot =
+		#{pl_detailPottingAndRoot},
+		pl_detailFertilizer =
+		#{pl_detailFertilizer}, pl_detailCaution = #{pl_detailCaution},
+		pl_image = #{pl_image}, pl_imageSource = #{pl_imageSource},
+		pl_contentSource = #{pl_contentSource},
+		pl_hits = #{pl_hits},
+		pl_bookmarkCnt = #{pl_bookmarkCnt}
 		where pl_id = #{pl_id}
 	</update>
 	<!-- 회원 id/닉네임/이름으로 검색 -->
-	<select id="searchUser" parameterType="java.lang.String" resultType="LoginEntity">
+	<select id="searchUser" parameterType="java.lang.String"
+		resultType="LoginEntity">
 		select u_id, u_nickname, u_name, u_email, u_state
 		from user
 		<where>
@@ -114,7 +150,8 @@
 			or
 			u_nickname = #{searchword}
 			or
-			u_name = #{searchword}
+			u_name =
+			#{searchword}
 		</where>
 	</select>
- </mapper>
+</mapper>

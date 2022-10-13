@@ -1,13 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: hong
-=======
-<<<<<<< HEAD
-Built-By: ￭ﾚﾨ￬ﾄﾠ￬ﾧﾱ￬ﾧﾱ
-=======
-Built-By: 123
->>>>>>> 1ffe65e01300a3a5aa223c12c73326d8b0126dad
->>>>>>> 49e2dc6f786aa5fcf1a10060f22d40afb7da4d27
 Build-Jdk: 15.0.2
 Created-By: Maven Integration for Eclipse
 
