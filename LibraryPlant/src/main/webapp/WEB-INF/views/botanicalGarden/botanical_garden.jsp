@@ -44,10 +44,15 @@
 			</div>
 		</div>
 		<div class="container">
-			<form action="${contextPath}/botanicalgarden/register" method="post">
+			<form action="${contextPath}/botanicalgarden/update" method="get">
+				<div class="form-group d-none">
+					<input type="text" class="form-control"
+						 name="g_id" value="${VO.g_id}"
+						readonly="readonly">
+				</div>
 				<div class="form-group">
 					<label>지역</label><input type="text" class="form-control"
-						placeholder="지역" name="g_id" value="${VO.g_id }"
+						placeholder="지역" name="g_id" value="${VO.g_region }"
 						readonly="readonly">
 				</div>
 				<div class="form-group">
@@ -81,7 +86,7 @@
 						placeholder="식물원 또는 수목원 경도" name="g_longitude" id="g_longitude"
 						step="any" readonly="readonly" value="${VO.g_longitude }">
 				</div>
-				<button type="button" onclick="" id="updateBtn">수정</button>
+				<button type="submit"  id="updateBtn">수정</button>
 				<button type="button" onclick="" id="removeBtn">삭제</button>
 				<div id="message"></div>
 			</form>
@@ -98,11 +103,11 @@
 	<!-- JS here -->
 	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 	<script>
-	 let updateBtn = document.getElementById('updateBtn');
+	 
      let removeBtn = document.getElementById('removeBtn');
 
      updateBtn.addEventListener('click',function(){
-         location.href = '${contextPath}/botanicalgarden/listbyid?g_id=${VO.g_id}';
+         location.href = '${contextPath}/botanicalgarden/update?g_id=${VO.g_id}';
      });		
 	</script>
 
