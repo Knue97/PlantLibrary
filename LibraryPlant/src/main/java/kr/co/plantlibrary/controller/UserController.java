@@ -1,6 +1,8 @@
 package kr.co.plantlibrary.controller;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,8 +69,16 @@ public class UserController {
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
 		
-		LoginEntity entity = service.mypage_lookup(loginEntity.getU_id());
-		session.setAttribute("user", entity);
+		LoginEntity entity = service.mypage_lookup(loginEntity.getU_id());		
+		
+		Map<String, String> map = new HashMap<String, String>();
+        map.put("u_id", entity.getU_id());
+        map.put("u_password", entity.getU_password());
+        
+        Map<String, String> sessionMap = service.login(map);
+        sessionMap.put("api", "none");
+        session.setAttribute("user",sessionMap);
+		
 		
 		
 		return "redirect:/user/mypage";
@@ -92,7 +102,14 @@ public class UserController {
 		session.removeAttribute("user");
 		
 		LoginEntity entity = service.mypage_lookup(loginEntity.getU_id());
-		session.setAttribute("user", entity);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("u_id", entity.getU_id());
+		map.put("u_password", entity.getU_password());
+		
+		Map<String, String> sessionMap = service.login(map);
+		sessionMap.put("api", "none");
+		session.setAttribute("user",sessionMap);
 		
 		
 		return "redirect:/user/mypage";

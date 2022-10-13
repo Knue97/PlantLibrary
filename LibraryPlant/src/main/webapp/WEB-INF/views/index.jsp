@@ -83,54 +83,14 @@
             </div>
         </div>
         <!-- Slider Area End -->
-        <!-- Domain-search start -->
-        <div class="domain-search-area section-bg1">
-           <div class="container">
-               <div class="row">
-               
-               
-               
-               
-             <div class="col-xl-12">   
-
-              </div>   
-
-              <div class="row" style="heigt:50px;"></div> 
-               
-               
-                   <div class="col-xl-4 col-lg-5">
-                       <h2>백과 검색</h2>
-                       <p>관리자와 사용자가 함께 만든 백과를 검색해보세요</p>
-                   </div>
-                   <div class="col-xl-8 col-lg-7">
-                    <!--Hero form -->
-                    <form action="#" class="search-box">
-                        <div class="input-form">
-                            <input type="text" placeholder="궁금한 사항을 검색하기">
-                            <!-- icon search -->
-                            <div class="search-form">
-                                <button><i class="ti-search"></i></button>
-                            </div>
-                            <!-- icon search -->
-                            <div class="world-form">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                        </div>
-                    </form>	                    
-                	</div>
-            	</div>
-        	</div>
-    	</div>
-    <!-- Domain-search End -->
-
+        
     <!--? Pricing Card Start -->
     <section class="pricing-card-area fix">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-8">
                     <div class="section-tittle text-center mb-90">
-                        <h2>이달의 인기 식물</h2>
-                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools. Our experts are just part of the reason Bluehost is the ideal home for your WordPress website. We're here to help you succeed!</p>
+                        <h2>이달의 인기 식물</h2>                        
                     </div>
                 </div>
             </div>
