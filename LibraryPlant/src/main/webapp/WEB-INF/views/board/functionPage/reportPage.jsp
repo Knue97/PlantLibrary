@@ -111,7 +111,7 @@ textarea:-webkit-autofill:focus {
 				<br>
 						<div class="contact-us">
 						<h2>신고하기</h2>
-							<form action="${contextPath }/board/report" method="post" enctype="multipart/form-data">
+							<form action="${contextPath }/board/reportPage" method="post" enctype="multipart/form-data">
 								<h3>
 									해당 글에 대한 신고페이지입니다.<br>
 									처리결과에 대한 내용은 마이페이지 신고목록에서 확인 가능합니다.

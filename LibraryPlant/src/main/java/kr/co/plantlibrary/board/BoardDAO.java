@@ -43,6 +43,7 @@ public interface BoardDAO {
 	public List<BoardDTO> searchList(Criteria cri) throws Exception;
 	public int countSearch(Criteria cri) throws Exception;
 	
+
 	
 
 	

@@ -123,7 +123,7 @@
 	</select>
 
 	<!-- 검색 페이징 -->
-	<select id="countSearch" resultType="java.lang.Integer">
+	<select id="countSearch" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 		select count(*)
 		from board
 		where bc_id 
@@ -165,12 +165,7 @@
 	</sql>
 	
 
-	<!-- 게시글 추천 기능 -->
-	<update id="recommended" parameterType="BoardDTO">
-		UPDATE board
-		SET b_recommendedNumber = #{b_recommendedNumber} + 1
-		WHERE b_no = #{b_no} and u_id = #{u_id}<!-- 좀 더 고민 -->
-	</update>
+	
 	
 
 <!-- /부가 기능 -->

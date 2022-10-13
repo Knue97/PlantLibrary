@@ -86,11 +86,6 @@
 					<button class="genric-btn primary e-large" onclick="location.href='${contextPath}/admin/botanicalgarden/register'">식물원 정보 등록</button>
 					<button class="genric-btn primary e-large">식물원 정보 변경/삭제</button>
 					<hr>
-					<div class="row align-items-left justify-content-left">
-						<h3>팝업창</h3>
-					</div>
-					<button class="genric-btn primary e-large">팝업창 등록</button>
-					<button class="genric-btn primary e-large">팝업창 변경/삭제</button>
 				</div>
 				
 			</div>

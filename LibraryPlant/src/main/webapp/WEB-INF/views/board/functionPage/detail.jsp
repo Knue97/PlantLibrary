@@ -9,15 +9,53 @@
 <%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 
 <style>
-	table textarea {
-	width: 60%;
-	height: 100px;
+	
+	
+	.textarea-middle{
+	margin-left: 19%;
+	width: 800px;
+	}
+	
+	textarea {
+	width: 800px;
 	margin: auto;
-	text-align: center;
+	padding-left: auto;
+	padding-right: auto;
+	min-height: 100px;
+	max-height: 450px;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	resize: none;
+	
 	}
 	.form-group{
 	min-height: 30em;
 	}
+	.textTotal{
+	padding-left: 19%;
+	}
+	.button-middle{
+	padding-top: 4%;
+	}
+	input {
+	display: block;
+	line-height: 24pt;
+	padding: 0 20px;
+	border: none;
+	background: #fff;
+	color: #000;
+	letter-spacing: 2px;
+	transition: .2s all ease-in-out;
+	border-bottom: 2px solid transparent;
+	outline: none;
+}
+
+	input:hover {
+	background: inherit;
+	color: #2e8b57;
+	border-bottom: 2px solid #2e8b57;
+}
+	
 </style>
 </head>
 
@@ -47,7 +85,8 @@ function replyListAll() {
 			//alert("result");
 			var htmls = "";
 			if(result.length < 1) {
-				htmls += '<h3>댓글이 없습니다.</h3>';
+				htmls += '<br><br>';
+				htmls += '<h3 style="color: lightgray; text-align: center;">댓글이 없습니다.</h3>';
 			} else{
 				$(result).each(function(){ // 요소별로 하나씩 실행하라
 					
@@ -66,13 +105,13 @@ function replyListAll() {
 					htmls += '<a href="javascript:void(0)" onclick="replyAlarm(' + this.c_no + ')" >삭제</a>';
 					htmls +=  '</span>';
 					}
-					htmls += '<br><br>' + this.c_content + ' <br>';
+					htmls += '<br><br>' + decodeURI( this.c_content ) + ' <br>';
 					if('${user.u_id}'!= this.u_id){
 					htmls += '<span style="padding-left: 7px; font-size: 9pt; float:right;">';
 					htmls += '<a href="javascript:void(0)" onclick="report(' + this.b_no + ', \'' + this.c_no + '\', \'' + this.u_id + '\', \'' + this.c_content + '\')" >신고</a>';
 					htmls += '</span>';
 					}
-					htmls += '<span style="color:grey; float:right; font-size:10pt;"> ' + this.c_regdate + '</span> ';
+					htmls += '<span style="color:gray; float:right; font-size:10pt;"> ' + this.c_regdate + '</span> ';
 					htmls += '</span>';
 					htmls += '</div><br>';  
 
@@ -134,6 +173,7 @@ function report(b_no, c_no, u_id, c_content){
 		c_content = c_content.replace(/(?:\r\n|\r|\n)/g, '<br>');	// 엔터
 //		c_content = c_content.replaceAll("\\\<.*?\\\>", "");
 		c_content = c_content.replace(/ /gi, '&nbsp');	// 스페이스
+		c_content = encodeURI(c_content);
 
 
 		console.log(c_content);
@@ -143,7 +183,7 @@ function report(b_no, c_no, u_id, c_content){
 		var url = "${contextPath}/board/reply";
 		var paramData = {
 				"u_id" : u_id,
-				"c_content" : c_content,
+				"c_content" : decodeURI(c_content),
 				"b_no" : '${board.b_no}'
 		}; // 추가 데이터 작성
 		
@@ -158,7 +198,7 @@ function report(b_no, c_no, u_id, c_content){
 					$("#c_content").focus();
 				}else{
 				replyListAll();
-				$("#c_content").val(''); // value 값을 ' ' 공백 처리
+				decodeURI($("#c_content").val('')); // value 값을 ' ' 공백 처리
 				$("#u_id").val('${user.u_id}');
 				}
 			},
@@ -173,12 +213,14 @@ function report(b_no, c_no, u_id, c_content){
 function replyUpdateForm(c_no, u_id, c_content){
 	// 개행문자 치환 - 출력
 	var c_content = c_content;
+	c_content = decodeURI(c_content);
 	c_content = c_content.split('<br>').join("\r\n");
 	c_content = c_content.split('&nbsp').join(" ");
 		var htmls = "";
 		
 		htmls = htmls + '<div class="" id="c_no' +c_no + '">';
         //<div id="reno12"> <div id="reno13">
+        htmls += '<hr>';
 		htmls += '<span class="d-block">';
 		htmls += c_no + ' - ';
 		htmls += '<strong class="text-gray-dark">' + u_id + '</strong>';
@@ -187,7 +229,7 @@ function replyUpdateForm(c_no, u_id, c_content){
 		htmls += '<a href="javascript:void(0)" onclick="replyListAll()" >취소</a>';
 		htmls += '</span>';
 		htmls += '</span><br>';
-		htmls += '<textarea id="editmemo" name="editmemo" style="width: 800px; height:100px;" maxlength="3000">';
+		htmls += '<textarea class="autosize" id="editmemo" name="editmemo" maxlength="3000" onkeydown="resize(this)" onkeyup="resize(this)">';
 		htmls += c_content;
 		htmls += '</textarea>';
 		htmls += '</p>';
@@ -205,12 +247,13 @@ function replyUpdateForm(c_no, u_id, c_content){
 		var editmemo = $('#editmemo').val().trim();
 		editmemo = editmemo.replace(/(?:\r\n|\r|\n)/g, '<br>');	// 엔터
 		editmemo = editmemo.replace(/ /gi, '&nbsp');	// 스페이스
+		editmemo = encodeURI(editmemo);
 		
 		var url = "${contextPath}/board/replyUpdate";
 		var paramData = {
 			"c_no" : c_no,
 			"u_id" : u_id,
-			"c_content" : editmemo
+			"c_content" : decodeURI(editmemo)
 		};
 		
 		
@@ -265,7 +308,20 @@ function replyUpdateForm(c_no, u_id, c_content){
 		}); // end of $.ajax
 	}
 	
+	// 댓글 창 자동 스크롤(길이 늘이기 max 450px)
+	function resize(obj) {
+		// obj.scrollHeight = (스크롤바를 움직이지 않고 보여지는 요소의 전체 높이)
+		// obj.scrollHeight의 높이가 484(=450px)을 넘긴다면 스크롤 on
+	    if (obj.scrollHeight >='484') {
+			$('textarea').css("overflow", "hidden scroll");
+		}else{	// 아니면 스크롤 hidden
+			$('textarea').css("overflow", "hidden");
+		}
+	    obj.style.height = '1px';
+	    obj.style.height = (obj.scrollHeight) + 'px';
+	}
 	
+
 	
 </script>
 
@@ -334,34 +390,28 @@ function replyUpdateForm(c_no, u_id, c_content){
 						<div class="quote-wrapper">
 							<p class="mb-4">${board.b_content}</p>
 							<c:if test="${board.b_content == '' }">
-								<h5 style="color: lightgrey; text-align: center;">내용이 없습니다.</h5>
+								<h5 style="color: lightgray; text-align: center;">내용이 없습니다.</h5>
 							</c:if>
 						</div>
-						
-				</div>
+					</div>
 				
+					<!-- 좋아요 기능 -->
+					<%@ include file="../option/like.jsp" %>
 						
-						<div >
-						<!-- 추천 기능 -->
-						<%@ include file="../option/like.jsp" %>
-						</div>
-						
-						<br><br>
-						<div class="search-box">
+					<br><br>
+					<div class="search-box">
 						<!-- 버튼 기능 -->
 						<%@ include file="../option/detail_button.jsp" %>
-						<br>
-						</div>		
-							
-
-
-				<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
-				<c:if test="${board.bc_id == 4 }">
-					<%@include file="../option/shareInfo.jsp"%>
-				</c:if>
-				<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
+					<br>
+					</div>		
+					
+					<!-- 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
+					<c:if test="${board.bc_id == 4 }">
+						<%@include file="../option/shareInfo.jsp"%>
+					</c:if>
+					<!--/ 나눔게시판 한정 작성자 및 나눔 관련 정보 -->
 				
-			</div>
+				</div>
 			</div>
 			<p></p><br>
 
@@ -372,12 +422,17 @@ function replyUpdateForm(c_no, u_id, c_content){
 								<tr>
 									<td>
 										<input type="hidden" name="u_id" id="u_id" value="${user.u_id}" readonly>
-										 작성자 : ${user.u_id}
-										<textarea class="form-control" name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="3000" rows="3"></textarea>
-										<p class="textTotal" align="right" style="width: 800px;">글자수 제한 : 3000자</p>
+										 
+										 <div class="textarea-middle">
+										 <p align="left" style="color: #000;">작성자 : ${user.u_id}</p>
+										<textarea class="autosize" name="c_content" id="c_content" placeholder="댓글을 입력하세요" maxlength="3000" onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
+										<p class="textTotal" align="right">글자수 제한 : 3000자</p>
+										 </div>
 									</td>
-									<td>
+									<td class="button-middle">
+									 <div class="textarea-middle">
 										<input type="button" id="replyRegister" value="등록">
+									</div>
 									</td>
 								</tr>
 							</table>

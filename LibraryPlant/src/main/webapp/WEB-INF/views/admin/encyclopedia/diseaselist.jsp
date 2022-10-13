@@ -174,7 +174,7 @@
 					
 					htmls += '<table class="table table-hover table-striped" id="searchresult">';
 					htmls += '<tr style="color:white; background-color: #1F2B7B;">';
-					htmls += '<th style="width: 20%;">등록번호</th><th class="text-center" >해충명</th><th style="width: 12%;"></th>';
+					htmls += '<th style="width: 20%;">등록번호</th><th class="text-center" >병해명</th><th style="width: 12%;"></th>';
 					htmls += '<th style="width: 12%;"></th></tr>';
 					console.log(result[0]);
 					for(var i=0; i<result.length; i++){						

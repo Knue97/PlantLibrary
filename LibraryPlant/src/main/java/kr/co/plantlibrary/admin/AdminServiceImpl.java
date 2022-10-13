@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.plantlibrary.login.LoginEntity;
+import kr.co.plantlibrary.plant_encyclopedia.EncyclopediaEntity;
 import kr.co.plantlibrary.report.ReportEntity;
 
 @Service
@@ -84,6 +86,24 @@ public class AdminServiceImpl implements AdminService{
     public int deleteUser(String u_id) throws Exception {
         // TODO Auto-generated method stub
         return adminDAO.deleteUser(u_id);
+    }
+
+    @Override
+    public List<LoginEntity> searchUser(String searchword) throws Exception {
+        // TODO Auto-generated method stub
+        return adminDAO.searchUser(searchword);
+    }
+
+    @Override
+    public int updatePlant(EncyclopediaEntity encyclopediaEntity) throws Exception {
+        // TODO Auto-generated method stub
+        return adminDAO.updatePlant(encyclopediaEntity);
+    }
+
+    @Override
+    public int deletePlant(int pl_id) throws Exception {
+        // TODO Auto-generated method stub
+        return adminDAO.deletePlant(pl_id);
     }
 	
 	

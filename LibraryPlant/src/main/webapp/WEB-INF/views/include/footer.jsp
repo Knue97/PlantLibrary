@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="footer-wrappr " data-background="${contextPath}/resources/assets/img/gallery/footer-bg.png">
+<div class="footer-wrappr " data-background="${contextPath}/resources/assets/img/gallery/footer-bg.jpg">
         <div class="footer-area footer-padding ">
             <div class="container">
                 <div class="row d-flex justify-content-between">
@@ -9,7 +9,7 @@
                         <div class="single-footer-caption mb-50">
                             <!-- logo -->
                             <div class="footer-logo mb-25">
-                                <a href="index.html"><img src="${contextPath}/resources/assets/img/logo/logo2_footer.png" alt=""></a>
+                                <a href="index.html"><img src="${contextPath}/resources/assets/img/logo/logo.png" style="height: 80px;" alt=""></a>
                             </div>
                             <div class="footer-tittle mb-50">
                                 <p>Subscribe our newsletter to get updates about our services</p>

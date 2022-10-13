@@ -3,6 +3,8 @@ package kr.co.plantlibrary.admin;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.plantlibrary.login.LoginEntity;
+import kr.co.plantlibrary.plant_encyclopedia.EncyclopediaEntity;
 import kr.co.plantlibrary.report.ReportEntity;
 
 public interface AdminService {
@@ -42,5 +44,14 @@ public interface AdminService {
     
     // 회원 삭제
     public int deleteUser(String u_id) throws Exception;
+    
+    // 회원 검색
+    public List<LoginEntity> searchUser(String searchword) throws Exception;
+    
+    // 식물 수정
+    public int updatePlant(EncyclopediaEntity encyclopediaEntity) throws Exception;
+    
+    // 식물 삭제
+    public int deletePlant(int pl_id) throws Exception;
 	
 }
