@@ -16,28 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `report`
+-- Table structure for table `board`
 --
 
-DROP TABLE IF EXISTS `report`;
+DROP TABLE IF EXISTS `board`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `report` (
-  `r_no` int NOT NULL AUTO_INCREMENT,
-  `b_no` int DEFAULT NULL,
-  `c_no` int DEFAULT NULL,
+CREATE TABLE `board` (
+  `b_no` int NOT NULL AUTO_INCREMENT,
+  `bc_id` int NOT NULL,
   `u_id` varchar(50) NOT NULL,
-  `report_user` varchar(50) NOT NULL,
-  `rc_content` varchar(50) DEFAULT NULL,
-  `r_content` varchar(3000) DEFAULT NULL,
-  `r_file` varchar(45) DEFAULT NULL,
-  `r_state` int DEFAULT NULL,
-  PRIMARY KEY (`r_no`),
-  KEY `r_u_id_idx` (`u_id`),
-  KEY `r_report_user_idx` (`report_user`),
-  CONSTRAINT `r_report_user` FOREIGN KEY (`report_user`) REFERENCES `board` (`u_id`),
-  CONSTRAINT `r_u_id` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3;
+  `b_title` varchar(50) NOT NULL,
+  `b_content` varchar(10000) NOT NULL,
+  `b_regdate` datetime DEFAULT NULL,
+  `b_image` varchar(1000) DEFAULT NULL,
+  `b_hits` int DEFAULT NULL,
+  `b_recommendedNumber` int DEFAULT NULL,
+  `b_report` int DEFAULT NULL,
+  `b_state` int DEFAULT NULL COMMENT '기본0삭제1신고대기상태2',
+  `b_commentcnt` int DEFAULT NULL,
+  PRIMARY KEY (`b_no`),
+  KEY `bc_id_idx` (`bc_id`),
+  KEY `u_id_idx` (`bc_id`),
+  KEY `c_u_id` (`u_id`),
+  CONSTRAINT `b_bc_id` FOREIGN KEY (`bc_id`) REFERENCES `board_category` (`bc_id`),
+  CONSTRAINT `c_u_id` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=496 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

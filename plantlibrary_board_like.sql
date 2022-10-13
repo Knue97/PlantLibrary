@@ -16,28 +16,23 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `report`
+-- Table structure for table `board_like`
 --
 
-DROP TABLE IF EXISTS `report`;
+DROP TABLE IF EXISTS `board_like`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `report` (
-  `r_no` int NOT NULL AUTO_INCREMENT,
-  `b_no` int DEFAULT NULL,
-  `c_no` int DEFAULT NULL,
+CREATE TABLE `board_like` (
+  `bl_no` int NOT NULL AUTO_INCREMENT,
+  `b_no` int NOT NULL,
   `u_id` varchar(50) NOT NULL,
-  `report_user` varchar(50) NOT NULL,
-  `rc_content` varchar(50) DEFAULT NULL,
-  `r_content` varchar(3000) DEFAULT NULL,
-  `r_file` varchar(45) DEFAULT NULL,
-  `r_state` int DEFAULT NULL,
-  PRIMARY KEY (`r_no`),
-  KEY `r_u_id_idx` (`u_id`),
-  KEY `r_report_user_idx` (`report_user`),
-  CONSTRAINT `r_report_user` FOREIGN KEY (`report_user`) REFERENCES `board` (`u_id`),
-  CONSTRAINT `r_u_id` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3;
+  `bl_content` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`bl_no`),
+  KEY `b_no_idx` (`b_no`),
+  KEY `u_id_idx` (`u_id`),
+  CONSTRAINT `bl_b_no` FOREIGN KEY (`b_no`) REFERENCES `board` (`b_no`),
+  CONSTRAINT `bl_u_id` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
