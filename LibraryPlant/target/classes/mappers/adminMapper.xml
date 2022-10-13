@@ -81,11 +81,40 @@
 		where u_id = #{u_id}
 	</delete>
 	<!-- 식물 삭제 -->
-	<delete id="dfs">
-		
+	<delete id="deletePlant" parameterType="java.lang.Integer">
+		delete
+		from plant
+		where pl_id = #{pl_id}
 	</delete>
 	<!-- 식물 수정 -->
-	<update id="d">
-		
+	<update id="updatePlant" parameterType="EncyclopediaEntity">
+		update plant
+		set
+		pl_id = #{pl_id}, ec_id = #{ec_id}, pl_koreanName = #{pl_koreanName},
+		pl_englishName = #{pl_englishName}, pl_scientificName = #{pl_scientificName},
+		pl_familyName = #{pl_familyName}, pl_classification = #{pl_classification},
+		pl_nativeHome = #{pl_nativeHome}, pl_feature = #{pl_feature}, pl_level = #{pl_level},
+		pl_reproduction = #{pl_reproduction}, pl_water = #{pl_water},
+		pl_growthTemperature = #{pl_growthTemperature}, pl_light = #{pl_light}, pl_placement = #{pl_placement},
+		pl_summary = #{pl_summary}, pl_tip = #{pl_tip}, pl_detailLight = #{pl_detailLight},
+		pl_detailTemperature = #{pl_detailTemperature}, pl_detailWater = #{pl_detailWater},
+		pl_detailReproduction = #{pl_detailReproduction}, pl_detailSupport = #{pl_detailSupport},
+		pl_detailSoil = #{pl_detailSoil}, pl_detailPottingAndRoot = #{pl_detailPottingAndRoot},
+		pl_detailFertilizer = #{pl_detailFertilizer}, pl_detailCaution = #{pl_detailCaution},
+		pl_image = #{pl_image}, pl_imageSource = #{pl_imageSource}, pl_contentSource = #{pl_contentSource},
+		pl_hits = #{pl_hits}, pl_bookmarkCnt = #{pl_bookmarkCnt}
+		where pl_id = #{pl_id}
 	</update>
+	<!-- 회원 id/닉네임/이름으로 검색 -->
+	<select id="searchUser" parameterType="java.lang.String" resultType="LoginEntity">
+		select u_id, u_nickname, u_name, u_email, u_state
+		from user
+		<where>
+			u_id = #{searchword}
+			or
+			u_nickname = #{searchword}
+			or
+			u_name = #{searchword}
+		</where>
+	</select>
  </mapper>

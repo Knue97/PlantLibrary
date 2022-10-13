@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.plantlibrary.login.LoginEntity;
+import kr.co.plantlibrary.plant_encyclopedia.EncyclopediaEntity;
 import kr.co.plantlibrary.report.ReportEntity;
 
 @Repository
@@ -128,6 +130,27 @@ public class AdminDAOImpl implements AdminDAO{
     public int deleteUser(String u_id) throws Exception {
         // TODO Auto-generated method stub
         return sqlSession.delete(NAMESPACE + ".deleteUser", u_id);
+    }
+
+
+    @Override
+    public List<LoginEntity> searchUser(String searchword) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.selectList(NAMESPACE + ".searchUser", searchword);
+    }
+
+
+    @Override
+    public int updatePlant(EncyclopediaEntity encyclopediaEntity) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.update(NAMESPACE + ".updatePlant", encyclopediaEntity);
+    }
+    
+
+    @Override
+    public int deletePlant(int pl_id) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.update(NAMESPACE + ".deletePlant", pl_id);
     }
 
 }

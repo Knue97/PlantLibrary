@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;400;500;600;700&display=swap');
+
+*{
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
 .section-bg1 {
     background: #ffffff;
 }
@@ -18,7 +24,7 @@
     background: #16161a;
 }
 .theme-bg {
-    background: #f067ff;
+    background: #00C756;
 }
 .brand-bg {
     background: #f1f4fa;
@@ -33,28 +39,28 @@
     color: #16161a;
 }
 .theme-color {
-    color: #f067ff;
+    color: #00C756;
 }
 .boxed-btn {
     background: #fff;
-    color: #f067ff !important;
+    color: #00C756 !important;
     display: inline-block;
     padding: 18px 44px;
     font-family: "Poppins", sans-serif;
     font-size: 14px;
     font-weight: 400;
     border: 0;
-    border: 1px solid #f067ff;
+    border: 1px solid #00C756;
     letter-spacing: 3px;
     text-align: center;
-    color: #f067ff;
+    color: #00C756;
     text-transform: uppercase;
     cursor: pointer;
 }
 .boxed-btn:hover {
-    background: #f067ff;
+    background: #00C756;
     color: #fff !important;
-    border: 1px solid #f067ff;
+    border: 1px solid #00C756;
 }
 .boxed-btn:focus {
     outline: none;
@@ -104,7 +110,7 @@
     opacity: 0.9;
 }
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     font-weight: normal;
     font-style: normal;
     font-size: 16px;
@@ -115,15 +121,15 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Poppins", sans-serif;
-    color: #4c1e51;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    color: #19501f;
     margin-top: 0px;
     font-style: normal;
     font-weight: 500;
     text-transform: normal;
 }
 p {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     color: #646d77;
     font-size: 16px;
     line-height: 30px;
@@ -146,6 +152,7 @@ p {
     -moz-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
+    font-family: "Poppins", sans-serif;
 }
 .f-left {
     float: left;
@@ -329,9 +336,9 @@ hr {
     background: #ff3500;
 }
 .btn {
-    font-family: "Poppins", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     text-transform: capitalize;
-    padding: 27px 44px !important;
+    padding: 22px 35px !important;
     color: #fff;
     cursor: pointer;
     font-size: 15px;
@@ -348,7 +355,7 @@ hr {
     border: 0;
     overflow: hidden;
     margin: 0;
-    border-radius: 30px !important;
+    border-radius: 0px !important;
     display: inline-block !important;
 }
 .btn::after {
@@ -407,7 +414,7 @@ hr {
     color: #072366 !important;
 }
 .white-btn::before {
-    background: #f067ff;
+    background: #00C756;
     color: #fff !important;
 }
 .black-btn {
@@ -421,9 +428,9 @@ hr {
 .borders-btn {
     padding: 10px 64px;
     background: none;
-    border: 1px solid #f067ff;
+    border: 1px solid #00C756;
     display: inline-block;
-    color: #f067ff;
+    color: #00C756;
     border-radius: 30px;
     text-transform: uppercase;
 }
@@ -455,8 +462,8 @@ hr {
     border-radius: 0px;
 }
 .border-btn {
-    border: 1px solid #f067ff;
-    color: #f067ff;
+    border: 1px solid #00C756;
+    color: #00C756;
     background: none;
     border-radius: 30px;
     text-transform: capitalize;
@@ -477,7 +484,7 @@ hr {
 .border-btn i {
     font-size: 16px;
     margin-right: 10px;
-    color: #f067ff;
+    color: #00C756;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
     -o-transition: 0.3s;
@@ -526,7 +533,7 @@ hr {
 }
 #scrollUp,
 #back-top {
-    background: #f067ff;
+    background: #00C756;
     height: 50px;
     width: 50px;
     right: 31px;
@@ -1620,7 +1627,7 @@ hr {
     position: relative;
     border-style: solid;
     border-width: 1px;
-    border-top-color: #f067ff;
+    border-top-color: #00C756;
     border-bottom-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -2028,7 +2035,7 @@ hr {
     color: #6e7697;
 }
 .section-tittle2 h2 {
-    color: #4c1e51;
+    color: #19501f;
 }
 .section-bg {
     background-size: cover;
@@ -2058,7 +2065,7 @@ hr {
     background: #16161a;
 }
 .theme-bg {
-    background: #f067ff;
+    background: #00C756;
 }
 .brand-bg {
     background: #f1f4fa;
@@ -2073,7 +2080,7 @@ hr {
     color: #16161a;
 }
 .theme-color {
-    color: #f067ff;
+    color: #00C756;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .header-area {
@@ -2198,7 +2205,7 @@ hr {
     -o-transition: 0.3s;
     transition: 0.3s;
     text-transform: uppercase;
-    font-family: "Poppins", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     position: relative;
 }
 .main-header .main-menu ul li a::after {
@@ -2214,10 +2221,10 @@ hr {
     -moz-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
-    background: #81E413;
+    background: #19501f;
 }
 .main-header .main-menu ul li:hover > a {
-    color: #81E413;
+    color: #19501f;
 }
 .main-header .main-menu ul li:hover > a::after {
     left: 0;
@@ -2365,11 +2372,11 @@ hr {
 }
 .mobile_menu .slicknav_menu .slicknav_nav {
     margin-top: 9px !important;
-    background: #4c1e51;
+    background: #19501f;
 }
 .mobile_menu .slicknav_menu .slicknav_nav a:hover {
     background: transparent;
-    color: #f067ff;
+    color: #00C756;
 }
 .mobile_menu .slicknav_menu .slicknav_nav a {
     font-size: 15px;
@@ -2478,7 +2485,7 @@ hr {
     font-size: 65px;
     font-weight: 700;
     color: #000;
-    font-family: "Poppins", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     line-height: 1.3;
     margin-bottom: 25px;
 }
@@ -3045,7 +3052,7 @@ form.search-box .input-form .world-form i {
     border-bottom: 1px solid #e7e6eb;
 }
 .pricing-card-area .single-card .card-mid h4 {
-    color: #4c1e51;
+    color: #19501f;
     font-size: 32px;
     font-weight: 600;
 }
@@ -3063,12 +3070,12 @@ form.search-box .input-form .world-form i {
     margin-bottom: 46px;
 }
 .pricing-card-area .single-card .card-bottom .borders-btn {
-    color: #f067ff;
+    color: #00C756;
     padding: 10px 64px;
     background: none;
-    border: 1px solid #f067ff;
+    border: 1px solid #00C756;
     display: inline-block;
-    color: #f067ff;
+    color: #00C756;
     border-radius: 30px;
     text-transform: uppercase;
 }
@@ -3146,10 +3153,10 @@ form.search-box .input-form .world-form i {
     border-bottom: 1px solid #fff;
 }
 .login-form .form-input input::placeholder {
-    color: #f067ff;
+    color: #00C756;
 }
 .login-form .form-input input[type="submit"] {
-    background: #f067ff;
+    background: #00C756;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -3162,12 +3169,12 @@ form.search-box .input-form .world-form i {
 }
 .login-form .form-input input[type="submit"]:hover {
     background: #000;
-    background: #f067ff;
+    background: #00C756;
 }
 .login-form .forget {
     display: block;
     margin-top: 30px;
-    color: #f067ff;
+    color: #00C756;
     font-weight: 600;
     text-decoration: underline;
     margin-bottom: 5px;
@@ -3177,7 +3184,7 @@ form.search-box .input-form .world-form i {
 }
 .login-form .registration {
     display: block;
-    color: #f067ff;
+    color: #00C756;
     font-weight: 600;
     text-decoration: underline;
     margin-bottom: 5px;
@@ -3257,7 +3264,7 @@ form.search-box .input-form .world-form i {
     }
 }
 .testimonial-area .single-testimonial {
-    background: #4c1e51;
+    background: #19501f;
     padding: 70px 100px 70px 100px;
     border-radius: 12px;
 }
@@ -3282,7 +3289,7 @@ form.search-box .input-form .world-form i {
 }
 .testimonial-area .testimonial-caption p {
     font-size: 16px;
-    color: #4c1e51;
+    color: #19501f;
     color: #fff;
     line-height: 45px;
     line-height: 1.5;
@@ -3344,10 +3351,10 @@ form.search-box .input-form .world-form i {
     background: #fff;
 }
 .h1-testimonial-active button.slick-arrow:hover i {
-    color: #4c1e51;
+    color: #19501f;
 }
 .h1-testimonial-active button.slick-arrow i {
-    color: #4c1e51;
+    color: #19501f;
     font-size: 20px;
     position: relative;
     top: 3px;
@@ -3383,22 +3390,23 @@ form.search-box .input-form .world-form i {
     color: #fff;
     font-size: 22px;
     margin-bottom: 29px;
-    font-weight: 500;
+    font-weight: 600;
 }
 .footer-area .footer-tittle ul li {
     margin-bottom: 15px;
 }
 .footer-area .footer-tittle ul li a {
-    color: #c2c5db;
-    font-weight: 300;
+    color: #fff;
+    font-weight: 500;
     text-decoration: underline transparent;
 }
 .footer-area .footer-tittle ul li a:hover {
-    color: #f067ff;
+    color: #00C756;
     text-decoration: underline;
 }
 .footer-area .footer-tittle p {
-    color: #c2c5db;
+    color: #fff;
+    font-weight: 500;
 }
 .footer-area .footer-form {
     margin-top: 40px;
@@ -3430,7 +3438,7 @@ form.search-box .input-form .world-form i {
     border-radius: 10px;
 }
 .footer-area .info.error {
-    color: #f067ff;
+    color: #00C756;
 }
 .footer-bottom-area .footer-border {
     padding: 33px 0px 20px;
@@ -3474,7 +3482,7 @@ form.search-box .input-form .world-form i {
 .footer-social > a:hover {
     color: #fff;
     border: 1px solid transparent;
-    background: #f067ff;
+    background: #00C756;
 }
 .footer-social > a:hover i {
     transform: rotateY(180deg);
@@ -3546,7 +3554,7 @@ form.search-box .input-form .world-form i {
     text-transform: capitalize;
 }
 .home-blog-area .home-blog-single .blog-img-cap .blog-cap h3 a:hover {
-    color: #f067ff;
+    color: #00C756;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .home-blog-area .home-blog-single .blog-img-cap .blog-cap h3 a {
@@ -3572,7 +3580,7 @@ form.search-box .input-form .world-form i {
     color: #3a3a3a;
     text-transform: uppercase;
     font-size: 14px;
-    font-family: "Poppins", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     color: #3a3a3a;
 }
 .home-blog-area .home-blog-single .blog-img-cap .blog-cap .more-btn:hover {
@@ -3596,7 +3604,7 @@ form.search-box .input-form .world-form i {
 }
 .blog_area a:hover,
 .blog_area a :hover {
-    background: -webkit-linear-gradient(131deg, #f067ff 0%, #f067ff 99%);
+    background: -webkit-linear-gradient(131deg, #00C756 0%, #00C756 99%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
@@ -4015,7 +4023,7 @@ form.search-box .input-form .world-form i {
     left: 10px;
     display: block;
     color: #fff;
-    background-color: #f067ff;
+    background-color: #00C756;
     padding: 8px 15px;
     border-radius: 5px;
 }
@@ -4084,7 +4092,7 @@ form.search-box .input-form .world-form i {
     box-shadow: none;
 }
 .blog_right_sidebar .search_widget .input-group button {
-    background: #f067ff;
+    background: #00C756;
     border-left: 0;
     border: 1px solid #f0e9ff;
     padding: 4px 15px;
@@ -4182,7 +4190,7 @@ form.search-box .input-form .world-form i {
     font-size: 13px;
 }
 .blog_right_sidebar .tag_cloud_widget ul li a:hover {
-    background: #f067ff;
+    background: #00C756;
     color: #fff !important;
     -webkit-text-fill-color: #fff;
     text-decoration: none;
@@ -4725,7 +4733,7 @@ form.search-box .input-form .world-form i {
     color: #fff;
     font-weight: 900;
     margin-bottom: 0;
-    font-family: "Poppins", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     text-transform: capitalize;
 }
 @media (max-width: 767px) {
@@ -4776,7 +4784,7 @@ form.search-box .input-form .world-form i {
     cursor: pointer;
     display: block;
     float: left;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     font-weight: normal;
     width: 100% !important;
     line-height: 50px;
@@ -4937,17 +4945,17 @@ form.search-box .input-form .search-form button,
 .pricing-card-area .single-card .card-bottom .borders-btn:hover,
 .pricing-card-area .single-card:hover .card-bottom .borders-btn,
 .footer-area .footer-form form .form-icon button {
-    background: #63B10C;
-    background: -moz-linear-gradient(top, #63B10C 0%, #83EE0B 100%);
-    background: -webkit-linear-gradient(top, #63B10C 0%, #83EE0B 100%);
-    background: linear-gradient(to bottom, #63B10C 0%, #83EE0B 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63B10C', endColorstr='#83EE0B',GradientType=0 );
+    background: #00C756;
+    background: -moz-linear-gradient(top, #00C756 0%, #00C756 100%);
+    background: -webkit-linear-gradient(top, #00C756 0%, #00C756 100%);
+    background: linear-gradient(to bottom, #00C756 0%, #00C756 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#19501f', endColorstr='#00C756',GradientType=0 );
 }
 .btn::before {
-    background: #63B10C;
-    background: -moz-linear-gradient(top, #63B10C 0%, #83EE0B 100%);
-    background: -webkit-linear-gradient(top, #63B10C 0%, #83EE0B 100%);
-    background: linear-gradient(to bottom, #63B10C 0%, #83EE0B 100%);
+    background: #00C756;
+    background: -moz-linear-gradient(top, #00C756 0%, #00C756 100%);
+    background: -webkit-linear-gradient(top, #00C756 0%, #00C756 100%);
+    background: linear-gradient(to bottom, #00C756 0%, #00C756 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a077ff', endColorstr='#ef67ff',GradientType=0 );
 }
 .sample-text-area {

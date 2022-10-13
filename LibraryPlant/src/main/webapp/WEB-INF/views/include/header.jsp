@@ -9,7 +9,7 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="${contextPath }/"><img src="${contextPath}/resources/assets/img/logo/logo.png" alt=""></a>
+                                    <a href="${contextPath }/"><img style="height: 85px;" src="${contextPath}/resources/assets/img/logo/logo.png" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-10 col-lg-10">
@@ -19,13 +19,13 @@
                                         <nav>
                                             <ul id="navigation" >                                                                                          
                                                 <li><a href="${contextPath }/">Home</a></li>
-                                                <li><a href="packages.html">About us</a></li>
+                                                <li><a href="${contextPath }/aboutus">About us</a></li>
                                                 <li><a href="#">백과</a>
                                                     <ul class="submenu">
                                                     	<li><a href="${contextPath }/encyclopedia/home">백과 홈</a></li>
                                                         <li><a href="${contextPath }/encyclopedia/plant/listgroup">식물</a></li>
                                                         <li><a href="${contextPath }/encyclopedia/diseaseandpest">병해충</a></li>
-                                                        <li><a href="elements.html">무슨무슨?</a></li>                                                        
+                                                                                                           
                                                     </ul>
                                                 </li>
                                                 <li><a href="#">게시판</a>
@@ -38,11 +38,9 @@
                                                 </li>
                                                 <li><a href="#">식물원</a>
                                                     <ul class="submenu">
-                                                        <li><a href="${contextPath }/botanicalgarden/navermap">지도로 보기</a></li>
-                                                        <li><a class="dropdown-item" href="${contextPath}/botanicalgarden/register">식물원 추가</a></li>                                                                                                                
+                                                        <li><a href="${contextPath }/botanicalgarden/navermap">지도로 보기</a></li>                                                                     
                                                     </ul>
                                                 </li>
-                                                <li><a href="contact.html">블로그</a></li>
                                                 <c:if test="${not empty user}">
                                                 	<c:if test="${user.u_state == 99 }">                                                
 	                                                	<li>
@@ -51,11 +49,7 @@
 															    ${user.u_nickname }님
 															  </button>
 															  <ul class="dropdown-menu">
-															    <li><a class="dropdown-item" href="${contextPath}/admin">관리자페이지</a></li>
-															    <li><a class="dropdown-item" href="${contextPath}/#">유저관리</a></li>
-															    <li><a class="dropdown-item" href="${contextPath}/#">유저 식물 관리</a></li>														    
-															    <li><a class="dropdown-item" href="${contextPath}/encyclopedia/plant/register">식물백과 추가</a></li>
-															    <li><a class="dropdown-item" href="${contextPath}/botanicalgarden/register">식물원 추가</a></li>															    
+															    <li><a class="dropdown-item" href="${contextPath}/admin">관리자 페이지</a></li>
 															    <li><a class="dropdown-item" href="${contextPath}/login/logout">로그아웃</a></li>
 															  </ul>
 															</div>
@@ -91,7 +85,6 @@
                                                 </c:if>
                                                 <c:if test="${empty user }">
 	                                                <!-- Button -->
-	                                                <li class="button-header margin-left "><a href="${contextPath}/login/register" class="btn">회원가입</a></li>
 	                                                <li class="button-header"><a href="${contextPath}/login/login" class="btn">로그인</a></li>
                                                 </c:if>                                                
                                             </ul>

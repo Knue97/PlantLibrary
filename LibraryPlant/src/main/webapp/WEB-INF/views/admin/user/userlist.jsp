@@ -28,8 +28,19 @@
 					<div style="height:100px;"></div>
 				<div class="row align-items-center justify-content-center">
 				<div class="col-lg-9">
+				<div class="form-group col-md-6" style="float: right;">
+				     <div class="form-group">
+				      <div class="input-group mb-3">
+				       <input id="searchword" style="height: 45px;" type="text" class="form-control" placeholder="아이디/닉네임/이름으로 검색하세요">
+				       <div class="input-group-append">
+				  		<button class="genric-btn w-100 primary" type="button" style="height: 45px;" onclick="search();">검색</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
 				<h2 id="title" style="height:50px; color: #212542;">회원 목록</h2>
-				<table class="table table-hover table-striped">
+				<table class="table table-hover table-striped" id="searchresult">
 				<tr style="color:white; background-color: #1F2B7B;">
 			      <th style="width: 20%;">ID</th>
 			      <th style="width: 20%;">닉네임</th>
@@ -70,7 +81,7 @@
 				</c:forEach>
 				</table>
 				
-				<div class="row align-items-center justify-content-center">
+				<div id="paging" class="row align-items-center justify-content-center">
 				<c:if test="${prev}">
 				 <span>[ <a href="${contextPath }/admin/user?num=${startPageNum - 1}">이전</a> ]</span>
 				</c:if>
@@ -114,6 +125,16 @@
 	<!-- JS here -->
 	<%@ include file="/WEB-INF/views/include/plugin.jsp"%>
 <script>
+	$(document).ready(function(){
+		
+		$('#searchword').keyup(function(event){
+			
+			if(event.keyCode == 13)
+				search();		
+		})
+		
+	})
+
 	function onChange(x){
 		
 		var u_state = x.value;
@@ -164,6 +185,72 @@
 		else {
 		   alert('삭제가 취소되었습니다.');
 		}
+	}
+	
+	
+	function search(){
+		
+		var htmls = '';
+		
+			$.ajax({
+				url: "${contextPath}/admin/search/user",
+				data: {
+					'searchword' : $("#searchword").val()
+				},
+				dataType: 'json',
+				type: 'GET',
+				success: function(result){
+					
+					if(result.length==0){
+						alert('검색 결과가 존재하지 않습니다.');
+						return false;
+					}
+					
+					htmls += '<table class="table table-hover table-striped" id="searchresult">';
+					htmls += '<tr style="color:white; background-color: #1F2B7B;">';
+				    htmls += '<th style="width: 20%;">ID</th><th style="width: 20%;">닉네임</th>';
+				    htmls += '<th style="width: 12%;">이름</th><th>이메일</th>';
+				    htmls += '<th class="text-center" style="width: 12%;">회원상태</th>';
+				    htmls += '<th class="text-center" style="width: 12%;">삭제</th></tr>';
+					
+					for(var i=0; i<result.length; i++){
+						
+						
+						htmls += '<tr><td>'+ result[i].u_id +'</td><td>'+ result[i].u_nickname +'</td>';
+						htmls += '<td>'+ result[i].u_name +'</td><td>'+ result[i].u_email +'</td><td class="text-center">';
+						htmls += '<select id="'+ result[i].u_id +'" onchange="onChange(this);">';
+						
+						if(result[i].u_state == 0){
+							htmls += '<option selected value="0">일반회원</option><option value="99">관리자</option>';
+							htmls += '</select></td>';
+							htmls += '<td class="text-center"><a onclick="delConfirm('+ result[i].u_id +');">회원삭제</a></td></tr>';
+						} else if(result[i].u_state == 99){
+							htmls += '<option value="0">일반회원</option><option selected value="99">관리자</option>';
+							htmls += '</select></td>';
+							htmls += '<td></td></tr>';
+						}
+
+					}
+					
+					htmls += '</table>';
+					htmls += '<button style="float: right;" class="genric-btn w-40 primary" id="all" onclick="reload();">전체보기</button>';
+					
+					$("#all").remove();
+					$("#searchresult").replaceWith(htmls);
+					$("#paging").remove();
+				    					
+				},
+				error: function(result){
+					alert('오류');
+				}
+				
+			
+			})
+		   
+	}
+	
+	function reload(){
+		location.href = "${contextPath}/admin/user?num=1";
 	}
 </script>
 </body>

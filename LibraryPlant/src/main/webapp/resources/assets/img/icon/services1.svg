@@ -2,7 +2,7 @@
   <defs>
     <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
       <stop offset="0" stop-color="#9f78ff"/>
-      <stop offset="1" stop-color="#f067ff"/>
+      <stop offset="1" stop-color="#00C756"/>
     </linearGradient>
   </defs>
   <path id="Path_61" data-name="Path 61" d="M0,16.119H3.287V19.3H0V35.207H3.287v3.181H0V54.295H54.295V38.388H51.007V35.207h3.287V19.3H51.007V16.119h3.287V0H0ZM51.114,51.114H3.181V41.57H51.114ZM47.826,38.388H6.469V35.207H47.826Zm3.287-6.363H3.181V22.481H51.114ZM47.826,19.3H6.469V16.119H47.826ZM3.181,3.181H51.114v9.756H3.181Z" fill="url(#linear-gradient)"/>

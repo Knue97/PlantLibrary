@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.plantlibrary.admin.AdminService;
 import kr.co.plantlibrary.disease_encyclopedia.DiseaseEntity;
 import kr.co.plantlibrary.disease_encyclopedia.DiseaseService;
+import kr.co.plantlibrary.login.LoginEntity;
 import kr.co.plantlibrary.pest_encyclopedia.PestEntity;
 import kr.co.plantlibrary.pest_encyclopedia.PestService;
 import kr.co.plantlibrary.plant_encyclopedia.EncyclopediaEntity;
@@ -356,7 +357,14 @@ public class AdminController {
     public int deleteUser(@RequestParam("u_id") String u_id, @RequestParam("u_state") int u_state) throws Exception {
         return adminService.updateUserState(u_id, u_state);
     }
-	
+    
+    // 회원 아이디, 닉네임, 이름으로 검색
+    @ResponseBody
+    @GetMapping(value="admin/search/user")
+    public List<LoginEntity> searchUser(@RequestParam("searchword") String searchword) throws Exception{
+        return adminService.searchUser(searchword);
+    }
+    
     // 해충 검색
     @ResponseBody
     @GetMapping(value="admin/search/pest")
@@ -381,14 +389,41 @@ public class AdminController {
         return plantService.search(searchVO);
     }
     
-    // 식물 수정
+    // 식물변경 폼 이동
+    @GetMapping(value="admin/encyclopedia/plant/update")
+    public ModelAndView updatePlant(@RequestParam("pl_id") int pl_id) {
+        
+        ModelAndView mav = new ModelAndView();
+        EncyclopediaEntity plant = new EncyclopediaEntity();
+        plant = plantService.listById(pl_id);
+        
+        
+        mav.addObject("plant", plant);
+        mav.setViewName("encyclopedia/plant/plantupdate");
+        
+        return mav;
+    }
     
+    // 식물 변경
+    @ResponseBody
+    @PostMapping(value="admin/encyclopedia/plant/update")
+    public int updatePlant(@RequestParam("plant") EncyclopediaEntity plant) throws Exception {
+        
+        return adminService.updatePlant(plant);
+    }
     
     // 식물 삭제
-//    @ResponseBody
-//    @PostMapping(value="/encyclopedia/disease/delete")
-//    public int deletePlant(@RequestParam("u_id") String u_id) throws Exception {
-//        
-//        return pestService.delete(u_id);
-//    }
+    @ResponseBody
+    @GetMapping(value="admin/encyclopedia/plant/delete")
+    public int deletePlant(@RequestParam("pl_id") int pl_id) throws Exception {
+        
+        return adminService.deletePlant(pl_id);
+    }
+    
+    
+    // About us 페이지 이동
+    @GetMapping(value="aboutus")
+    public String aboutUs() {
+        return "aboutus";
+    }
 }
