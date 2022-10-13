@@ -108,6 +108,19 @@ public class BoardController {
 		logger.info("" + pageMaker);
 
 		List<BoardDTO> listAll = service.showListAll(cri);
+		
+//		// 썸네일 
+//		for(int i =0; i<listAll.size();i++) {
+//		    if (listAll.get(i).getB_image() != null) {
+//                
+//	         String thumbnail = null;
+//	         String [] st =listAll.get(i).getB_image().split(",");
+//	         thumbnail = st[0];
+//	         listAll.get(i).setB_image(thumbnail);
+//		    }
+//	      }
+		
+		
 		mav.addObject("showListAll", listAll);
 		mav.addObject("pageMaker", pageMaker);
 		mav.setViewName("board/showListAll");
@@ -151,7 +164,7 @@ public class BoardController {
 		List<BoardDTO> listAll = service.searchList(cri);
 		mav.addObject("searchList", listAll);
 		mav.addObject("pageMaker", pageMaker);
-		mav.setViewName("board/optionPage/searchList");
+		mav.setViewName("board/functionPage/searchList");
 		return mav;
 	}
 	
@@ -164,7 +177,7 @@ public class BoardController {
 		BoardDTO board = service.detail(b_no);
 		model.addAttribute("board", board);
 
-		return "board/optionPage/detail";
+		return "board/functionPage/detail";
 	}
 
 //	게시글 입력 insert
@@ -172,7 +185,7 @@ public class BoardController {
 	@GetMapping(value = "board/register")
 	public String register() {
 		logger.info("글쓰기 폼으로 이동");
-		return "board/optionPage/register";
+		return "board/functionPage/register";
 	}
 
 //	-2. 입력
@@ -210,7 +223,7 @@ public class BoardController {
 //				
 //			}
 //		}
-		logger.info("b_image = "+b_image);
+		logger.info("b_image = " + b_image);
 		if (b_image != "") {	//  이미지가 있을 때만 적용되기 -> 없으면 오류창에 end = -1이 되버림
 //		b_image = b_image.substring(0, b_image.length() - 1);	//	substring : 문자열자르기 = db 입력시 마지막 콤마 자르기
 		boardDTO.setB_image(b_image);
@@ -240,7 +253,7 @@ public class BoardController {
 		BoardDTO board = service.detail(b_no);
 		model.addAttribute("board", board);
 		logger.info("업뎃 폼 " + board);
-		return "board/optionPage/update";
+		return "board/functionPage/update";
 	}
 
 //	-2 수정
@@ -317,16 +330,8 @@ public class BoardController {
 	}
 
 	
+
 	
-//	추천/좋아요/신고
-	// 세션 값 받아서 처리..? user.u_id + boardDTO.b_no + 체크값1 입력
-	// 취소 -> 동일 체크값 -1
-	@ResponseBody
-	@PostMapping(value = "board/recommended")
-	public int recommended(BoardDTO boardDTO) throws Exception {
-		logger.info("총 추천 수 : "+ boardDTO.getB_recommendedNumber());
-		return service.recommended(boardDTO);
-	}
 	
 //	이미지 업로드 및 구현
 	@RequestMapping(value="board/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
@@ -350,15 +355,15 @@ public class BoardController {
 			jsonObject.addProperty("url", "/plantlibrary/resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 			
-			if(b_image != null || savedFileName.length()>1) {
-				b_image += "," + savedFileName;	// DB 이미지 컬럼에 배열로 받기
-				logger.info("사진+ = " + b_image);
-			}else {
+			
 			b_image = request.getContextPath() + "/resources/fileupload/" + savedFileName;
 			logger.info("사진 = " + b_image);
-			}
+//			if(b_image != null) {
+//                b_image += "," + savedFileName; // DB 이미지 컬럼에 배열로 받기
+//                logger.info("사진+ = " + b_image);
+//            }
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			FileUtils.deleteQuietly(targetFile);	 //저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}

@@ -27,7 +27,7 @@ public class ReportController {
 	
 	@GetMapping(value="board/reportPage")
 	public String report(ReportEntity reportEntity) {
-		return "board/optionPage/reportPage";
+		return "board/functionPage/reportPage";
 	}
 	
 	
@@ -42,7 +42,7 @@ public class ReportController {
 		reportEntity.setR_file(imgstr);
 		int r = reportService.register(reportEntity);
 		log.info("b_no = "+reportEntity.getB_no());
-		if(reportEntity.getB_no() == 0) {
+		if(reportEntity.getB_no() <= 0) {
 			mav.setViewName("redirect:freeListAll");
 		} else {
 		mav.setViewName("redirect:detail?b_no=" + reportEntity.getB_no());

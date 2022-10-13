@@ -8,6 +8,44 @@
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/plugin.jsp" %>
 <%@ include file="/WEB-INF/views/include/summernote.jsp" %>
+<style>
+input {
+	display: block;
+	float: right;
+	line-height: 24pt;
+	padding: 0 20px;
+	border: none;
+	background: #fff;
+	color: #000;
+	letter-spacing: 2px;
+	transition: .2s all ease-in-out;
+	border-bottom: 2px solid transparent;
+	outline: none;
+}
+
+input:hover {
+	background: inherit;
+	color: #2e8b57;
+	border-bottom: 2px solid #2e8b57;
+}
+.textarea-title {
+    display: block;
+    width: 100%;
+    line-height: 40px;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #000;
+    padding: 0 20px;
+    height: 100px;
+    resize: none;
+    font-size: x-large;
+}
+.textarea-title:hover {
+	color: #000;
+    outline: none;
+}
+</style>
 </head>
 
 <script>
@@ -94,6 +132,7 @@ $(document).ready(function(){
         <!-- Header End -->
     </header>
     <main>
+    
     	<!-- Slider Area Start-->
         <div class="slider-area white-bg ">
             <div class="slider-active">
@@ -155,27 +194,28 @@ $(document).ready(function(){
 
 					<div class="box-body">
 							<div class="form-group">
-								<label>제목</label> <input type="text" name="b_title" rows="20"
-									class="form-control" value="${board.b_title}" placeholder="(필수)제목을 입력하세요 50자 제한" maxlength="50" />
+							<input type="text" name="b_title"
+									class="textarea-title" value="${board.b_title}" placeholder="(필수)제목을 입력하세요 50자 제한" maxlength="50" />
 							</div>
 
 							<div class="form-group">
 								<label>내용</label>
 								<textarea id="summernote" name="b_content" rows="10"
-									class="form-control" placeholder="내용을 입력하세요" maxlength="1000">${board.b_content}</textarea>
-									<p class="textTotal" align="right">글자수 제한 : 1000자</p>
+									class="form-control" placeholder="내용을 입력하세요" maxlength="10000">${board.b_content}</textarea>
+									<p class="textTotal" align="right">글자수 제한 : 10000자</p>
 							</div>
 							
 							<!-- 작성자 -->
 							<input type="hidden" name="u_id" value="${user.u_id}">
 							<!-- 수정에 사용할 글번호 -->
-							<input type="hidden" name="b_no" value="${board.b_no }" />
+							<input type="hidden" name="b_no" value="${board.b_no }">
+							<input type="hidden" name="b_image" value="${board.b_image }">
 						</div>
 
 						<div class="box-footer" align="right">
 						<input type="button" value="취소" onclick="history.back()">
 						<input type="reset" value="초기화">
-						<input type="submit" value="수정" >
+						<input type="submit" value="수정완료" >
 						</div>
 				</form>
 </div></div>

@@ -134,56 +134,7 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	
-//	게시글 추천
-	@Override
-	public int recommended(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlsession.update(Namespace + ".recommended", boardDTO);
-	}
-	
-//	댓글 좋아요
-	@Override
-	public int replyLike(int c_no) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlsession.update(Namespace + ".replyLike", c_no);
-	}
-	@Override
-	public int replyDisLike(int c_no) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlsession.update(Namespace + ".replyDisLike", c_no);
-	}
-//	댓글 채택
-	@Override
-	public int replyChoose(int c_no) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlsession.update(Namespace + ".replyChoose", c_no);
-	}
-	
-	
-//	신고
-//	게시글
-	@Override
-	public int boardReport(int b_no) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlsession.update(Namespace + ".boardReport", b_no);
-	}
-//	댓글
-	@Override
-	public int replyReport(int c_no) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlsession.update(Namespace + ".replyReport", c_no);
-	}
-//	유저
-	@Override
-	public int userReport(String u_id) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlsession.update(Namespace + ".userReport", u_id);
-	}
-	
-	
-	
-	
-	
+
 	
 	
 	

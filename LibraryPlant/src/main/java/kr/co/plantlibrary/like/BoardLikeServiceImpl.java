@@ -18,15 +18,16 @@ public class BoardLikeServiceImpl implements BoardLikeService{
 	
 	@Override
 	public int addLike(BoardLikeEntity boardLikeEntity) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.addLike(boardLikeEntity);
+//      좋아요 + 좋아요 개수 카운트
+		return dao.addLike(boardLikeEntity) + dao.likeCountAll(boardLikeEntity);
 	}
 	
 	@Override
 	public int removeLike(BoardLikeEntity boardLikeEntity) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.removeLike(boardLikeEntity);
+//      안좋아요 + 좋아요 개수 카운트
+		return dao.removeLike(boardLikeEntity) + dao.likeCountAll(boardLikeEntity);
 	}
-		
+
+
 		
 }

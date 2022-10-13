@@ -8,6 +8,45 @@
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/plugin.jsp" %>
 <%@ include file="/WEB-INF/views/include/summernote.jsp" %>
+<style>
+input {
+	display: block;
+	float: right;
+	line-height: 24pt;
+	padding: 0 20px;
+	border: none;
+	background: #fff;
+	color: #000;
+	letter-spacing: 2px;
+	transition: .2s all ease-in-out;
+	border-bottom: 2px solid transparent;
+	outline: none;
+}
+
+input:hover {
+	background: inherit;
+	color: #2e8b57;
+	border-bottom: 2px solid #2e8b57;
+}
+
+.textarea-title {
+    display: block;
+    width: 100%;
+    line-height: 40px;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #000;
+    padding: 0 20px;
+    height: 100px;
+    resize: none;
+    font-size: x-large;
+}
+.textarea-title:hover {
+	color: #000;
+    outline: none;
+}
+</style>
 </head>
 
 <script>
@@ -71,8 +110,6 @@ function uploadSummernoteImageFile(file, el) {
 	});
 }
 
-
-
 function validate() {
 		console.log("전송 확인하기 - 유효성 검사");
 
@@ -89,7 +126,9 @@ function validate() {
 		return true;
 	}
 }
+
 </script>
+
 <body>
     <!-- ? Preloader Start -->
     <%@ include file="/WEB-INF/views/include/preloader.jsp" %>
@@ -130,7 +169,7 @@ function validate() {
         <section class="content container-fluid">
 
 			<div class="container">
-				
+				<div class="row px-xl-5">
 				<form role="form" method="post" enctype="multipart/form-data" name="loginCheck" onsubmit="return validate();">
 				
 					<select name="bc_id">
@@ -144,12 +183,12 @@ function validate() {
 						<div class="form-group">
 
 							 <input type="text" name="b_title"
-								class="single-textarea" placeholder="(필수)제목을 입력하세요 50자 제한" maxlength="50">
+								class="textarea-title" placeholder="(필수)제목을 입력하세요 50자 제한" maxlength="50">
 						</div>
 						<div class="form-group">
 							<label>내용</label>
-							<textarea id="summernote" name="b_content"
-								placeholder="내용을 입력하세요" maxlength="10000"></textarea>
+							<textarea id="summernote" name="b_content" rows="10"
+								class="form-control" placeholder="내용을 입력하세요" maxlength="10000"></textarea>
 							<p class="textTotal" align="right">글자수 제한 : 10000자</p>
 						</div>
 						
@@ -163,7 +202,7 @@ function validate() {
 						<input type="submit" value="작성완료">
 					</div>
 				</form>
-
+			</div>
 			</div>
 		</section>
        

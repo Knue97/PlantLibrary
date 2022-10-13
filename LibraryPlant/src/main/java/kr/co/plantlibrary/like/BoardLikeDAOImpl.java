@@ -31,6 +31,21 @@ public class BoardLikeDAOImpl implements BoardLikeDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.delete(NAMESPACE + ".removeLike", boardLikeEntity);
 	}
+
+//	 해당 게시글 좋아요 전체 취소(게시글 삭제시)
+    @Override
+    public int removeLikeAll(int b_no) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.delete(NAMESPACE + ".removeLikeAll", b_no);
+    }
+
+//  게시글 좋아요 총 개수
+    @Override
+    public int likeCountAll(BoardLikeEntity boardLikeEntity) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.update(NAMESPACE + ".likeCountAll", boardLikeEntity);
+    }
+    
 	
 
 }

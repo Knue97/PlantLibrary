@@ -60,6 +60,9 @@
    	<context:component-scan base-package="kr.co.plantlibrary.plant_encyclopedia"></context:component-scan>
    	<context:component-scan base-package="kr.co.plantlibrary.login"></context:component-scan>
    	<context:component-scan base-package="kr.co.plantlibrary.board"></context:component-scan>
+   	<context:component-scan base-package="kr.co.plantlibrary.like"></context:component-scan>
+   
+   	
     <context:component-scan base-package="kr.co.plantlibrary.disease"></context:component-scan>
     <context:component-scan base-package="kr.co.plantlibrary.disease_encyclopedia"></context:component-scan>
    	
