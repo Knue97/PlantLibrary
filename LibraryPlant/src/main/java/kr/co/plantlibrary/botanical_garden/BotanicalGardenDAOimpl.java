@@ -34,4 +34,10 @@ public class BotanicalGardenDAOimpl implements BotanicalGardenDAO {
         return sqlSession.selectOne(nameSpace + ".listbyid", g_id);
     }
 
+    @Override
+    public int update(int g_id) {
+        // TODO Auto-generated method stub
+        return sqlSession.update(nameSpace +".update", g_id);
+    }
+
 }

@@ -12,4 +12,7 @@ public interface BotanicalGardenService {
 	
 	//개별 식물원 조회
     public BotanicalGardenVO listById(int g_id);
+    
+    //식물원 수정
+    public int update(int g_id);
 }

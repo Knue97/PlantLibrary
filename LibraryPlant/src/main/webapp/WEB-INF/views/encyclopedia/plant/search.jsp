@@ -63,9 +63,9 @@
 						<!--Hero form -->
 						<form action="${contextPath}/encyclopedia/plant/search"
 							class="search-box" method="get">
-							<select name="category" id="" class="text-center"
+							<select name="category" id="category" class="text-center"
 								onchange="changeSelect()">
-								<option value="" selected>타입</option>
+								<option value="none">타입</option>
 								<option value="pl_koreanName">한글명</option>
 								<option value="pl_englishName">영명</option>
 								<option value="pl_scientificName">학명</option>
@@ -137,6 +137,12 @@
 
 	<!-- JS here -->
 	<script>
+		/*
+		let selectList = document.getElementById('category');
+		console.log(selectList);
+		console.log(selectList.options[selectList.selectedIndex].value);
+		 */
+
 		function changeSelect() {
 			let selectList = document.getElementById('category');
 

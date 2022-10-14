@@ -81,12 +81,20 @@ public class BotanicalGardenController {
 	}
 	
 	@GetMapping("/update")
-	public String BotanicalGardenUpdate(@RequestParam("g_id") int g_id, Model model) {
-	    log.info("=========================Botanical Garden Update=====================");
-	    BotanicalGardenVO vo = service.listById(g_id);
+	public String BotanicalGardenUpdate(BotanicalGardenVO vo, Model model) {
+	    log.info("=========================Botanical Garden UpdateForm=====================");	    
         
         
         model.addAttribute("VO", vo);
         return "botanicalGarden/botanical_gardenupdate";
+	}
+	
+	@PostMapping("/update")
+	public String BotanicalGardenUpdate(BotanicalGardenVO vo) {
+	    log.info("=======================BOtanical Garden ");
+	    log.info(vo);
+	    int r = service.update(vo.getG_id());
+	    
+	    return "redirect:/";
 	}
 }

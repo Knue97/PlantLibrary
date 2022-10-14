@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class BotanicalGardenVO {
 	
-	private String g_id;
+	private int g_id;
 	private String g_name;
 	private String g_detailedAddress;
 	private String g_url;

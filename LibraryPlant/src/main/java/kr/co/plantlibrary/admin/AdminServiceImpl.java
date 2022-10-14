@@ -105,6 +105,12 @@ public class AdminServiceImpl implements AdminService{
         // TODO Auto-generated method stub
         return adminDAO.deletePlant(pl_id);
     }
+
+    @Override
+    public int create(EncyclopediaEntity encyclopediaEntity) throws Exception {
+        // TODO Auto-generated method stub
+        return adminDAO.create(encyclopediaEntity);
+    }
 	
 	
 }

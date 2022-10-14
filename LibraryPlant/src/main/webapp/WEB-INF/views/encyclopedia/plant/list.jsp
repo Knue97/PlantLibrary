@@ -48,7 +48,7 @@
 				</div>
 				<div class="div">
 					<button type="button" class="btn btn-primary"
-						onclick="location.href = '${contextPath}/encyclopedia/plant/listgroup">뒤로가기</button>
+						onclick="location.href = '${contextPath}/encyclopedia/plant/listgroup'">뒤로가기</button>
 				</div>
 			</div>
 			<div class="row row-cols-1 row-cols-md-3">

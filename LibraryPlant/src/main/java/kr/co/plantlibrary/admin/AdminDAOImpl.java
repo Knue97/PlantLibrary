@@ -153,4 +153,11 @@ public class AdminDAOImpl implements AdminDAO{
         return sqlSession.update(NAMESPACE + ".deletePlant", pl_id);
     }
 
+
+    @Override
+    public int create(EncyclopediaEntity encyclopediaEntity) throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.insert(NAMESPACE + ".create", encyclopediaEntity);
+    }
+
 }

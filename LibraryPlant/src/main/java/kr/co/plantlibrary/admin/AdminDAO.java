@@ -48,6 +48,9 @@ public interface AdminDAO {
     // 회원 검색
     public List<LoginEntity> searchUser(String searchword) throws Exception;
     
+    // 식물 등록
+    public int create(EncyclopediaEntity encyclopediaEntity) throws Exception;
+    
     // 식물 수정
     public int updatePlant(EncyclopediaEntity encyclopediaEntity) throws Exception;
     

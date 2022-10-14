@@ -404,6 +404,15 @@ public class AdminController {
         return mav;
     }
     
+    @ResponseBody
+    @PostMapping(value = "admin/encyclopedia/register")
+    public String encyclopediaRegister(EncyclopediaEntity encyclopediaEntity) throws Exception {
+        
+        
+        return "adminService.create(encyclopediaEntity)";
+    }
+
+    
     // 식물 변경
     @ResponseBody
     @PostMapping(value="admin/encyclopedia/plant/update")

@@ -81,10 +81,10 @@
   <select id="search" parameterType="SearchVO" resultType="EncyclopediaEntity">
   	SELECT * FROM plantlibrary.plant
   	<where>
-  		<if test="category == null and value != null">
-  			pl_koreanName Like CONCAT('%', #{value}, '%') OR pl_englishName Like CONCAT('%', #{value}, '%') or pl_scientificName Like CONCAT('%', #{value}, '%') or pl_familyName Like CONCAT('%', #{value}, '%') or pl_classification Like CONCAT('%', #{value}, '%')
+  		<if test="category == 'none' and value != null">
+  			pl_koreanName Like CONCAT('%', #{value}, '%') OR pl_englishName Like CONCAT('%', #{value}, '%') OR pl_scientificName Like CONCAT('%', #{value}, '%') or pl_familyName Like CONCAT('%', #{value}, '%') OR pl_classification Like CONCAT('%', #{value}, '%')
   		</if>
-  		<if test="category == null and value == null"></if>
+  		<if test="category == 'none' and value == null"></if>
   		<if test="category == 'pl_koreanName'">
   			pl_koreanName Like CONCAT('%', #{value}, '%')
   		</if>

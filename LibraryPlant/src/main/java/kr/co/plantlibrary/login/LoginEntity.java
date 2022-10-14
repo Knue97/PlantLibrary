@@ -13,4 +13,5 @@ public class LoginEntity {
 	private int u_findPasswordQ;
 	private String u_findPasswordA;
 	private int u_state;
+	
 }
