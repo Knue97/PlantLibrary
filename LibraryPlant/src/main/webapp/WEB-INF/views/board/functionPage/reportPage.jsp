@@ -161,7 +161,6 @@ textarea:-webkit-autofill:focus {
 								<br>
 								<a href="detail?b_no=<%=b_no %>">뒤로가기</a>
 								<button type="submit">신고하기</button>
-								<button type="button" onclick="location.href='detail?b_no=<%=b_no %>';">취소</button>
 							</form>
 						</div>
 

@@ -121,7 +121,7 @@
 <%@ include file="/WEB-INF/views/include/plugin.jsp" %>
 
 <script>
-/*
+
 	$(document).ready(function(){
 		
 		$.ajax({
@@ -158,7 +158,7 @@
 		})
 		
 	});
-	*/
+	
 </script>​
 </body>
 </html>

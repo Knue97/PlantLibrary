@@ -1,0 +1,25 @@
+<MySQL 계정>
+- id: maker
+- password: 123456
+
+<Schema>
+- schema name: plantlibrary
+
+<MySQL 계정&스키마 설정>
+SQL문을 순서대로 실행해주세요.
+
+1. schema 생성
+
+CREATE SCHEMA `plantlibrary` DEFAULT CHARACTER SET utf8 ;
+
+2. maker 계정 생성
+
+CREATE USER 'maker'@'%' IDENTIFIED BY '123456';
+
+3. plantlibrary 스키마 권한 부여
+
+GRANT ALL PRIVILEGES ON plantlibrary.* TO 'maker'@'%';
+
+4. plantlibrary 스키마에서 테이블 생성 파일(플라 테이블 생성.sql) 실행
+
+5. plantlibrary 스키마에서 더미데이터 파일(플라 데이터 생성.sql) 실행

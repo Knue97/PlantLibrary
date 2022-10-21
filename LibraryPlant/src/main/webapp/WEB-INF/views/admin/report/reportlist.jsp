@@ -46,10 +46,10 @@
 				<c:forEach items="${list}" var="list">
 				 <tr>
 				  <td><a href="${contextPath }/admin/report/detail?r_no=${list.r_no}">${list.r_no}</a></td>
-				  <c:if test="${list.c_no == null }">
+				  <c:if test="${list.c_no == 0 }">
 				  	<td>게시물</td>
 				  </c:if>
-				  <c:if test="${list.c_no != null }">
+				  <c:if test="${list.c_no != 0 }">
 				  	<td>댓글</td>
 				  </c:if>
 				  <td>${list.u_id }</td>

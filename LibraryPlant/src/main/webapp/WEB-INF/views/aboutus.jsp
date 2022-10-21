@@ -210,40 +210,10 @@
 										</div>
 										<div class="cat-cap">
 											<h5 style="color: black;">이경섭</h5>
-											<p>Supercharge your WordPress hosting with detailed
-												website analytics, marketing tools.</p>
+											<p></p>
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-4 col-md-4 col-sm-6">
-									<div class="single-cat">
-										<div class="cat-icon">
-											<img
-												src="${contextPath}/resources/assets/img/icon/member5.png"
-												alt="">
-										</div>
-										<div class="cat-cap">
-											<h5 style="color: black;">김종호</h5>
-											<p>Supercharge your WordPress hosting with detailed
-												website analytics, marketing tools.</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-4 col-sm-6">
-									<div class="single-cat">
-										<div class="cat-icon">
-											<img
-												src="${contextPath}/resources/assets/img/icon/member6.png"
-												alt="">
-										</div>
-										<div class="cat-cap">
-											<h5 style="color: black;">김보건</h5>
-											<p>Supercharge your WordPress hosting with detailed
-												website analytics, marketing tools.</p>
-										</div>
-									</div>
-								</div>
-
 							</div>
 						</div>
 					</section>

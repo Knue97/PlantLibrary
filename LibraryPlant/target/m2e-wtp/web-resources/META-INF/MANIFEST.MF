@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: ￭ﾚﾨ￬ﾄﾠ￬ﾧﾱ￬ﾧﾱ
-=======
-Built-By: hong
->>>>>>> bd0ed20fa05131c5792d0d245af24594eaef533c
+Built-By: chs
 Build-Jdk: 15.0.2
 Created-By: Maven Integration for Eclipse
 
