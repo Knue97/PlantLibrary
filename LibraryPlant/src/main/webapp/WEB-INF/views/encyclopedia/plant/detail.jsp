@@ -27,7 +27,14 @@
 					    <h1 class="mb-5">요약 설명</h1>
 					    <h1 class="mb-5 d-none">${pl_id }</h1>
 					    <h5 class="text-right">조회수: ${entity.pl_hits}</h5>
-					    <h5 class="text-right"><button id ="bookmark">추가</button><span id="like">북마크: ${entity.pl_bookmarkCnt}</span></h5>
+					    <h2 >${disease.di_alias }<img src="${contextPath}/resources/assets/img/icon/empty.png" id="bookmark"
+										style="float:right; height:35px;cursor:pointer;" class="bookmarkno" onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>
+										</h2>
+										
+									<c:if test="${user != null}">
+										<a href="${contextPath }/encyclopedia/modifyrequest?mr_name=${disease.di_id}&ec_id=${disease.ec_id}&name=${disease.di_alias}"
+										style="color: black; float: right;">수정문의</a>
+									</c:if>
 					    <div class="row">
 					        <div class="col">
 					        	<h2>${entity.pl_koreanName}</h2>
@@ -39,7 +46,7 @@
 								<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 								  <div class="carousel-inner">
 								    <div class="carousel-item active">
-								      <img src="${contextPath}/resources/assets/img/dummy/${entity.pl_image}" class="d-block w-100" alt="...">
+								      <img src="${contextPath}/resources/assets/img/plant/${entity.pl_image}" class="d-block w-100" alt="...">
 								    </div>
 								    <!-- 
 								    <div class="carousel-item">
@@ -220,27 +227,171 @@
 
 <!-- JS here -->
 <%@ include file="/WEB-INF/views/include/plugin.jsp" %>
-<script>        
+<script>
+	
+	function onMouseEnter() {
+		if($("#bookmark").attr('class') == 'bookmarkno')
+			
+	     	$("#bookmark").attr("src", $("#bookmark").attr("src").replace("empty","full"));
+		else
+			$("#bookmark").attr("src", $("#bookmark").attr("src").replace("full","empty"));
+		
+	}
+	
+	function onMouseLeave() {
+		if($("#bookmark").attr('class') == 'bookmarkno')
+	     	$("#bookmark").attr("src", $("#bookmark").attr("src").replace("full","empty"));
+		else
+			$("#bookmark").attr("src", $("#bookmark").attr("src").replace("empty","full"));	
+	
+	}
 
-        $(document).ready(function(){
-            $("#bookmark").click(function () {
-                var form = {
-                    pl_id : ${ pl_id }
-                }
-                $.ajax({
-                    url: "${contextPaht}/encyclopedia/plant/detail/hitsup",
-                    type: "POST",
-                    data: form,
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function(){
-                        alert("error");
-                    }
-                });
-            });
-            
-        });
+	// 즐겨찾기버튼에 마우스 올렸을시 hover 효과로 추가효과, 제거효과 만들기
+	// cnt => db에서 즐겨찾기 조건 동일한 것의 개수
+
+	let cnt = 0;
+		
+	$(document).ready(function() {
+
+		isbookmarked();
+
+		$(document).on('click', '#bookmark', function() {
+			
+			if('${user.u_id}' == ""){
+				alert('즐겨찾기는 로그인 후 이용해주세요.');
+				location.href= "${contextPath}/login/login";
+				return;
+				
+			}
+
+			var addUrl = "${contextPath}/bookmark/addbookmark";
+			var removeUrl = "${contextPath}/bookmark/removebookmark";
+			var paramData = {
+				"ec_id" : '${disease.ec_id}',
+				"u_id" : '${user.u_id}',
+				"bm_name" : '${disease.di_id}'
+			};
+
+
+			if (cnt == 0) {
+
+				$.ajax({
+					url : addUrl,
+					data : paramData,
+					dataType : 'json',
+					type : 'POST',
+					success : function(result) {
+
+						isbookmarked();
+						alert('즐겨찾기가 추가되었습니다. 마이페이지에서 목록을 확인할 수 있습니다.');
+
+					},
+
+					error : function(result) {
+						alert('즐겨찾기실패')
+
+					}
+
+				});
+
+			} else {
+
+				$.ajax({
+					url : removeUrl,
+					data : paramData,
+					dataType : 'json',
+					type : 'POST',
+					success : function(result) {
+
+						isbookmarked();
+						alert('즐겨찾기가 해제되었습니다.');
+
+					},
+					error : function(result) {
+
+						alert('즐겨찾기해제실패');
+
+					}
+				});
+
+			}
+			;
+
+		}); // end of $(document).on('
+
+	})
+
+	function isbookmarked() {
+			
+		if('${user.u_id}'== "")
+			return;
+
+		var url = "${contextPath}/bookmark/isbookmarked";
+		var paramData = {
+			"u_id" : '${user.u_id}',
+			"ec_id" : '${disease.ec_id}',
+			"bm_name" : '${disease.di_id}'
+		};
+		$.ajax({
+			url : url,// 전송주소 -> controller 매핑주소
+			data : paramData,// 전송데이터, 요청데이터
+			dataType : 'json',// 문서타입, 데이터타입
+			type : 'POST',// 전송방식(POST/GET)
+			success : function(result) {
+				
+				var htmls = ""; // 문서꾸미기
+
+				if (result != 0) {
+					htmls += '<img src="${contextPath}/resources/assets/img/icon/full.png" id="bookmark"';
+					htmls += 'style="float:right; height:35px; cursor:pointer;" class="bookmarkyes" ';
+					htmls += 'onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>';
+				}else{
+					htmls += '<img src="${contextPath}/resources/assets/img/icon/empty.png" id="bookmark"';
+					htmls += 'style="float:right; height:35px; cursor:pointer;" class="bookmarkno" ';
+					htmls += 'onmouseenter="onMouseEnter();" onmouseleave="onMouseLeave();"></img>';
+				}
+				
+				$("#bookmark").replaceWith(htmls);
+
+				cnt = result;
+				
+				
+			},
+			error : function(result) {
+				alert('실패');
+			}
+		});
+
+	}
+		
+	
+	function delConfirm(di_id){
+		var delConfirm = confirm('정말 삭제하시겠습니까?');
+		if (delConfirm) {
+			$.ajax({
+				url: "${contextPath}/admin/encyclopedia/disease/delete",
+				data: {
+					"di_id" : di_id
+				},
+				dataType: 'json',
+				type: 'GET',
+				success: function(result){
+					alert('삭제되었습니다.');
+					location.href='${contextPath}/encyclopedia/diseaseandpest';
+				},
+				error: function(result){
+					alert('오류');
+				}
+				
+			
+			})
+		   
+		}
+		else {
+		   alert('삭제가 취소되었습니다.');
+		}
+	}		
+		
 </script>
 </body>
 </html>

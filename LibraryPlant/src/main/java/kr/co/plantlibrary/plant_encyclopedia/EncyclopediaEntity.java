@@ -31,7 +31,7 @@ public class EncyclopediaEntity {
 	private String pl_detailPottingAndRoot;
 	private String pl_detailFertilizer;
 	private String pl_detailCaution;
-	private String pl_image;
+	private String pl_image = "가울테리아.jpg";
 	private String pl_imageSource;
 	private String pl_contentSource;	
 	private int pl_hits;

@@ -108,7 +108,7 @@
 						<div class="card h-100 text-center">
 							<div class="card-header">${entity.pl_koreanName}</div>
 							<img
-								src="${contextPath}/resources/assets/img/dummy/${entity.pl_image}"
+								src="${contextPath}/resources/assets/img/plant/${entity.pl_image}"
 								class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title">${entity.pl_englishName }</h5>
@@ -142,7 +142,7 @@
 						<div class="card h-100 text-center">
 							<div class="card-header">${entity.pl_koreanName}</div>
 							<img
-								src="${contextPath}/resources/assets/img/dummy/${entity.pl_image}"
+								src="${contextPath}/resources/assets/img/plant/${entity.pl_image}"
 								class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title">${entity.pl_englishName }</h5>
@@ -176,7 +176,7 @@
 						<div class="card h-100 text-center">
 							<div class="card-header">${entity.pl_koreanName}</div>
 							<img
-								src="${contextPath}/resources/assets/img/dummy/${entity.pl_image}"
+								src="${contextPath}/resources/assets/img/plant/${entity.pl_image}"
 								class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title">${entity.pl_englishName }</h5>
@@ -210,7 +210,7 @@
 						<div class="card h-100 text-center">
 							<div class="card-header">${entity.pl_koreanName}</div>
 							<img
-								src="${contextPath}/resources/assets/img/dummy/${entity.pl_image}"
+								src="${contextPath}/resources/assets/img/plant/${entity.pl_image}"
 								class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title">${entity.pl_englishName }</h5>
